@@ -19,7 +19,7 @@ const Ship = (index) => {
     isSunk: null,
   };
   // Add ship name based on index
-  newShip.name = shipNames[newShip.index];
+  newShip.type = shipNames[newShip.index];
 
   return newShip;
 };

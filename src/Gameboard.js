@@ -6,6 +6,7 @@ import Ship from "./Ship";
 const Gameboard = () => {
   const newBoard = {
     ships: [],
+    getShip: null,
     addShip: null,
     occupiedCells: [],
     addOccupiedCell: null,
@@ -13,6 +14,12 @@ const Gameboard = () => {
     recieveAttack: null,
     misses: [],
     hits: [],
+  };
+
+  // Method for getting a new ship and adding it to ships
+  newBoard.getShip = (shipTypeIndex) => {
+    const newShip = Ship(shipTypeIndex);
+    newBoard.ships.push(newShip);
   };
 
   // Method for adding an occupied cell
@@ -29,10 +36,7 @@ const Gameboard = () => {
     // Are coords already in occupiedCells?
     // Will the ship fit in the desired direction
     // Create the ship and add it to ships
-    const newShip = Ship(shipTypeIndex);
-    newBoard.ships.push(newShip);
     // Add the correct cells to occupied cells
-    return newShip;
   };
 
   return newBoard;

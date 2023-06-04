@@ -1,9 +1,15 @@
 import Gameboard from "../src/Gameboard";
+import Ship from "../src/Ship";
 
 describe("Basic Functionality", () => {
   test("Gameboard returns an object", () => {
     const testBoard = Gameboard();
     expect(testBoard).toBeInstanceOf(Object);
+  });
+
+  test("Gameboard.addShip returns valid ship", () => {
+    const testBoard = Gameboard();
+    expect(testBoard.addShip()).toBeInstanceOf(Ship);
   });
 
   test("Gameboard.addShip adds the correct cells to occupiedCells", () => {

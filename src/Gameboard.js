@@ -5,9 +5,11 @@ import Ship from "./Ship";
    all its ships have been sunk. */
 const Gameboard = () => {
   const newBoard = {
+    ships: [],
+    addShip: null,
     occupiedCells: [],
     addOccupiedCell: null,
-    addShip: null,
+    addCells: null,
     recieveAttack: null,
     misses: [],
     hits: [],
@@ -19,11 +21,15 @@ const Gameboard = () => {
     newBoard.occupiedCells.push(newCell);
   };
 
+  // Method for adding all cells required for a ship
+
   // Method for adding a ship at a given coords in given direction if ship will fit on board
   newBoard.addShip = (coords, direction, shipTypeIndex) => {
-    const newShip = Ship(shipTypeIndex);
     // Are coords already in occupiedCells?
-    // Will the ship fit in the desired direction?
+    // Will the ship fit in the desired direction
+    // Create the ship and add it to ships
+    const newShip = Ship(shipTypeIndex);
+    newBoard.ships.push(newShip);
     // Add the correct cells to occupied cells
     return newShip;
   };

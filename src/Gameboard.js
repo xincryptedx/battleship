@@ -11,7 +11,7 @@ const Gameboard = (mapX = 10, mapY = 10) => {
   };
 
   // Method for adding a ship at a given coords in given direction if ship will fit on board
-  addShip = (coords, direction) => {
+  newBoard.addShip = (coords, direction, shipTypeIndex) => {
     // Are coords already in occupiedCells?
     // Will the ship fit in the desired direction?
     // Add the correct cells to occupied cells

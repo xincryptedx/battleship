@@ -1,4 +1,4 @@
-import module from "./aModule";
+import "./style.css";
 
 const testFn = () => "result";
 

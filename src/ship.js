@@ -32,6 +32,11 @@ const Ship = (index) => {
   // Add ship name based on index
   newShip.type = shipNames[newShip.index];
 
+  // Add hit method
+  newShip.hit = () => {
+    newShip.hits += 1;
+  };
+
   return newShip;
 };
 export default Ship;

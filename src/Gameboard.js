@@ -6,10 +6,17 @@ import Ship from "./Ship";
 const Gameboard = (mapX = 10, mapY = 10) => {
   const newBoard = {
     occupiedCells: [],
+    addOccupiedCell: null,
     addShip: null,
     recieveAttack: null,
     misses: [],
     hits: [],
+  };
+
+  // Method for adding an occupied cell
+  newBoard.addOccupiedCell = (position, shipType) => {
+    const newCell = { position, shipType };
+    newBoard.occupiedCells.push(newCell);
   };
 
   // Method for adding a ship at a given coords in given direction if ship will fit on board

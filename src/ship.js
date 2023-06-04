@@ -37,6 +37,11 @@ const Ship = (index) => {
     newShip.hits += 1;
   };
 
+  newShip.isSunk = () => {
+    if (newShip.hits >= newShip.size) return true;
+    return false;
+  };
+
   return newShip;
 };
 export default Ship;

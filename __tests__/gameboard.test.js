@@ -1,5 +1,8 @@
 import Gameboard from "../src/Gameboard";
 
 describe("Basic Functionality", () => {
-  // Tests
+  test("Gameboard returns an object", () => {
+    const testBoard = Gameboard();
+    expect(testBoard).toBeTypeOf(Object);
+  });
 });

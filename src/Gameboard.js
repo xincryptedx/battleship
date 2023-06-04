@@ -22,9 +22,10 @@ const Gameboard = () => {
   };
 
   // Method for adding all cells required for a ship
+  newBoard.addCells = (coords, ship, direction) => {};
 
   // Method for adding a ship at a given coords in given direction if ship will fit on board
-  newBoard.addShip = (coords, direction, shipTypeIndex) => {
+  newBoard.addShip = (coords, shipTypeIndex, direction) => {
     // Are coords already in occupiedCells?
     // Will the ship fit in the desired direction
     // Create the ship and add it to ships

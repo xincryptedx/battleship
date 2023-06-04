@@ -18,6 +18,17 @@ const Ship = (index) => {
     hit: null,
     isSunk: null,
   };
+  // Set ship size
+  switch (index) {
+    case 1:
+      newShip.size = 2;
+      break;
+    case 2:
+      newShip.size = 3;
+      break;
+    default:
+      newShip.size = index;
+  }
   // Add ship name based on index
   newShip.type = shipNames[newShip.index];
 

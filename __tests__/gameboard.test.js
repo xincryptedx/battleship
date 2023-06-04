@@ -6,11 +6,13 @@ describe("Basic Functionality", () => {
     expect(testBoard).toBeInstanceOf(Object);
   });
 
-  test("Gameboard has a default size of 10x10", () => {
+  test("Gameboard.addShip adds the correct cells to occupiedCells", () => {
     const testBoard = Gameboard();
-    expect(testBoard.map).toHaveLength(10);
-    for (let i = 0; i < testBoard.map.length; i += 1) {
-      expect(testBoard.map[i].length).toHaveLength(10);
-    }
+    const testViper = testBoard.addShip([4, 4], "N", 3);
+    expect(testBoard.occupiedCells).toEqual(
+      { position: [4, 4], ship: testViper },
+      { position: [4, 3], ship: testViper },
+      { position: [4, 2], ship: testViper }
+    );
   });
 });

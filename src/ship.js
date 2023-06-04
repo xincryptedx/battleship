@@ -9,6 +9,8 @@ const shipNames = {
 
 // Factory that can create and return one of a variety of pre-determined ships.
 const Ship = (index) => {
+  // Validate index
+  if (!Number.isInteger(index) || index > 5 || index < 1) return undefined;
   // Create the ship object that will be returned
   const newShip = {
     index,

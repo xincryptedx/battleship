@@ -1,5 +1,8 @@
-import testFn from "../src/index";
+import Ship from "../src/ship";
 
-test('doest test function return "result"?', () => {
-  expect(testFn()).toBe("result");
+describe("Basic Functionality", () => {
+  test("Ship returns an object", () => {
+    const testShip = Ship();
+    expect(testShip).toBeInstanceOf(Object);
+  });
 });

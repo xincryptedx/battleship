@@ -6,7 +6,7 @@ describe("Basic Functionality", () => {
     expect(testShip).toBeInstanceOf(Object);
   });
 
-  test("Ship(1) returns an object with type prop:'Sentinel Probe'", () => {
+  test("Ship returns object with correct type prop", () => {
     const testShip = Ship(1);
     expect(testShip.type).toBe("Sentinel Probe");
   });

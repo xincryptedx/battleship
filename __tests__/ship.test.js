@@ -39,4 +39,10 @@ describe("Basic Functionality", () => {
     const leviathan = Ship(5);
     expect(leviathan.size).toBe(5);
   });
+
+  test("Ship.hit() will increment hits prop", () => {
+    const sentinel = Ship(1);
+    sentinel.hit();
+    expect(sentinel.hits).toBe(1);
+  });
 });

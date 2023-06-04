@@ -14,8 +14,8 @@ const Gameboard = () => {
   };
 
   // Method for adding an occupied cell
-  newBoard.addOccupiedCell = (position, shipType) => {
-    const newCell = { position, shipType };
+  newBoard.addOccupiedCell = (position, ship) => {
+    const newCell = { position, ship };
     newBoard.occupiedCells.push(newCell);
   };
 

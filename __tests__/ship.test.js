@@ -46,7 +46,7 @@ describe("Basic Functionality", () => {
     expect(sentinel.hits).toBe(1);
   });
 
-  test("Ship.isSunk true if hits >= length", () => {
+  test("Ship.isSunk true if hits >= size", () => {
     const sentinel = Ship(1);
     sentinel.hit();
     sentinel.hit();

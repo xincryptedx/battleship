@@ -53,3 +53,17 @@ describe("Basic Functionality", () => {
     expect(sentinel.isSunk()).toBe(true);
   });
 });
+
+describe("Edge Cases", () => {
+  test("returns undefined if index is not an int from 1 - 5", () => {
+    expect(Ship(-1)).toBeUndefined();
+    expect(Ship(0)).toBeUndefined();
+    expect(Ship(3.5)).toBeUndefined();
+    expect(Ship()).toBeUndefined();
+    expect(Ship(NaN)).toBeUndefined();
+    expect(Ship(null)).toBeUndefined();
+    expect(Ship("index")).toBeUndefined();
+    expect(Ship(undefined)).toBeUndefined();
+    expect(Ship(false)).toBeUndefined();
+  });
+});

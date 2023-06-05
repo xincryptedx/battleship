@@ -140,7 +140,7 @@ describe("Edge Cases", () => {
     expect(Ship(false)).toBeUndefined();
   });
 
-  test("coords will be empty if position not array", () => {
+  test("occupiedCells will be empty if position not array", () => {
     let titan = Ship(2, null, "N");
     expect(titan.occupiedCells).toEqual([]);
 
@@ -151,7 +151,12 @@ describe("Edge Cases", () => {
     expect(titan.occupiedCells).toEqual([]);
   });
 
-  test("coords will be empty if position not array of two ints", () => {
+  test("occupiedCells will be empty if direction not 'N','S','E', or 'W'", () => {
+    const titan = Ship(2, [4, 4], "U");
+    expect(titan.occupiedCells).toEqual([]);
+  });
+
+  test("occupiedCells will be empty if position not array of two ints", () => {
     let titan = Ship(2, [], "N");
     expect(titan.occupiedCells).toEqual([]);
 
@@ -165,7 +170,7 @@ describe("Edge Cases", () => {
     expect(titan.occupiedCells).toEqual([]);
   });
 
-  test("coords will return even if they are off the board", () => {
+  test("occupiedCells will return even if they are off the board", () => {
     const sentinel = Ship(1, [0, 0], "N");
     expect(sentinel.occupiedCells).toEqual([
       [0, 0],

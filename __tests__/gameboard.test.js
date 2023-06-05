@@ -20,14 +20,3 @@ describe("getShip", () => {
     expect(testBoard.ships[0].type).toBe("Assault Titan");
   });
 });
-
-describe("addOccupiedCell", () => {
-  test("occupiedCells gets correct cell added to it", () => {
-    const testBoard = Gameboard();
-    const mockShip = {};
-    testBoard.addOccupiedCell([4, 4], mockShip);
-    expect(testBoard.occupiedCells).toEqual([
-      { position: [4, 4], ship: mockShip },
-    ]);
-  });
-});

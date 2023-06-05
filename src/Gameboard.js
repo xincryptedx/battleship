@@ -12,6 +12,11 @@ const Gameboard = () => {
     hits: [],
   };
 
+  // Method that validates ship occupied cell coords
+  const validateShip = () => {
+    // Check that ships occupied cells are all within map
+  };
+
   // Method for adding a ship at a given coords in given direction if ship will fit on board
   newBoard.addShip = (shipTypeIndex, position, direction) => {
     // Create the desired ship

@@ -86,6 +86,45 @@ describe("Basic Functionality", () => {
       [3, 4],
     ]);
   });
+
+  test("coords work properly for all ship types", () => {
+    const setinel = Ship(1, [3, 6], "N");
+    expect(setinel.occupiedCells).toEqual([
+      [3, 6],
+      [3, 5],
+    ]);
+
+    const titan = Ship(2, [2, 3], "S");
+    expect(titan.occupiedCells).toEqual([
+      [2, 3],
+      [2, 4],
+      [2, 5],
+    ]);
+
+    const viper = Ship(3, [4, 5], "E");
+    expect(viper.occupiedCells).toEqual([
+      [4, 5],
+      [5, 5],
+      [6, 5],
+    ]);
+
+    const goliath = Ship(4, [4, 6], "W");
+    expect(goliath.occupiedCells).toEqual([
+      [4, 6],
+      [3, 6],
+      [2, 6],
+      [1, 6],
+    ]);
+
+    const leviathan = Ship(5, [5, 5], "N");
+    expect(leviathan.occupiedCells).toEqual([
+      [5, 5],
+      [5, 4],
+      [5, 3],
+      [5, 2],
+      [5, 1],
+    ]);
+  });
 });
 
 describe("Edge Cases", () => {

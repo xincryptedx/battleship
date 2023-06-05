@@ -139,4 +139,21 @@ describe("Edge Cases", () => {
     expect(Ship(undefined)).toBeUndefined();
     expect(Ship(false)).toBeUndefined();
   });
+
+  test("coords will return even if they are off the board", () => {
+    const sentinel = Ship(1, [0, 0], "N");
+    expect(sentinel.occupiedCells).toEqual([
+      [0, 0],
+      [0, -1],
+    ]);
+
+    const leviathan = Ship(5, [0, 0], "W");
+    expect(leviathan.occupiedCells).toEqual([
+      [0, 0],
+      [-1, 0],
+      [-2, 0],
+      [-3, 0],
+      [-4, 0],
+    ]);
+  });
 });

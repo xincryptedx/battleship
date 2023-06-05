@@ -16,15 +16,10 @@ const Gameboard = () => {
     hits: [],
   };
 
-  // Method for getting a new ship and adding it to ships
-  newBoard.getShip = (shipTypeIndex) => {
-    const newShip = Ship(shipTypeIndex);
-    newBoard.ships.push(newShip);
-  };
-
   // Method for adding a ship at a given coords in given direction if ship will fit on board
   newBoard.addShip = (shipTypeIndex, position, direction) => {
     // Create the desired ship
+    const newShip = Ship(shipTypeIndex, position, direction);
     // Validate ship occupiedCells
     // Add it to ships
   };

@@ -28,6 +28,8 @@ const Gameboard = () => {
     newBoard.occupiedCells.push(newCell);
   };
 
+  // Method for testing if ship will fit on the map from a given position in a given direction
+
   // Method for adding all cells required for a ship
   newBoard.addCells = (coords, ship, direction) => {};
 

@@ -49,6 +49,17 @@ const Ship = (index, position, direction) => {
     return false;
   };
 
+  // Turn direction into iterator
+  const directionIterator = {
+    N: [0, -1],
+    S: [0, 1],
+    E: [1, 0],
+    W: [-1, 0],
+  };
+
+  // Use position and direction to add occupied cells coords
+  for (let i = 0; i < newShip.size; i += 1) {}
+
   return newShip;
 };
 export default Ship;

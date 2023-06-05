@@ -13,8 +13,25 @@ const Gameboard = () => {
   };
 
   // Method that validates ship occupied cell coords
-  const validateShip = () => {
+  const validateShip = (ship) => {
+    // Flag for detecting invalid position value
+    let isValid = false;
+    // Constraints for game board (10x10 grid, zero based)
+    const maxBoardCoord = 9;
     // Check that ships occupied cells are all within map
+    for (let i = 0; i < ship.occupiedCells.length; i += 1) {
+      if (
+        ship.occupiedCells[i][0] >= 0 &&
+        ship.occupiedCells[i][0] <= maxBoardCoord &&
+        ship.occupiedCells[i][1] >= 0 &&
+        ship.occupiedCells[i][1] <= maxBoardCoord
+      ) {
+        isValid = true;
+      } else {
+        isValid = false;
+      }
+    }
+    return isValid;
   };
 
   // Method for adding a ship at a given coords in given direction if ship will fit on board

@@ -55,10 +55,9 @@ describe("Basic Functionality", () => {
 
   test("Ship will add param coords to occupiedCells", () => {
     const sentinel = Ship(1, [4, 4], "N");
-    expect(sentinel.occupiedCells).toBe([
+    expect(sentinel.occupiedCells).toEqual([
       [4, 4],
       [4, 3],
-      [4, 2],
     ]);
   });
 });

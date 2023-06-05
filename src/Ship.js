@@ -8,7 +8,7 @@ const shipNames = {
 };
 
 // Factory that can create and return one of a variety of pre-determined ships.
-const Ship = (index) => {
+const Ship = (index, position, direction) => {
   // Validate index
   if (!Number.isInteger(index) || index > 5 || index < 1) return undefined;
   // Create the ship object that will be returned
@@ -19,6 +19,7 @@ const Ship = (index) => {
     hits: 0,
     hit: null,
     isSunk: null,
+    occupiedCells: [],
   };
   // Set ship size
   switch (index) {

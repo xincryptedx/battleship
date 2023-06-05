@@ -8,13 +8,21 @@ describe("General Functionality", () => {
   });
 });
 
-describe("addOccupiedCell", () => {
-  test("testBoard occupiedCells gets correct cell added to it", () => {
+describe("getShip", () => {
+  test("a ship gets added to ships", () => {
     const testBoard = Gameboard();
-    const testShip = Ship(1);
-    testBoard.addOccupiedCell([4, 4], testShip);
+    testBoard.getShip(2);
+    expect(testBoard.ships).toHaveLength(1);
+  });
+});
+
+describe("addOccupiedCell", () => {
+  test("occupiedCells gets correct cell added to it", () => {
+    const testBoard = Gameboard();
+    const mockShip = {};
+    testBoard.addOccupiedCell([4, 4], mockShip);
     expect(testBoard.occupiedCells).toEqual([
-      { position: [4, 4], ship: testShip },
+      { position: [4, 4], ship: mockShip },
     ]);
   });
 });

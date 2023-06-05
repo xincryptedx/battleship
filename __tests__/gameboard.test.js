@@ -10,7 +10,7 @@ describe("General Functionality", () => {
 describe("addShip", () => {
   test("a ship gets added to ships", () => {
     const testBoard = Gameboard();
-    testBoard.addShip(2);
+    testBoard.addShip(2, [4, 4], "N");
     expect(testBoard.ships).toHaveLength(1);
   });
 

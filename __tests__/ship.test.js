@@ -52,6 +52,15 @@ describe("Basic Functionality", () => {
     sentinel.hit();
     expect(sentinel.isSunk()).toBe(true);
   });
+
+  test("Ship will add param coords to occupiedCells", () => {
+    const sentinel = Ship(1, [4, 4], "N");
+    expect(sentinel.occupiedCells).toBe([
+      [4, 4],
+      [4, 3],
+      [4, 2],
+    ]);
+  });
 });
 
 describe("Edge Cases", () => {

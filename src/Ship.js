@@ -59,12 +59,14 @@ const Ship = (index, position, direction) => {
 
   // Use position and direction to add occupied cells coords
   if (Array.isArray(position) && position.length === 2) {
-    for (let i = 0; i < newShip.size; i += 1) {
-      const newCoords = [
-        position[0] + i * directionIterator[direction][0],
-        position[1] + i * directionIterator[direction][1],
-      ];
-      newShip.occupiedCells.push(newCoords);
+    if (Number.isInteger(position[0]) && Number.isInteger(position[1])) {
+      for (let i = 0; i < newShip.size; i += 1) {
+        const newCoords = [
+          position[0] + i * directionIterator[direction][0],
+          position[1] + i * directionIterator[direction][1],
+        ];
+        newShip.occupiedCells.push(newCoords);
+      }
     }
   }
 

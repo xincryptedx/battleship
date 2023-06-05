@@ -6,11 +6,7 @@ import Ship from "./Ship";
 const Gameboard = () => {
   const newBoard = {
     ships: [],
-    getShip: null,
     addShip: null,
-    occupiedCells: [],
-    addOccupiedCell: null,
-    addCells: null,
     recieveAttack: null,
     misses: [],
     hits: [],

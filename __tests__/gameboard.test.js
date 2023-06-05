@@ -1,5 +1,4 @@
 import Gameboard from "../src/Gameboard";
-import Ship from "../src/Ship";
 
 describe("General Functionality", () => {
   test("Gameboard returns an object", () => {
@@ -13,6 +12,12 @@ describe("getShip", () => {
     const testBoard = Gameboard();
     testBoard.getShip(2);
     expect(testBoard.ships).toHaveLength(1);
+  });
+
+  test("a valid ship is added, juding by type value", () => {
+    const testBoard = Gameboard();
+    testBoard.getShip(2);
+    expect(testBoard.ships[0].type).toBe("Assault Titan");
   });
 });
 

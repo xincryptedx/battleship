@@ -140,6 +140,17 @@ describe("Edge Cases", () => {
     expect(Ship(false)).toBeUndefined();
   });
 
+  test("coords will be empty if position not array", () => {
+    let titan = Ship(2, null, "N");
+    expect(titan.occupiedCells).toEqual([]);
+
+    titan = Ship(2, 35, "N");
+    expect(titan.occupiedCells).toEqual([]);
+
+    titan = Ship(2, "coords", "N");
+    expect(titan.occupiedCells).toEqual([]);
+  });
+
   test("coords will return even if they are off the board", () => {
     const sentinel = Ship(1, [0, 0], "N");
     expect(sentinel.occupiedCells).toEqual([

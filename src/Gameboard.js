@@ -21,7 +21,9 @@ const Gameboard = () => {
     // Create the desired ship
     const newShip = Ship(shipTypeIndex, position, direction);
     // Validate ship occupiedCells
+    const validatedShip = newShip;
     // Add it to ships
+    newBoard.ships.push(validatedShip);
   };
 
   return newBoard;

@@ -11,6 +11,7 @@ const shipNames = {
 const Ship = (index, position, direction) => {
   // Validate index
   if (!Number.isInteger(index) || index > 5 || index < 1) return undefined;
+
   // Create the ship object that will be returned
   const newShip = {
     index,
@@ -21,6 +22,7 @@ const Ship = (index, position, direction) => {
     isSunk: null,
     occupiedCells: [],
   };
+
   // Set ship size
   switch (index) {
     case 1:
@@ -32,14 +34,16 @@ const Ship = (index, position, direction) => {
     default:
       newShip.size = index;
   }
-  // Add ship name based on index
+
+  // Set ship name based on index
   newShip.type = shipNames[newShip.index];
 
-  // Add hit method
+  // Adds a hit to the ship
   newShip.hit = () => {
     newShip.hits += 1;
   };
 
+  // Determines if ship sunk is true
   newShip.isSunk = () => {
     if (newShip.hits >= newShip.size) return true;
     return false;

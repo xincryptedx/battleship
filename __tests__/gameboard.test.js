@@ -14,7 +14,7 @@ describe("getShip", () => {
     expect(testBoard.ships).toHaveLength(1);
   });
 
-  test("a valid ship is added, juding by type value", () => {
+  test("a valid ship is added, judging by type value", () => {
     const testBoard = Gameboard();
     testBoard.getShip(2);
     expect(testBoard.ships[0].type).toBe("Assault Titan");

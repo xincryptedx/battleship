@@ -7,7 +7,7 @@ const Gameboard = () => {
   const newBoard = {
     ships: [],
     addShip: null,
-    recieveAttack: null,
+    receiveAttack: null,
     misses: [],
     hits: [],
   };
@@ -40,6 +40,19 @@ const Gameboard = () => {
     const newShip = Ship(shipTypeIndex, position, direction);
     // Add it to ships if it has valid occupied cells
     if (validateShip(newShip)) newBoard.ships.push(newShip);
+  };
+
+  newBoard.receiveAttack = (position, ships = newBoard.ships) => {
+    for (let i = 0; i < ships.length; i += 1) {
+      for (let j = 0; j < ships[0].occupiedCells.length; j += 1) {
+        if (
+          ships[i].occupiedCells[j][0] === position[0] &&
+          ships[i].occupiedCells[j][1] === position[1]
+        ) {
+          ships[i].hit();
+        }
+      }
+    }
   };
 
   return newBoard;

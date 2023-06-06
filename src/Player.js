@@ -40,9 +40,9 @@ const Player = () => {
   };
 
   // Method for sending attack to rival gameboard
-  thisPlayer.sendAttack = (position, gameboard = thisPlayer.gameboard) => {
-    if (validateAttack(position, gameboard)) {
-      thisPlayer.gameboard.rivalBoard.receiveAttack(position);
+  thisPlayer.sendAttack = (position, playerBoard = thisPlayer.gameboard) => {
+    if (validateAttack(position, playerBoard)) {
+      playerBoard.rivalBoard.receiveAttack(position);
     }
   };
 

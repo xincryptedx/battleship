@@ -20,7 +20,7 @@ describe("Player Name", () => {
     expect(testPlayer.name).toBe("123");
   });
 
-  test("player.name = falsy values not '' returns ''", () => {
+  test("player.name = falsy values returns ''", () => {
     const testPlayer = Player();
     testPlayer.name = null;
     expect(testPlayer.name).toBe("");

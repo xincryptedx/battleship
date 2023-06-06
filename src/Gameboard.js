@@ -76,11 +76,14 @@ const Gameboard = () => {
             ) {
               // Call that ships hit method and break out of loop
               ships[i].hit();
-              break;
+              addHit(position);
+              return true;
             }
           }
         }
       }
+      addMiss(position);
+      return false;
     }
   };
 

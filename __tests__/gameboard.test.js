@@ -26,3 +26,28 @@ describe("addShip", () => {
     expect(testBoard.ships).toHaveLength(0);
   });
 });
+
+describe("receiveAttack", () => {
+  test("hit method called when attack coords found on a ships occupiedCells", () => {
+    const testBoard = Gameboard();
+    const mockShips = [
+      {
+        occupiedCells: [
+          [2, 2],
+          [2, 1],
+        ],
+        hits: 0,
+      },
+    ];
+    testBoard.recieveAttack([2, 2], mockShips);
+    expect(mockShips).toEqual([
+      {
+        occupiedCells: [
+          [2, 2],
+          [2, 1],
+        ],
+        hits: 1,
+      },
+    ]);
+  });
+});

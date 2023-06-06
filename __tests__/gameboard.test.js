@@ -1,4 +1,4 @@
-import Gameboard from "../src/Gameboard";
+import Gameboard from "../src/factories/Gameboard";
 
 // Basic game boad factory functionality
 describe("General Functionality", () => {

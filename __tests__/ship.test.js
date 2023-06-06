@@ -1,4 +1,4 @@
-import Ship from "../src/Ship";
+import Ship from "../src/factories/Ship";
 
 describe("Basic Functionality", () => {
   test("Ship returns an object", () => {

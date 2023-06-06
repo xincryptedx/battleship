@@ -1,4 +1,4 @@
-import Player from "../src/Player";
+import Player from "../src/factories/Player";
 
 describe("Player basic functionality", () => {
   test("returns an object", () => {

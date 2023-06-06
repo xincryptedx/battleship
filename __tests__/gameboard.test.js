@@ -202,4 +202,18 @@ describe("allSunk", () => {
     ];
     expect(testBoard.allSunk(mockShips)).toBe(true);
   });
+
+  test("if any ship isSunk false, return false", () => {
+    const testBoard = Gameboard();
+    const mockIsSunk = () => true;
+    const mockIsNotSunk = () => false;
+    const mockShips = [
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsNotSunk },
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+    ];
+    expect(testBoard.allSunk(mockShips)).toBe(false);
+  });
 });

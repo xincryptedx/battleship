@@ -1,5 +1,5 @@
 /* Factory that creates and returns a player object that can take a shot at opponent's game board */
-const Player = () => {
+const Player = (gameboard) => {
   let privateName = "";
   const thisPlayer = {
     get name() {
@@ -10,7 +10,7 @@ const Player = () => {
         privateName = newName.toString();
       } else privateName = "";
     },
-    gameboard: null,
+    gameboard,
     sendAttack: null,
   };
 

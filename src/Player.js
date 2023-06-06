@@ -1,7 +1,7 @@
 import Gameboard from "./Gameboard";
 
 /* Factory that creates and returns a player object that can take a shot at opponent's game board */
-const Player = (isAI = false) => {
+const Player = () => {
   let privateName = "";
   const thisPlayer = {
     get name() {
@@ -14,7 +14,6 @@ const Player = (isAI = false) => {
     },
     gameboard: Gameboard(),
     sendAttack: null,
-    isAI,
   };
 
   // Helper method for validating that attack position is on board

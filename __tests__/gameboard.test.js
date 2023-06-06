@@ -250,4 +250,19 @@ describe("allSunk", () => {
     ];
     expect(testBoard.allSunk(mockShips)).toBe(true);
   });
+
+  test("invalid truthy entries are ignored", () => {
+    const testBoard = Gameboard();
+    const mockIsSunk = () => true;
+    const mockShips = [
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+      500,
+      "abc",
+      false,
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+    ];
+    expect(testBoard.allSunk(mockShips)).toBe(true);
+  });
 });

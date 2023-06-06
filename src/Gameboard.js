@@ -5,7 +5,8 @@ import Ship from "./Ship";
    all its ships have been sunk. */
 const Gameboard = () => {
   // Constraints for game board (10x10 grid, zero based)
-  const maxBoardCoord = 9;
+  const maxBoardX = 9;
+  const maxBoardY = 9;
 
   const thisGameboard = {
     ships: [],
@@ -16,10 +17,10 @@ const Gameboard = () => {
     allSunk: null,
     rivalBoard: null,
     get maxBoardX() {
-      return maxBoardCoord;
+      return maxBoardX;
     },
     get maxBoardY() {
-      return maxBoardCoord;
+      return maxBoardY;
     },
   };
 
@@ -32,9 +33,9 @@ const Gameboard = () => {
     for (let i = 0; i < ship.occupiedCells.length; i += 1) {
       if (
         ship.occupiedCells[i][0] >= 0 &&
-        ship.occupiedCells[i][0] <= maxBoardCoord &&
+        ship.occupiedCells[i][0] <= maxBoardX &&
         ship.occupiedCells[i][1] >= 0 &&
-        ship.occupiedCells[i][1] <= maxBoardCoord
+        ship.occupiedCells[i][1] <= maxBoardY
       ) {
         isValid = true;
       } else {

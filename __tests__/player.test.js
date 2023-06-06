@@ -51,4 +51,28 @@ describe("sendAttack", () => {
     testPlayer.sendAttack([2, 4], mockPlayerBoard);
     expect(mockReceiveAttack.mock.calls).toHaveLength(1);
   });
+
+  test("receiveAttack not invoked when invalid board param", () => {
+    const mockReceiveAttack = jest.fn();
+    const testPlayer = Player();
+    testPlayer.sendAttack([2, 4], null);
+    expect(mockReceiveAttack.mock.calls).toHaveLength(0);
+  });
+
+  test("receiveAttack not invoked when invalid position param", () => {
+    const mockReceiveAttack = jest.fn();
+    const mockRivalBoard = {
+      maxBoardX: 9,
+      maxBoardY: 9,
+      receiveAttack: mockReceiveAttack,
+    };
+    const mockPlayerBoard = {
+      maxBoardX: 9,
+      maxBoardY: 9,
+      rivalBoard: mockRivalBoard,
+    };
+    const testPlayer = Player();
+    testPlayer.sendAttack([20, 4], mockPlayerBoard);
+    expect(mockReceiveAttack.mock.calls).toHaveLength(0);
+  });
 });

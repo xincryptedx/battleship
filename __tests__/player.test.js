@@ -7,6 +7,7 @@ describe("Player basic functionality", () => {
   });
 });
 
+// Set function for player name
 describe("Player Name", () => {
   test('player.name = "string" should set name to string', () => {
     const testPlayer = Player();
@@ -29,5 +30,17 @@ describe("Player Name", () => {
     expect(testPlayer.name).toBe("");
     testPlayer.name = NaN;
     expect(testPlayer.name).toBe("");
+  });
+});
+
+// Method for sending attacks to rival board
+describe("sendAttack", () => {
+  test("receiveAttack is invoked on opponent board", () => {
+    const mockReceiveAttack = jest.fn();
+    const mockRivalBoard = { receiveAttack: mockReceiveAttack };
+    const mockPlayerBoard = { rivalBoard: mockRivalBoard };
+    const testPlayer = Player(mockPlayerBoard);
+    testPlayer.sendAttack([2, 4]);
+    expect(mockReceiveAttack.mock.calls).toHaveLength(1);
   });
 });

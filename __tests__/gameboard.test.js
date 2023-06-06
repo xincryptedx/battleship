@@ -75,4 +75,13 @@ describe("receiveAttack", () => {
     testBoard.receiveAttack(undefined, mockShips);
     expect(mockHit.mock.calls).toHaveLength(0);
   });
+
+  test("hit method not called when invalid ships", () => {
+    const testBoard = Gameboard();
+    const mockHit = jest.fn();
+    testBoard.receiveAttack([2, 2], undefined);
+    testBoard.receiveAttack([2, 2], []);
+    testBoard.receiveAttack([2, 2], [NaN, null]);
+    expect(mockHit.mock.calls).toHaveLength(0);
+  });
 });

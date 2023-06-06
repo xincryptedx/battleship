@@ -11,6 +11,8 @@ const gameManager = (() => {
      -Set rivalBoard properties */
   const userPlayer = Player();
   const aiPlayer = Player();
+  userPlayer.gameboard.rivalBoard = aiPlayer.gameboard;
+  aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
   // Start a game
   /* -Have user add ships 
      -Have AI add ships */

@@ -10,15 +10,13 @@ const gameManager = (() => {
   userPlayer.gameboard.rivalBoard = aiPlayer.gameboard;
   aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
   // Start a game
-  /* -Have user add ships - Need a method/module that asks the user to supply coords
+  /* -Have user add ships - method/module on gameboard that asks the user to supply coords
      and a direction to use for the gameboard's addShip method. 
-     
      Then check that the ship was added to the gameboard, and if it was move on 
      to the next one. If it was not, ask for the placement of the same ship again.
-
      Move on after all 5 player ships have been placed, one of each
 
-     -Have AI add ships - Need a method/module that automatically adds ships
+     -Have AI add ships - Need a module that automatically adds ships
      to the ai gameboard. It will need to add them one at a time based on a 
      variable ruleset that will create a bord for a given high-level "dificulty" setting */
 
@@ -26,17 +24,30 @@ const gameManager = (() => {
      and returns true or false */
 
   /* Method that flips a virtual coin to determine who goes first, and sets that
-     player object to an active player variable
-
-  /* Iterate between players for attacks - if above method doesn't return true, check the
-     active player and have query them for their move.
-     
-     -For user
-     -For AI */
+     player object to an active player variable */
 
   // Method for ending the game by reporting results
 
   // Method for restarting the game
+
+  /* Iterate between players for attacks - if above method doesn't return true, check the
+     active player and query them for their move. If above method is true, call method
+     for ending the game, then method for restarting the game.
+     
+     -For user - set a one time event trigger for user clicking on valid attack position div
+     on the web interface. It will use gameboard.rivalBoard.receiveAttack and info from the div
+     html data to have the board attempt the attack. If the attack is true or false then a valid
+     hit or valid miss occurred. If undefined then an invalid attack was made, typically meaning
+     attacking a cell that has already had a hit or miss occur in it. If the attack is invalid 
+     then reset the trigger. After a successful attack (true or false returned) then set the 
+     active player to the AI and loop
+
+     -For AI use AI module's query method and pass in relevant parameters. AI module does its
+     magic and returns a position. Then use gameboard.rivalboard.receivedAttack to make and 
+     confirm the attack similar to the users attacks */
+
+  // The logic of the game manager and how the web interface responds to it will remain
+  // separated by using a pubsub module
 })();
 
 export default gameManager;

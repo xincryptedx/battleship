@@ -72,7 +72,30 @@ describe("receiveAttack", () => {
     ];
     testBoard.receiveAttack([2, 2], mockShips);
     testBoard.receiveAttack([2, 3], mockShips);
-    expect(testBoard.hits).toHaveLength(2);
+    expect(testBoard.hits).toEqual([
+      [2, 2],
+      [2, 3],
+    ]);
+  });
+
+  test("miss recorded to testBoard.misses array", () => {
+    const testBoard = Gameboard();
+    const mockHit = jest.fn();
+    const mockShips = [
+      {
+        occupiedCells: [
+          [2, 2],
+          [2, 3],
+        ],
+        hit: mockHit,
+      },
+    ];
+    testBoard.receiveAttack([3, 2], mockShips);
+    testBoard.receiveAttack([3, 3], mockShips);
+    expect(testBoard.misses).toEqual([
+      [3, 2],
+      [3, 3],
+    ]);
   });
 
   test("hit method called when attack coords found on a ships occupiedCells", () => {

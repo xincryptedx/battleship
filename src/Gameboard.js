@@ -10,6 +10,7 @@ const Gameboard = () => {
     receiveAttack: null,
     misses: [],
     hits: [],
+    allSunk: null,
   };
 
   // Method that validates ship occupied cell coords
@@ -85,6 +86,15 @@ const Gameboard = () => {
     }
     addMiss(position);
     return false;
+  };
+
+  // Method that determines if all ships are sunk or not
+  newBoard.allSunk = (shipArray = newBoard.ships) => {
+    let allSunk = true;
+    shipArray.forEach((ship) => {
+      if (!ship.isSunk()) allSunk = false;
+    });
+    return allSunk;
   };
 
   return newBoard;

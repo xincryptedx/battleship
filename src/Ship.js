@@ -13,7 +13,7 @@ const Ship = (index, position, direction) => {
   if (!Number.isInteger(index) || index > 5 || index < 1) return undefined;
 
   // Create the ship object that will be returned
-  const newShip = {
+  const thisShip = {
     index,
     size: null,
     type: null,
@@ -26,26 +26,26 @@ const Ship = (index, position, direction) => {
   // Set ship size
   switch (index) {
     case 1:
-      newShip.size = 2;
+      thisShip.size = 2;
       break;
     case 2:
-      newShip.size = 3;
+      thisShip.size = 3;
       break;
     default:
-      newShip.size = index;
+      thisShip.size = index;
   }
 
   // Set ship name based on index
-  newShip.type = shipNames[newShip.index];
+  thisShip.type = shipNames[thisShip.index];
 
   // Adds a hit to the ship
-  newShip.hit = () => {
-    newShip.hits += 1;
+  thisShip.hit = () => {
+    thisShip.hits += 1;
   };
 
   // Determines if ship sunk is true
-  newShip.isSunk = () => {
-    if (newShip.hits >= newShip.size) return true;
+  thisShip.isSunk = () => {
+    if (thisShip.hits >= thisShip.size) return true;
     return false;
   };
 
@@ -65,15 +65,15 @@ const Ship = (index, position, direction) => {
     Number.isInteger(position[1]) &&
     Object.keys(directionIterator).includes(direction)
   ) {
-    for (let i = 0; i < newShip.size; i += 1) {
+    for (let i = 0; i < thisShip.size; i += 1) {
       const newCoords = [
         position[0] + i * directionIterator[direction][0],
         position[1] + i * directionIterator[direction][1],
       ];
-      newShip.occupiedCells.push(newCoords);
+      thisShip.occupiedCells.push(newCoords);
     }
   }
 
-  return newShip;
+  return thisShip;
 };
 export default Ship;

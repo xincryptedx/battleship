@@ -1,7 +1,7 @@
 /* Factory that creates and returns a player object that can take a shot at opponent's game board */
 const Player = () => {
   let privateName = "";
-  const newPlayer = {
+  const thisPlayer = {
     get name() {
       return privateName;
     },
@@ -14,11 +14,11 @@ const Player = () => {
     sendAttack: null,
   };
 
-  newPlayer.sendAttack = () => {
+  thisPlayer.sendAttack = () => {
     // Stuff
   };
 
-  return newPlayer;
+  return thisPlayer;
 };
 
 export default Player;

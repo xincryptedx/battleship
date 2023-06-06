@@ -43,6 +43,7 @@ const Gameboard = () => {
   };
 
   newBoard.receiveAttack = (position, ships = newBoard.ships) => {
+    // Validate position is 2 in array and ships is an array
     if (
       Array.isArray(position) &&
       position.length === 2 &&
@@ -50,13 +51,22 @@ const Gameboard = () => {
       Number.isInteger(position[1]) &&
       Array.isArray(ships)
     ) {
+      // Each ship in ships
       for (let i = 0; i < ships.length; i += 1) {
-        if (ships[i].occupiedCells && Array.isArray(ships[i].occupiedCells)) {
+        if (
+          // If the ship is not falsy, and occupiedCells prop exists and is an array
+          ships[i] &&
+          ships[i].occupiedCells &&
+          Array.isArray(ships[i].occupiedCells)
+        ) {
+          // For each of that ships occupied cells
           for (let j = 0; j < ships[0].occupiedCells.length; j += 1) {
             if (
+              // If that cell matches the attack position
               ships[i].occupiedCells[j][0] === position[0] &&
               ships[i].occupiedCells[j][1] === position[1]
             ) {
+              // Call that ships hit method and break out of loop
               ships[i].hit();
               break;
             }

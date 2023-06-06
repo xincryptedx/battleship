@@ -99,10 +99,10 @@ describe("receiveAttack", () => {
     expect(mockHit.mock.calls).toHaveLength(0);
   });
 
-  test("hit method not called when falsy array values for ships", () => {
+  test("hit method not called when falsy non object array values for ships", () => {
     const testBoard = Gameboard();
     const mockHit = jest.fn();
-    testBoard.receiveAttack([2, 2], [null, NaN]);
+    testBoard.receiveAttack([2, 2], [null, undefined, NaN, false]);
     expect(mockHit.mock.calls).toHaveLength(0);
   });
 });

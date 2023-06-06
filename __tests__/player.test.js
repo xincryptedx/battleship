@@ -6,3 +6,11 @@ describe("Player basic functionality", () => {
     expect(testPlayer).toBeInstanceOf(Object);
   });
 });
+
+describe("Player Name", () => {
+  test('player.name = "string" should set name to string', () => {
+    const testPlayer = Player();
+    testPlayer.name = "string";
+    expect(testPlayer.name).toBe("string");
+  });
+});

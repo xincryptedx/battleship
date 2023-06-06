@@ -16,7 +16,7 @@ const Player = () => {
     sendAttack: null,
   };
 
-  thisPlayer.sendAttack = () => {
+  thisPlayer.sendAttack = (position, gameboard = thisPlayer.gameboard) => {
     // Stuff
   };
 

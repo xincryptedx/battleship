@@ -82,9 +82,9 @@ const Gameboard = () => {
           }
         }
       }
-      addMiss(position);
-      return false;
     }
+    addMiss(position);
+    return false;
   };
 
   return newBoard;

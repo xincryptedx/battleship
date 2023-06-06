@@ -44,6 +44,22 @@ describe("receiveAttack", () => {
     expect(testBoard.receiveAttack([2, 2], mockShips)).toBe(true);
   });
 
+  test("returns false when match not found", () => {
+    const testBoard = Gameboard();
+    const mockHit = jest.fn();
+    const mockShips = [
+      {
+        occupiedCells: [
+          [2, 2],
+          [2, 3],
+        ],
+        hit: mockHit,
+      },
+    ];
+    testBoard.receiveAttack([2, 2], mockShips);
+    expect(testBoard.receiveAttack([4, 2], mockShips)).toBe(false);
+  });
+
   test("hit method called when attack coords found on a ships occupiedCells", () => {
     const testBoard = Gameboard();
     const mockHit = jest.fn();

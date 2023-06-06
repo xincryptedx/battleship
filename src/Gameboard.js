@@ -50,6 +50,7 @@ const Gameboard = () => {
           ships[i].occupiedCells[j][1] === position[1]
         ) {
           ships[i].hit();
+          break;
         }
       }
     }

@@ -70,7 +70,9 @@ describe("receiveAttack", () => {
         hit: mockHit,
       },
     ];
-    expect(testBoard.receiveAttack([2, 2], mockShips)).toBe(true);
+    testBoard.receiveAttack([2, 2], mockShips);
+    testBoard.receiveAttack([2, 3], mockShips);
+    expect(testBoard.hits).toHaveLength(2);
   });
 
   test("hit method called when attack coords found on a ships occupiedCells", () => {

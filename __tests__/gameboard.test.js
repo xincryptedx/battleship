@@ -229,7 +229,22 @@ describe("allSunk", () => {
     const mockShips = [
       { isSunk: mockIsSunk },
       { isSunk: mockIsSunk },
+      { wrongFn: () => "r.i.p." },
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+    ];
+    expect(testBoard.allSunk(mockShips)).toBe(true);
+  });
+
+  test("falsy array entries are ignored", () => {
+    const testBoard = Gameboard();
+    const mockIsSunk = () => true;
+    const mockShips = [
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
       null,
+      undefined,
+      NaN,
       { isSunk: mockIsSunk },
       { isSunk: mockIsSunk },
     ];

@@ -93,7 +93,7 @@ const Gameboard = () => {
     if (!shipArray || !Array.isArray(shipArray)) return undefined;
     let allSunk = true;
     shipArray.forEach((ship) => {
-      if (!ship.isSunk()) allSunk = false;
+      if (ship.isSunk && !ship.isSunk()) allSunk = false;
     });
     return allSunk;
   };

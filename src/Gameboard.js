@@ -43,14 +43,21 @@ const Gameboard = () => {
   };
 
   newBoard.receiveAttack = (position, ships = newBoard.ships) => {
-    for (let i = 0; i < ships.length; i += 1) {
-      for (let j = 0; j < ships[0].occupiedCells.length; j += 1) {
-        if (
-          ships[i].occupiedCells[j][0] === position[0] &&
-          ships[i].occupiedCells[j][1] === position[1]
-        ) {
-          ships[i].hit();
-          break;
+    if (
+      Array.isArray(position) &&
+      position.length === 2 &&
+      Number.isInteger(position[0]) &&
+      Number.isInteger(position[1])
+    ) {
+      for (let i = 0; i < ships.length; i += 1) {
+        for (let j = 0; j < ships[0].occupiedCells.length; j += 1) {
+          if (
+            ships[i].occupiedCells[j][0] === position[0] &&
+            ships[i].occupiedCells[j][1] === position[1]
+          ) {
+            ships[i].hit();
+            break;
+          }
         }
       }
     }

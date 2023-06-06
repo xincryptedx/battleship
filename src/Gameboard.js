@@ -90,6 +90,7 @@ const Gameboard = () => {
 
   // Method that determines if all ships are sunk or not
   newBoard.allSunk = (shipArray = newBoard.ships) => {
+    if (!shipArray || !Array.isArray(shipArray)) return undefined;
     let allSunk = true;
     shipArray.forEach((ship) => {
       if (!ship.isSunk()) allSunk = false;

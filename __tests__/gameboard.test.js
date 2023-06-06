@@ -31,14 +31,32 @@ describe("receiveAttack", () => {
   test("hit method called when attack coords found on a ships occupiedCells", () => {
     const testBoard = Gameboard();
     const mockHit = jest.fn();
-    const mockShips = {
-      occupiedCells: [
-        [2, 2],
-        [2, 3],
-      ],
-      hit: mockHit,
-    };
+    const mockShips = [
+      {
+        occupiedCells: [
+          [2, 2],
+          [2, 3],
+        ],
+        hit: mockHit,
+      },
+    ];
     testBoard.receiveAttack([2, 2], mockShips);
     expect(mockHit.mock.calls).toHaveLength(1);
+  });
+
+  test("hit method not called when no match found", () => {
+    const testBoard = Gameboard();
+    const mockHit = jest.fn();
+    const mockShips = [
+      {
+        occupiedCells: [
+          [2, 4],
+          [2, 3],
+        ],
+        hit: mockHit,
+      },
+    ];
+    testBoard.receiveAttack([2, 2], mockShips);
+    expect(mockHit.mock.calls).toHaveLength(0);
   });
 });

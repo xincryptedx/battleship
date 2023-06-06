@@ -6,7 +6,9 @@ const Player = () => {
       return privateName;
     },
     set name(newName) {
-      privateName = newName.toString();
+      if (newName) {
+        privateName = newName.toString();
+      } else privateName = "";
     },
     gameboard: null,
   };

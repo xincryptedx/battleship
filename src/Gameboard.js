@@ -11,6 +11,7 @@ const Gameboard = () => {
     misses: [],
     hits: [],
     allSunk: null,
+    rivalBoard: null,
   };
 
   // Method that validates ship occupied cell coords

@@ -22,6 +22,7 @@ describe("Player Name", () => {
 
   test("player.name = falsy values returns ''", () => {
     const testPlayer = Player();
+    testPlayer.name = "My Name"; // Removes default '' value for name
     testPlayer.name = null;
     expect(testPlayer.name).toBe("");
   });

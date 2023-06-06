@@ -28,7 +28,7 @@ const Player = () => {
       Array.isArray(position) &&
       position.length === 2 &&
       Number.isInteger(position[0]) &&
-      Number.isInteger(position[2]) &&
+      Number.isInteger(position[1]) &&
       position[0] >= 0 &&
       position[0] <= gameboard.maxBoardX &&
       position[1] >= 0 &&

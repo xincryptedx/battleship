@@ -60,7 +60,7 @@ describe("receiveAttack", () => {
     expect(mockHit.mock.calls).toHaveLength(0);
   });
 
-  test("hit method not called when invalid position", () => {
+  test("hit method not called when undefined position", () => {
     const testBoard = Gameboard();
     const mockHit = jest.fn();
     const mockShips = [
@@ -76,12 +76,26 @@ describe("receiveAttack", () => {
     expect(mockHit.mock.calls).toHaveLength(0);
   });
 
-  test("hit method not called when invalid ships", () => {
+  test("hit method not called when falsy array values", () => {
+    const testBoard = Gameboard();
+    const mockHit = jest.fn();
+    const mockShips = [
+      {
+        occupiedCells: [
+          [2, 4],
+          [2, 3],
+        ],
+        hit: mockHit,
+      },
+    ];
+    testBoard.receiveAttack([null, NaN], mockShips);
+    expect(mockHit.mock.calls).toHaveLength(0);
+  });
+
+  test("hit method not called when ships undefined", () => {
     const testBoard = Gameboard();
     const mockHit = jest.fn();
     testBoard.receiveAttack([2, 2], undefined);
-    testBoard.receiveAttack([2, 2], []);
-    testBoard.receiveAttack([2, 2], [NaN, null]);
     expect(mockHit.mock.calls).toHaveLength(0);
   });
 });

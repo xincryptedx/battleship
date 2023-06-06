@@ -28,6 +28,22 @@ describe("addShip", () => {
 });
 
 describe("receiveAttack", () => {
+  test("returns true when match found", () => {
+    const testBoard = Gameboard();
+    const mockHit = jest.fn();
+    const mockShips = [
+      {
+        occupiedCells: [
+          [2, 2],
+          [2, 3],
+        ],
+        hit: mockHit,
+      },
+    ];
+    testBoard.receiveAttack([2, 2], mockShips);
+    expect(testBoard.receiveAttack([2, 2], mockShips)).toBe(true);
+  });
+
   test("hit method called when attack coords found on a ships occupiedCells", () => {
     const testBoard = Gameboard();
     const mockHit = jest.fn();

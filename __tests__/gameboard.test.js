@@ -59,4 +59,12 @@ describe("receiveAttack", () => {
     testBoard.receiveAttack([2, 2], mockShips);
     expect(mockHit.mock.calls).toHaveLength(0);
   });
+
+  test("return undefined if invalid position", () => {
+    const testBoard = Gameboard();
+    expect(testBoard.receiveAttack(null, [])).toBeUndefined();
+    expect(testBoard.receiveAttack("abc", [])).toBeUndefined();
+    expect(testBoard.receiveAttack([], [])).toBeUndefined();
+    expect(testBoard.receiveAttack(["abc", undefined], [])).toBeUndefined();
+  });
 });

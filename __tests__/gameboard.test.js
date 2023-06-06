@@ -216,4 +216,10 @@ describe("allSunk", () => {
     ];
     expect(testBoard.allSunk(mockShips)).toBe(false);
   });
+
+  test("if shipsArray is not an array return undefined", () => {
+    const testBoard = Gameboard();
+    const mockShips = null;
+    expect(testBoard.allSunk(mockShips)).toBeUndefined();
+  });
 });

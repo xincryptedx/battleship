@@ -37,8 +37,16 @@ describe("Player Name", () => {
 describe("sendAttack", () => {
   test("receiveAttack is invoked on opponent board", () => {
     const mockReceiveAttack = jest.fn();
-    const mockRivalBoard = { receiveAttack: mockReceiveAttack };
-    const mockPlayerBoard = { rivalBoard: mockRivalBoard };
+    const mockRivalBoard = {
+      maxBoardX: 9,
+      maxBoardY: 9,
+      receiveAttack: mockReceiveAttack,
+    };
+    const mockPlayerBoard = {
+      maxBoardX: 9,
+      maxBoardY: 9,
+      rivalBoard: mockRivalBoard,
+    };
     const testPlayer = Player();
     testPlayer.sendAttack([2, 4], mockPlayerBoard);
     expect(mockReceiveAttack.mock.calls).toHaveLength(1);

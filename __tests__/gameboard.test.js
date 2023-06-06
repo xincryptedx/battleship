@@ -1,5 +1,6 @@
 import Gameboard from "../src/Gameboard";
 
+// Basic game boad factory functionality
 describe("General Functionality", () => {
   test("Gameboard returns an object", () => {
     const testBoard = Gameboard();
@@ -7,6 +8,7 @@ describe("General Functionality", () => {
   });
 });
 
+// Method for adding shipt to game board
 describe("addShip", () => {
   test("a valid ship gets added to ships", () => {
     const testBoard = Gameboard();
@@ -27,6 +29,8 @@ describe("addShip", () => {
   });
 });
 
+/* Method for taking an attack from opponent. Returns true if hit, false if miss, 
+   and records position of attack to proper array, hits or misses, on game board */
 describe("receiveAttack", () => {
   test("returns true when match found", () => {
     const testBoard = Gameboard();

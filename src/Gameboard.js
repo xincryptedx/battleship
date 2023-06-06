@@ -42,6 +42,14 @@ const Gameboard = () => {
     if (validateShip(newShip)) newBoard.ships.push(newShip);
   };
 
+  const addMiss = (position) => {
+    newBoard.misses.push(position);
+  };
+
+  const addHit = (position) => {
+    newBoard.hits.push(position);
+  };
+
   newBoard.receiveAttack = (position, ships = newBoard.ships) => {
     // Validate position is 2 in array and ships is an array
     if (

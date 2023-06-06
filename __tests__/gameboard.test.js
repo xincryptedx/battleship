@@ -187,3 +187,19 @@ describe("receiveAttack", () => {
     expect(mockHit.mock.calls).toHaveLength(0);
   });
 });
+
+// Method that checks isSunk for all ships and returns true if all sunk or false otherwise
+describe("allSunk", () => {
+  test("if all ships isSunk true, return true", () => {
+    const testBoard = Gameboard();
+    const mockIsSunk = () => true;
+    const mockShips = [
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+    ];
+    expect(testBoard.allSunk(mockShips)).toBe(true);
+  });
+});

@@ -40,7 +40,6 @@ describe("receiveAttack", () => {
         hit: mockHit,
       },
     ];
-    testBoard.receiveAttack([2, 2], mockShips);
     expect(testBoard.receiveAttack([2, 2], mockShips)).toBe(true);
   });
 
@@ -56,8 +55,22 @@ describe("receiveAttack", () => {
         hit: mockHit,
       },
     ];
-    testBoard.receiveAttack([2, 2], mockShips);
     expect(testBoard.receiveAttack([4, 2], mockShips)).toBe(false);
+  });
+
+  test("hit recorded to testBoard.hits array", () => {
+    const testBoard = Gameboard();
+    const mockHit = jest.fn();
+    const mockShips = [
+      {
+        occupiedCells: [
+          [2, 2],
+          [2, 3],
+        ],
+        hit: mockHit,
+      },
+    ];
+    expect(testBoard.receiveAttack([2, 2], mockShips)).toBe(true);
   });
 
   test("hit method called when attack coords found on a ships occupiedCells", () => {

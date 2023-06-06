@@ -222,4 +222,17 @@ describe("allSunk", () => {
     const mockShips = null;
     expect(testBoard.allSunk(mockShips)).toBeUndefined();
   });
+
+  test("things in array with no isSunk method are ignored", () => {
+    const testBoard = Gameboard();
+    const mockIsSunk = () => true;
+    const mockShips = [
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+      null,
+      { isSunk: mockIsSunk },
+      { isSunk: mockIsSunk },
+    ];
+    expect(testBoard.allSunk(mockShips)).toBe(true);
+  });
 });

@@ -67,4 +67,12 @@ describe("receiveAttack", () => {
     expect(testBoard.receiveAttack([], [])).toBeUndefined();
     expect(testBoard.receiveAttack(["abc", undefined], [])).toBeUndefined();
   });
+
+  test("return undefined if invalid ships", () => {
+    const testBoard = Gameboard();
+    expect(testBoard.receiveAttack([2, 2], [])).toBeUndefined();
+    expect(testBoard.receiveAttack([2, 2], null)).toBeUndefined();
+    expect(testBoard.receiveAttack([2, 2], [undefined])).toBeUndefined();
+    expect(testBoard.receiveAttack([2, 2], [{ undefined }])).toBeUndefined();
+  });
 });

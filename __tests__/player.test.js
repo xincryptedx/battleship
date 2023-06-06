@@ -13,4 +13,10 @@ describe("Player Name", () => {
     testPlayer.name = "string";
     expect(testPlayer.name).toBe("string");
   });
+
+  test("player.name = anything else should use that things .toString()", () => {
+    const testPlayer = Player();
+    testPlayer.name = 123;
+    expect(testPlayer.name).toBe("123");
+  });
 });

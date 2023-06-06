@@ -105,4 +105,11 @@ describe("receiveAttack", () => {
     testBoard.receiveAttack([2, 2], [null, undefined, NaN, false]);
     expect(mockHit.mock.calls).toHaveLength(0);
   });
+
+  test("hit method not called when invalid truthy array values for ships", () => {
+    const testBoard = Gameboard();
+    const mockHit = jest.fn();
+    testBoard.receiveAttack([2, 2], ["abc", 23, true]);
+    expect(mockHit.mock.calls).toHaveLength(0);
+  });
 });

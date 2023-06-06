@@ -4,13 +4,13 @@ import Gameboard from "./factories/Gameboard";
 /* This module holds the game loop logic for starting games, creating
    required objects, iterating through turns, reporting game outcome when
    a player loses, and restart the game */
-const gameManager = () => {
+const gameManager = (() => {
   // Initialization
-  /* -Create user gameboard
-     -Create AI gameboard
-     -Create user player
+  /* -Create user player
      -Create AI player
      -Set rivalBoard properties */
+  const userPlayer = Player();
+  const aiPlayer = Player();
   // Start a game
   /* -Have user add ships 
      -Have AI add ships */
@@ -21,6 +21,6 @@ const gameManager = () => {
      -Query AI for attack on AI turns */
   // Report game results if game ends
   // Restart the game
-};
+})();
 
 export default gameManager;

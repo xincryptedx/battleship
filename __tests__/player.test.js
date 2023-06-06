@@ -39,8 +39,8 @@ describe("sendAttack", () => {
     const mockReceiveAttack = jest.fn();
     const mockRivalBoard = { receiveAttack: mockReceiveAttack };
     const mockPlayerBoard = { rivalBoard: mockRivalBoard };
-    const testPlayer = Player(mockPlayerBoard);
-    testPlayer.sendAttack([2, 4]);
+    const testPlayer = Player();
+    testPlayer.sendAttack([2, 4], mockPlayerBoard);
     expect(mockReceiveAttack.mock.calls).toHaveLength(1);
   });
 });

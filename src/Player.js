@@ -11,6 +11,11 @@ const Player = () => {
       } else privateName = "";
     },
     gameboard: null,
+    sendAttack: null,
+  };
+
+  newPlayer.sendAttack = () => {
+    // Stuff
   };
 
   return newPlayer;

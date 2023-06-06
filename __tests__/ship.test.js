@@ -152,7 +152,13 @@ describe("Edge Cases", () => {
   });
 
   test("occupiedCells will be empty if direction not 'N','S','E', or 'W'", () => {
-    const titan = Ship(2, [4, 4], "U");
+    let titan = Ship(2, [4, 4], "U");
+    expect(titan.occupiedCells).toEqual([]);
+
+    titan = Ship(2, [4, 4], null);
+    expect(titan.occupiedCells).toEqual([]);
+
+    titan = Ship(2, [4, 4], 45);
     expect(titan.occupiedCells).toEqual([]);
   });
 

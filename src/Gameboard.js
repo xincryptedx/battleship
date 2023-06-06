@@ -4,6 +4,9 @@ import Ship from "./Ship";
    and then decides whether to hit() if ship is in that spot, records hits and misses, and reports if
    all its ships have been sunk. */
 const Gameboard = () => {
+  // Constraints for game board (10x10 grid, zero based)
+  const maxBoardCoord = 9;
+
   const thisGameboard = {
     ships: [],
     addShip: null,
@@ -12,14 +15,19 @@ const Gameboard = () => {
     hits: [],
     allSunk: null,
     rivalBoard: null,
+    get maxBoardX() {
+      return maxBoardCoord;
+    },
+    get maxBoardY() {
+      return maxBoardCoord;
+    },
   };
 
   // Method that validates ship occupied cell coords
   const validateShip = (ship) => {
     // Flag for detecting invalid position value
     let isValid = false;
-    // Constraints for game board (10x10 grid, zero based)
-    const maxBoardCoord = 9;
+
     // Check that ships occupied cells are all within map
     for (let i = 0; i < ship.occupiedCells.length; i += 1) {
       if (

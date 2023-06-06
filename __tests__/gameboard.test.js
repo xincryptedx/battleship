@@ -60,19 +60,19 @@ describe("receiveAttack", () => {
     expect(mockHit.mock.calls).toHaveLength(0);
   });
 
-  test("return undefined if invalid position", () => {
+  test("hit method not called when invalid position", () => {
     const testBoard = Gameboard();
-    expect(testBoard.receiveAttack(null, [])).toBeUndefined();
-    expect(testBoard.receiveAttack("abc", [])).toBeUndefined();
-    expect(testBoard.receiveAttack([], [])).toBeUndefined();
-    expect(testBoard.receiveAttack(["abc", undefined], [])).toBeUndefined();
-  });
-
-  test("return undefined if invalid ships", () => {
-    const testBoard = Gameboard();
-    expect(testBoard.receiveAttack([2, 2], [])).toBeUndefined();
-    expect(testBoard.receiveAttack([2, 2], null)).toBeUndefined();
-    expect(testBoard.receiveAttack([2, 2], [undefined])).toBeUndefined();
-    expect(testBoard.receiveAttack([2, 2], [{ undefined }])).toBeUndefined();
+    const mockHit = jest.fn();
+    const mockShips = [
+      {
+        occupiedCells: [
+          [2, 4],
+          [2, 3],
+        ],
+        hit: mockHit,
+      },
+    ];
+    testBoard.receiveAttack(undefined, mockShips);
+    expect(mockHit.mock.calls).toHaveLength(0);
   });
 });

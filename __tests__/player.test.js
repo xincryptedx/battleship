@@ -25,5 +25,9 @@ describe("Player Name", () => {
     testPlayer.name = "My Name"; // Removes default '' value for name
     testPlayer.name = null;
     expect(testPlayer.name).toBe("");
+    testPlayer.name = undefined;
+    expect(testPlayer.name).toBe("");
+    testPlayer.name = NaN;
+    expect(testPlayer.name).toBe("");
   });
 });

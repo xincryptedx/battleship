@@ -17,7 +17,7 @@ const Player = () => {
   };
 
   // Helper method for validating that attack position is on board
-  const validatePosition = (position, gameboard) => {
+  const validateAttack = (position, gameboard) => {
     // Does gameboard exist with maxBoardX/y properties?
     if (!gameboard || !gameboard.maxBoardX || !gameboard.maxBoardY) {
       return false;
@@ -41,7 +41,9 @@ const Player = () => {
 
   // Method for sending attack to rival gameboard
   thisPlayer.sendAttack = (position, gameboard = thisPlayer.gameboard) => {
-    // Stuff
+    if (validateAttack(position, gameboard)) {
+      thisPlayer.gameboard.rivalBoard.receiveAttack(position);
+    }
   };
 
   return thisPlayer;

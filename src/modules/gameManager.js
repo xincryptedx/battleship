@@ -10,8 +10,8 @@ const gameManager = (() => {
   userPlayer.gameboard.rivalBoard = aiPlayer.gameboard;
   aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
   // Start a game
-  /* -Have user add ships - method/module on gameboard that asks the user to supply coords
-     and a direction to use for the gameboard's addShip method. 
+  /* -Have user add ships - method on interface module that asks the user to supply coords
+     and a direction to use for the gameboard's addShip method by clicking on a div.
      Then check that the ship was added to the gameboard, and if it was move on 
      to the next one. If it was not, ask for the placement of the same ship again.
      Move on after all 5 player ships have been placed, one of each

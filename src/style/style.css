@@ -33,7 +33,7 @@ body {
 /* title grid */
 .title {
   grid-column: 3 / 19;
-  grid-row: 2 / 10;
+  grid-row: 2 / 6;
 
   transition: transform 0.8s ease-in-out;
 

@@ -43,7 +43,13 @@ body {
   grid-column: 3 / 19;
   grid-row: 11 / 20;
 
+  transition: transform 0.3s ease-in-out;
+
   background-color: hsla(300, 72%, 59%, 0.5);
+}
+
+.menu.hidden {
+  transform: translateX(-150%);
 }
 /* #endregion */
 

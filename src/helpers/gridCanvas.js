@@ -29,6 +29,22 @@ function createGridCanvas(sizeX, sizeY) {
     ctx.stroke();
   }
 
+  // Add and handle event for canvas clicks
+  const cellSizeX = canvas.width / 10; // Width of each cell
+  const cellSizeY = canvas.height / 10; // Height of each cell
+
+  const handleClick = (event) => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    const clickedCellX = Math.floor(mouseX / cellSizeX);
+    const clickedCellY = Math.floor(mouseY / cellSizeY);
+
+    console.log(`x: ${clickedCellX}, y: ${clickedCellY}`);
+  };
+  canvas.addEventListener("click", handleClick);
+
   return canvas;
 }
 

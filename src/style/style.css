@@ -52,7 +52,13 @@ body {
   grid-column: 3 / 19;
   grid-row: 6 / 20;
 
+  transition: transform 0.3s ease-in-out;
+
   background-color: hsla(276, 72%, 59%, 0.5);
+}
+
+.placement.hidden {
+  transform: translateY(150%);
 }
 /* #endregion */
 

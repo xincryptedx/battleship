@@ -68,6 +68,10 @@ const webInterface = (() => {
   };
 
   // #endregion
+
+  // #region Add classes to ship divs to represent placed/destroyed
+
+  // #endregion
 })();
 
 export default webInterface;

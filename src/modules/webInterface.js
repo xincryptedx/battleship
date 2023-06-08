@@ -1,13 +1,23 @@
+import events from "./events";
+
 /* This module has three primary functions:
    1. Get ship placement coordinates from the user based on their clicks on the web interface
    2. Get attack placement coordinates from the user based on the same
    3. Other minor interface actions such as handling button clicks (start game, restart, etc) */
 const webInterface = (() => {
+  // References to elements
+  const title = document.querySelector(".title");
+  const menu = document.querySelector(".menu");
+  const placement = document.querySelector(".placement");
+  const game = document.querySelector(".game");
+
   // #region General helper methods
   // Move any active sections off the screen
   const hideAll = () => {
-    // Set proper class for css to transition elements off screen
+    console.log(title, menu, placement, game);
   };
+  events.on("hideAll", hideAll);
+
   // #endregion
 
   // #region menu section

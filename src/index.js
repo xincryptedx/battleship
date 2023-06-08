@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "./style.css";
-// eslint-disable-next-line no-unused-vars
 import gameManager from "./modules/gameManager";
+import canvasManager from "./modules/canvasManager";

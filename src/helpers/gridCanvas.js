@@ -175,7 +175,7 @@ function createGridCanvas(sizeX, sizeY) {
 
     handleHover(touchX, touchY);
   };
-  document.addEventListener("touchstart", handleTouchstart);
+  document.addEventListener("touchstart", handleTouchstart, { passive: false });
 
   // Add and handle event for touchmove
   const handleTouchmove = (event) => {
@@ -188,7 +188,7 @@ function createGridCanvas(sizeX, sizeY) {
 
     handleHover(touchX, touchY);
   };
-  document.addEventListener("touchmove", handleTouchmove);
+  document.addEventListener("touchmove", handleTouchmove, { passive: false });
 
   // Add and handle event for touchend and touchcancel
   const handleTouchend = (event) => {
@@ -199,19 +199,28 @@ function createGridCanvas(sizeX, sizeY) {
     const touchX = touch.clientX - rect.left;
     const touchY = touch.clientY - rect.top;
 
-    const endedCellX = Math.floor(touchX / cellSizeX);
-    const endedCellY = Math.floor(touchY / cellSizeY);
+    // Check if touch is within the canvas boundaries
+    if (
+      touchX >= 0 &&
+      touchX < canvas.width &&
+      touchY >= 0 &&
+      touchY < canvas.height
+    ) {
+      const endedCellX = Math.floor(touchX / cellSizeX);
+      const endedCellY = Math.floor(touchY / cellSizeY);
 
-    console.log(`x: ${endedCellX}, y: ${endedCellY}`);
+      console.log(`x: ${endedCellX}, y: ${endedCellY}`);
+    }
     clearCanvas();
   };
   const handleTouchcancel = (event) => {
     event.preventDefault();
     clearCanvas();
   };
-  document.addEventListener("touchend", handleTouchend);
-  document.addEventListener("touchcancel", handleTouchcancel);
-
+  document.addEventListener("touchend", handleTouchend, { passive: false });
+  document.addEventListener("touchcancel", handleTouchcancel, {
+    passive: false,
+  });
   // #endregion
 
   // #endregion

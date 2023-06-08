@@ -37,6 +37,10 @@ body {
 
 /* #region menu section */
 .menu {
+  grid-column: 3 / 18;
+  grid-row: 11 / 19;
+
+  background-color: hsla(300, 72%, 59%, 0.5);
 }
 /* #endregion */
 

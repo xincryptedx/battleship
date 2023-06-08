@@ -70,9 +70,12 @@ const webInterface = (() => {
   events.on("rotateClicked", handleRotateClick);
 
   // Handle clicks on the ship placement grid
-  const handlePlacementClick = () => {
-    // Send an even trying to place the ship
-    // Check the ship placement so the current ship for placement is updated properly
+  const handlePlacementClick = (payload) => {
+    // Send an event trying to place the ship
+    events.emit("tryPlacement", {
+      position: payload.position,
+      direction: placementDirection,
+    });
   };
 
   // Handle clicks on the enemy

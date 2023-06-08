@@ -51,7 +51,7 @@ function createGridCanvas(sizeX, sizeY) {
   canvas.addEventListener("click", handleClick);
 
   // Add and handle event for mousemove
-  function handleMousemove(event) {
+  const handleMousemove = (event) => {
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
@@ -84,8 +84,31 @@ function createGridCanvas(sizeX, sizeY) {
         ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
       }
     }
-  }
+  };
   canvas.addEventListener("mousemove", handleMousemove);
+
+  // Add and handle event for mouseleave
+  const handleMouseleave = () => {
+    // const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+    // Draw the grid
+    for (let x = 0; x < 10; x += 1) {
+      for (let y = 0; y < 10; y += 1) {
+        const cellX = x * cellSizeX;
+        const cellY = y * cellSizeY;
+
+        // Draw the regular cells
+        ctx.fillStyle = "lightgray"; // Set the color for regular cells
+        ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+
+        // Draw grid lines
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
+      }
+    }
+  };
+  canvas.addEventListener("mouseleave", handleMouseleave);
 
   // #endregion
 

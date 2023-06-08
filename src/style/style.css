@@ -29,14 +29,15 @@ body {
 
 /* title grid */
 .title {
-  grid-column: 5 / 16;
-  grid-row: 2 / 5;
+  grid-column: 3 / 18;
+  grid-row: 2 / 9;
 
   background-color: hsla(165, 72%, 59%, 0.5);
 }
 
 /* #region menu section */
-
+.menu {
+}
 /* #endregion */
 
 /* #region placement section */

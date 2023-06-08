@@ -10,9 +10,9 @@ const webInterface = (() => {
   };
   // #endregion
 
-  // #region Title section
-  // Show the title UI
-  const showTitle = () => {
+  // #region menu section
+  // Show the menu UI
+  const showMenu = () => {
     // Hide all then show proper elements by adding a class
   };
 

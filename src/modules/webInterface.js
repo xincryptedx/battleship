@@ -56,12 +56,6 @@ const webInterface = (() => {
   };
   events.on("startClicked", handleStartClick);
 
-  // Check if all ships placed
-  const checkShipPlacement = () => {
-    // Check what ships have been placed using module scope variable
-    // Call showGame if all ships have been placed
-  };
-
   // Handle clicks on the ship placement grid
   const handlePlacementClick = () => {
     // Send an even trying to place the ship

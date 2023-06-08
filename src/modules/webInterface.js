@@ -11,8 +11,9 @@ const webInterface = (() => {
   const placement = document.querySelector(".placement");
   const game = document.querySelector(".game");
 
-  // Reference to current direction for placing ships
+  // Reference to current direction for placing ships and to object for turning it into string
   let placementDirection = 0;
+  const directions = { 0: "N", 1: "E", 2: "S", 3: "W" };
   // Method for iterating through directions
   const rotateDirection = () => {
     placementDirection = (placementDirection + 1) % 4;
@@ -74,9 +75,10 @@ const webInterface = (() => {
     // Send an event trying to place the ship
     events.emit("tryPlacement", {
       position: payload.position,
-      direction: placementDirection,
+      direction: directions[placementDirection],
     });
   };
+  events.on("placementClicked", handlePlacementClick);
 
   // Handle clicks on the enemy
   const handleAttackClick = () => {

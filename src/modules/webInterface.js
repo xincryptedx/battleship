@@ -5,7 +5,7 @@ import events from "./events";
    2. Get attack placement coordinates from the user based on the same
    3. Other minor interface actions such as handling button clicks (start game, restart, etc) */
 const webInterface = (() => {
-  // References to elements
+  // References to main elements
   const title = document.querySelector(".title");
   const menu = document.querySelector(".menu");
   const placement = document.querySelector(".placement");
@@ -51,6 +51,7 @@ const webInterface = (() => {
   // #region High level responses to clicks
   // Hande clicks on the start game button
   const handleStartClick = () => {
+    shrinkTitle();
     showPlacement();
   };
   events.on("startClicked", handleStartClick);

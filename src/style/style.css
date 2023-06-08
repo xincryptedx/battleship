@@ -33,11 +33,16 @@ body {
 /* title grid */
 .title {
   grid-column: 3 / 19;
-  grid-row: 2 / 9;
+  grid-row: 2 / 10;
+
+  transition: transform 0.8s ease-in-out;
 
   background-color: hsla(165, 72%, 59%, 0.5);
 }
 
+.title.shrink {
+  transform: scale(0.5) translateY(-50%);
+}
 /* #region menu section */
 .menu {
   grid-column: 3 / 19;

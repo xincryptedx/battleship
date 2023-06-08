@@ -29,14 +29,17 @@ const webInterface = (() => {
 
   // Show the ship placement UI
   const showPlacement = () => {
-    // Hide all then show proper elements by adding a class
+    hideAll();
+    placement.classList.remove("hidden");
   };
+  events.on("showPlacement", showPlacement);
 
   // Show the game UI
   const showGame = () => {
-    // Hide all then show the game section elements
+    hideAll();
+    game.classList.remove("hidden");
   };
-
+  events.on("showGame", showGame);
   // #endregion
 
   // #region High level responses to clicks

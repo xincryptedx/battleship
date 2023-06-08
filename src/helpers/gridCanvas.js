@@ -175,7 +175,7 @@ function createGridCanvas(sizeX, sizeY) {
 
     handleHover(touchX, touchY);
   };
-  canvas.addEventListener("touchstart", handleTouchstart);
+  document.addEventListener("touchstart", handleTouchstart);
 
   // Add and handle event for touchmove
   const handleTouchmove = (event) => {
@@ -188,7 +188,7 @@ function createGridCanvas(sizeX, sizeY) {
 
     handleHover(touchX, touchY);
   };
-  canvas.addEventListener("touchmove", handleTouchmove);
+  document.addEventListener("touchmove", handleTouchmove);
 
   // Add and handle event for touchend and touchcancel
   const handleTouchend = (event) => {
@@ -209,8 +209,8 @@ function createGridCanvas(sizeX, sizeY) {
     event.preventDefault();
     clearCanvas();
   };
-  canvas.addEventListener("touchend", handleTouchend);
-  canvas.addEventListener("touchcancel", handleTouchcancel);
+  document.addEventListener("touchend", handleTouchend);
+  document.addEventListener("touchcancel", handleTouchcancel);
 
   // #endregion
 

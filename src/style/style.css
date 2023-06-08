@@ -74,7 +74,18 @@ body {
 /* #endregion */
 
 /* #region game section */
+.game {
+  grid-column: 2 / 20;
+  grid-row: 5 / 20;
 
+  transition: transform 0.3s ease-in-out;
+
+  background-color: hsla(106, 100%, 51%, 0.5);
+}
+
+.game.hidden {
+  transform: translateX(150%);
+}
 /* #endregion */
 
 /* #endregion */

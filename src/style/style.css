@@ -1,3 +1,14 @@
+:root {
+  --bg-color: hsl(0, 0%, 22%);
+  --text-color: hsl(0, 0%, 77%);
+  --link-color: hsl(98, 72%, 59%);
+}
+
+a {
+  color: var(--link-color);
+}
+
 body {
-  background-color: lightgrey;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }

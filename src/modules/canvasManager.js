@@ -6,6 +6,12 @@ const canvasManager = (() => {
   // Replace the three grid placeholder elements with the proper canvases
   // Refs to DOM elements
   const placementPH = document.querySelector(".placement-canvas-ph");
+
+  // Create the ship placement canvas
+  const placementCanvas = gridCanvas(300, 300);
+
+  // Replace the place holders
+  placementPH.parentNode.replaceChild(placementCanvas, placementPH);
 })();
 
 export default canvasManager;

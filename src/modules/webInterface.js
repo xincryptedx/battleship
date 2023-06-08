@@ -11,6 +11,13 @@ const webInterface = (() => {
   const placement = document.querySelector(".placement");
   const game = document.querySelector(".game");
 
+  // Reference to current direction for placing ships
+  let placementDirection = 0;
+  // Method for iterating through directions
+  const rotateDirection = () => {
+    placementDirection = (placementDirection + 1) % 4;
+  };
+
   // #region Basic methods for showing/hiding elements
   // Move any active sections off the screen
   const hideAll = () => {
@@ -55,6 +62,12 @@ const webInterface = (() => {
     showPlacement();
   };
   events.on("startClicked", handleStartClick);
+
+  // Handle clicks on the rotate button in the placement section
+  const handleRotateClick = () => {
+    rotateDirection();
+  };
+  events.on("rotateClicked", handleRotateClick);
 
   // Handle clicks on the ship placement grid
   const handlePlacementClick = () => {

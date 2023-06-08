@@ -14,7 +14,9 @@ const webInterface = (() => {
   // #region General helper methods
   // Move any active sections off the screen
   const hideAll = () => {
-    console.log(title, menu, placement, game);
+    menu.classList.add("hidden");
+    placement.classList.add("hidden");
+    game.classList.add("hidden");
   };
   events.on("hideAll", hideAll);
 
@@ -23,8 +25,10 @@ const webInterface = (() => {
   // #region menu section
   // Show the menu UI
   const showMenu = () => {
-    // Hide all then show proper elements by adding a class
+    hideAll();
+    menu.classList.remove("hidden");
   };
+  events.on("showMenu", showMenu);
 
   // Hande clicks on the start game button
   const handleStartClick = () => {

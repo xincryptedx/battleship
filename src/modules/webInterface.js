@@ -3,7 +3,26 @@
    2. Get attack placement coordinates from the user based on the same
    3. Other minor interface actions such as handling button clicks (start game, restart, etc) */
 const webInterface = (() => {
-  // #region Ship Placement
+  // #region General helper methods
+  // Move any active sections off the screen
+  const hideAll = () => {
+    // Set proper class for css to transition elements off screen
+  };
+  // #endregion
+
+  // #region Title section
+  // Show the title UI
+  const showTitle = () => {
+    // Hide all then show proper elements by adding a class
+  };
+
+  // Hande clicks on the start game button
+  const handleStartClick = () => {
+    // Hide all and then show the ship placement section elements
+  };
+  // #endregion
+
+  // #region Ship placement section
   /* Methods that ask the user to supply coords
      and a direction to use for the gameboard's addShip method by clicking on a div.
      Then check that the ship was added to the gameboard, and if it was move on 
@@ -11,25 +30,27 @@ const webInterface = (() => {
      Move on after all 5 player ships have been placed, one of each */
 
   // Show the ship placement UI
-  const showPlacementUi = () => {
-    // Show/hide html elements
-  };
-
-  // Move from placement to game
-  const showGameUi = () => {
-    // Show/hide html elements
+  const showPlacement = () => {
+    // Hide all then show proper elements by adding a class
   };
 
   // Check if all ships placed
   const checkShipPlacement = () => {
     // Check what ships have been placed using module scope variable
-    // Call method for moving on to game if all ships placed
+    // Call showGame
   };
 
   const handlePlacementClick = () => {
     // Respond to a click on the placement interface
   };
 
+  // #endregion
+
+  // #region Game section
+  // Show the game UI
+  const showGame = () => {
+    // Hide all then show the game section elements
+  };
   // #endregion
 })();
 

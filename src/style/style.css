@@ -46,7 +46,7 @@ body {
 /* #region menu section */
 .menu {
   grid-column: 3 / 19;
-  grid-row: 11 / 20;
+  grid-row: 8 / 18;
 
   transition: transform 0.3s ease-in-out;
 

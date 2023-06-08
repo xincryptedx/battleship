@@ -1,9 +1,11 @@
+/* Color Rules */
 :root {
   --bg-color: hsl(0, 0%, 22%);
   --text-color: hsl(0, 0%, 77%);
   --link-color: hsl(98, 72%, 59%);
 }
 
+/* #region Universal element rules */
 a {
   color: var(--link-color);
 }
@@ -12,3 +14,20 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+
+/* #endregion */
+
+/* #region main-content */
+/* #region menu section */
+
+/* #endregion */
+
+/* #region placement section */
+
+/* #endregion */
+
+/* #region game section */
+
+/* #endregion */
+
+/* #endregion */

@@ -8,7 +8,7 @@ function createGridCanvas(sizeX, sizeY) {
   ctx.clearRect(0, 0, sizeX, sizeY);
 
   // Draw grid lines
-  const gridSize = 10;
+  const gridSize = Math.min(sizeX, sizeY) / 10;
   const lineColor = "black";
   ctx.strokeStyle = lineColor;
   ctx.lineWidth = 1;

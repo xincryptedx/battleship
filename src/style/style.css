@@ -15,6 +15,7 @@ body {
   color: var(--text-color);
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 /* #endregion */
@@ -23,13 +24,15 @@ body {
 .main-content {
   display: grid;
   grid-template: repeat(20, 5%) / repeat(20, 5%);
+  position: relative;
+
   height: 100%;
   width: 100%;
 }
 
 /* title grid */
 .title {
-  grid-column: 3 / 18;
+  grid-column: 3 / 19;
   grid-row: 2 / 9;
 
   background-color: hsla(165, 72%, 59%, 0.5);
@@ -37,15 +40,20 @@ body {
 
 /* #region menu section */
 .menu {
-  grid-column: 3 / 18;
-  grid-row: 11 / 19;
+  grid-column: 3 / 19;
+  grid-row: 11 / 20;
 
   background-color: hsla(300, 72%, 59%, 0.5);
 }
 /* #endregion */
 
 /* #region placement section */
+.placement {
+  grid-column: 3 / 19;
+  grid-row: 6 / 20;
 
+  background-color: hsla(276, 72%, 59%, 0.5);
+}
 /* #endregion */
 
 /* #region game section */

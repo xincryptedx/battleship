@@ -27,6 +27,14 @@ body {
   width: 100%;
 }
 
+/* title grid */
+.title {
+  grid-column: 5 / 16;
+  grid-row: 2 / 5;
+
+  background-color: hsla(165, 72%, 59%, 0.5);
+}
+
 /* #region menu section */
 
 /* #endregion */

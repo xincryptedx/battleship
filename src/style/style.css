@@ -13,11 +13,20 @@ a {
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
+  height: 100vh;
+  width: 100vw;
 }
 
 /* #endregion */
 
 /* #region main-content */
+.main-content {
+  display: grid;
+  grid-template: repeat(20, 5%) / repeat(20, 5%);
+  height: 100%;
+  width: 100%;
+}
+
 /* #region menu section */
 
 /* #endregion */

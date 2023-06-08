@@ -40,6 +40,12 @@ const webInterface = (() => {
     game.classList.remove("hidden");
   };
   events.on("showGame", showGame);
+
+  // Shrink the title
+  const shrinkTitle = () => {
+    title.classList.add("shrink");
+  };
+  events.on("shrinkTitle", shrinkTitle);
   // #endregion
 
   // #region High level responses to clicks
@@ -47,6 +53,7 @@ const webInterface = (() => {
   const handleStartClick = () => {
     showPlacement();
   };
+  events.on("startClicked", handleStartClick);
 
   // Check if all ships placed
   const checkShipPlacement = () => {

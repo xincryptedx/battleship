@@ -65,6 +65,7 @@ const Gameboard = () => {
     thisGameboard.hits.push(position);
   };
 
+  // Method for receiving an attack from opponent
   thisGameboard.receiveAttack = (position, ships = thisGameboard.ships) => {
     // Validate position is 2 in array and ships is an array
     if (

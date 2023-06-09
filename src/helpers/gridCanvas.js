@@ -1,7 +1,13 @@
 import events from "../modules/events";
-/* Events pubbed:
+/* 
+  Events subbed:
+    returnShips
+    returnShipPlacementDirection
+
+  Events pubbed:
     placementClicked
     requestShips
+    requestShipPlacementDirection
 */
 
 const createGridCanvas = (sizeX, sizeY, options) => {
@@ -14,6 +20,24 @@ const createGridCanvas = (sizeX, sizeY, options) => {
     });
   };
   events.on("returnShips", setUserShips);
+
+  // Sets info about current placement direction in reponse to event
+  let placementDirection = "N";
+
+  const getShipPlacementDirection = () => {
+    events.emit("getShipPlacementDirection"); // Emit event to request direction information
+  };
+
+  events.on("returnShipPlacementDirection", (direction) => {
+    if (
+      direction === "N" ||
+      direction === "S" ||
+      direction === "E" ||
+      direction === "W"
+    ) {
+      placementDirection = direction;
+    }
+  });
 
   // Method that requests information about current user ships using event
   const getUserShips = () => {

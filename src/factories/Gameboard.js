@@ -8,11 +8,9 @@ const Gameboard = () => {
   const maxBoardX = 9;
   const maxBoardY = 9;
 
-  // All occupied cells for a faster search
-  const allOccupiedCells = [];
-
   const thisGameboard = {
     ships: [],
+    allOccupiedCells: [],
     addShip: null,
     receiveAttack: null,
     misses: [],
@@ -54,7 +52,7 @@ const Gameboard = () => {
   // Method that adds occupied cells of valid boat to list
   const addCellsToList = (ship) => {
     ship.occupiedCells.forEach((cell) => {
-      allOccupiedCells.push(cell);
+      thisGameboard.allOccupiedCells.push(cell);
     });
   };
 
@@ -67,7 +65,10 @@ const Gameboard = () => {
     // Create the desired ship
     const newShip = Ship(shipTypeIndex, position, direction);
     // Add it to ships if it has valid occupied cells
-    if (validateShip(newShip)) thisGameboard.ships.push(newShip);
+    if (validateShip(newShip)) {
+      addCellsToList(newShip);
+      thisGameboard.ships.push(newShip);
+    }
   };
 
   const addMiss = (position) => {

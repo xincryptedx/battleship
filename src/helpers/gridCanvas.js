@@ -4,7 +4,7 @@ import events from "../modules/events";
     requestShips
 */
 
-const createGridCanvas = (sizeX, sizeY) => {
+const createGridCanvas = (sizeX, sizeY, options) => {
   // Sets info about user ships in response to event
   const ships = [];
 

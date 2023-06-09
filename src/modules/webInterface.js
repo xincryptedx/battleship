@@ -1,4 +1,12 @@
 import events from "./events";
+/* Events subbed: 
+    hideAll showMenu  showPlacement
+    showGame  shrinkTitle startClicked
+    rotateClicked placementClicked
+
+   Events pubbed:
+    tryPlacement
+*/
 
 /* This module has three primary functions:
    1. Get ship placement coordinates from the user based on their clicks on the web interface

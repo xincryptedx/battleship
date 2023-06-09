@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-use-before-define */
 import events from "../modules/events";
 /* 
   Events subbed:
@@ -10,7 +12,10 @@ import events from "../modules/events";
     requestShipPlacementDirection
 */
 
-const createGridCanvas = (sizeX, sizeY, options) => {
+// Old implementation
+
+/* const createGridCanvas = (sizeX, sizeY, options) => {
+
   // #region Methods for getting data via event
   // Sets info about user ships in response to event
   const ships = [];
@@ -115,34 +120,26 @@ const createGridCanvas = (sizeX, sizeY, options) => {
   const shipGrid = createShipGrid(ships, 10);
 
   // Helper method for checking ship placement
-  const isShipPlacementValid = (
-    originX,
-    originY,
-    shipSize,
-    direction,
-    cellX,
-    cellY
-  ) => {
-    const directionX = Math.sign(cellX - originX);
-    const directionY = Math.sign(cellY - originY);
+  const isShipPlacementValid = (originX, originY, shipSize, direction) => {
+    const directionX = direction === "W" ? -1 : direction === "E" ? 1 : 0;
+    const directionY = direction === "N" ? -1 : direction === "S" ? 1 : 0;
 
-    if (
-      (direction === "N" && directionY === -1) ||
-      (direction === "S" && directionY === 1) ||
-      (direction === "W" && directionX === -1) ||
-      (direction === "E" && directionX === 1)
-    ) {
-      for (let i = 0; i < shipSize; i += 1) {
-        const currentX = originX + i * directionX;
-        const currentY = originY + i * directionY;
+    for (let i = 0; i < shipSize; i++) {
+      const currentX = originX + i * directionX;
+      const currentY = originY + i * directionY;
 
-        if (currentX === cellX && currentY === cellY) {
-          return true; // Valid placement
-        }
+      if (
+        currentX < 0 ||
+        currentX >= shipGrid.length ||
+        currentY < 0 ||
+        currentY >= shipGrid[0].length ||
+        shipGrid[currentY][currentX] !== false
+      ) {
+        return false; // Invalid placement
       }
     }
 
-    return false; // Invalid placement
+    return true; // Valid placement
   };
 
   // #region Add event handlers based on options
@@ -185,8 +182,8 @@ const createGridCanvas = (sizeX, sizeY, options) => {
 
           // Ship size can be inferred based on how many ships have been placed already
           const shipSize = () => {
-            if (ships.length === 1) return 2;
-            if (ships.length === 2) return 3;
+            if (ships.length === 0) return 2;
+            if (ships.length === 1) return 3;
             return ships.length;
           };
 
@@ -194,38 +191,20 @@ const createGridCanvas = (sizeX, sizeY, options) => {
             // Apply hover effect to the hovered cell
             ctx.fillStyle = "gray"; // Set a different color for the hovered cell
             ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
-          } else if (
-            isShipPlacementValid(
+          } else {
+            const isValidPlacement = isShipPlacementValid(
               hoveredCellX,
               hoveredCellY,
               shipSize(),
               placementDirection
-            )
-          ) {
-            // Check if the ship placement is valid in the correct direction
-            if (
-              (placementDirection === "N" &&
-                y >= hoveredCellY - shipSize() + 1 &&
-                y <= hoveredCellY) ||
-              (placementDirection === "E" &&
-                x >= hoveredCellX &&
-                x <= hoveredCellX + shipSize() - 1) ||
-              (placementDirection === "S" &&
-                y >= hoveredCellY &&
-                y <= hoveredCellY + shipSize() - 1) ||
-              (placementDirection === "W" &&
-                x >= hoveredCellX - shipSize() + 1 &&
-                x <= hoveredCellX)
-            ) {
-              ctx.fillStyle = "blue"; // Set color for valid placement cells
-              ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+            );
+
+            if (isValidPlacement && shipGrid[y][x] === false) {
+              ctx.fillStyle = "blue"; // Set color for valid and unoccupied cells
             } else {
-              ctx.fillStyle = "red"; // Set color for invalid placement cells
-              ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+              ctx.fillStyle = "red"; // Set color for invalid or occupied cells
             }
-          } else {
-            // Invalid ship placement
-            ctx.fillStyle = "red"; // Set color for invalid placement cells
+
             ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
           }
         }
@@ -386,3 +365,22 @@ const createGridCanvas = (sizeX, sizeY, options) => {
 };
 
 export default createGridCanvas;
+ */
+
+/* Determine the variation and take appropriate actions:
+    For the "placement" variation:
+      Subscribe to an event for the placementDirection change, emitted by a different module.
+      Define a method that will be called when the placementDirection changes.
+      Define a method that will be called when the mouseLeave event occurs:
+        Remove the highlighted origin cell, green cells, red cells, and blue cells.
+      Define a method that will be called when the click event occurs:
+        Log a console message with the coordinates of the clicked cell.
+        Emit an event to request the ships array from another module.
+      Define a method that will be called when the ships array is received:
+        Draw the ships on the grid using the occupiedCells parameter of each ship object.
+      Highlight the origin cell (being hovered over) as yellow.
+      Determine the ship size based on the length of the array containing ship objects.
+      Determine the cells that should be green or red based on occupiedCells of existing ships and placementDirection.
+      Mark those cells as green or red, ensuring they don't overlap with other ships.
+      Mark the cells representing placed ships as blue.
+ */

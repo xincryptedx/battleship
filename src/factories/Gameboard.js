@@ -51,6 +51,13 @@ const Gameboard = () => {
     return isValid;
   };
 
+  // Method that adds occupied cells of valid boat to list
+  const addCellsToList = (ship) => {
+    ship.occupiedCells.forEach((cell) => {
+      allOccupiedCells.push(cell);
+    });
+  };
+
   // Method for adding a ship at a given coords in given direction if ship will fit on board
   thisGameboard.addShipInternal = (
     position,

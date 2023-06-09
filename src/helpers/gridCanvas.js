@@ -89,6 +89,29 @@ const createGridCanvas = (sizeX, sizeY, options) => {
   const cellSizeX = canvas.width / 10; // Width of each cell
   const cellSizeY = canvas.height / 10; // Height of each cell
 
+  // Helper for creating a grid showing occupied/empty cells
+  const createShipGrid = (ships, gridSize) => {
+    const grid = [];
+
+    // Initialize the grid with empty cells
+    for (let i = 0; i < gridSize; i++) {
+      const row = [];
+      for (let j = 0; j < gridSize; j++) {
+        row.push(false); // Mark cell as unoccupied
+      }
+      grid.push(row);
+    }
+
+    // Mark occupied cells based on ship positions
+    ships.forEach((ship) => {
+      ship.occupiedCells.forEach(([occupiedCellX, occupiedCellY]) => {
+        grid[occupiedCellY][occupiedCellX] = true; // Mark cell as occupied
+      });
+    });
+
+    return grid;
+  };
+
   // #region Add event handlers based on options
   if (options && options.options === "placement") {
     // #region Mouse
@@ -116,11 +139,12 @@ const createGridCanvas = (sizeX, sizeY, options) => {
       const hoveredCellX = Math.floor(mouseX / cellSizeX);
       const hoveredCellY = Math.floor(mouseY / cellSizeY);
 
-      // Apply hover effect to the hovered cell
-      // const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw the grid
+      // Redraw the grid lines
+      drawLines();
+
       for (let x = 0; x < 10; x += 1) {
         for (let y = 0; y < 10; y += 1) {
           const cellX = x * cellSizeX;
@@ -130,18 +154,26 @@ const createGridCanvas = (sizeX, sizeY, options) => {
             // Apply hover effect to the hovered cell
             ctx.fillStyle = "gray"; // Set a different color for the hovered cell
             ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+          } else if (
+            isShipPlacementValid(
+              hoveredCellX,
+              hoveredCellY,
+              shipSize,
+              placementDirection
+            )
+          ) {
+            // Check if the ship placement is valid
+            ctx.fillStyle = "blue"; // Set color for valid placement cells
+            ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
           } else {
-            // Draw the regular cells
-            ctx.fillStyle = "lightgray"; // Set the color for regular cells
+            // Invalid ship placement
+            ctx.fillStyle = "red"; // Set color for invalid placement cells
             ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
           }
-
-          // Draw grid lines
-          ctx.strokeStyle = "black";
-          ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
         }
       }
     };
+
     canvas.addEventListener("mousemove", handleMousemove);
 
     // Add and handle event for mouseleave

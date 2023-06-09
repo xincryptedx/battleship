@@ -14,4 +14,5 @@ eventsLogger();
 window.events = events;
 
 // Initialize modules
+gameManager();
 webInterface();

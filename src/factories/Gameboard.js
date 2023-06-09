@@ -8,6 +8,9 @@ const Gameboard = () => {
   const maxBoardX = 9;
   const maxBoardY = 9;
 
+  // All occupied cells for a faster search
+  const allOccupiedCells = [];
+
   const thisGameboard = {
     ships: [],
     addShip: null,
@@ -30,8 +33,9 @@ const Gameboard = () => {
     // Flag for detecting invalid position value
     let isValid = false;
 
-    // Check that ships occupied cells are all within map
+    // Check that ships occupied cells are all within map and not already occupied
     for (let i = 0; i < ship.occupiedCells.length; i += 1) {
+      // On the map?
       if (
         ship.occupiedCells[i][0] >= 0 &&
         ship.occupiedCells[i][0] <= maxBoardX &&
@@ -43,6 +47,7 @@ const Gameboard = () => {
         isValid = false;
       }
     }
+
     return isValid;
   };
 

@@ -90,7 +90,7 @@ const createGridCanvas = (sizeX, sizeY, options) => {
   const cellSizeY = canvas.height / 10; // Height of each cell
 
   // Helper for creating a grid showing occupied/empty cells
-  const createShipGrid = (ships, gridSize) => {
+  const createShipGrid = (shipsToAdd, gridSize) => {
     const grid = [];
 
     // Initialize the grid with empty cells
@@ -103,7 +103,7 @@ const createGridCanvas = (sizeX, sizeY, options) => {
     }
 
     // Mark occupied cells based on ship positions
-    ships.forEach((ship) => {
+    shipsToAdd.forEach((ship) => {
       ship.occupiedCells.forEach(([occupiedCellX, occupiedCellY]) => {
         grid[occupiedCellY][occupiedCellX] = true; // Mark cell as occupied
       });

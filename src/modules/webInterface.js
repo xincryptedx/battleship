@@ -12,7 +12,7 @@ import events from "./events";
    1. Get ship placement coordinates from the user based on their clicks on the web interface
    2. Get attack placement coordinates from the user based on the same
    3. Other minor interface actions such as handling button clicks (start game, restart, etc) */
-const webInterface = (() => {
+const webInterface = () => {
   // References to main elements
   const title = document.querySelector(".title");
   const menu = document.querySelector(".menu");
@@ -34,34 +34,30 @@ const webInterface = (() => {
     placement.classList.add("hidden");
     game.classList.add("hidden");
   };
-  events.on("hideAll", hideAll);
 
   // Show the menu UI
   const showMenu = () => {
     hideAll();
     menu.classList.remove("hidden");
   };
-  events.on("showMenu", showMenu);
 
   // Show the ship placement UI
   const showPlacement = () => {
     hideAll();
     placement.classList.remove("hidden");
   };
-  events.on("showPlacement", showPlacement);
 
   // Show the game UI
   const showGame = () => {
     hideAll();
     game.classList.remove("hidden");
   };
-  events.on("showGame", showGame);
 
   // Shrink the title
   const shrinkTitle = () => {
     title.classList.add("shrink");
   };
-  events.on("shrinkTitle", shrinkTitle);
+
   // #endregion
 
   // #region High level responses to clicks
@@ -70,13 +66,11 @@ const webInterface = (() => {
     shrinkTitle();
     showPlacement();
   };
-  events.on("startClicked", handleStartClick);
 
   // Handle clicks on the rotate button in the placement section
   const handleRotateClick = () => {
     rotateDirection();
   };
-  events.on("rotateClicked", handleRotateClick);
 
   // Handle clicks on the ship placement grid by using payload.position
   const handlePlacementClick = (payload) => {
@@ -86,7 +80,6 @@ const webInterface = (() => {
       direction: directions[placementDirection],
     });
   };
-  events.on("placementClicked", handlePlacementClick);
 
   // Handle clicks on the enemy
   const handleAttackClick = () => {
@@ -98,6 +91,17 @@ const webInterface = (() => {
   // #region Add classes to ship divs to represent placed/destroyed
 
   // #endregion
-})();
+
+  const init = () => {
+    events.on("hideAll", hideAll);
+    events.on("showMenu", showMenu);
+    events.on("showPlacement", showPlacement);
+    events.on("showGame", showGame);
+    events.on("shrinkTitle", shrinkTitle);
+    events.on("rotateClicked", handleRotateClick);
+    events.on("startClicked", handleStartClick);
+    events.on("placementClicked", handlePlacementClick);
+  };
+};
 
 export default webInterface;

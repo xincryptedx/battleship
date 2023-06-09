@@ -7,7 +7,7 @@ import events from "./events";
 /* This module holds the game loop logic for starting games, creating
    required objects, iterating through turns, reporting game outcome when
    a player loses, and restart the game */
-const gameManager = (() => {
+const gameManager = () => {
   // Initialization of Player objects for user and AI
   const userPlayer = Player();
   const aiPlayer = Player();
@@ -50,6 +50,6 @@ const gameManager = (() => {
 
   // The logic of the game manager and how the web interface responds to it will remain
   // separated by using a pubsub module
-})();
+};
 
 export default gameManager;

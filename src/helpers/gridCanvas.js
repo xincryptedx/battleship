@@ -1,12 +1,12 @@
 import events from "../modules/events";
 /* 
   Events subbed:
-    returnShips
+    returnUserShips
     returnShipPlacementDirection
 
   Events pubbed:
     placementClicked
-    requestShips
+    requestUserShips
     requestShipPlacementDirection
 */
 
@@ -19,13 +19,18 @@ const createGridCanvas = (sizeX, sizeY, options) => {
       ships.push(ship);
     });
   };
-  events.on("returnShips", setUserShips);
+  events.on("returnUserShips", setUserShips);
+
+  // Method that requests information about current user ships using event
+  const requestUserShips = () => {
+    events.emit("requestUserShips");
+  };
 
   // Sets info about current placement direction in reponse to event
   let placementDirection = "N";
 
-  const getShipPlacementDirection = () => {
-    events.emit("getShipPlacementDirection"); // Emit event to request direction information
+  const requestShipPlacementDirection = () => {
+    events.emit("requestShipPlacementDirection"); // Emit event to request direction information
   };
 
   events.on("returnShipPlacementDirection", (direction) => {
@@ -38,11 +43,6 @@ const createGridCanvas = (sizeX, sizeY, options) => {
       placementDirection = direction;
     }
   });
-
-  // Method that requests information about current user ships using event
-  const getUserShips = () => {
-    events.emit("getUserShips");
-  };
 
   // #region Create the canvas element and draw grid
   const canvas = document.createElement("canvas");

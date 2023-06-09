@@ -67,6 +67,13 @@ describe("addShipInternal", () => {
     testBoard.addShipInternal([10, 0], "N", 2);
     expect(testBoard.ships).toHaveLength(0);
   });
+
+  test("ships that have cells that are already occupied will not be added", () => {
+    const testBoard = Gameboard();
+    testBoard.addShipInternal([4, 4], "N", 2);
+    testBoard.addShipInternal([4, 3], "N", 3);
+    expect(testBoard.ships).toHaveLength(1);
+  });
 });
 
 /* Method for taking an attack from opponent. Returns true if hit, false if miss, 

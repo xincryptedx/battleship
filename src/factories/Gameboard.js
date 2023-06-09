@@ -44,6 +44,19 @@ const Gameboard = () => {
       } else {
         isValid = false;
       }
+      // Check occupied cells
+      // Check occupied cells
+      const isCellOccupied = thisGameboard.allOccupiedCells.some(
+        (cell) =>
+          // Coords found in all occupied cells already
+          cell[0] === ship.occupiedCells[i][0] &&
+          cell[1] === ship.occupiedCells[i][1]
+      );
+
+      if (isCellOccupied) {
+        isValid = false;
+        break; // Break out of the loop if occupied cell is found
+      }
     }
 
     return isValid;

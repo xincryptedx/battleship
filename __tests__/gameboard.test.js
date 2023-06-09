@@ -9,22 +9,22 @@ describe("General Functionality", () => {
 });
 
 // Method for adding shipt to game board
-describe("addShip", () => {
+describe("addShipInternal", () => {
   test("a valid ship gets added to ships", () => {
     const testBoard = Gameboard();
-    testBoard.addShip(2, [4, 4], "N");
+    testBoard.addShipInternal(2, [4, 4], "N");
     expect(testBoard.ships).toHaveLength(1);
   });
 
   test("ships w/ negative coordinates will not be added", () => {
     const testBoard = Gameboard();
-    testBoard.addShip(2, [0, 0], "N");
+    testBoard.addShipInternal(2, [0, 0], "N");
     expect(testBoard.ships).toHaveLength(0);
   });
 
   test("ships w/ too high coordinates will not be added", () => {
     const testBoard = Gameboard();
-    testBoard.addShip(2, [10, 0], "N");
+    testBoard.addShipInternal(2, [10, 0], "N");
     expect(testBoard.ships).toHaveLength(0);
   });
 });

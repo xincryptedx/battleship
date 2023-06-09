@@ -102,7 +102,7 @@ const createGridCanvas = (sizeX, sizeY, options) => {
       grid.push(row);
     }
 
-    // Mark occupied cells based on ship positions
+    // Helper for marking occupied cells based on ship positions and returning in an array structure
     shipsToAdd.forEach((ship) => {
       ship.occupiedCells.forEach(([occupiedCellX, occupiedCellY]) => {
         grid[occupiedCellY][occupiedCellX] = true; // Mark cell as occupied
@@ -113,6 +113,47 @@ const createGridCanvas = (sizeX, sizeY, options) => {
   };
 
   const shipGrid = createShipGrid(ships, 10);
+
+  // Helper method for checking ship placement
+  const isShipPlacementValid = (
+    startX,
+    startY,
+    shipSize,
+    direction,
+    gridSize = 10
+  ) => {
+    if (direction === "N") {
+      for (let i = 0; i < shipSize; i += 1) {
+        const cellY = startY - i;
+        if (cellY < 0 || !shipGrid[cellY][startX]) {
+          return false;
+        }
+      }
+    } else if (direction === "E") {
+      for (let i = 0; i < shipSize; i += 1) {
+        const cellX = startX + i;
+        if (cellX >= gridSize || !shipGrid[startY][cellX]) {
+          return false;
+        }
+      }
+    } else if (direction === "S") {
+      for (let i = 0; i < shipSize; i += 1) {
+        const cellY = startY + i;
+        if (cellY >= gridSize || !shipGrid[cellY][startX]) {
+          return false;
+        }
+      }
+    } else if (direction === "W") {
+      for (let i = 0; i < shipSize; i += 1) {
+        const cellX = startX - i;
+        if (cellX < 0 || !shipGrid[startY][cellX]) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  };
 
   // #region Add event handlers based on options
   if (options && options.options === "placement") {
@@ -152,6 +193,13 @@ const createGridCanvas = (sizeX, sizeY, options) => {
           const cellX = x * cellSizeX;
           const cellY = y * cellSizeY;
 
+          // Ship size can be inferred based on how many ships have been placed already
+          const shipSize = () => {
+            if (ships.length === 1) return 2;
+            if (ships.length === 2) return 3;
+            return ships.length;
+          };
+
           if (x === hoveredCellX && y === hoveredCellY) {
             // Apply hover effect to the hovered cell
             ctx.fillStyle = "gray"; // Set a different color for the hovered cell
@@ -160,7 +208,7 @@ const createGridCanvas = (sizeX, sizeY, options) => {
             isShipPlacementValid(
               hoveredCellX,
               hoveredCellY,
-              shipSize,
+              shipSize(),
               placementDirection
             )
           ) {

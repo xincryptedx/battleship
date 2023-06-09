@@ -1,4 +1,8 @@
 import Player from "../factories/Player";
+import events from "./events";
+/*  Events subbed:
+      tryPlacement
+*/
 
 /* This module holds the game loop logic for starting games, creating
    required objects, iterating through turns, reporting game outcome when
@@ -9,7 +13,8 @@ const gameManager = (() => {
   const aiPlayer = Player();
   userPlayer.gameboard.rivalBoard = aiPlayer.gameboard;
   aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
-  // Start a game by having user place ships
+
+  // Have the user's gameboard listen for tryPlacement events
 
   // Have AI place their ships
   /* Need a module that automatically adds ships

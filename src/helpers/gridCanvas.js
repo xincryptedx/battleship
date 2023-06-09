@@ -1,6 +1,7 @@
 import events from "../modules/events";
 /* Events pubbed:
     placementClicked
+    requestShips
 */
 
 const createGridCanvas = (sizeX, sizeY) => {

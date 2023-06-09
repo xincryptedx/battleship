@@ -78,7 +78,7 @@ const webInterface = (() => {
   };
   events.on("rotateClicked", handleRotateClick);
 
-  // Handle clicks on the ship placement grid
+  // Handle clicks on the ship placement grid by using payload.position
   const handlePlacementClick = (payload) => {
     // Send an event trying to place the ship
     events.emit("tryPlacement", {

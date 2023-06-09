@@ -4,6 +4,10 @@ import events from "../modules/events";
     requestShips
 */
 
+// Sets info about user ships in response to event
+
+// Method that requests information about current user ships using event
+
 const createGridCanvas = (sizeX, sizeY) => {
   // #region Create the canvas element and draw grid
   const canvas = document.createElement("canvas");

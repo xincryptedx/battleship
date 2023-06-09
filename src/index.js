@@ -7,7 +7,10 @@ import webInterface from "./modules/webInterface";
 
 // import events for testing in dev tools
 import events from "./modules/events";
+// Import events logger
+import eventsLogger from "./helpers/eventLogger";
 
+eventsLogger();
 window.events = events;
 
 // Initialize modules

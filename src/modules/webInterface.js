@@ -92,16 +92,15 @@ const webInterface = () => {
 
   // #endregion
 
-  const init = () => {
-    events.on("hideAll", hideAll);
-    events.on("showMenu", showMenu);
-    events.on("showPlacement", showPlacement);
-    events.on("showGame", showGame);
-    events.on("shrinkTitle", shrinkTitle);
-    events.on("rotateClicked", handleRotateClick);
-    events.on("startClicked", handleStartClick);
-    events.on("placementClicked", handlePlacementClick);
-  };
+  // Sub to event listeners
+  events.on("hideAll", hideAll);
+  events.on("showMenu", showMenu);
+  events.on("showPlacement", showPlacement);
+  events.on("showGame", showGame);
+  events.on("shrinkTitle", shrinkTitle);
+  events.on("rotateClicked", handleRotateClick);
+  events.on("startClicked", handleStartClick);
+  events.on("placementClicked", handlePlacementClick);
 };
 
 export default webInterface;

@@ -9,3 +9,6 @@ import webInterface from "./modules/webInterface";
 import events from "./modules/events";
 
 window.events = events;
+
+// Initialize modules
+webInterface();

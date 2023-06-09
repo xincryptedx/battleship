@@ -46,7 +46,7 @@ const Gameboard = () => {
   };
 
   // Method for adding a ship at a given coords in given direction if ship will fit on board
-  thisGameboard.addShip = (
+  thisGameboard.addShipInternal = (
     shipTypeIndex = thisGameboard.ships.length + 1,
     position,
     direction

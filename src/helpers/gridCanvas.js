@@ -4,11 +4,22 @@ import events from "../modules/events";
     requestShips
 */
 
-// Sets info about user ships in response to event
-
-// Method that requests information about current user ships using event
-
 const createGridCanvas = (sizeX, sizeY) => {
+  // Sets info about user ships in response to event
+  const ships = [];
+
+  const setUserShips = (payload) => {
+    payload.foreach((ship) => {
+      ships.push(ship);
+    });
+  };
+  events.on("returnShips", setUserShips);
+
+  // Method that requests information about current user ships using event
+  const getUserShips = () => {
+    events.emit("getUserShips");
+  };
+
   // #region Create the canvas element and draw grid
   const canvas = document.createElement("canvas");
   canvas.width = sizeX;

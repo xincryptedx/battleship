@@ -15,6 +15,7 @@ const gameManager = (() => {
   aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
 
   // Have the user's gameboard listen for tryPlacement events
+  events.on("tryPlacement", userPlayer.gameboard.addShip());
 
   // Have AI place their ships
   /* Need a module that automatically adds ships

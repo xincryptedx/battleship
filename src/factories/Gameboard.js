@@ -65,6 +65,11 @@ const Gameboard = () => {
     thisGameboard.hits.push(position);
   };
 
+  // Method for responding to event that tries to create a user ship
+  thisGameboard.addShip = (payload) => {
+    thisGameboard.addShipInternal(payload.position, payload.direction);
+  };
+
   // Method for receiving an attack from opponent
   thisGameboard.receiveAttack = (position, ships = thisGameboard.ships) => {
     // Validate position is 2 in array and ships is an array

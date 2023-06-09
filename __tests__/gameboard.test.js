@@ -12,19 +12,19 @@ describe("General Functionality", () => {
 describe("addShipInternal", () => {
   test("a valid ship gets added to ships", () => {
     const testBoard = Gameboard();
-    testBoard.addShipInternal(2, [4, 4], "N");
+    testBoard.addShipInternal([4, 4], "N", 2);
     expect(testBoard.ships).toHaveLength(1);
   });
 
   test("ships w/ negative coordinates will not be added", () => {
     const testBoard = Gameboard();
-    testBoard.addShipInternal(2, [0, 0], "N");
+    testBoard.addShipInternal([0, 0], "N", 2);
     expect(testBoard.ships).toHaveLength(0);
   });
 
   test("ships w/ too high coordinates will not be added", () => {
     const testBoard = Gameboard();
-    testBoard.addShipInternal(2, [10, 0], "N");
+    testBoard.addShipInternal([10, 0], "N", 2);
     expect(testBoard.ships).toHaveLength(0);
   });
 });

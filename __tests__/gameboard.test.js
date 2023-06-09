@@ -35,6 +35,27 @@ describe("addShipInternal", () => {
     expect(testBoard.ships[4].size).toBe(5);
   });
 
+  test("default index above max will return undefined", () => {
+    const testBoard = Gameboard();
+    // Add first ship
+    testBoard.addShipInternal([4, 4], "N");
+    expect(testBoard.ships[0].size).toBe(2);
+    // Add second ship
+    testBoard.addShipInternal([5, 4], "N");
+    expect(testBoard.ships[1].size).toBe(3);
+    // Add third ship
+    testBoard.addShipInternal([6, 4], "N");
+    expect(testBoard.ships[2].size).toBe(3);
+    // Add fourth ship
+    testBoard.addShipInternal([7, 4], "N");
+    expect(testBoard.ships[3].size).toBe(4);
+    // Add fifth ship
+    testBoard.addShipInternal([8, 4], "N");
+    expect(testBoard.ships[4].size).toBe(5);
+
+    expect(testBoard.addShipInternal([9, 4], "N")).toBeUndefined();
+  });
+
   test("ships w/ negative coordinates will not be added", () => {
     const testBoard = Gameboard();
     testBoard.addShipInternal([0, 0], "N", 2);

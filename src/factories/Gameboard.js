@@ -26,6 +26,7 @@ const Gameboard = () => {
 
   // Method that validates ship occupied cell coords
   const validateShip = (ship) => {
+    if (!ship) return false;
     // Flag for detecting invalid position value
     let isValid = false;
 

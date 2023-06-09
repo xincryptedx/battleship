@@ -116,43 +116,33 @@ const createGridCanvas = (sizeX, sizeY, options) => {
 
   // Helper method for checking ship placement
   const isShipPlacementValid = (
-    startX,
-    startY,
+    originX,
+    originY,
     shipSize,
     direction,
-    gridSize = 10
+    cellX,
+    cellY
   ) => {
-    if (direction === "N") {
+    const directionX = Math.sign(cellX - originX);
+    const directionY = Math.sign(cellY - originY);
+
+    if (
+      (direction === "N" && directionY === -1) ||
+      (direction === "S" && directionY === 1) ||
+      (direction === "W" && directionX === -1) ||
+      (direction === "E" && directionX === 1)
+    ) {
       for (let i = 0; i < shipSize; i += 1) {
-        const cellY = startY - i;
-        if (cellY < 0 || !shipGrid[cellY][startX]) {
-          return false;
-        }
-      }
-    } else if (direction === "E") {
-      for (let i = 0; i < shipSize; i += 1) {
-        const cellX = startX + i;
-        if (cellX >= gridSize || !shipGrid[startY][cellX]) {
-          return false;
-        }
-      }
-    } else if (direction === "S") {
-      for (let i = 0; i < shipSize; i += 1) {
-        const cellY = startY + i;
-        if (cellY >= gridSize || !shipGrid[cellY][startX]) {
-          return false;
-        }
-      }
-    } else if (direction === "W") {
-      for (let i = 0; i < shipSize; i += 1) {
-        const cellX = startX - i;
-        if (cellX < 0 || !shipGrid[startY][cellX]) {
-          return false;
+        const currentX = originX + i * directionX;
+        const currentY = originY + i * directionY;
+
+        if (currentX === cellX && currentY === cellY) {
+          return true; // Valid placement
         }
       }
     }
 
-    return true;
+    return false; // Invalid placement
   };
 
   // #region Add event handlers based on options
@@ -212,9 +202,27 @@ const createGridCanvas = (sizeX, sizeY, options) => {
               placementDirection
             )
           ) {
-            // Check if the ship placement is valid
-            ctx.fillStyle = "blue"; // Set color for valid placement cells
-            ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+            // Check if the ship placement is valid in the correct direction
+            if (
+              (placementDirection === "N" &&
+                y >= hoveredCellY - shipSize() + 1 &&
+                y <= hoveredCellY) ||
+              (placementDirection === "E" &&
+                x >= hoveredCellX &&
+                x <= hoveredCellX + shipSize() - 1) ||
+              (placementDirection === "S" &&
+                y >= hoveredCellY &&
+                y <= hoveredCellY + shipSize() - 1) ||
+              (placementDirection === "W" &&
+                x >= hoveredCellX - shipSize() + 1 &&
+                x <= hoveredCellX)
+            ) {
+              ctx.fillStyle = "blue"; // Set color for valid placement cells
+              ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+            } else {
+              ctx.fillStyle = "red"; // Set color for invalid placement cells
+              ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+            }
           } else {
             // Invalid ship placement
             ctx.fillStyle = "red"; // Set color for invalid placement cells

@@ -94,9 +94,9 @@ const createGridCanvas = (sizeX, sizeY, options) => {
     const grid = [];
 
     // Initialize the grid with empty cells
-    for (let i = 0; i < gridSize; i++) {
+    for (let i = 0; i < gridSize; i += 1) {
       const row = [];
-      for (let j = 0; j < gridSize; j++) {
+      for (let j = 0; j < gridSize; j += 1) {
         row.push(false); // Mark cell as unoccupied
       }
       grid.push(row);
@@ -111,6 +111,8 @@ const createGridCanvas = (sizeX, sizeY, options) => {
 
     return grid;
   };
+
+  const shipGrid = createShipGrid(ships, 10);
 
   // #region Add event handlers based on options
   if (options && options.options === "placement") {

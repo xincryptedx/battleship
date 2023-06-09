@@ -16,7 +16,7 @@ const createGridCanvas = (sizeX, sizeY, options) => {
   const ships = [];
 
   const setUserShips = (payload) => {
-    payload.foreach((ship) => {
+    payload.forEach((ship) => {
       ships.push(ship);
     });
   };

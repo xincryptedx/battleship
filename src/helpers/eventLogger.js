@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import events from "../modules/events";
 
 const useLogger = true; // set to false if you don't want to use the logger, or just dont' import it in index

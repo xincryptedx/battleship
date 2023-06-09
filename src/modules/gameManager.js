@@ -17,7 +17,7 @@ const gameManager = () => {
   // Have the user's gameboard listen for tryPlacement events
   events.on("tryPlacement", userPlayer.gameboard.addShip);
   // Have the user's gameboard listen to requestShip events
-  events.on("requestShips", userPlayer.gameboard.returnShips);
+  events.on("requestUserShips", userPlayer.gameboard.returnShips);
 
   // Have AI place their ships
   /* Need a module that automatically adds ships

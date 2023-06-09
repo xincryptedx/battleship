@@ -1,4 +1,9 @@
-function createGridCanvas(sizeX, sizeY) {
+import events from "../modules/events";
+/* Events pubbed:
+    placementClicked
+*/
+
+const createGridCanvas = (sizeX, sizeY) => {
   // #region Create the canvas element and draw grid
   const canvas = document.createElement("canvas");
   canvas.width = sizeX;
@@ -46,7 +51,7 @@ function createGridCanvas(sizeX, sizeY) {
     const clickedCellX = Math.floor(mouseX / cellSizeX);
     const clickedCellY = Math.floor(mouseY / cellSizeY);
 
-    console.log(`x: ${clickedCellX}, y: ${clickedCellY}`);
+    events.emit("placementClicked", { position: [clickedCellX, clickedCellY] });
   };
   canvas.addEventListener("click", handleClick);
 
@@ -226,6 +231,6 @@ function createGridCanvas(sizeX, sizeY) {
   // #endregion
 
   return canvas;
-}
+};
 
 export default createGridCanvas;

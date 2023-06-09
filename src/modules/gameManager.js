@@ -9,10 +9,10 @@ const gameManager = (() => {
   const aiPlayer = Player();
   userPlayer.gameboard.rivalBoard = aiPlayer.gameboard;
   aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
-  // Start a game
-  /* -Have user add ships - method on interface module 
-  
-     -Have AI add ships - Need a module that automatically adds ships
+  // Start a game by having user place ships
+
+  // Have AI place their ships
+  /* Need a module that automatically adds ships
      to the ai gameboard. It will need to add them one at a time based on a 
      variable ruleset that will create a bord for a given high-level "dificulty" setting */
 

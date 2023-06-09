@@ -11,6 +11,7 @@ import events from "../modules/events";
 */
 
 const createGridCanvas = (sizeX, sizeY, options) => {
+  // #region Methods for getting data via event
   // Sets info about user ships in response to event
   const ships = [];
 
@@ -43,6 +44,8 @@ const createGridCanvas = (sizeX, sizeY, options) => {
       placementDirection = direction;
     }
   });
+
+  // #endregion
 
   // #region Create the canvas element and draw grid
   const canvas = document.createElement("canvas");
@@ -77,197 +80,211 @@ const createGridCanvas = (sizeX, sizeY, options) => {
 
   // #endregion
 
-  // #region Add event handlers for clicks, mousemove, and mouseleave
   // Set the cell size refs
   const cellSizeX = canvas.width / 10; // Width of each cell
   const cellSizeY = canvas.height / 10; // Height of each cell
 
-  // Add and handle event for canvas clicks
-  const handleClick = (event) => {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
+  // #region Add event handlers based on options
+  if (options && options.options === "placement") {
+    // #region Mouse
+    // Add and handle event for canvas clicks
+    const handleClick = (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = event.clientX - rect.left;
+      const mouseY = event.clientY - rect.top;
 
-    const clickedCellX = Math.floor(mouseX / cellSizeX);
-    const clickedCellY = Math.floor(mouseY / cellSizeY);
+      const clickedCellX = Math.floor(mouseX / cellSizeX);
+      const clickedCellY = Math.floor(mouseY / cellSizeY);
 
-    events.emit("placementClicked", { position: [clickedCellX, clickedCellY] });
-  };
-  canvas.addEventListener("click", handleClick);
+      events.emit("placementClicked", {
+        position: [clickedCellX, clickedCellY],
+      });
+    };
+    canvas.addEventListener("click", handleClick);
 
-  // Add and handle event for mousemove
-  const handleMousemove = (event) => {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
+    // Add and handle event for mousemove
+    const handleMousemove = (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = event.clientX - rect.left;
+      const mouseY = event.clientY - rect.top;
 
-    const hoveredCellX = Math.floor(mouseX / cellSizeX);
-    const hoveredCellY = Math.floor(mouseY / cellSizeY);
+      const hoveredCellX = Math.floor(mouseX / cellSizeX);
+      const hoveredCellY = Math.floor(mouseY / cellSizeY);
 
-    // Apply hover effect to the hovered cell
-    // const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+      // Apply hover effect to the hovered cell
+      // const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
-    // Draw the grid
-    for (let x = 0; x < 10; x += 1) {
-      for (let y = 0; y < 10; y += 1) {
-        const cellX = x * cellSizeX;
-        const cellY = y * cellSizeY;
+      // Draw the grid
+      for (let x = 0; x < 10; x += 1) {
+        for (let y = 0; y < 10; y += 1) {
+          const cellX = x * cellSizeX;
+          const cellY = y * cellSizeY;
 
-        if (x === hoveredCellX && y === hoveredCellY) {
-          // Apply hover effect to the hovered cell
-          ctx.fillStyle = "gray"; // Set a different color for the hovered cell
-          ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
-        } else {
+          if (x === hoveredCellX && y === hoveredCellY) {
+            // Apply hover effect to the hovered cell
+            ctx.fillStyle = "gray"; // Set a different color for the hovered cell
+            ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+          } else {
+            // Draw the regular cells
+            ctx.fillStyle = "lightgray"; // Set the color for regular cells
+            ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+          }
+
+          // Draw grid lines
+          ctx.strokeStyle = "black";
+          ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
+        }
+      }
+    };
+    canvas.addEventListener("mousemove", handleMousemove);
+
+    // Add and handle event for mouseleave
+    const handleMouseleave = () => {
+      // const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+      // Draw the grid
+      for (let x = 0; x < 10; x += 1) {
+        for (let y = 0; y < 10; y += 1) {
+          const cellX = x * cellSizeX;
+          const cellY = y * cellSizeY;
+
           // Draw the regular cells
           ctx.fillStyle = "lightgray"; // Set the color for regular cells
           ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+
+          // Draw grid lines
+          ctx.strokeStyle = "black";
+          ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
         }
-
-        // Draw grid lines
-        ctx.strokeStyle = "black";
-        ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
       }
-    }
-  };
-  canvas.addEventListener("mousemove", handleMousemove);
+    };
+    canvas.addEventListener("mouseleave", handleMouseleave);
 
-  // Add and handle event for mouseleave
-  const handleMouseleave = () => {
-    // const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+    // #endregion
 
-    // Draw the grid
-    for (let x = 0; x < 10; x += 1) {
-      for (let y = 0; y < 10; y += 1) {
-        const cellX = x * cellSizeX;
-        const cellY = y * cellSizeY;
+    // #region Touch
+    // Helper function to clear the canvas and redraw the grid
+    const clearCanvas = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
-        // Draw the regular cells
-        ctx.fillStyle = "lightgray"; // Set the color for regular cells
-        ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+      // Draw the grid
+      for (let x = 0; x < 10; x += 1) {
+        for (let y = 0; y < 10; y += 1) {
+          const cellX = x * cellSizeX;
+          const cellY = y * cellSizeY;
 
-        // Draw grid lines
-        ctx.strokeStyle = "black";
-        ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
-      }
-    }
-  };
-  canvas.addEventListener("mouseleave", handleMouseleave);
-
-  // #endregion
-
-  // #region Add event handlers for touch start and touch end
-  // Helper function to clear the canvas and redraw the grid
-  const clearCanvas = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-
-    // Draw the grid
-    for (let x = 0; x < 10; x += 1) {
-      for (let y = 0; y < 10; y += 1) {
-        const cellX = x * cellSizeX;
-        const cellY = y * cellSizeY;
-
-        // Draw the regular cells
-        ctx.fillStyle = "lightgray"; // Set the color for regular cells
-        ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
-
-        // Draw grid lines
-        ctx.strokeStyle = "black";
-        ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
-      }
-    }
-  };
-
-  // Helper function to handle hover effect
-  const handleHover = (x, y) => {
-    const hoveredCellX = Math.floor(x / cellSizeX);
-    const hoveredCellY = Math.floor(y / cellSizeY);
-
-    clearCanvas();
-
-    // Draw the grid
-    for (let a = 0; a < 10; a += 1) {
-      for (let b = 0; b < 10; b += 1) {
-        const cellX = a * cellSizeX;
-        const cellY = b * cellSizeY;
-
-        if (a === hoveredCellX && b === hoveredCellY) {
-          // Apply hover effect to the hovered cell
-          ctx.fillStyle = "gray"; // Set a different color for the hovered cell
-          ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
-        } else {
           // Draw the regular cells
           ctx.fillStyle = "lightgray"; // Set the color for regular cells
           ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+
+          // Draw grid lines
+          ctx.strokeStyle = "black";
+          ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
         }
-
-        // Draw grid lines
-        ctx.strokeStyle = "black";
-        ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
       }
-    }
-  };
+    };
 
-  // Add and handle event for touchstart
-  const handleTouchstart = (event) => {
-    event.preventDefault();
-    const touches = event.changedTouches;
-    const touch = touches[0];
-    const rect = canvas.getBoundingClientRect();
-    const touchX = touch.clientX - rect.left;
-    const touchY = touch.clientY - rect.top;
+    // Helper function to handle hover effect
+    const handleHover = (x, y) => {
+      const hoveredCellX = Math.floor(x / cellSizeX);
+      const hoveredCellY = Math.floor(y / cellSizeY);
 
-    handleHover(touchX, touchY);
-  };
-  document.addEventListener("touchstart", handleTouchstart, { passive: false });
+      clearCanvas();
 
-  // Add and handle event for touchmove
-  const handleTouchmove = (event) => {
-    event.preventDefault();
-    const touches = event.changedTouches;
-    const touch = touches[0];
-    const rect = canvas.getBoundingClientRect();
-    const touchX = touch.clientX - rect.left;
-    const touchY = touch.clientY - rect.top;
+      // Draw the grid
+      for (let a = 0; a < 10; a += 1) {
+        for (let b = 0; b < 10; b += 1) {
+          const cellX = a * cellSizeX;
+          const cellY = b * cellSizeY;
 
-    handleHover(touchX, touchY);
-  };
-  document.addEventListener("touchmove", handleTouchmove, { passive: false });
+          if (a === hoveredCellX && b === hoveredCellY) {
+            // Apply hover effect to the hovered cell
+            ctx.fillStyle = "gray"; // Set a different color for the hovered cell
+            ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+          } else {
+            // Draw the regular cells
+            ctx.fillStyle = "lightgray"; // Set the color for regular cells
+            ctx.fillRect(cellX, cellY, cellSizeX, cellSizeY);
+          }
 
-  // Add and handle event for touchend and touchcancel
-  const handleTouchend = (event) => {
-    event.preventDefault();
-    const touches = event.changedTouches;
-    const touch = touches[0];
-    const rect = canvas.getBoundingClientRect();
-    const touchX = touch.clientX - rect.left;
-    const touchY = touch.clientY - rect.top;
+          // Draw grid lines
+          ctx.strokeStyle = "black";
+          ctx.strokeRect(cellX, cellY, cellSizeX, cellSizeY);
+        }
+      }
+    };
 
-    // Check if touch is within the canvas boundaries
-    if (
-      touchX >= 0 &&
-      touchX < canvas.width &&
-      touchY >= 0 &&
-      touchY < canvas.height
-    ) {
-      const endedCellX = Math.floor(touchX / cellSizeX);
-      const endedCellY = Math.floor(touchY / cellSizeY);
+    // Add and handle event for touchstart
+    const handleTouchstart = (event) => {
+      event.preventDefault();
+      const touches = event.changedTouches;
+      const touch = touches[0];
+      const rect = canvas.getBoundingClientRect();
+      const touchX = touch.clientX - rect.left;
+      const touchY = touch.clientY - rect.top;
 
-      console.log(`x: ${endedCellX}, y: ${endedCellY}`);
-    }
-    clearCanvas();
-  };
-  const handleTouchcancel = (event) => {
-    event.preventDefault();
-    clearCanvas();
-  };
-  document.addEventListener("touchend", handleTouchend, { passive: false });
-  document.addEventListener("touchcancel", handleTouchcancel, {
-    passive: false,
-  });
+      handleHover(touchX, touchY);
+    };
+    document.addEventListener("touchstart", handleTouchstart, {
+      passive: false,
+    });
+
+    // Add and handle event for touchmove
+    const handleTouchmove = (event) => {
+      event.preventDefault();
+      const touches = event.changedTouches;
+      const touch = touches[0];
+      const rect = canvas.getBoundingClientRect();
+      const touchX = touch.clientX - rect.left;
+      const touchY = touch.clientY - rect.top;
+
+      handleHover(touchX, touchY);
+    };
+    document.addEventListener("touchmove", handleTouchmove, { passive: false });
+
+    // Add and handle event for touchend and touchcancel
+    const handleTouchend = (event) => {
+      event.preventDefault();
+      const touches = event.changedTouches;
+      const touch = touches[0];
+      const rect = canvas.getBoundingClientRect();
+      const touchX = touch.clientX - rect.left;
+      const touchY = touch.clientY - rect.top;
+
+      // Check if touch is within the canvas boundaries
+      if (
+        touchX >= 0 &&
+        touchX < canvas.width &&
+        touchY >= 0 &&
+        touchY < canvas.height
+      ) {
+        const endedCellX = Math.floor(touchX / cellSizeX);
+        const endedCellY = Math.floor(touchY / cellSizeY);
+
+        console.log(`x: ${endedCellX}, y: ${endedCellY}`);
+      }
+      clearCanvas();
+    };
+    const handleTouchcancel = (event) => {
+      event.preventDefault();
+      clearCanvas();
+    };
+    document.addEventListener("touchend", handleTouchend, { passive: false });
+    document.addEventListener("touchcancel", handleTouchcancel, {
+      passive: false,
+    });
+    // #endregion
+  } else if (options && options.options === "opponent") {
+    // Variation for opponent grid
+    // Implement specific functionality for opponent grid
+  } else {
+    // Variation for other grid type (if applicable)
+    // Implement specific functionality for other grid type
+  }
+
   // #endregion
-
   // #endregion
 
   return canvas;

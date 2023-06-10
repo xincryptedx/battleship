@@ -385,37 +385,39 @@ export default createGridCanvas;
       Mark the cells representing placed ships as blue.
  */
 
-// #region Methods for getting data via event
-// Sets info about user ships in response to event
-const shipsCopy = [];
+const createCanvas = (sizeX, sizeY, options) => {
+  // #region Methods for getting/setting needed data via event
+  // Sets info about user ships in response to event
+  const shipsCopy = [];
 
-const setUserShips = (ships) => {
-  ships.forEach((ship) => {
-    shipsCopy.push(ship);
-  });
+  const setUserShips = (ships) => {
+    ships.forEach((ship) => {
+      shipsCopy.push(ship);
+    });
+  };
+
+  // Method that requests information about current user ships using event
+  const requestUserShips = () => {
+    events.emit("requestUserShips");
+  };
+
+  // Sets info about current placement direction in reponse to event
+  let placementDirection = "N";
+
+  const setPlacementDirection = (direction) => {
+    if (
+      direction === "N" ||
+      direction === "S" ||
+      direction === "E" ||
+      direction === "W"
+    ) {
+      placementDirection = direction;
+    }
+  };
+
+  // #endregion
+
+  // Subscribe to events
+  events.on("returnUserShips", setUserShips);
+  events.on("directionChanged", setPlacementDirection);
 };
-
-// Method that requests information about current user ships using event
-const requestUserShips = () => {
-  events.emit("requestUserShips");
-};
-
-// Sets info about current placement direction in reponse to event
-let placementDirection = "N";
-
-const setPlacementDirection = (direction) => {
-  if (
-    direction === "N" ||
-    direction === "S" ||
-    direction === "E" ||
-    direction === "W"
-  ) {
-    placementDirection = direction;
-  }
-};
-
-// #endregion
-
-// Subscribe to events
-events.on("returnUserShips", setUserShips);
-events.on("directionChanged", setPlacementDirection);

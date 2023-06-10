@@ -416,7 +416,7 @@ const createCanvas = (sizeX, sizeY, options) => {
   };
 
   // #endregion
-  // Module scoped variables
+  // Module scoped variables and constants
   const gridHeight = 10;
   const gridWidth = 10;
 

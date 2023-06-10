@@ -4,12 +4,12 @@ import events from "../modules/events";
 /* 
   Events subbed:
     returnUserShips
-    returnDirection
+    directionChanged
 
   Events pubbed:
     placementClicked
     requestUserShips
-    requestDirection
+  
 */
 
 // Old implementation
@@ -418,4 +418,4 @@ const setPlacementDirection = (direction) => {
 
 // Subscribe to events
 events.on("returnUserShips", setUserShips);
-events.on("returnDirection", setPlacementDirection);
+events.on("directionChanged", setPlacementDirection);

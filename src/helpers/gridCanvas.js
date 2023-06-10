@@ -416,6 +416,9 @@ const createCanvas = (sizeX, sizeY, options) => {
   };
 
   // #endregion
+  // Module scoped variables
+  const gridHeight = 10;
+  const gridWidth = 10;
 
   // Create the base canvas element
   const canvas = document.createElement("canvas");

@@ -448,7 +448,23 @@ const createCanvas = (sizeX, sizeY, options) => {
     }
   };
 
-  drawLines();
+  // #region Assign behavior using browser event handlers based on options
+  // These methods will be defined based on options
+  let handleMouseMove = null;
+  let handleMouseLeave = null;
+  let handleMouseClick = null;
+
+  if (options === "placement") {
+    handleMouseMove = () => {
+      // Code
+    };
+    handleMouseLeave = () => {
+      // Code
+    };
+    handleMouseClick = () => {
+      // Code
+    };
+  }
 
   // Subscribe to events
   events.on("returnUserShips", setUserShips);

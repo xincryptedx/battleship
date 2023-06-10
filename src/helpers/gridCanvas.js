@@ -417,9 +417,45 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // #endregion
 
+  // Create the base canvas element
+  const canvas = document.createElement("canvas");
+  canvas.width = sizeX;
+  canvas.height = sizeY;
+  const ctx = canvas.getContext("2d");
+
+  // Method for drawing the grid lines
+  const drawLines = () => {
+    // Draw grid lines
+    const gridSize = Math.min(sizeX, sizeY) / 10;
+    const lineColor = "black";
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = 1;
+
+    // Draw vertical lines
+    for (let x = 0; x <= sizeX; x += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, sizeY);
+      ctx.stroke();
+    }
+
+    // Draw horizontal lines
+    for (let y = 0; y <= sizeY; y += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(sizeX, y);
+      ctx.stroke();
+    }
+  };
+
+  drawLines();
+
   // Subscribe to events
   events.on("returnUserShips", setUserShips);
   events.on("directionChanged", setPlacementDirection);
+
+  // Return completed canvas
+  return canvas;
 };
 
 export default createCanvas;

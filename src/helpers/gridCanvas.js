@@ -4,12 +4,12 @@ import events from "../modules/events";
 /* 
   Events subbed:
     returnUserShips
-    returnShipPlacementDirection
+    returnDirection
 
   Events pubbed:
     placementClicked
     requestUserShips
-    requestShipPlacementDirection
+    requestDirection
 */
 
 // Old implementation
@@ -384,3 +384,38 @@ export default createGridCanvas;
       Mark those cells as green or red, ensuring they don't overlap with other ships.
       Mark the cells representing placed ships as blue.
  */
+
+// #region Methods for getting data via event
+// Sets info about user ships in response to event
+const shipsCopy = [];
+
+const setUserShips = (ships) => {
+  ships.forEach((ship) => {
+    shipsCopy.push(ship);
+  });
+};
+
+// Method that requests information about current user ships using event
+const requestUserShips = () => {
+  events.emit("requestUserShips");
+};
+
+// Sets info about current placement direction in reponse to event
+let placementDirection = "N";
+
+const setPlacementDirection = (direction) => {
+  if (
+    direction === "N" ||
+    direction === "S" ||
+    direction === "E" ||
+    direction === "W"
+  ) {
+    placementDirection = direction;
+  }
+};
+
+// #endregion
+
+// Subscribe to events
+events.on("returnUserShips", setUserShips);
+events.on("returnDirection", setPlacementDirection);

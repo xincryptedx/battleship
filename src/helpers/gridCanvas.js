@@ -13,7 +13,6 @@ import events from "../modules/events";
 */
 
 // Old implementation
-
 /* const createGridCanvas = (sizeX, sizeY, options) => {
 
   // #region Methods for getting data via event
@@ -452,26 +451,35 @@ const createCanvas = (sizeX, sizeY, options) => {
   };
 
   // #region Assign behavior using browser event handlers based on options
-  // These methods will be defined based on options
-  let handleMouseMove = null;
-  let handleMouseLeave = null;
-  let handleMouseClick = null;
+  if (options.type === "placement") {
+    canvas.handleMouseMove = () => {
+      // Code
+    };
+    canvas.handleMouseLeave = () => {
+      // Code
+    };
+    canvas.handleMouseClick = (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = event.clientX - rect.left;
+      const mouseY = event.clientY - rect.top;
 
-  if (options === "placement") {
-    handleMouseMove = () => {
-      // Code
-    };
-    handleMouseLeave = () => {
-      // Code
-    };
-    handleMouseClick = () => {
-      // Code
+      const cellSizeX = canvas.width / gridWidth;
+      const cellSizeY = canvas.height / gridHeight;
+
+      const cellX = Math.floor(mouseX / cellSizeX);
+      const cellY = Math.floor(mouseY / cellSizeY);
+
+      console.log(`Clicked cell: (${cellX}, ${cellY})`);
     };
   }
 
-  // Subscribe to events
+  // Subscribe to events for getting data
   events.on("returnUserShips", setUserShips);
   events.on("directionChanged", setPlacementDirection);
+  // Subscribe to events for browser event handling
+  canvas.addEventListener("click", () => canvas.handleMouseClick());
+
+  drawLines();
 
   // Return completed canvas
   return canvas;

@@ -8,7 +8,7 @@ const canvasManager = (() => {
   const placementPH = document.querySelector(".placement-canvas-ph");
 
   // Create the ship placement canvas
-  const placementCanvas = gridCanvas(300, 300, { options: "placement" });
+  const placementCanvas = gridCanvas(300, 300, { type: "placement" });
 
   // Replace the place holders
   placementPH.parentNode.replaceChild(placementCanvas, placementPH);

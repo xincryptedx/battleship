@@ -477,7 +477,7 @@ const createCanvas = (sizeX, sizeY, options) => {
   events.on("returnUserShips", setUserShips);
   events.on("directionChanged", setPlacementDirection);
   // Subscribe to events for browser event handling
-  canvas.addEventListener("click", () => canvas.handleMouseClick());
+  canvas.addEventListener("click", (e) => canvas.handleMouseClick(e));
 
   drawLines();
 

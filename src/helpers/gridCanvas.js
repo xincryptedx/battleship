@@ -419,6 +419,8 @@ const createCanvas = (sizeX, sizeY, options) => {
   const gridHeight = 10;
   const gridWidth = 10;
 
+  const currentCell = null;
+
   // Create the base canvas element
   const canvas = document.createElement("canvas");
   canvas.width = sizeX;
@@ -468,8 +470,9 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // #region Assign behavior using browser event handlers based on options
   if (options.type === "placement") {
-    canvas.handleMouseMove = () => {
+    canvas.handleMouseMove = (event) => {
       // Get what cell the mouse is over and update if over a different cell
+      const mouseCell = getMouseCell(event);
       // Update current cell if needed which will trigger a render
     };
     canvas.handleMouseLeave = () => {
@@ -481,6 +484,8 @@ const createCanvas = (sizeX, sizeY, options) => {
       console.log(`Clicked cell: (${currentCell})`);
     };
   }
+
+  // #endregion
 
   // Subscribe to events for getting data
   events.on("returnUserShips", setUserShips);

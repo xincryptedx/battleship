@@ -421,3 +421,5 @@ const createCanvas = (sizeX, sizeY, options) => {
   events.on("returnUserShips", setUserShips);
   events.on("directionChanged", setPlacementDirection);
 };
+
+export default createCanvas;

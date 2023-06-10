@@ -425,6 +425,10 @@ const createCanvas = (sizeX, sizeY, options) => {
   canvas.height = sizeY;
   const ctx = canvas.getContext("2d");
 
+  // Set the "cell size" for the grid represented by the canvas
+  const cellSizeX = canvas.width / gridWidth; // Module const
+  const cellSizeY = canvas.height / gridHeight; // Module const
+
   // Method for drawing the grid lines
   const drawLines = () => {
     // Draw grid lines
@@ -450,26 +454,31 @@ const createCanvas = (sizeX, sizeY, options) => {
     }
   };
 
+  // Method that gets the mouse position based on what cell it is over
+  const getMouseCell = (event) => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    const cellX = Math.floor(mouseX / cellSizeX);
+    const cellY = Math.floor(mouseY / cellSizeY);
+
+    return [cellX, cellY];
+  };
+
   // #region Assign behavior using browser event handlers based on options
   if (options.type === "placement") {
     canvas.handleMouseMove = () => {
-      // Code
+      // Get what cell the mouse is over and update if over a different cell
+      // Update current cell if needed which will trigger a render
     };
     canvas.handleMouseLeave = () => {
       // Code
     };
     canvas.handleMouseClick = (event) => {
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
+      const currentCell = getMouseCell(event);
 
-      const cellSizeX = canvas.width / gridWidth;
-      const cellSizeY = canvas.height / gridHeight;
-
-      const cellX = Math.floor(mouseX / cellSizeX);
-      const cellY = Math.floor(mouseY / cellSizeY);
-
-      console.log(`Clicked cell: (${cellX}, ${cellY})`);
+      console.log(`Clicked cell: (${currentCell})`);
     };
   }
 

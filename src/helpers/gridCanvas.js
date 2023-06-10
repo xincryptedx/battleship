@@ -489,6 +489,7 @@ const createCanvas = (sizeX, sizeY, options) => {
     };
     canvas.handleMouseLeave = () => {
       // Code
+      // Set currentCell to null
     };
     canvas.handleMouseClick = (event) => {
       const mouseCell = getMouseCell(event);

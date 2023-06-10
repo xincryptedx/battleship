@@ -419,7 +419,7 @@ const createCanvas = (sizeX, sizeY, options) => {
   const gridHeight = 10;
   const gridWidth = 10;
 
-  const currentCell = null;
+  let currentCell = null;
 
   // Create the base canvas element
   const canvas = document.createElement("canvas");
@@ -471,17 +471,29 @@ const createCanvas = (sizeX, sizeY, options) => {
   // #region Assign behavior using browser event handlers based on options
   if (options.type === "placement") {
     canvas.handleMouseMove = (event) => {
-      // Get what cell the mouse is over and update if over a different cell
+      // Get what cell the mouse is over
       const mouseCell = getMouseCell(event);
-      // Update current cell if needed which will trigger a render
+      // If the 'old' currentCell is equal to the mouseCell being evaluated
+      if (
+        !(
+          currentCell &&
+          currentCell[0] === mouseCell[0] &&
+          currentCell[1] === mouseCell[1]
+        )
+      ) {
+        // Render the changes
+      }
+
+      // Set the currentCell to the mouseCell for future comparisons
+      currentCell = mouseCell;
     };
     canvas.handleMouseLeave = () => {
       // Code
     };
     canvas.handleMouseClick = (event) => {
-      const currentCell = getMouseCell(event);
+      const mouseCell = getMouseCell(event);
 
-      console.log(`Clicked cell: (${currentCell})`);
+      console.log(`Clicked cell: (${mouseCell})`);
     };
   }
 
@@ -493,7 +505,7 @@ const createCanvas = (sizeX, sizeY, options) => {
   // Subscribe to events for browser event handling
   canvas.addEventListener("click", (e) => canvas.handleMouseClick(e));
 
-  drawLines();
+  drawLines(); // Remove this later
 
   // Return completed canvas
   return canvas;

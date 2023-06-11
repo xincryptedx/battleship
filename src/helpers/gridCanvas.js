@@ -527,6 +527,12 @@ const createCanvas = (sizeX, sizeY, options) => {
     boardCanvas.dispatchEvent(newEvent);
   };
 
+  // Mouseleave
+  overlayCanvas.handleMouseLeave = () => {
+    overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+    currentCell = null;
+  };
+
   // #endregion
 
   // #region Assign behavior using browser event handlers based on options
@@ -553,10 +559,6 @@ const createCanvas = (sizeX, sizeY, options) => {
       // Set the currentCell to the mouseCell for future comparisons
       currentCell = mouseCell;
     };
-    overlayCanvas.handleMouseLeave = () => {
-      // Code
-      // Set currentCell to null
-    };
   }
 
   // #endregion
@@ -571,9 +573,13 @@ const createCanvas = (sizeX, sizeY, options) => {
   overlayCanvas.addEventListener("click", (e) =>
     overlayCanvas.handleMouseClick(e)
   );
-  // overlay mouseMove
+  // overlay mousemove
   overlayCanvas.addEventListener("mousemove", (e) =>
     overlayCanvas.handleMouseMove(e)
+  );
+  // overlay mouseleave
+  overlayCanvas.addEventListener("mouseleave", () =>
+    overlayCanvas.handleMouseLeave()
   );
 
   drawLines(boardCtx); // Remove this later

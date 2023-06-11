@@ -18,6 +18,16 @@ body {
   overflow: hidden;
 }
 
+.canvas-container {
+  display: grid;
+  grid-template: 1fr / 1fr;
+}
+
+.canvas-container > * {
+  grid-row: -1 / 1;
+  grid-column: -1 / 1;
+}
+
 /* #endregion */
 
 /* #region main-content */

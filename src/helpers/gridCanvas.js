@@ -424,12 +424,15 @@ const createCanvas = (sizeX, sizeY, options) => {
   // Create parent div that holds the canvases. This is the element returned.
   const canvasContainer = document.createElement("div");
 
-  // Create the first canvas element to serve as the gameboard
+  // Create the board canvas element to serve as the gameboard base
+  // Static or rarely rendered things should go here
   const boardCanvas = document.createElement("canvas");
   canvasContainer.appendChild(boardCanvas);
   boardCanvas.width = sizeX;
   boardCanvas.height = sizeY;
   const boardCtx = boardCanvas.getContext("2d");
+
+  // Create the overlay canvas for rendering ship placement and attack selection
 
   // Set the "cell size" for the grid represented by the canvas
   const cellSizeX = boardCanvas.width / gridWidth; // Module const

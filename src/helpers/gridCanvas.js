@@ -508,27 +508,32 @@ const createCanvas = (sizeX, sizeY, options) => {
     else if (shipsCount === 1 || shipsCount === 2) drawLength = 3;
     else drawLength = shipsCount + 1;
 
-    // Translate direction into coordinate modifiers
-    let modX = 0;
-    let modY = 0;
-    if (direction === "N") {
-      modX = 0;
-      modY = -1;
-    } else if (direction === "S") {
-      modX = 0;
-      modY = 1;
-    } else if (direction === "E") {
-      modX = 1;
-      modY = 0;
-    } else if (direction === "W") {
-      modX = -1;
-      modY = 0;
+    // Determine direction to draw in
+    let directionX = 0;
+    let directionY = 0;
+
+    if (direction === "N" || direction === "S") {
+      directionY = direction === "N" ? -1 : 1;
+    } else if (direction === "E" || direction === "W") {
+      directionX = direction === "E" ? 1 : -1;
     }
 
-    // Draw the extra cells in the correct direction
-    for (let i = 0; i < drawLength; i += 1) {
-      const nextX = cellCoordinates[0] + i * modX;
-      const nextY = cellCoordinates[1] + i * modY;
+    // Divide the drawLenght in half with remainder
+    const halfDrawLength = Math.floor(drawLength / 2);
+    const remainderLength = drawLength % 2;
+
+    // Draw the first half of cells and remainder in one direction
+    for (let i = 0; i < halfDrawLength + remainderLength; i += 1) {
+      const nextX = cellCoordinates[0] + i * directionX;
+      const nextY = cellCoordinates[1] + i * directionY;
+      drawCell(nextX, nextY);
+    }
+
+    // Draw the remaining half
+    // Draw the remaining cells in the opposite direction
+    for (let i = 0; i < halfDrawLength; i += 1) {
+      const nextX = cellCoordinates[0] - (i + 1) * directionX;
+      const nextY = cellCoordinates[1] - (i + 1) * directionY;
       drawCell(nextX, nextY);
     }
   };

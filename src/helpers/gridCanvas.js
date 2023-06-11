@@ -530,6 +530,7 @@ const createCanvas = (sizeX, sizeY, options) => {
         )
       ) {
         // Render the changes
+        // highlightCell(cellCoordinates)
       }
 
       // Set the currentCell to the mouseCell for future comparisons

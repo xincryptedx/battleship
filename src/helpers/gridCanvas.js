@@ -421,15 +421,15 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   let currentCell = null;
 
-  // Create the base canvas element
-  const canvas = document.createElement("canvas");
-  canvas.width = sizeX;
-  canvas.height = sizeY;
-  const ctx = canvas.getContext("2d");
+  // Create the first canvas element to serve as the gameboard
+  const boardCanvas = document.createElement("canvas");
+  boardCanvas.width = sizeX;
+  boardCanvas.height = sizeY;
+  const ctx = boardCanvas.getContext("2d");
 
   // Set the "cell size" for the grid represented by the canvas
-  const cellSizeX = canvas.width / gridWidth; // Module const
-  const cellSizeY = canvas.height / gridHeight; // Module const
+  const cellSizeX = boardCanvas.width / gridWidth; // Module const
+  const cellSizeY = boardCanvas.height / gridHeight; // Module const
 
   // Method for drawing the grid lines
   const drawLines = () => {
@@ -458,7 +458,7 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // Method that gets the mouse position based on what cell it is over
   const getMouseCell = (event) => {
-    const rect = canvas.getBoundingClientRect();
+    const rect = boardCanvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
 
@@ -470,7 +470,7 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // #region Assign behavior using browser event handlers based on options
   if (options.type === "placement") {
-    canvas.handleMouseMove = (event) => {
+    boardCanvas.handleMouseMove = (event) => {
       // Get what cell the mouse is over
       const mouseCell = getMouseCell(event);
       // If the 'old' currentCell is equal to the mouseCell being evaluated
@@ -487,11 +487,11 @@ const createCanvas = (sizeX, sizeY, options) => {
       // Set the currentCell to the mouseCell for future comparisons
       currentCell = mouseCell;
     };
-    canvas.handleMouseLeave = () => {
+    boardCanvas.handleMouseLeave = () => {
       // Code
       // Set currentCell to null
     };
-    canvas.handleMouseClick = (event) => {
+    boardCanvas.handleMouseClick = (event) => {
       const mouseCell = getMouseCell(event);
 
       console.log(`Clicked cell: (${mouseCell})`);
@@ -504,12 +504,12 @@ const createCanvas = (sizeX, sizeY, options) => {
   events.on("returnUserShips", setUserShips);
   events.on("directionChanged", setPlacementDirection);
   // Subscribe to events for browser event handling
-  canvas.addEventListener("click", (e) => canvas.handleMouseClick(e));
+  boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e));
 
   drawLines(); // Remove this later
 
   // Return completed canvas
-  return canvas;
+  return boardCanvas;
 };
 
 export default createCanvas;

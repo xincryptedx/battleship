@@ -495,12 +495,8 @@ const createCanvas = (sizeX, sizeY, options) => {
 
     // Draw a cell
     function drawCell(posX, posY) {
-      overlayCtx.fillStyle = "blue";
       overlayCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
     }
-
-    // Draw the moused over cell from passed coords
-    drawCell(cellCoordinates[0], cellCoordinates[1]);
 
     // Determine current ship length (based on default battleship rules sizes, smallest to biggest)
     let drawLength;
@@ -521,6 +517,37 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Divide the drawLenght in half with remainder
     const halfDrawLength = Math.floor(drawLength / 2);
     const remainderLength = drawLength % 2;
+
+    // If drawing off canvas make color red
+    // Calculate maximum and minimum coordinates
+    const maxCoordinateX =
+      cellCoordinates[0] + (halfDrawLength + remainderLength - 1) * directionX;
+    const maxCoordinateY =
+      cellCoordinates[1] + (halfDrawLength + remainderLength - 1) * directionY;
+    const minCoordinateX =
+      cellCoordinates[0] - (halfDrawLength + 1) * directionX;
+    const minCoordinateY =
+      cellCoordinates[1] - (halfDrawLength + 1) * directionY;
+    // And translate into an actual canvas position
+    const maxX = maxCoordinateX * cellX;
+    const maxY = maxCoordinateY * cellY;
+    const minX = minCoordinateX * cellX;
+    const minY = minCoordinateY * cellY;
+    console.log(
+      `maxX: ${maxX}, maxY: ${maxY}, minX: ${minX}, minY: ${minY}, canvasW: ${overlayCanvas.width}, canvasH: ${overlayCanvas.height}`
+    );
+    // Check if any cells are outside the canvas boundaries
+    const isOutOfBounds =
+      maxX >= overlayCanvas.width ||
+      maxY >= overlayCanvas.height ||
+      minX < 0 ||
+      minY < 0;
+
+    // Set the fill color based on whether cells are drawn off canvas
+    overlayCtx.fillStyle = isOutOfBounds ? "red" : "blue";
+
+    // Draw the moused over cell from passed coords
+    drawCell(cellCoordinates[0], cellCoordinates[1]);
 
     // Draw the first half of cells and remainder in one direction
     for (let i = 0; i < halfDrawLength + remainderLength; i += 1) {

@@ -433,6 +433,11 @@ const createCanvas = (sizeX, sizeY, options) => {
   const boardCtx = boardCanvas.getContext("2d");
 
   // Create the overlay canvas for rendering ship placement and attack selection
+  const overlayCanvas = document.createElement("canvas");
+  canvasContainer.appendChild(overlayCanvas);
+  overlayCanvas.width = sizeX;
+  overlayCanvas.height = sizeY;
+  const overlayCtx = overlayCanvas.getContext("2d");
 
   // Set the "cell size" for the grid represented by the canvas
   const cellSizeX = boardCanvas.width / gridWidth; // Module const

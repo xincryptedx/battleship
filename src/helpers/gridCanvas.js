@@ -493,14 +493,16 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Clear the canvas
     overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 
+    // Draw a cell
+    function drawCell(posX, posY) {
+      overlayCtx.fillStyle = "blue";
+      overlayCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
+    }
+
     // Draw the moused over cell from passed coords
-    overlayCtx.fillStyle = "blue";
-    overlayCtx.fillRect(
-      cellCoordinates[0] * cellX,
-      cellCoordinates[1] * cellY,
-      cellX,
-      cellY
-    );
+    drawCell(cellCoordinates[0], cellCoordinates[1]);
+
+    // Draw the other cells based on shipsCount and direction
   };
 
   // #endregion

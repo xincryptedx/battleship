@@ -421,6 +421,9 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   let currentCell = null;
 
+  // Create parent div that holds the canvases. This is the element returned.
+  const canvasContainer = document.createElement("div");
+
   // Create the first canvas element to serve as the gameboard
   const boardCanvas = document.createElement("canvas");
   boardCanvas.width = sizeX;
@@ -508,8 +511,8 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   drawLines(); // Remove this later
 
-  // Return completed canvas
-  return boardCanvas;
+  // Return completed canvases
+  return canvasContainer;
 };
 
 export default createCanvas;

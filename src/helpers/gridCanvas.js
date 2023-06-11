@@ -502,7 +502,33 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Draw the moused over cell from passed coords
     drawCell(cellCoordinates[0], cellCoordinates[1]);
 
-    // Draw the other cells based on shipsCount and direction
+    // Determine current ship length (based on default battleship rules sizes, smallest to biggest)
+    let drawLength;
+    if (shipsCount === 0) drawLength = 2;
+    else if (shipsCount === 1 || shipsCount === 2) drawLength = 3;
+    else drawLength = shipsCount + 1;
+
+    // Translate direction into coordinate modifiers
+    let modX = 0;
+    let modY = 0;
+    if (direction === "N") {
+      modX = 0;
+      modY = -1;
+    } else if (direction === "S") {
+      modX = 0;
+      modY = 1;
+    } else if (direction === "E") {
+      modX = 1;
+      modY = 0;
+    } else if (direction === "W") {
+      modX = -1;
+      modY = 0;
+    }
+
+    // Draw the extra cells in the correct direction
+    for (let i = 0; i < drawLength; i += 1) {
+      // code
+    }
   };
 
   // #endregion

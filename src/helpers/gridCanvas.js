@@ -423,10 +423,7 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // Create parent div that holds the canvases. This is the element returned.
   const canvasContainer = document.createElement("div");
-  canvasContainer.classList.add(
-    "canvas-container",
-    "placement-canvas-container"
-  );
+  canvasContainer.classList.add("canvas-container");
 
   // Create the board canvas element to serve as the gameboard base
   // Static or rarely rendered things should go here
@@ -498,6 +495,8 @@ const createCanvas = (sizeX, sizeY, options) => {
   // #region Assign behavior using browser event handlers based on options
   // Placement is used for placing ships
   if (options.type === "placement") {
+    // Add class to canvasContainer to denote placement container
+    canvasContainer.classList.add("placement-canvas-container");
     // Set up boardCanvas with behaviors unique to placement
     boardCanvas.handleMouseMove = (event) => {
       // Get what cell the mouse is over

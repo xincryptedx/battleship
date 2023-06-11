@@ -497,8 +497,8 @@ const createCanvas = (sizeX, sizeY, options) => {
   if (options.type === "placement") {
     // Add class to canvasContainer to denote placement container
     canvasContainer.classList.add("placement-canvas-container");
-    // Set up boardCanvas with behaviors unique to placement
-    boardCanvas.handleMouseMove = (event) => {
+    // Set up overlayCanvas with behaviors unique to placement
+    overlayCanvas.handleMouseMove = (event) => {
       // Get what cell the mouse is over
       const mouseCell = getMouseCell(event);
       // If the 'old' currentCell is equal to the mouseCell being evaluated
@@ -515,7 +515,7 @@ const createCanvas = (sizeX, sizeY, options) => {
       // Set the currentCell to the mouseCell for future comparisons
       currentCell = mouseCell;
     };
-    boardCanvas.handleMouseLeave = () => {
+    overlayCanvas.handleMouseLeave = () => {
       // Code
       // Set currentCell to null
     };

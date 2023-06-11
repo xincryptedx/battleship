@@ -475,6 +475,14 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // #endregion
 
+  // #region Assign static behaviors
+  // boardCanvas
+  boardCanvas.handleMouseClick = (event) => {
+    const mouseCell = getMouseCell(event);
+
+    console.log(`Clicked cell: (${mouseCell})`);
+  };
+
   // #region Assign behavior using browser event handlers based on options
   // Placement is used for placing ships
   if (options.type === "placement") {
@@ -499,11 +507,6 @@ const createCanvas = (sizeX, sizeY, options) => {
     boardCanvas.handleMouseLeave = () => {
       // Code
       // Set currentCell to null
-    };
-    boardCanvas.handleMouseClick = (event) => {
-      const mouseCell = getMouseCell(event);
-
-      console.log(`Clicked cell: (${mouseCell})`);
     };
   }
 

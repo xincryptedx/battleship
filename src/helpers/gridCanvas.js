@@ -435,6 +435,7 @@ const createCanvas = (sizeX, sizeY, options) => {
   const cellSizeX = boardCanvas.width / gridWidth; // Module const
   const cellSizeY = boardCanvas.height / gridHeight; // Module const
 
+  // #region Helper Methods
   // Method for drawing the grid lines
   const drawLines = (context) => {
     // Draw grid lines
@@ -472,8 +473,12 @@ const createCanvas = (sizeX, sizeY, options) => {
     return [cellX, cellY];
   };
 
+  // #endregion
+
   // #region Assign behavior using browser event handlers based on options
+  // Placement is used for placing ships
   if (options.type === "placement") {
+    // Set up boardCanvas with behaviors unique to placement
     boardCanvas.handleMouseMove = (event) => {
       // Get what cell the mouse is over
       const mouseCell = getMouseCell(event);

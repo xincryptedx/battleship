@@ -524,8 +524,8 @@ const createCanvas = (sizeX, sizeY, options) => {
   // #endregion
 
   // Subscribe to events for getting data
-  events.on("returnUserShips", setUserShips);
-  events.on("directionChanged", setPlacementDirection);
+  events.on("returnUserShips", setUserShips); // Returns ships array
+  events.on("directionChanged", setPlacementDirection); // Returns direction string
   // Subscribe to events for browser event handling
   boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e));
 

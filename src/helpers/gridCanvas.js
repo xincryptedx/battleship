@@ -423,6 +423,10 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // Create parent div that holds the canvases. This is the element returned.
   const canvasContainer = document.createElement("div");
+  canvasContainer.classList.add(
+    "canvas-container",
+    "placement-canvas-container"
+  );
 
   // Create the board canvas element to serve as the gameboard base
   // Static or rarely rendered things should go here

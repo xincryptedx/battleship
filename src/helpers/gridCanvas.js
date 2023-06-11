@@ -482,6 +482,20 @@ const createCanvas = (sizeX, sizeY, options) => {
     return [cellX, cellY];
   };
 
+  // Draws the highlight cells to the overlay canvas
+  const highlightCells = (
+    cellCoordinates,
+    cellX = cellSizeX,
+    cellY = cellSizeY
+  ) => {
+    // Clear the canvas
+    overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+
+    // Draw the moused over cell from passed coords
+    overlayCtx.fillStyle = "blue";
+    overlayCtx.fillRect(cellCoordinates[0] * cellX, cellCoordinates[1] * cellY);
+  };
+
   // #endregion
 
   // #region Assign static behaviors

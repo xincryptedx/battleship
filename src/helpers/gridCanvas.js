@@ -493,7 +493,12 @@ const createCanvas = (sizeX, sizeY, options) => {
 
     // Draw the moused over cell from passed coords
     overlayCtx.fillStyle = "blue";
-    overlayCtx.fillRect(cellCoordinates[0] * cellX, cellCoordinates[1] * cellY);
+    overlayCtx.fillRect(
+      cellCoordinates[0] * cellX,
+      cellCoordinates[1] * cellY,
+      cellX,
+      cellY
+    );
   };
 
   // #endregion
@@ -562,9 +567,15 @@ const createCanvas = (sizeX, sizeY, options) => {
   events.on("returnUserShips", setUserShips); // Returns ships array
   events.on("directionChanged", setPlacementDirection); // Returns direction string
   // Subscribe to browser events
-  boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e)); // board click
+  // board click
+  boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e));
+  // overlay click
   overlayCanvas.addEventListener("click", (e) =>
     overlayCanvas.handleMouseClick(e)
+  );
+  // overlay mouseMove
+  overlayCanvas.addEventListener("mousemove", (e) =>
+    overlayCanvas.handleMouseMove(e)
   );
 
   drawLines(boardCtx); // Remove this later

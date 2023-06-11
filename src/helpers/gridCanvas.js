@@ -527,7 +527,9 @@ const createCanvas = (sizeX, sizeY, options) => {
 
     // Draw the extra cells in the correct direction
     for (let i = 0; i < drawLength; i += 1) {
-      // code
+      const nextX = cellCoordinates[0] + i + modX;
+      const nextY = cellCoordinates[1] + i + modY;
+      drawCell(nextX, nextY);
     }
   };
 

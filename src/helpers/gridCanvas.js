@@ -486,7 +486,9 @@ const createCanvas = (sizeX, sizeY, options) => {
   const highlightCells = (
     cellCoordinates,
     cellX = cellSizeX,
-    cellY = cellSizeY
+    cellY = cellSizeY,
+    shipsCount = shipsCopy.length,
+    direction = placementDirection
   ) => {
     // Clear the canvas
     overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
@@ -533,11 +535,7 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Add class to canvasContainer to denote placement container
     canvasContainer.classList.add("placement-canvas-container");
     // Set up overlayCanvas with behaviors unique to placement
-    overlayCanvas.handleMouseMove = (
-      event,
-      shipsCount = shipsCopy.length,
-      direction = placementDirection
-    ) => {
+    overlayCanvas.handleMouseMove = (event) => {
       // Get what cell the mouse is over
       const mouseCell = getMouseCell(event);
       // If the 'old' currentCell is equal to the mouseCell being evaluated

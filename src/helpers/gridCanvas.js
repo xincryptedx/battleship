@@ -514,7 +514,11 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Add class to canvasContainer to denote placement container
     canvasContainer.classList.add("placement-canvas-container");
     // Set up overlayCanvas with behaviors unique to placement
-    overlayCanvas.handleMouseMove = (event) => {
+    overlayCanvas.handleMouseMove = (
+      event,
+      ships = shipsCopy,
+      direction = placementDirection
+    ) => {
       // Get what cell the mouse is over
       const mouseCell = getMouseCell(event);
       // If the 'old' currentCell is equal to the mouseCell being evaluated

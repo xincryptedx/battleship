@@ -426,36 +426,37 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // Create the first canvas element to serve as the gameboard
   const boardCanvas = document.createElement("canvas");
+  canvasContainer.appendChild(boardCanvas);
   boardCanvas.width = sizeX;
   boardCanvas.height = sizeY;
-  const ctx = boardCanvas.getContext("2d");
+  const boardCtx = boardCanvas.getContext("2d");
 
   // Set the "cell size" for the grid represented by the canvas
   const cellSizeX = boardCanvas.width / gridWidth; // Module const
   const cellSizeY = boardCanvas.height / gridHeight; // Module const
 
   // Method for drawing the grid lines
-  const drawLines = () => {
+  const drawLines = (context) => {
     // Draw grid lines
     const gridSize = Math.min(sizeX, sizeY) / 10;
     const lineColor = "black";
-    ctx.strokeStyle = lineColor;
-    ctx.lineWidth = 1;
+    context.strokeStyle = lineColor;
+    context.lineWidth = 1;
 
     // Draw vertical lines
     for (let x = 0; x <= sizeX; x += gridSize) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, sizeY);
-      ctx.stroke();
+      context.beginPath();
+      context.moveTo(x, 0);
+      context.lineTo(x, sizeY);
+      context.stroke();
     }
 
     // Draw horizontal lines
     for (let y = 0; y <= sizeY; y += gridSize) {
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(sizeX, y);
-      ctx.stroke();
+      context.beginPath();
+      context.moveTo(0, y);
+      context.lineTo(sizeX, y);
+      context.stroke();
     }
   };
 
@@ -509,7 +510,7 @@ const createCanvas = (sizeX, sizeY, options) => {
   // Subscribe to events for browser event handling
   boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e));
 
-  drawLines(); // Remove this later
+  drawLines(boardCtx); // Remove this later
 
   // Return completed canvases
   return canvasContainer;

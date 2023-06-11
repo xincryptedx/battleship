@@ -493,7 +493,7 @@ const createCanvas = (sizeX, sizeY, options) => {
   };
 
   // overlayCanvas
-  // Disable clicks so board click method works
+  // Forward clicks to board canvas
   overlayCanvas.handleMouseClick = (event) => {
     event.preventDefault();
     event.stopPropagation();

@@ -516,7 +516,7 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Set up overlayCanvas with behaviors unique to placement
     overlayCanvas.handleMouseMove = (
       event,
-      ships = shipsCopy,
+      shipsCount = shipsCopy.length,
       direction = placementDirection
     ) => {
       // Get what cell the mouse is over

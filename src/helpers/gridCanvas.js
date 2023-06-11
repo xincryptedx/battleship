@@ -492,6 +492,22 @@ const createCanvas = (sizeX, sizeY, options) => {
     console.log(`Clicked cell: (${mouseCell})`);
   };
 
+  // overlayCanvas
+  // Disable clicks so board click method works
+  overlayCanvas.handleMouseClick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const newEvent = new MouseEvent("click", {
+      bubbles: event.bubbles,
+      cancelable: event.cancelable,
+      clientX: event.clientX,
+      clientY: event.clientY,
+    });
+    boardCanvas.dispatchEvent(newEvent);
+  };
+
+  // #endregion
+
   // #region Assign behavior using browser event handlers based on options
   // Placement is used for placing ships
   if (options.type === "placement") {
@@ -527,7 +543,10 @@ const createCanvas = (sizeX, sizeY, options) => {
   events.on("returnUserShips", setUserShips); // Returns ships array
   events.on("directionChanged", setPlacementDirection); // Returns direction string
   // Subscribe to browser events
-  boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e));
+  boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e)); // board click
+  overlayCanvas.addEventListener("click", (e) =>
+    overlayCanvas.handleMouseClick(e)
+  );
 
   drawLines(boardCtx); // Remove this later
 

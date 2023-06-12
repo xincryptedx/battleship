@@ -110,6 +110,24 @@ const createCanvas = (sizeX, sizeY, options) => {
     return [cellX, cellY];
   };
 
+  // Draw ships to board canvas using shipsCopy
+  boardCanvas.drawShips = (
+    ships = shipsCopy,
+    cellX = cellSizeX,
+    cellY = cellSizeY
+  ) => {
+    // Draw a cell to board
+    function drawCell(posX, posY) {
+      boardCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
+    }
+
+    ships.forEach((ship) => {
+      Object.keys(ship.occupiedCells).forEach((cell) => {
+        drawCell(cell[0], cell[1]);
+      });
+    });
+  };
+
   // Draws the highlight cells to the overlay canvas
   const highlightCells = (
     cellCoordinates,
@@ -121,7 +139,7 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Clear the canvas
     overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 
-    // Draw a cell
+    // Draw a cell to overlay
     function drawCell(posX, posY) {
       overlayCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
     }
@@ -198,6 +216,7 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // #region Assign static behaviors
   // boardCanvas
+  // Browser click events
   boardCanvas.handleMouseClick = (event) => {
     const mouseCell = getMouseCell(event);
 

@@ -112,17 +112,14 @@ const createCanvas = (sizeX, sizeY, options) => {
     cellX = cellSizeX,
     cellY = cellSizeY
   ) => {
-    console.log("Starting ship draw...");
     // Draw a cell to board
     function drawCell(posX, posY) {
       boardCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
     }
 
     ships.forEach((ship) => {
-      console.log("Ship:", ship);
       ship.occupiedCells.forEach((cell) => {
         drawCell(cell[0], cell[1]);
-        console.log("Drew cell!", cell);
       });
     });
   };

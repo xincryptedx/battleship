@@ -57,13 +57,24 @@ const Ship = (index, position, direction) => {
     W: [-1, 0],
   };
 
+  // Placement direction is either 0 for horizontal or 1 for vertical
+  let placementDirectionX = 0;
+  let placementDirectionY = 0;
+  if (direction === 0) {
+    placementDirectionX = 1;
+    placementDirectionY = 0;
+  } else if (direction === 1) {
+    placementDirectionX = 0;
+    placementDirectionY = 1;
+  }
+
   // Use position and direction to add occupied cells coords
   if (
     Array.isArray(position) &&
     position.length === 2 &&
     Number.isInteger(position[0]) &&
     Number.isInteger(position[1]) &&
-    Object.keys(directionIterator).includes(direction)
+    (direction === 1 || direction === 0)
   ) {
     for (let i = 0; i < thisShip.size; i += 1) {
       const newCoords = [

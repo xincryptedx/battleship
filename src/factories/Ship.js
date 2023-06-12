@@ -77,8 +77,24 @@ const Ship = (index, position, direction) => {
       thisShip.occupiedCells.push(newCoords);
     } */
     // Divide length into half and remainder
+    const halfSize = thisShip.size / 2;
+    const remainderSize = thisShip.size % 2;
     // Add first half of cells plus remainder in one direction
+    for (let i = 0; i < halfSize + remainderSize; i += 1) {
+      const newCoords = [
+        position[0] + i * placementDirectionX,
+        position[1] + i * placementDirectionY,
+      ];
+      thisShip.occupiedCells.push(newCoords);
+    }
     // Add second half of cells
+    for (let i = 0; i < halfSize; i += 1) {
+      const newCoords = [
+        position[0] - i * placementDirectionX,
+        position[1] - i * placementDirectionY,
+      ];
+      thisShip.occupiedCells.push(newCoords);
+    }
   }
 
   return thisShip;

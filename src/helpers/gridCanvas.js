@@ -7,7 +7,6 @@ import events from "../modules/events";
     directionChanged
 
   Events pubbed:
-    placementClicked
     requestUserShips
     shipsSet
 */
@@ -33,17 +32,10 @@ const createCanvas = (sizeX, sizeY, options) => {
   };
 
   // Sets info about current placement direction in reponse to event
-  let placementDirection = "N";
+  let placementDirection = 1;
 
   const setPlacementDirection = (direction) => {
-    if (
-      direction === "N" ||
-      direction === "S" ||
-      direction === "E" ||
-      direction === "W"
-    ) {
-      placementDirection = direction;
-    }
+    placementDirection = direction;
   };
 
   // #endregion
@@ -120,14 +112,17 @@ const createCanvas = (sizeX, sizeY, options) => {
     cellX = cellSizeX,
     cellY = cellSizeY
   ) => {
+    console.log("Starting ship draw...");
     // Draw a cell to board
     function drawCell(posX, posY) {
       boardCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
     }
 
     ships.forEach((ship) => {
+      console.log("Ship:", ship);
       ship.occupiedCells.forEach((cell) => {
         drawCell(cell[0], cell[1]);
+        console.log("Drew cell!", cell);
       });
     });
   };
@@ -158,10 +153,10 @@ const createCanvas = (sizeX, sizeY, options) => {
     let directionX = 0;
     let directionY = 0;
 
-    if (direction === "N" || direction === "S") {
+    if (direction === 1) {
       directionY = 1;
       directionX = 0;
-    } else if (direction === "E" || direction === "W") {
+    } else if (direction === 0) {
       directionY = 0;
       directionX = 1;
     }

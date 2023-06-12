@@ -36,7 +36,7 @@ const Gameboard = () => {
   const validateShip = (ship) => {
     if (!ship) return false;
     // Flag for detecting invalid position value
-    let isValid = false;
+    let isValid = true;
 
     // Check that ships occupied cells are all within map and not already occupied
     for (let i = 0; i < ship.occupiedCells.length; i += 1) {
@@ -47,11 +47,10 @@ const Gameboard = () => {
         ship.occupiedCells[i][1] >= 0 &&
         ship.occupiedCells[i][1] <= maxBoardY
       ) {
-        isValid = true;
+        // Do nothing
       } else {
         isValid = false;
       }
-      // Check occupied cells
       // Check occupied cells
       const isCellOccupied = thisGameboard.allOccupiedCells.some(
         (cell) =>

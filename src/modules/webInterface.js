@@ -2,7 +2,7 @@ import events from "./events";
 /* Events subbed: 
     hideAll showMenu  showPlacement
     showGame  shrinkTitle startClicked
-    rotateClicked placementClicked
+    rotateClicked
 
    Events pubbed:
     tryPlacement
@@ -19,12 +19,12 @@ const webInterface = () => {
   const placement = document.querySelector(".placement");
   const game = document.querySelector(".game");
 
-  // Reference to current direction for placing ships and to object for turning it into string
+  // Reference to current direction for placing ships
   let placementDirection = 0;
-  const directions = { 0: "N", 1: "E", 2: "S", 3: "W" };
+
   // Method for iterating through directions
   const rotateDirection = () => {
-    placementDirection = (placementDirection + 1) % 4;
+    placementDirection = placementDirection === 0 ? 1 : 0;
   };
 
   // #region Basic methods for showing/hiding elements
@@ -72,20 +72,6 @@ const webInterface = () => {
     rotateDirection();
   };
 
-  // Handle clicks on the ship placement grid by using payload.position
-  const handlePlacementClick = (payload) => {
-    // Send an event trying to place the ship
-    events.emit("tryPlacement", {
-      position: payload.position,
-      direction: directions[placementDirection],
-    });
-  };
-
-  // Handle clicks on the enemy
-  const handleAttackClick = () => {
-    // Send event that will attempt to send an attack based on clicked cell
-  };
-
   // #endregion
 
   // #region Add classes to ship divs to represent placed/destroyed
@@ -100,7 +86,6 @@ const webInterface = () => {
   events.on("shrinkTitle", shrinkTitle);
   events.on("rotateClicked", handleRotateClick);
   events.on("startClicked", handleStartClick);
-  events.on("placementClicked", handlePlacementClick);
 };
 
 export default webInterface;

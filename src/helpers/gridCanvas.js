@@ -15,9 +15,11 @@ import events from "../modules/events";
 const createCanvas = (sizeX, sizeY, options) => {
   // #region Methods for getting/setting needed data via event
   // Sets info about user ships in response to event
-  const shipsCopy = [];
+  let shipsCopy = [];
 
   const setUserShips = (ships) => {
+    // Erase old ships data
+    shipsCopy = [];
     ships.forEach((ship) => {
       shipsCopy.push(ship);
     });
@@ -282,6 +284,7 @@ const createCanvas = (sizeX, sizeY, options) => {
   // Subscribe to events for getting data
   events.on("returnUserShips", setUserShips); // Returns ships array
   events.on("directionChanged", setPlacementDirection); // Returns direction string
+  events.on("shipPlaced", requestUserShips); // Request ships when new ship added
   // Events for drawing when data gotten
   events.on("shipsSet", boardCanvas.drawShips);
   // Subscribe to browser events

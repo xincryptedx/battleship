@@ -70,8 +70,8 @@ describe("addShipInternal", () => {
 
   test("ships that have cells that are already occupied will not be added", () => {
     const testBoard = Gameboard();
-    testBoard.addShipInternal([4, 4], 0, 2);
-    testBoard.addShipInternal([4, 3], 0, 3);
+    testBoard.addShipInternal([4, 4], 1, 2);
+    testBoard.addShipInternal([4, 3], 1, 3);
     expect(testBoard.ships).toHaveLength(1);
   });
 });

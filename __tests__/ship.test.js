@@ -24,19 +24,19 @@ describe("Basic Functionality", () => {
   });
 
   test("Ship has correct size prop", () => {
-    const sentinel = Ship(1);
+    const sentinel = Ship(1, [2, 3], 0);
     expect(sentinel.size).toBe(2);
 
-    const titan = Ship(2);
+    const titan = Ship(2, [2, 3], 0);
     expect(titan.size).toBe(3);
 
-    const viper = Ship(3);
+    const viper = Ship(3, [2, 3], 0);
     expect(viper.size).toBe(3);
 
-    const goliath = Ship(4);
+    const goliath = Ship(4, [2, 3], 0);
     expect(goliath.size).toBe(4);
 
-    const leviathan = Ship(5);
+    const leviathan = Ship(5, [2, 3], 0);
     expect(leviathan.size).toBe(5);
   });
 

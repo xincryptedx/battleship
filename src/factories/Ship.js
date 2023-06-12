@@ -90,8 +90,8 @@ const Ship = (index, position, direction) => {
     // Add second half of cells
     for (let i = 0; i < halfSize; i += 1) {
       const newCoords = [
-        position[0] - i * placementDirectionX,
-        position[1] - i * placementDirectionY,
+        position[0] - (i + 1) * placementDirectionX,
+        position[1] - (i + 1) * placementDirectionY,
       ];
       thisShip.occupiedCells.push(newCoords);
     }

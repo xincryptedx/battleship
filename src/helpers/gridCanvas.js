@@ -9,7 +9,7 @@ import events from "../modules/events";
   Events pubbed:
     placementClicked
     requestUserShips
-  
+    shipsSet
 */
 
 const createCanvas = (sizeX, sizeY, options) => {
@@ -21,6 +21,8 @@ const createCanvas = (sizeX, sizeY, options) => {
     ships.forEach((ship) => {
       shipsCopy.push(ship);
     });
+    // Emit event signalling ships have been copied and are ready for use
+    events.emit("shipsSet");
   };
 
   // Method that requests information about current user ships using event
@@ -276,6 +278,8 @@ const createCanvas = (sizeX, sizeY, options) => {
   // Subscribe to events for getting data
   events.on("returnUserShips", setUserShips); // Returns ships array
   events.on("directionChanged", setPlacementDirection); // Returns direction string
+  // Events for drawing when data gotten
+  events.on("shipsSet", boardCanvas.drawShips);
   // Subscribe to browser events
   // board click
   boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e));
@@ -292,6 +296,7 @@ const createCanvas = (sizeX, sizeY, options) => {
     overlayCanvas.handleMouseLeave()
   );
 
+  // Testing calls
   drawLines(boardCtx); // Remove this later
 
   // Return completed canvases

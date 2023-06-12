@@ -36,21 +36,21 @@ describe("addShipInternal", () => {
   });
 
   test("default index above max will return undefined", () => {
-    const testBoard = Gameboard();
+    const testBoard = Gameboard(); // Ships placed next to each other vertically
     // Add first ship
-    testBoard.addShipInternal([4, 4], 0);
+    testBoard.addShipInternal([4, 4], 1);
     expect(testBoard.ships[0].size).toBe(2);
     // Add second ship
-    testBoard.addShipInternal([5, 4], 0);
+    testBoard.addShipInternal([5, 4], 1);
     expect(testBoard.ships[1].size).toBe(3);
     // Add third ship
-    testBoard.addShipInternal([6, 4], 0);
+    testBoard.addShipInternal([6, 4], 1);
     expect(testBoard.ships[2].size).toBe(3);
     // Add fourth ship
-    testBoard.addShipInternal([7, 4], 0);
+    testBoard.addShipInternal([7, 4], 1);
     expect(testBoard.ships[3].size).toBe(4);
     // Add fifth ship
-    testBoard.addShipInternal([8, 4], 0);
+    testBoard.addShipInternal([8, 4], 1);
     expect(testBoard.ships[4].size).toBe(5);
 
     expect(testBoard.addShipInternal([9, 4], 0)).toBeUndefined();

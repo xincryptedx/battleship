@@ -29,7 +29,7 @@ const Gameboard = () => {
 
   // Method for returning ships in event
   thisGameboard.returnShips = () => {
-    events.emit("returnShips", thisGameboard.ships);
+    events.emit("returnUserShips", thisGameboard.ships);
   };
 
   // Method that validates ship occupied cell coords

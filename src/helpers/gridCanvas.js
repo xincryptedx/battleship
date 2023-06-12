@@ -159,8 +159,6 @@ const createCanvas = (sizeX, sizeY, options) => {
     const minCoordinateY =
       cellCoordinates[1] - (halfDrawLength + remainderLength) * directionY;
 
-    console.log(maxCoordinateX, minCoordinateX, maxCoordinateY, minCoordinateY);
-
     // And translate into an actual canvas position
     const maxX = maxCoordinateX * cellX;
     const maxY = maxCoordinateY * cellY;
@@ -176,10 +174,6 @@ const createCanvas = (sizeX, sizeY, options) => {
 
     // Set the fill color based on whether cells are drawn off canvas
     overlayCtx.fillStyle = isOutOfBounds ? "red" : "blue";
-
-    /* console.log(
-      `maxX: ${maxX}, maxY: ${maxY}, minX: ${minX}, minY: ${minY}, canvasW: ${overlayCanvas.width}, canvasH: ${overlayCanvas.height}, outOfBounds: ${isOutOfBounds}`
-    ); */
 
     // Draw the moused over cell from passed coords
     drawCell(cellCoordinates[0], cellCoordinates[1]);

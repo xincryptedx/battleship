@@ -219,10 +219,14 @@ const createCanvas = (sizeX, sizeY, options) => {
   // #region Assign static behaviors
   // boardCanvas
   // Browser click events
-  boardCanvas.handleMouseClick = (event) => {
+  boardCanvas.handleMouseClick = (event, direction = placementDirection) => {
     const mouseCell = getMouseCell(event);
 
-    console.log(`Clicked cell: (${mouseCell})`);
+    // Get new ships information
+    events.emit("tryPlacement", {
+      position: [mouseCell[0], mouseCell[1]],
+      direction,
+    });
   };
 
   // overlayCanvas

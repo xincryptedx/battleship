@@ -41,13 +41,13 @@ describe("Basic Functionality", () => {
   });
 
   test("Ship.hit() will increment hits prop", () => {
-    const sentinel = Ship(1);
+    const sentinel = Ship(1, [2, 3], 0);
     sentinel.hit();
     expect(sentinel.hits).toBe(1);
   });
 
   test("Ship.isSunk true if hits >= size", () => {
-    const sentinel = Ship(1);
+    const sentinel = Ship(1, [2, 3], 0);
     sentinel.hit();
     sentinel.hit();
     expect(sentinel.isSunk()).toBe(true);

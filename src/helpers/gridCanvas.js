@@ -126,7 +126,7 @@ const createCanvas = (sizeX, sizeY, options) => {
     }
 
     ships.forEach((ship) => {
-      Object.keys(ship.occupiedCells).forEach((cell) => {
+      ship.occupiedCells.forEach((cell) => {
         drawCell(cell[0], cell[1]);
       });
     });

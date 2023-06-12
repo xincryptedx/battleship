@@ -88,6 +88,7 @@ const Gameboard = () => {
     if (validateShip(newShip)) {
       addCellsToList(newShip);
       thisGameboard.ships.push(newShip);
+      events.emit("shipPlaced");
     }
   };
 

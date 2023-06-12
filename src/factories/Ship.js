@@ -49,14 +49,6 @@ const Ship = (index, position, direction) => {
     return false;
   };
 
-  // Turn direction into iterator
-  const directionIterator = {
-    N: [0, -1],
-    S: [0, 1],
-    E: [1, 0],
-    W: [-1, 0],
-  };
-
   // Placement direction is either 0 for horizontal or 1 for vertical
   let placementDirectionX = 0;
   let placementDirectionY = 0;

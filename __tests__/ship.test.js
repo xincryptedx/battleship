@@ -2,7 +2,7 @@ import Ship from "../src/factories/Ship";
 
 describe("Basic Functionality", () => {
   test("Ship returns an object", () => {
-    const testShip = Ship(1);
+    const testShip = Ship(1, [2, 3], 0);
     expect(testShip).toBeInstanceOf(Object);
   });
 

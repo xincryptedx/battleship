@@ -7,19 +7,19 @@ describe("Basic Functionality", () => {
   });
 
   test("Ship has correct type prop", () => {
-    const sentinel = Ship(1);
+    const sentinel = Ship(1, [2, 3], 0);
     expect(sentinel.type).toBe("Sentinel Probe");
 
-    const titan = Ship(2);
+    const titan = Ship(2, [2, 3], 0);
     expect(titan.type).toBe("Assault Titan");
 
-    const viper = Ship(3);
+    const viper = Ship(3, [2, 3], 0);
     expect(viper.type).toBe("Viper Mech");
 
-    const goliath = Ship(4);
+    const goliath = Ship(4, [2, 3], 0);
     expect(goliath.type).toBe("Iron Goliath");
 
-    const leviathan = Ship(5);
+    const leviathan = Ship(5, [2, 3], 0);
     expect(leviathan.type).toBe("Leviathan");
   });
 

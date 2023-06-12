@@ -69,7 +69,7 @@ const Ship = (index, position, direction) => {
     (direction === 1 || direction === 0)
   ) {
     // Divide length into half and remainder
-    const halfSize = thisShip.size / 2;
+    const halfSize = Math.floor(thisShip.size / 2);
     const remainderSize = thisShip.size % 2;
     // Add first half of cells plus remainder in one direction
     for (let i = 0; i < halfSize + remainderSize; i += 1) {

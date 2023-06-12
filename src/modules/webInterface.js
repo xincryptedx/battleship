@@ -3,9 +3,6 @@ import events from "./events";
     hideAll showMenu  showPlacement
     showGame  shrinkTitle startClicked
     rotateClicked
-
-   Events pubbed:
-    tryPlacement
 */
 
 /* This module has three primary functions:

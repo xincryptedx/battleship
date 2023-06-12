@@ -12,66 +12,66 @@ describe("General Functionality", () => {
 describe("addShipInternal", () => {
   test("a valid ship gets added to ships", () => {
     const testBoard = Gameboard();
-    testBoard.addShipInternal([4, 4], "N", 2);
+    testBoard.addShipInternal([4, 4], 0, 2);
     expect(testBoard.ships).toHaveLength(1);
   });
 
   test("index not getting passed results in ships created incrementally", () => {
-    const testBoard = Gameboard();
+    const testBoard = Gameboard(); // Ships placed next to each other vertically
     // Add first ship
-    testBoard.addShipInternal([4, 4], "N");
+    testBoard.addShipInternal([4, 4], 1);
     expect(testBoard.ships[0].size).toBe(2);
     // Add second ship
-    testBoard.addShipInternal([5, 4], "N");
+    testBoard.addShipInternal([5, 4], 1);
     expect(testBoard.ships[1].size).toBe(3);
     // Add third ship
-    testBoard.addShipInternal([6, 4], "N");
+    testBoard.addShipInternal([6, 4], 1);
     expect(testBoard.ships[2].size).toBe(3);
     // Add fourth ship
-    testBoard.addShipInternal([7, 4], "N");
+    testBoard.addShipInternal([7, 4], 1);
     expect(testBoard.ships[3].size).toBe(4);
     // Add fifth ship
-    testBoard.addShipInternal([8, 4], "N");
+    testBoard.addShipInternal([8, 4], 1);
     expect(testBoard.ships[4].size).toBe(5);
   });
 
   test("default index above max will return undefined", () => {
     const testBoard = Gameboard();
     // Add first ship
-    testBoard.addShipInternal([4, 4], "N");
+    testBoard.addShipInternal([4, 4], 0);
     expect(testBoard.ships[0].size).toBe(2);
     // Add second ship
-    testBoard.addShipInternal([5, 4], "N");
+    testBoard.addShipInternal([5, 4], 0);
     expect(testBoard.ships[1].size).toBe(3);
     // Add third ship
-    testBoard.addShipInternal([6, 4], "N");
+    testBoard.addShipInternal([6, 4], 0);
     expect(testBoard.ships[2].size).toBe(3);
     // Add fourth ship
-    testBoard.addShipInternal([7, 4], "N");
+    testBoard.addShipInternal([7, 4], 0);
     expect(testBoard.ships[3].size).toBe(4);
     // Add fifth ship
-    testBoard.addShipInternal([8, 4], "N");
+    testBoard.addShipInternal([8, 4], 0);
     expect(testBoard.ships[4].size).toBe(5);
 
-    expect(testBoard.addShipInternal([9, 4], "N")).toBeUndefined();
+    expect(testBoard.addShipInternal([9, 4], 0)).toBeUndefined();
   });
 
   test("ships w/ negative coordinates will not be added", () => {
     const testBoard = Gameboard();
-    testBoard.addShipInternal([0, 0], "N", 2);
+    testBoard.addShipInternal([0, 0], 0, 2);
     expect(testBoard.ships).toHaveLength(0);
   });
 
   test("ships w/ too high coordinates will not be added", () => {
     const testBoard = Gameboard();
-    testBoard.addShipInternal([10, 0], "N", 2);
+    testBoard.addShipInternal([10, 0], 0, 2);
     expect(testBoard.ships).toHaveLength(0);
   });
 
   test("ships that have cells that are already occupied will not be added", () => {
     const testBoard = Gameboard();
-    testBoard.addShipInternal([4, 4], "N", 2);
-    testBoard.addShipInternal([4, 3], "N", 3);
+    testBoard.addShipInternal([4, 4], 0, 2);
+    testBoard.addShipInternal([4, 3], 0, 3);
     expect(testBoard.ships).toHaveLength(1);
   });
 });

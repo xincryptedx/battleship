@@ -63,29 +63,27 @@ describe("Basic Functionality", () => {
     ]);
   });
 
-  test("Ship will add param coords accurately for all directions", () => {
-    const sentinel = Ship(1, [4, 4], "N");
-    expect(sentinel.occupiedCells).toEqual([
-      [4, 4],
-      [4, 3],
-    ]);
-
-    const setinel2 = Ship(1, [4, 4], "S");
-    expect(setinel2.occupiedCells).toEqual([
-      [4, 4],
-      [4, 5],
-    ]);
-
-    const setinel3 = Ship(1, [4, 4], "E");
-    expect(setinel3.occupiedCells).toEqual([
+  test("Ship will add param coords accurately for horizontal direction", () => {
+    // Horizontal
+    const leviathan = Ship(5, [4, 4], 0);
+    expect(leviathan.occupiedCells).toEqual([
       [4, 4],
       [5, 4],
-    ]);
-
-    const setinel4 = Ship(1, [4, 4], "W");
-    expect(setinel4.occupiedCells).toEqual([
-      [4, 4],
+      [6, 4],
       [3, 4],
+      [2, 4],
+    ]);
+  });
+
+  test("Ship will add param coords accurately for vertical direction", () => {
+    // Vertical
+    const leviathan = Ship(5, [4, 4], 1);
+    expect(leviathan.occupiedCells).toEqual([
+      [4, 4],
+      [4, 5],
+      [4, 6],
+      [4, 3],
+      [4, 2],
     ]);
   });
 

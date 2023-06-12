@@ -68,14 +68,6 @@ const Ship = (index, position, direction) => {
     Number.isInteger(position[1]) &&
     (direction === 1 || direction === 0)
   ) {
-    // old method
-    /* for (let i = 0; i < thisShip.size; i += 1) {
-      const newCoords = [
-        position[0] + i * directionIterator[direction][0],
-        position[1] + i * directionIterator[direction][1],
-      ];
-      thisShip.occupiedCells.push(newCoords);
-    } */
     // Divide length into half and remainder
     const halfSize = thisShip.size / 2;
     const remainderSize = thisShip.size % 2;

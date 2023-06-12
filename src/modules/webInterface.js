@@ -3,6 +3,9 @@ import events from "./events";
     hideAll showMenu  showPlacement
     showGame  shrinkTitle startClicked
     rotateClicked
+
+    Events pubbed:
+    directionChanged
 */
 
 /* This module has three primary functions:
@@ -16,8 +19,11 @@ const webInterface = () => {
   const placement = document.querySelector(".placement");
   const game = document.querySelector(".game");
 
+  // Reference to sub elements
+  const rotateBtn = document.querySelector(".rotate-btn");
+
   // Reference to current direction for placing ships
-  let placementDirection = 0;
+  let placementDirection = 1; // Vertical by default
 
   // Method for iterating through directions
   const rotateDirection = () => {
@@ -67,6 +73,7 @@ const webInterface = () => {
   // Handle clicks on the rotate button in the placement section
   const handleRotateClick = () => {
     rotateDirection();
+    events.emit("directionChanged", placementDirection);
   };
 
   // #endregion
@@ -83,6 +90,9 @@ const webInterface = () => {
   events.on("shrinkTitle", shrinkTitle);
   events.on("rotateClicked", handleRotateClick);
   events.on("startClicked", handleStartClick);
+
+  // Handle browser events
+  rotateBtn.addEventListener("click", handleRotateClick);
 };
 
 export default webInterface;

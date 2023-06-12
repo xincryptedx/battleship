@@ -76,13 +76,17 @@ const Ship = (index, position, direction) => {
     Number.isInteger(position[1]) &&
     (direction === 1 || direction === 0)
   ) {
-    for (let i = 0; i < thisShip.size; i += 1) {
+    // old method
+    /* for (let i = 0; i < thisShip.size; i += 1) {
       const newCoords = [
         position[0] + i * directionIterator[direction][0],
         position[1] + i * directionIterator[direction][1],
       ];
       thisShip.occupiedCells.push(newCoords);
-    }
+    } */
+    // Divide length into half and remainder
+    // Add first half of cells plus remainder in one direction
+    // Add second half of cells
   }
 
   return thisShip;

@@ -88,41 +88,41 @@ describe("Basic Functionality", () => {
   });
 
   test("coords work properly for all ship types", () => {
-    const setinel = Ship(1, [3, 6], "N");
+    const setinel = Ship(1, [3, 6], 0);
     expect(setinel.occupiedCells).toEqual([
       [3, 6],
-      [3, 5],
+      [2, 6],
     ]);
 
-    const titan = Ship(2, [2, 3], "S");
+    const titan = Ship(2, [2, 3], 0);
     expect(titan.occupiedCells).toEqual([
       [2, 3],
-      [2, 4],
-      [2, 5],
+      [3, 3],
+      [1, 3],
     ]);
 
-    const viper = Ship(3, [4, 5], "E");
+    const viper = Ship(3, [4, 5], 0);
     expect(viper.occupiedCells).toEqual([
       [4, 5],
       [5, 5],
-      [6, 5],
+      [3, 5],
     ]);
 
-    const goliath = Ship(4, [4, 6], "W");
+    const goliath = Ship(4, [4, 6], 0);
     expect(goliath.occupiedCells).toEqual([
       [4, 6],
+      [5, 6],
       [3, 6],
       [2, 6],
-      [1, 6],
     ]);
 
-    const leviathan = Ship(5, [5, 5], "N");
+    const leviathan = Ship(5, [5, 5], 0);
     expect(leviathan.occupiedCells).toEqual([
       [5, 5],
-      [5, 4],
-      [5, 3],
-      [5, 2],
-      [5, 1],
+      [6, 5],
+      [7, 5],
+      [4, 5],
+      [3, 5],
     ]);
   });
 });
@@ -141,17 +141,17 @@ describe("Edge Cases", () => {
   });
 
   test("occupiedCells will be empty if position not array", () => {
-    let titan = Ship(2, null, "N");
+    let titan = Ship(2, null, 0);
     expect(titan.occupiedCells).toEqual([]);
 
-    titan = Ship(2, 35, "N");
+    titan = Ship(2, 35, 0);
     expect(titan.occupiedCells).toEqual([]);
 
-    titan = Ship(2, "coords", "N");
+    titan = Ship(2, "coords", 0);
     expect(titan.occupiedCells).toEqual([]);
   });
 
-  test("occupiedCells will be empty if direction not 'N','S','E', or 'W'", () => {
+  test("occupiedCells will be empty if direction not 0 or 1", () => {
     let titan = Ship(2, [4, 4], "U");
     expect(titan.occupiedCells).toEqual([]);
 
@@ -163,21 +163,21 @@ describe("Edge Cases", () => {
   });
 
   test("occupiedCells will be empty if position not array of two ints", () => {
-    let titan = Ship(2, [], "N");
+    let titan = Ship(2, [], 0);
     expect(titan.occupiedCells).toEqual([]);
 
-    titan = Ship(2, [null, undefined], "N");
+    titan = Ship(2, [null, undefined], 0);
     expect(titan.occupiedCells).toEqual([]);
 
-    titan = Ship(2, [3.5, 2.342], "N");
+    titan = Ship(2, [3.5, 2.342], 0);
     expect(titan.occupiedCells).toEqual([]);
 
-    titan = Ship(2, [5, NaN], "N");
+    titan = Ship(2, [5, NaN], 0);
     expect(titan.occupiedCells).toEqual([]);
   });
 
   test("occupiedCells will return even if they are off the board", () => {
-    const sentinel = Ship(1, [0, 0], "N");
+    const sentinel = Ship(1, [0, 0], 0);
     expect(sentinel.occupiedCells).toEqual([
       [0, 0],
       [0, -1],

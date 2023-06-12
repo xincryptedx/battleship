@@ -180,16 +180,16 @@ describe("Edge Cases", () => {
     const sentinel = Ship(1, [0, 0], 0);
     expect(sentinel.occupiedCells).toEqual([
       [0, 0],
-      [0, -1],
+      [-1, 0],
     ]);
 
-    const leviathan = Ship(5, [0, 0], "W");
+    const leviathan = Ship(5, [0, 0], 0);
     expect(leviathan.occupiedCells).toEqual([
       [0, 0],
+      [1, 0],
+      [2, 0],
       [-1, 0],
       [-2, 0],
-      [-3, 0],
-      [-4, 0],
     ]);
   });
 });

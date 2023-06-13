@@ -4,7 +4,7 @@ import events from "../modules/events";
 */
 
 // This helper will attempt to add ships to the ai gameboard in a variety of ways for varying difficulty
-const placeAiShips = (difficulty = 0) => {
+const placeAiShips = async (difficulty = 0) => {
   // Grid size
   const gridHeight = 10;
   const gridWidth = 10;
@@ -39,15 +39,25 @@ const placeAiShips = (difficulty = 0) => {
   // Place a ship along edges until one successfully placed
   // Place a ship based on quadrant
 
-  // Waits for a
+  // Waits for a aiShipsSet event
+  function waitForAiShipsSet() {
+    return new Promise((resolve) => {
+      events.once("aiShipsSet", () => {
+        resolve(true);
+      });
+    });
+  }
 
   // Combine placement tactics to create varying difficulties
   // Totally random palcement
   if (difficulty === 1) {
     while (shipsCopy.length <= 4) {
       // Try random placement
+      placeRandomShip();
       // Update ships
+      requestAiShips();
       // Wait for returnAiShips
+      const shipsGotten = await waitForAiShipsSet();
     }
   }
 };

@@ -296,7 +296,14 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Add class to denote ai canvas
     canvasContainer.classList.add("ai-canvas-container");
     // Handle canvas mouse move
+    overlayCanvas.handleMouseMove = () => {
+      // Highlight the current cell in red
+      // Denote if it is a valid attack or not
+    };
     // Handle board mouse click
+    boardCanvas.handleMouseClick = () => {
+      // Try the attack at the given position
+    };
     // Event for drawing ships when user loses game
   }
   // #endregion

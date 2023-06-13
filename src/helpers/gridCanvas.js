@@ -1,50 +1,7 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-use-before-define */
-import events from "../modules/events";
-/* 
-  Events subbed:
-    returnUserShips
-    directionChanged
-    userShipsSet
-
-  Events pubbed:
-    requestUserShips
-    userShipsSet
-*/
-
 const createCanvas = (sizeX, sizeY, options) => {
   // #region Methods for getting/setting needed data via event
   // Sets info about user ships in response to event
-  let shipsCopy = [];
-
-  const setUserShips = (ships) => {
-    // Erase old ships data
-    console.log("FUCK");
-    shipsCopy = [];
-    ships.forEach((ship) => {
-      shipsCopy.push(ship);
-    });
-    // Emit event signalling ships have been copied and are ready for use
-    events.emit("userShipsSet");
-  };
-
-  // Handle ship placement events
-  const handleShipPlaced = (ship) => {};
-
-  // Method that requests information about current user ships using event
-  const requestUserShips = () => {
-    events.emit("requestUserShips");
-  };
-
-  // Copy of the ai ships array and method to get it
-  const aiShipsCopy = [];
-  const setAiShips = (ships) => {
-    // Erase old ships data
-    shipsCopy = [];
-    ships.forEach((ship) => {
-      shipsCopy.push(ship);
-    });
-  };
+  const shipsCopy = [];
 
   // Sets info about current placement direction in reponse to event
   let placementDirection = 1;
@@ -301,16 +258,9 @@ const createCanvas = (sizeX, sizeY, options) => {
     boardCanvas.handleMouseClick = (event, direction = placementDirection) => {
       const mouseCell = getMouseCell(event);
 
-      // Get new ships information
-      events.emit("tryPlacement", {
-        position: [mouseCell[0], mouseCell[1]],
-        direction,
-      });
+      // Try placement
+      console.log("Placement: ", mouseCell, direction);
     };
-
-    // Set up option specific events
-    // Draw ships when new ship added
-    events.on("userShipsSet", boardCanvas.drawShips);
   }
   // User canvas for displaying ai hits and misses against user and user ship placements
   else if (options.type === "user") {
@@ -324,8 +274,6 @@ const createCanvas = (sizeX, sizeY, options) => {
     boardCanvas.handleMouseClick = () => {
       // Do nothing
     };
-    // Event for drawing ships when all added
-    events.on("allShipsPlaced", boardCanvas.drawShips);
   }
   // AI canvas for displaying user hits and misses against ai, and ai ship placements if user loses
   else if (options.type === "ai") {
@@ -357,11 +305,6 @@ const createCanvas = (sizeX, sizeY, options) => {
   }
   // #endregion
 
-  // Subscribe to events for getting data
-  events.on("returnUserShips", setUserShips); // Returns ships array
-  events.on("directionChanged", setPlacementDirection); // Returns direction string
-  events.on("shipPlaced", handleShipPlaced); // Request ships when new ship added
-  events.on("returnAiShips", setAiShips); // Returns ai ships array
   // Subscribe to browser events
   // board click
   boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e));

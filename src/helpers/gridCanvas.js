@@ -32,6 +32,18 @@ const createCanvas = (sizeX, sizeY, options) => {
     events.emit("requestUserShips");
   };
 
+  // Copy of the ai ships array and method to get it
+  const aiShipsCopy = [];
+  const setAiShips = (ships) => {
+    // Erase old ships data
+    shipsCopy = [];
+    ships.forEach((ship) => {
+      shipsCopy.push(ship);
+    });
+    // Emit event signalling ships have been copied and are ready for use
+    events.emit("aiShipsSet");
+  };
+
   // Sets info about current placement direction in reponse to event
   let placementDirection = 1;
 
@@ -339,6 +351,7 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Handle board mouse click
     boardCanvas.handleMouseClick = () => {
       // Try the attack at the given position
+      events.emit("playerLost"); // for now test player lost condition
     };
     // Event for drawing ships when user loses game
     events.on("playerLost", boardCanvas.drawShips);
@@ -349,6 +362,7 @@ const createCanvas = (sizeX, sizeY, options) => {
   events.on("returnUserShips", setUserShips); // Returns ships array
   events.on("directionChanged", setPlacementDirection); // Returns direction string
   events.on("shipPlaced", requestUserShips); // Request ships when new ship added
+  events.on("returnAiShips", setAiShips); // Returns ai ships array
   // Subscribe to browser events
   // board click
   boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e));

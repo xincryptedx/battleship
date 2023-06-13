@@ -1,5 +1,6 @@
 import Player from "../factories/Player";
 import canvasAdder from "../helpers/canvasAdder";
+import webInterface from "./webInterface";
 import placeAiShips from "../helpers/placeAiShips";
 
 /* This module holds the game loop logic for starting games, creating
@@ -14,8 +15,11 @@ const gameManager = () => {
   userPlayer.gameboard.isAI = false;
   aiPlayer.gameboard.isAI = true;
 
+  // Initialize the web interface with gameboards
+  webInterface(userPlayer.gameboard, aiPlayer.gameboard);
   // Add the canvas objects now that gameboards are created
   canvasAdder(userPlayer.gameboard, aiPlayer.gameboard);
+
   /* Method to determine if game is over after every turn. Checks allSunk on rival gameboard 
      and returns true or false */
 

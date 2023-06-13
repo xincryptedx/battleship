@@ -1,7 +1,9 @@
 import Player from "../factories/Player";
 import events from "./events";
 /*  Events subbed:
-      tryPlacement
+      tryPlacement   requestUserShips
+      requestAiShips tryAiPlacement
+      tryAttack
 */
 
 /* This module holds the game loop logic for starting games, creating

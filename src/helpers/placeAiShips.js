@@ -38,13 +38,17 @@ const placeAiShips = (difficulty = 0) => {
   };
   // Place a ship along edges until one successfully placed
   // Place a ship based on quadrant
+
+  // Waits for a
+
   // Combine placement tactics to create varying difficulties
   // Totally random palcement
   if (difficulty === 1) {
-    while (shipsCopy.length <= 4)
-    // Try random placement
-    // Update ships
-    // Wait for returnAiShips
+    while (shipsCopy.length <= 4) {
+      // Try random placement
+      // Update ships
+      // Wait for returnAiShips
+    }
   }
 };
 

@@ -4,7 +4,7 @@ import events from "../modules/events";
 */
 
 // This helper will attempt to add ships to the ai gameboard in a variety of ways for varying difficulty
-const placeAiShips = (passedDiff) => {
+const placeAiShips = async (passedDiff) => {
   // Grid size
   const gridHeight = 10;
   const gridWidth = 10;
@@ -68,7 +68,8 @@ const placeAiShips = (passedDiff) => {
   // Sub to events
   events.on("returnAiShips", setAiShips);
 
-  placeShips(passedDiff);
+  await placeShips(passedDiff);
+  events.emit("aiShipsPlaced");
 };
 
 export default placeAiShips;

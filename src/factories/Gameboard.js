@@ -1,14 +1,4 @@
 import Ship from "./Ship";
-import events from "../modules/events";
-/* Events Subbed:
-
-   Events Pubbed:
-   returnUserShips
-   shipPlaced
-   allShipsPlaced
-   returnAiShips
-
-*/
 
 /* Factory that returns a gameboard that can place ships with Ship(), recieve attacks based on coords 
    and then decides whether to hit() if ship is in that spot, records hits and misses, and reports if
@@ -35,15 +25,6 @@ const Gameboard = () => {
       return maxBoardY;
     },
     isAI: false,
-  };
-
-  // Method for returning ships in event
-  thisGameboard.returnUserShips = () => {
-    events.emit("returnUserShips", thisGameboard.ships);
-  };
-
-  thisGameboard.returnAiShips = () => {
-    events.emit("returnAiShips", thisGameboard.ships);
   };
 
   // Method that validates ship occupied cell coords
@@ -101,7 +82,6 @@ const Gameboard = () => {
     if (validateShip(newShip)) {
       addCellsToList(newShip);
       thisGameboard.ships.push(newShip);
-      events.emit("shipPlaced", newShip);
     }
   };
 
@@ -116,10 +96,6 @@ const Gameboard = () => {
   // Method for responding to event that tries to create a user ship
   thisGameboard.addShip = (payload) => {
     thisGameboard.addShipInternal(payload.position, payload.direction);
-    // If all ships have been added emit event
-    if (thisGameboard.ships.length === 5) {
-      events.emit("allShipsPlaced", thisGameboard.isAI);
-    }
   };
 
   // Method for receiving an attack from opponent

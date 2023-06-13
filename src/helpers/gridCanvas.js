@@ -259,7 +259,7 @@ const createCanvas = (sizeX, sizeY, options, gameboard) => {
       const mouseCell = getMouseCell(event);
 
       // Try placement
-      console.log("Placement: ", mouseCell, direction);
+      // gameboard.addShip
     };
   }
   // User canvas for displaying ai hits and misses against user and user ship placements

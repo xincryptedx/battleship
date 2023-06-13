@@ -71,7 +71,7 @@ const Gameboard = () => {
   };
 
   // Method for adding a ship at a given coords in given direction if ship will fit on board
-  thisGameboard.addShipInternal = (
+  thisGameboard.addShip = (
     position,
     direction,
     shipTypeIndex = thisGameboard.ships.length + 1
@@ -91,11 +91,6 @@ const Gameboard = () => {
 
   const addHit = (position) => {
     thisGameboard.hits.push(position);
-  };
-
-  // Method for responding to event that tries to create a user ship
-  thisGameboard.addShip = (payload) => {
-    thisGameboard.addShipInternal(payload.position, payload.direction);
   };
 
   // Method for receiving an attack from opponent

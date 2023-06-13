@@ -197,6 +197,24 @@ const createCanvas = (sizeX, sizeY, options) => {
     }
   };
 
+  // Draw highlighted attack cell
+  const highlightAttack = (
+    cellCoordinates,
+    cellX = cellSizeX,
+    cellY = cellSizeY
+  ) => {
+    // Clear the canvas
+    overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+
+    // Highlight the current cell in red
+    overlayCtx.fillRect(
+      cellCoordinates[0] * cellX,
+      cellCoordinates[1] * cellY,
+      cellX,
+      cellY
+    );
+  };
+
   // #endregion
 
   // #region General helper methods

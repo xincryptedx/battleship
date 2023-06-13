@@ -281,16 +281,22 @@ const createCanvas = (sizeX, sizeY, options) => {
   else if (options.type === "user") {
     // Add class to denote user canvas
     canvasContainer.classList.add("user-canvas-container");
-    // Handle mouse move
-    // Handle mouse click
+    // Handle canvas mouse move
+    overlayCanvas.handleMouseMove = () => {
+      // Do nothing
+    };
+    // Handle board mouse click
+    boardCanvas.handleMouseClick = () => {
+      // Do nothing
+    };
     // Event for drawing ships when all added
   }
   // AI canvas for displaying user hits and misses against ai, and ai ship placements if user loses
   else if (options.type === "ai") {
     // Add class to denote ai canvas
     canvasContainer.classList.add("ai-canvas-container");
-    // Handle mouse move
-    // Handle mouse click
+    // Handle canvas mouse move
+    // Handle board mouse click
     // Event for drawing ships when user loses game
   }
   // #endregion

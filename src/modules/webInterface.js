@@ -2,7 +2,7 @@ import events from "./events";
 /* Events subbed: 
     hideAll showMenu  showPlacement
     showGame  shrinkTitle startClicked
-    rotateClicked
+    rotateClicked allShipsPlaced
 
     Events pubbed:
     directionChanged
@@ -91,6 +91,7 @@ const webInterface = () => {
   events.on("shrinkTitle", shrinkTitle);
   events.on("rotateClicked", handleRotateClick);
   events.on("startClicked", handleStartClick);
+  events.on("allShipsPlaced", showGame);
 
   // Handle browser events
   rotateBtn.addEventListener("click", handleRotateClick);

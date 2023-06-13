@@ -273,6 +273,10 @@ const createCanvas = (sizeX, sizeY, options) => {
       // Set the currentCell to the mouseCell for future comparisons
       currentCell = mouseCell;
     };
+
+    // Set up option specific events
+    // Draw ships when new ship added
+    events.on("shipsSet", boardCanvas.drawShips);
   }
 
   // #endregion
@@ -281,8 +285,6 @@ const createCanvas = (sizeX, sizeY, options) => {
   events.on("returnUserShips", setUserShips); // Returns ships array
   events.on("directionChanged", setPlacementDirection); // Returns direction string
   events.on("shipPlaced", requestUserShips); // Request ships when new ship added
-  // Events for drawing when data gotten
-  events.on("shipsSet", boardCanvas.drawShips);
   // Subscribe to browser events
   // board click
   boardCanvas.addEventListener("click", (e) => boardCanvas.handleMouseClick(e));

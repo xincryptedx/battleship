@@ -314,8 +314,21 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Add class to denote ai canvas
     canvasContainer.classList.add("ai-canvas-container");
     // Handle canvas mouse move
-    overlayCanvas.handleMouseMove = () => {
-      // Highlight the current cell in red
+    overlayCanvas.handleMouseMove = (event) => {
+      // Get what cell the mouse is over
+      const mouseCell = getMouseCell(event);
+
+      // If the 'old' currentCell is equal to the mouseCell being evaluated
+      if (
+        !(
+          currentCell &&
+          currentCell[0] === mouseCell[0] &&
+          currentCell[1] === mouseCell[1]
+        )
+      ) {
+        // Highlight the current cell in red
+        highlightAttack(mouseCell);
+      }
       // Denote if it is a valid attack or not
     };
     // Handle board mouse click

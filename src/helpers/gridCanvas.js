@@ -341,7 +341,7 @@ const createCanvas = (sizeX, sizeY, options) => {
       // Try the attack at the given position
     };
     // Event for drawing ships when user loses game
-    events.on("showGame", boardCanvas.drawShips);
+    events.on("playerLost", boardCanvas.drawShips);
   }
   // #endregion
 

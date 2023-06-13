@@ -39,10 +39,11 @@ const createCanvas = (sizeX, sizeY, options) => {
   };
 
   // #endregion
-  // Module scoped variables and constants
+
+  // #region Set up basic element properties
+  // Set the grid height and width and add ref to current cell
   const gridHeight = 10;
   const gridWidth = 10;
-
   let currentCell = null;
 
   // Create parent div that holds the canvases. This is the element returned.
@@ -68,7 +69,9 @@ const createCanvas = (sizeX, sizeY, options) => {
   const cellSizeX = boardCanvas.width / gridWidth; // Module const
   const cellSizeY = boardCanvas.height / gridHeight; // Module const
 
-  // #region Helper Methods
+  // #endregion
+
+  // #region Methods for drawing to canvases
   // Method for drawing the grid lines
   const drawLines = (context) => {
     // Draw grid lines
@@ -92,18 +95,6 @@ const createCanvas = (sizeX, sizeY, options) => {
       context.lineTo(sizeX, y);
       context.stroke();
     }
-  };
-
-  // Method that gets the mouse position based on what cell it is over
-  const getMouseCell = (event) => {
-    const rect = boardCanvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-
-    const cellX = Math.floor(mouseX / cellSizeX);
-    const cellY = Math.floor(mouseY / cellSizeY);
-
-    return [cellX, cellY];
   };
 
   // Draw ships to board canvas using shipsCopy
@@ -204,6 +195,21 @@ const createCanvas = (sizeX, sizeY, options) => {
       const nextY = cellCoordinates[1] - (i + 1) * directionY;
       drawCell(nextX, nextY);
     }
+  };
+
+  // #endregion
+
+  // #region General helper methods
+  // Method that gets the mouse position based on what cell it is over
+  const getMouseCell = (event) => {
+    const rect = boardCanvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    const cellX = Math.floor(mouseX / cellSizeX);
+    const cellY = Math.floor(mouseY / cellSizeY);
+
+    return [cellX, cellY];
   };
 
   // #endregion

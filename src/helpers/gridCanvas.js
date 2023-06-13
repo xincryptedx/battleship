@@ -28,9 +28,12 @@ const createCanvas = (sizeX, sizeY, options) => {
     events.emit("userShipsSet");
   };
 
+  // Handle ship placement events
+  const handleShipPlaced = (ship) => {};
+
   // Method that requests information about current user ships using event
-  const requestUserShips = (aiEvent) => {
-    if (!aiEvent) events.emit("requestUserShips");
+  const requestUserShips = () => {
+    events.emit("requestUserShips");
   };
 
   // Copy of the ai ships array and method to get it
@@ -357,7 +360,7 @@ const createCanvas = (sizeX, sizeY, options) => {
   // Subscribe to events for getting data
   events.on("returnUserShips", setUserShips); // Returns ships array
   events.on("directionChanged", setPlacementDirection); // Returns direction string
-  events.on("shipPlaced", requestUserShips); // Request ships when new ship added
+  events.on("shipPlaced", handleShipPlaced); // Request ships when new ship added
   events.on("returnAiShips", setAiShips); // Returns ai ships array
   // Subscribe to browser events
   // board click

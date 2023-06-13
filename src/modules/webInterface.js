@@ -83,6 +83,11 @@ const webInterface = () => {
 
   // #endregion
 
+  // Handle all ships being added
+  const handleShipsPlaced = (isAI) => {
+    if (!isAI) showGame();
+  };
+
   // Sub to event listeners
   events.on("hideAll", hideAll);
   events.on("showMenu", showMenu);
@@ -91,7 +96,7 @@ const webInterface = () => {
   events.on("shrinkTitle", shrinkTitle);
   events.on("rotateClicked", handleRotateClick);
   events.on("startClicked", handleStartClick);
-  events.on("allShipsPlaced", showGame);
+  events.on("allShipsPlaced", handleShipsPlaced);
 
   // Handle browser events
   rotateBtn.addEventListener("click", handleRotateClick);

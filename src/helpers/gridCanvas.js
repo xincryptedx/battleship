@@ -5,10 +5,11 @@ import events from "../modules/events";
   Events subbed:
     returnUserShips
     directionChanged
+    userShipsSet
 
   Events pubbed:
     requestUserShips
-    shipsSet
+    userShipsSet
 */
 
 const createCanvas = (sizeX, sizeY, options) => {
@@ -23,7 +24,7 @@ const createCanvas = (sizeX, sizeY, options) => {
       shipsCopy.push(ship);
     });
     // Emit event signalling ships have been copied and are ready for use
-    events.emit("shipsSet");
+    events.emit("userShipsSet");
   };
 
   // Method that requests information about current user ships using event
@@ -294,7 +295,7 @@ const createCanvas = (sizeX, sizeY, options) => {
 
     // Set up option specific events
     // Draw ships when new ship added
-    events.on("shipsSet", boardCanvas.drawShips);
+    events.on("userShipsSet", boardCanvas.drawShips);
   }
   // User canvas for displaying ai hits and misses against user and user ship placements
   else if (options.type === "user") {

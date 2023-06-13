@@ -207,6 +207,7 @@ const createCanvas = (sizeX, sizeY, options) => {
     overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 
     // Highlight the current cell in red
+    overlayCtx.fillStyle = "red";
     overlayCtx.fillRect(
       cellCoordinates[0] * cellX,
       cellCoordinates[1] * cellY,

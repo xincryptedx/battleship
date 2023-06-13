@@ -2,7 +2,7 @@ import gridCanvas from "./gridCanvas";
 
 /* This module creates canvas elements and adds them to the appropriate 
    places in the DOM. */
-const canvasAdder = (userGameboard, aiGameboard) => {
+const canvasAdder = (userGameboard, aiGameboard, webInterface) => {
   // Replace the three grid placeholder elements with the proper canvases
   // Refs to DOM elements
   const placementPH = document.querySelector(".placement-canvas-ph");
@@ -14,10 +14,23 @@ const canvasAdder = (userGameboard, aiGameboard) => {
     300,
     300,
     { type: "placement" },
-    userGameboard
+    userGameboard,
+    webInterface
   );
-  const userCanvas = gridCanvas(300, 300, { type: "user" }, userGameboard);
-  const aiCanvas = gridCanvas(300, 300, { type: "ai" }, aiGameboard);
+  const userCanvas = gridCanvas(
+    300,
+    300,
+    { type: "user" },
+    userGameboard,
+    webInterface
+  );
+  const aiCanvas = gridCanvas(
+    300,
+    300,
+    { type: "ai" },
+    aiGameboard,
+    webInterface
+  );
 
   // Replace the place holders
   placementPH.parentNode.replaceChild(placementCanvas, placementPH);

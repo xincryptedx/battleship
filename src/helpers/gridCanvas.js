@@ -100,10 +100,12 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // Draw ships to board canvas using shipsCopy
   boardCanvas.drawShips = (
+    isAI,
     ships = shipsCopy,
     cellX = cellSizeX,
     cellY = cellSizeY
   ) => {
+    if (isAI) return;
     // Draw a cell to board
     function drawCell(posX, posY) {
       boardCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);

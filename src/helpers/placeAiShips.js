@@ -1,11 +1,11 @@
 // This helper will attempt to add ships to the ai gameboard in a variety of ways for varying difficulty
-const placeAiShips = (passedDiff) => {
+const placeAiShips = (passedDiff, aiGameboard) => {
   // Grid size
   const gridHeight = 10;
   const gridWidth = 10;
 
   // Copy of the ai ships array and method to get it
-  const shipsCopy = [];
+  const aiShips = aiGameboard.ships;
 
   // Place a ship randomly until one successfully placed
   const placeRandomShip = () => {
@@ -28,7 +28,7 @@ const placeAiShips = (passedDiff) => {
   // Combine placement tactics to create varying difficulties
   const placeShips = async (difficulty) => {
     // Totally random palcement
-    if (difficulty === 1 && shipsCopy.length <= 4) {
+    if (difficulty === 1 && aiShips.length <= 4) {
       // Try random placement
       placeRandomShip();
 

@@ -280,13 +280,15 @@ const createCanvas = (sizeX, sizeY, options) => {
   // User canvas for displaying ai hits and misses against user and user ship placements
   else if (options.type === "user") {
     // Add class to denote user canvas
+    canvasContainer.classList.add("user-canvas-container");
     // Handle mouse move
     // Handle mouse click
     // Event for drawing ships when all added
   }
   // AI canvas for displaying user hits and misses against ai, and ai ship placements if user loses
-  else if ((options.type = "ai")) {
+  else if (options.type === "ai") {
     // Add class to denote ai canvas
+    canvasContainer.classList.add("ai-canvas-container");
     // Handle mouse move
     // Handle mouse click
     // Event for drawing ships when user loses game

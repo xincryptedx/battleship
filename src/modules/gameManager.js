@@ -34,7 +34,7 @@ const gameManager = () => {
   events.on("tryAiPlacement", aiPlayer.gameboard.addShip);
 
   // Place AI Ships
-  events.on("allShipsPlaced", () => placeAiShips(1));
+  placeAiShips(1);
 
   /* Method to determine if game is over after every turn. Checks allSunk on rival gameboard 
      and returns true or false */

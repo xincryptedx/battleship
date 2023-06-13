@@ -34,6 +34,7 @@ const Gameboard = () => {
     get maxBoardY() {
       return maxBoardY;
     },
+    isAI: false,
   };
 
   // Method for returning ships in event
@@ -117,7 +118,7 @@ const Gameboard = () => {
     thisGameboard.addShipInternal(payload.position, payload.direction);
     // If all ships have been added emit event
     if (thisGameboard.ships.length === 5) {
-      events.emit("allShipsPlaced");
+      events.emit("allShipsPlaced", thisGameboard.isAI);
     }
   };
 

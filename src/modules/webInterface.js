@@ -1,13 +1,3 @@
-import events from "./events";
-/* Events subbed: 
-    hideAll showMenu  showPlacement
-    showGame  shrinkTitle startClicked
-    rotateClicked allShipsPlaced
-
-    Events pubbed:
-    directionChanged
-*/
-
 /* This module has three primary functions:
    1. Get ship placement coordinates from the user based on their clicks on the web interface
    2. Get attack placement coordinates from the user based on the same
@@ -74,7 +64,6 @@ const webInterface = () => {
   // Handle clicks on the rotate button in the placement section
   const handleRotateClick = () => {
     rotateDirection();
-    events.emit("directionChanged", placementDirection);
   };
 
   // #endregion
@@ -82,21 +71,6 @@ const webInterface = () => {
   // #region Add classes to ship divs to represent placed/destroyed
 
   // #endregion
-
-  // Handle all ships being added
-  const handleShipsPlaced = (isAI) => {
-    if (!isAI) showGame();
-  };
-
-  // Sub to event listeners
-  events.on("hideAll", hideAll);
-  events.on("showMenu", showMenu);
-  events.on("showPlacement", showPlacement);
-  events.on("showGame", showGame);
-  events.on("shrinkTitle", shrinkTitle);
-  events.on("rotateClicked", handleRotateClick);
-  events.on("startClicked", handleStartClick);
-  events.on("allShipsPlaced", handleShipsPlaced);
 
   // Handle browser events
   rotateBtn.addEventListener("click", handleRotateClick);

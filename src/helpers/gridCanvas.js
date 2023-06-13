@@ -19,6 +19,7 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   const setUserShips = (ships) => {
     // Erase old ships data
+    console.log("FUCK");
     shipsCopy = [];
     ships.forEach((ship) => {
       shipsCopy.push(ship);
@@ -28,8 +29,8 @@ const createCanvas = (sizeX, sizeY, options) => {
   };
 
   // Method that requests information about current user ships using event
-  const requestUserShips = () => {
-    events.emit("requestUserShips");
+  const requestUserShips = (aiEvent) => {
+    if (!aiEvent) events.emit("requestUserShips");
   };
 
   // Copy of the ai ships array and method to get it
@@ -40,8 +41,6 @@ const createCanvas = (sizeX, sizeY, options) => {
     ships.forEach((ship) => {
       shipsCopy.push(ship);
     });
-    // Emit event signalling ships have been copied and are ready for use
-    events.emit("aiShipsSet");
   };
 
   // Sets info about current placement direction in reponse to event
@@ -112,12 +111,12 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // Draw ships to board canvas using shipsCopy
   boardCanvas.drawShips = (
-    isAI,
+    isAiEvent,
     ships = shipsCopy,
     cellX = cellSizeX,
     cellY = cellSizeY
   ) => {
-    if (isAI) return;
+    if (isAiEvent) return;
     // Draw a cell to board
     function drawCell(posX, posY) {
       boardCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
@@ -140,7 +139,6 @@ const createCanvas = (sizeX, sizeY, options) => {
   ) => {
     // Clear the canvas
     overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-
     // Draw a cell to overlay
     function drawCell(posX, posY) {
       overlayCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
@@ -351,10 +349,8 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Handle board mouse click
     boardCanvas.handleMouseClick = () => {
       // Try the attack at the given position
-      events.emit("playerLost"); // for now test player lost condition
     };
     // Event for drawing ships when user loses game
-    events.on("playerLost", boardCanvas.drawShips);
   }
   // #endregion
 

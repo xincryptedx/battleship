@@ -168,10 +168,8 @@ const createCanvas = (sizeX, sizeY, options) => {
       cellCoordinates[0] + (halfDrawLength + remainderLength - 1) * directionX;
     const maxCoordinateY =
       cellCoordinates[1] + (halfDrawLength + remainderLength - 1) * directionY;
-    const minCoordinateX =
-      cellCoordinates[0] - (halfDrawLength + remainderLength) * directionX;
-    const minCoordinateY =
-      cellCoordinates[1] - (halfDrawLength + remainderLength) * directionY;
+    const minCoordinateX = cellCoordinates[0] - halfDrawLength * directionX;
+    const minCoordinateY = cellCoordinates[1] - halfDrawLength * directionY;
 
     // And translate into an actual canvas position
     const maxX = maxCoordinateX * cellX;

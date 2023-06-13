@@ -115,8 +115,8 @@ const createCanvas = (sizeX, sizeY, options) => {
     });
   };
 
-  // Draws the highlight cells to the overlay canvas
-  const highlightCells = (
+  // Draws the highlighted placement cells to the overlay canvas
+  const highlightPlacementCells = (
     cellCoordinates,
     cellX = cellSizeX,
     cellY = cellSizeY,
@@ -267,7 +267,7 @@ const createCanvas = (sizeX, sizeY, options) => {
         )
       ) {
         // Render the changes
-        highlightCells(mouseCell);
+        highlightPlacementCells(mouseCell);
       }
 
       // Set the currentCell to the mouseCell for future comparisons

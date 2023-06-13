@@ -1,5 +1,13 @@
 import Ship from "./Ship";
 import events from "../modules/events";
+/* Events Subbed:
+
+   Events Pubbed:
+   returnUserShips
+   shipPlaced
+   allShipsPlaced
+
+*/
 
 /* Factory that returns a gameboard that can place ships with Ship(), recieve attacks based on coords 
    and then decides whether to hit() if ship is in that spot, records hits and misses, and reports if
@@ -104,7 +112,7 @@ const Gameboard = () => {
     thisGameboard.addShipInternal(payload.position, payload.direction);
     // If all ships have been added emit event
     if (thisGameboard.ships.length === 5) {
-      events.emit("allShipsAdded");
+      events.emit("allShipsPlaced");
     }
   };
 

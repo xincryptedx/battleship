@@ -68,7 +68,7 @@ const placeAiShips = (passedDiff) => {
   // Sub to events
   events.on("returnAiShips", setAiShips);
 
-  return placeShips(passedDiff);
+  placeShips(passedDiff);
 };
 
 export default placeAiShips;

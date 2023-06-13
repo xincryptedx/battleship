@@ -278,6 +278,9 @@ const createCanvas = (sizeX, sizeY, options) => {
     // Draw ships when new ship added
     events.on("shipsSet", boardCanvas.drawShips);
   }
+  // User canvas for displaying ai hits and misses against user and user ship placements
+
+  // AI canvas for displaying user hits and misses against ai, and ai ship placements if user loses
 
   // #endregion
 

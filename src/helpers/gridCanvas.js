@@ -215,8 +215,6 @@ const createCanvas = (sizeX, sizeY, options) => {
   // #endregion
 
   // #region Assign static behaviors
-  // boardCanvas
-
   // overlayCanvas
   // Forward clicks to board canvas
   overlayCanvas.handleMouseClick = (event) => {
@@ -283,9 +281,16 @@ const createCanvas = (sizeX, sizeY, options) => {
   else if (options.type === "user") {
     // Add class to denote user canvas
     // Handle mouse move
+    // Handle mouse click
+    // Event for drawing ships when all added
   }
   // AI canvas for displaying user hits and misses against ai, and ai ship placements if user loses
-
+  else if ((options.type = "ai")) {
+    // Add class to denote ai canvas
+    // Handle mouse move
+    // Handle mouse click
+    // Event for drawing ships when user loses game
+  }
   // #endregion
 
   // Subscribe to events for getting data

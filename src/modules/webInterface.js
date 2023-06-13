@@ -19,7 +19,8 @@ const webInterface = () => {
   const placement = document.querySelector(".placement");
   const game = document.querySelector(".game");
 
-  // Reference to sub elements
+  // Reference to btn elements
+  const startBtn = document.querySelector(".start-btn");
   const rotateBtn = document.querySelector(".rotate-btn");
 
   // Reference to current direction for placing ships
@@ -93,6 +94,7 @@ const webInterface = () => {
 
   // Handle browser events
   rotateBtn.addEventListener("click", handleRotateClick);
+  startBtn.addEventListener("click", handleStartClick);
 };
 
 export default webInterface;

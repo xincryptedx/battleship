@@ -1,8 +1,3 @@
-import events from "../modules/events";
-/* Events Subbed:
-
-*/
-
 // This helper will attempt to add ships to the ai gameboard in a variety of ways for varying difficulty
 const placeAiShips = (passedDiff) => {
   // Grid size
@@ -10,22 +5,7 @@ const placeAiShips = (passedDiff) => {
   const gridWidth = 10;
 
   // Copy of the ai ships array and method to get it
-  let shipsCopy = [];
-  const setAiShips = (ships) => {
-    // Erase old ships data
-    shipsCopy = [];
-    ships.forEach((ship) => {
-      shipsCopy.push(ship);
-    });
-    // Emit event signalling ships have been copied and are ready for use
-    events.emit("aiShipsSet");
-    console.log("AI Ships copy set:", shipsCopy);
-  };
-
-  // Method that requests information about current user ships using event
-  const requestAiShips = () => {
-    events.emit("requestAiShips");
-  };
+  const shipsCopy = [];
 
   // Place a ship randomly until one successfully placed
   const placeRandomShip = () => {
@@ -34,7 +14,7 @@ const placeAiShips = (passedDiff) => {
     const y = Math.floor(Math.random() * gridHeight);
     const direction = Math.round(Math.random());
     // Try the placement
-    events.emit("tryAiPlacement", { position: [x, y], direction });
+
     console.log("Trying AI placement: ", x, y, direction);
   };
   // Place a ship along edges until one successfully placed
@@ -42,13 +22,7 @@ const placeAiShips = (passedDiff) => {
 
   // Waits for a aiShipsSet event
   function waitForAiShipsSet() {
-    return new Promise((resolve) => {
-      events.once("aiShipsSet", () => {
-        resolve(true);
-      });
-      // Update ships
-      requestAiShips();
-    });
+    // Refactor
   }
 
   // Combine placement tactics to create varying difficulties
@@ -64,9 +38,6 @@ const placeAiShips = (passedDiff) => {
       placeShips(difficulty);
     }
   };
-
-  // Sub to events
-  events.on("returnAiShips", setAiShips);
 
   placeShips(passedDiff);
 };

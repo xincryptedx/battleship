@@ -309,6 +309,7 @@ const createCanvas = (sizeX, sizeY, options) => {
       // Do nothing
     };
     // Event for drawing ships when all added
+    events.on("allShipsPlaced", boardCanvas.drawShips);
   }
   // AI canvas for displaying user hits and misses against ai, and ai ship placements if user loses
   else if (options.type === "ai") {

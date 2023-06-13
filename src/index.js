@@ -2,7 +2,6 @@
 import "./style/reset.css";
 import "./style/style.css";
 import gameManager from "./modules/gameManager";
-import canvasManager from "./modules/canvasManager";
 import webInterface from "./modules/webInterface";
 
 // Initialize modules

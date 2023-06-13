@@ -28,12 +28,24 @@ const placeAiShips = (difficulty = 0) => {
 
   // Place a ship randomly until one successfully placed
   const placeRandomShip = () => {
-    // Get random coordinates
+    // Get random placement
+    const x = Math.floor(Math.random() * gridWidth);
+    const y = Math.floor(Math.random() * gridHeight);
+    const direction = Math.round(Math.random());
     // Try the placement
+    events.emit("tryAiPlacement", { position: [x, y], direction });
+    console.log("Trying AI placement: ", x, y, direction);
   };
   // Place a ship along edges until one successfully placed
   // Place a ship based on quadrant
   // Combine placement tactics to create varying difficulties
+  // Totally random palcement
+  if (difficulty === 1) {
+    while (shipsCopy.length <= 4)
+    // Try random placement
+    // Update ships
+    // Wait for returnAiShips
+  }
 };
 
 export default placeAiShips;

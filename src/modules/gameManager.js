@@ -1,11 +1,5 @@
 import Player from "../factories/Player";
 import placeAiShips from "../helpers/placeAiShips";
-import events from "./events";
-/*  Events subbed:
-      tryPlacement   requestUserShips
-      requestAiShips tryAiPlacement
-      tryAttack   allShipsPlaced
-*/
 
 /* This module holds the game loop logic for starting games, creating
    required objects, iterating through turns, reporting game outcome when
@@ -18,23 +12,6 @@ const gameManager = () => {
   aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
   userPlayer.gameboard.isAI = false;
   aiPlayer.gameboard.isAI = true;
-
-  // Set up User board events
-  // Have the user's gameboard listen for tryPlacement events
-  events.on("tryPlacement", userPlayer.gameboard.addShip);
-  // Have the user's gameboard listen to requestShip events
-  events.on("requestUserShips", userPlayer.gameboard.returnUserShips);
-
-  // Set up AI board events
-  // Have the ai's gameboard listen for tryAttack events
-  // events.on("tryAttack", userPlayer.gameboard.receiveAttack ?);
-  // Have the si's gameboard listen to requestShip events
-  events.on("requestAiShips", aiPlayer.gameboard.returnAiShips);
-  // Have the ai's gameboard listen for tryAiPlacement events
-  events.on("tryAiPlacement", aiPlayer.gameboard.addShip);
-
-  // Place AI Ships
-  placeAiShips(1);
 
   /* Method to determine if game is over after every turn. Checks allSunk on rival gameboard 
      and returns true or false */

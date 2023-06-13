@@ -216,16 +216,6 @@ const createCanvas = (sizeX, sizeY, options) => {
 
   // #region Assign static behaviors
   // boardCanvas
-  // Browser click events
-  boardCanvas.handleMouseClick = (event, direction = placementDirection) => {
-    const mouseCell = getMouseCell(event);
-
-    // Get new ships information
-    events.emit("tryPlacement", {
-      position: [mouseCell[0], mouseCell[1]],
-      direction,
-    });
-  };
 
   // overlayCanvas
   // Forward clicks to board canvas
@@ -274,12 +264,26 @@ const createCanvas = (sizeX, sizeY, options) => {
       currentCell = mouseCell;
     };
 
+    // Browser click events
+    boardCanvas.handleMouseClick = (event, direction = placementDirection) => {
+      const mouseCell = getMouseCell(event);
+
+      // Get new ships information
+      events.emit("tryPlacement", {
+        position: [mouseCell[0], mouseCell[1]],
+        direction,
+      });
+    };
+
     // Set up option specific events
     // Draw ships when new ship added
     events.on("shipsSet", boardCanvas.drawShips);
   }
   // User canvas for displaying ai hits and misses against user and user ship placements
-
+  else if (options.type === "user") {
+    // Add class to denote user canvas
+    // Handle mouse move
+  }
   // AI canvas for displaying user hits and misses against ai, and ai ship placements if user loses
 
   // #endregion

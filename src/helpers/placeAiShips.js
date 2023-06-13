@@ -43,8 +43,8 @@ const placeAiShips = (passedDiff) => {
   // Waits for a aiShipsSet event
   function waitForAiShipsSet() {
     return new Promise((resolve) => {
-      events.once("aiShipsSet", (isAI) => {
-        if (isAI) resolve(true);
+      events.once("aiShipsSet", () => {
+        resolve(true);
       });
       // Update ships
       requestAiShips();

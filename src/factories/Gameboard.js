@@ -19,7 +19,7 @@ const Gameboard = () => {
 
   const thisGameboard = {
     ships: [],
-    returnShips: null,
+    returnUserShips: null,
     allOccupiedCells: [],
     addShip: null,
     receiveAttack: null,
@@ -36,8 +36,12 @@ const Gameboard = () => {
   };
 
   // Method for returning ships in event
-  thisGameboard.returnShips = () => {
+  thisGameboard.returnUserShips = () => {
     events.emit("returnUserShips", thisGameboard.ships);
+  };
+
+  thisGameboard.returnAiShips = () => {
+    events.emit("returnAiShips", thisGameboard.ships);
   };
 
   // Method that validates ship occupied cell coords

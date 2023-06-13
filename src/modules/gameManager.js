@@ -14,12 +14,17 @@ const gameManager = () => {
   userPlayer.gameboard.rivalBoard = aiPlayer.gameboard;
   aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
 
+  // These events allow user to set ships
   // Have the user's gameboard listen for tryPlacement events
   events.on("tryPlacement", userPlayer.gameboard.addShip);
   // Have the user's gameboard listen to requestShip events
-  events.on("requestUserShips", userPlayer.gameboard.returnShips);
+  events.on("requestUserShips", userPlayer.gameboard.returnUserShips);
 
   // Have AI place their ships
+  // Have the ai's gameboard listen for tryAttack events
+  // events.on("tryAttack", userPlayer.gameboard.receiveAttack ?);
+  // Have the si's gameboard listen to requestShip events
+  events.on("requestAiShips", aiPlayer.gameboard.returnUserShips);
   /* Need a module that automatically adds ships
      to the ai gameboard. It will need to add them one at a time based on a 
      variable ruleset that will create a bord for a given high-level "dificulty" setting */

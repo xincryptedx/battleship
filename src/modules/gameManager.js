@@ -16,9 +16,9 @@ const gameManager = () => {
   aiPlayer.gameboard.isAI = true;
 
   // Initialize the web interface with gameboards
-  webInterface(userPlayer.gameboard, aiPlayer.gameboard);
+  const webInt = webInterface(userPlayer.gameboard, aiPlayer.gameboard);
   // Add the canvas objects now that gameboards are created
-  canvasAdder(userPlayer.gameboard, aiPlayer.gameboard);
+  canvasAdder(userPlayer.gameboard, aiPlayer.gameboard, webInt);
 
   /* Method to determine if game is over after every turn. Checks allSunk on rival gameboard 
      and returns true or false */

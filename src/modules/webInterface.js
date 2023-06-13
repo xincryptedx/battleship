@@ -81,6 +81,8 @@ const webInterface = (userGameboard, aiGameboard) => {
   // Handle browser events
   rotateBtn.addEventListener("click", handleRotateClick);
   startBtn.addEventListener("click", handleStartClick);
+
+  return { tryStartGame };
 };
 
 export default webInterface;

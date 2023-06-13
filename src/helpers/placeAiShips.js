@@ -19,6 +19,7 @@ const placeAiShips = (passedDiff) => {
     });
     // Emit event signalling ships have been copied and are ready for use
     events.emit("aiShipsSet");
+    console.log("AI Ships copy set:", shipsCopy);
   };
 
   // Method that requests information about current user ships using event
@@ -45,6 +46,8 @@ const placeAiShips = (passedDiff) => {
       events.once("aiShipsSet", () => {
         resolve(true);
       });
+      // Update ships
+      requestAiShips();
     });
   }
 
@@ -54,14 +57,12 @@ const placeAiShips = (passedDiff) => {
     if (difficulty === 1 && shipsCopy.length <= 4) {
       // Try random placement
       placeRandomShip();
-      // Update ships
-      requestAiShips();
+
       // Wait for returnAiShips
       await waitForAiShipsSet();
       // Recursively call fn until ships placed
-      await placeShips();
+      placeShips(difficulty);
     }
-    console.dir(shipsCopy);
   };
 
   // Sub to events

@@ -4,7 +4,7 @@ import events from "./events";
 /*  Events subbed:
       tryPlacement   requestUserShips
       requestAiShips tryAiPlacement
-      tryAttack
+      tryAttack   allShipsPlaced
 */
 
 /* This module holds the game loop logic for starting games, creating
@@ -16,6 +16,8 @@ const gameManager = () => {
   const aiPlayer = Player();
   userPlayer.gameboard.rivalBoard = aiPlayer.gameboard;
   aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
+  userPlayer.gameboard.isAI = false;
+  aiPlayer.gameboard.isAI = true;
 
   // Set up User board events
   // Have the user's gameboard listen for tryPlacement events
@@ -32,7 +34,7 @@ const gameManager = () => {
   events.on("tryAiPlacement", aiPlayer.gameboard.addShip);
 
   // Place AI Ships
-  placeAiShips(1);
+  events.on("allShipsPlaced", () => placeAiShips(1));
 
   /* Method to determine if game is over after every turn. Checks allSunk on rival gameboard 
      and returns true or false */

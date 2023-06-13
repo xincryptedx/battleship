@@ -1,7 +1,7 @@
-const createCanvas = (sizeX, sizeY, options) => {
+const createCanvas = (sizeX, sizeY, options, gameboard) => {
   // #region Methods for getting/setting needed data via event
   // Sets info about user ships in response to event
-  const shipsCopy = [];
+  const shipsCopy = gameboard.ships;
 
   // Sets info about current placement direction in reponse to event
   let placementDirection = 1;

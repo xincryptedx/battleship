@@ -6,6 +6,7 @@ import events from "../modules/events";
    returnUserShips
    shipPlaced
    allShipsPlaced
+   returnAiShips
 
 */
 

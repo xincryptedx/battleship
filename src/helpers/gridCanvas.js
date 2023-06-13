@@ -1,4 +1,4 @@
-const createCanvas = (sizeX, sizeY, options, gameboard) => {
+const createCanvas = (sizeX, sizeY, options, gameboard, webInterface) => {
   // #region Methods for getting/setting needed data via event
   // Sets info about user ships in response to event
   const { ships } = gameboard;
@@ -259,6 +259,7 @@ const createCanvas = (sizeX, sizeY, options, gameboard) => {
       // Try placement
       gameboard.addShip(mouseCell, direction);
       boardCanvas.drawShips();
+      webInterface.tryStartGame();
     };
   }
   // User canvas for displaying ai hits and misses against user and user ship placements

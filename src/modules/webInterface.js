@@ -47,9 +47,11 @@ const webInterface = (userGameboard, aiGameboard) => {
     game.classList.remove("hidden");
   };
   // If the user gameboard has full ships then the game is ready to start
-  if (userGameboard.ships.length === 5) {
-    showGame();
-  }
+  const tryStartGame = () => {
+    if (userGameboard.ships.length === 5) {
+      showGame();
+    }
+  };
 
   // Shrink the title
   const shrinkTitle = () => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* This module has three primary functions:
    1. Get ship placement coordinates from the user based on their clicks on the web interface
    2. Get attack placement coordinates from the user based on the same
@@ -13,12 +14,10 @@ const webInterface = (userGameboard, aiGameboard) => {
   const startBtn = document.querySelector(".start-btn");
   const rotateBtn = document.querySelector(".rotate-btn");
 
-  // Reference to current direction for placing ships
-  let placementDirection = 1; // Vertical by default
-
   // Method for iterating through directions
   const rotateDirection = () => {
-    placementDirection = placementDirection === 0 ? 1 : 0;
+    userGameboard.direction = userGameboard.direction === 0 ? 1 : 0;
+    aiGameboard.direction = aiGameboard.direction === 0 ? 1 : 0;
   };
 
   // #region Basic methods for showing/hiding elements

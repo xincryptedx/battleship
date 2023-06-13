@@ -1,7 +1,7 @@
 const createCanvas = (sizeX, sizeY, options, gameboard) => {
   // #region Methods for getting/setting needed data via event
   // Sets info about user ships in response to event
-  const shipsCopy = gameboard.ships;
+  const { ships } = gameboard;
 
   // Sets info about current placement direction in reponse to event
   let placementDirection = 1;
@@ -71,18 +71,16 @@ const createCanvas = (sizeX, sizeY, options, gameboard) => {
 
   // Draw ships to board canvas using shipsCopy
   boardCanvas.drawShips = (
-    isAiEvent,
-    ships = shipsCopy,
+    shipsToDraw = ships,
     cellX = cellSizeX,
     cellY = cellSizeY
   ) => {
-    if (isAiEvent) return;
     // Draw a cell to board
     function drawCell(posX, posY) {
       boardCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
     }
 
-    ships.forEach((ship) => {
+    shipsToDraw.forEach((ship) => {
       ship.occupiedCells.forEach((cell) => {
         drawCell(cell[0], cell[1]);
       });
@@ -94,7 +92,7 @@ const createCanvas = (sizeX, sizeY, options, gameboard) => {
     cellCoordinates,
     cellX = cellSizeX,
     cellY = cellSizeY,
-    shipsCount = shipsCopy.length,
+    shipsCount = ships.length,
     direction = placementDirection
   ) => {
     // Clear the canvas
@@ -260,6 +258,7 @@ const createCanvas = (sizeX, sizeY, options, gameboard) => {
 
       // Try placement
       gameboard.addShip(mouseCell, direction);
+      boardCanvas.drawShips();
     };
   }
   // User canvas for displaying ai hits and misses against user and user ship placements

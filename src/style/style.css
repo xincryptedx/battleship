@@ -111,6 +111,11 @@ body {
   background-color: var(--colorA1);
 }
 
+.game .canvas-container {
+  width: fit-content;
+  background-color: var(--colorA2);
+}
+
 .game.hidden {
   transform: translateX(150%);
 }

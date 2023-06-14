@@ -51,7 +51,8 @@ body {
 
   transition: transform 0.8s ease-in-out;
 
-  background-color: hsla(165, 72%, 59%, 0.5);
+  background-color: hsl(214, 21%, 38%);
+  border-radius: 20px;
 }
 
 .title-text {

@@ -74,24 +74,6 @@ const createCanvas = (
     }
   };
 
-  // Draw ships to board canvas using shipsCopy
-  boardCanvas.drawShips = (
-    shipsToDraw = ships,
-    cellX = cellSizeX,
-    cellY = cellSizeY
-  ) => {
-    // Draw a cell to board
-    function drawCell(posX, posY) {
-      boardCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
-    }
-
-    shipsToDraw.forEach((ship) => {
-      ship.occupiedCells.forEach((cell) => {
-        drawCell(cell[0], cell[1]);
-      });
-    });
-  };
-
   // Draws the highlighted placement cells to the overlay canvas
   const highlightPlacementCells = (
     cellCoordinates,
@@ -192,8 +174,45 @@ const createCanvas = (
     );
   };
 
+  // #endregion
+
+  // #region General helper methods
+  // Method that gets the mouse position based on what cell it is over
+  const getMouseCell = (event) => {
+    const rect = boardCanvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    const cellX = Math.floor(mouseX / cellSizeX);
+    const cellY = Math.floor(mouseY / cellSizeY);
+
+    return [cellX, cellY];
+  };
+
+  // Draw ships to board canvas using shipsCopy
+  boardCanvas.drawShips = (
+    shipsToDraw = ships,
+    cellX = cellSizeX,
+    cellY = cellSizeY
+  ) => {
+    // Draw a cell to board
+    function drawCell(posX, posY) {
+      boardCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
+    }
+
+    shipsToDraw.forEach((ship) => {
+      ship.occupiedCells.forEach((cell) => {
+        drawCell(cell[0], cell[1]);
+      });
+    });
+  };
+
+  // #endregion
+
+  // #region Assign static behaviors
+  // boardCanvas
   // Draw hit or to board canvas
-  const drawHitMiss = (
+  boardCanvas.drawHitMiss = (
     cellCoordinates,
     type = 0,
     cellX = cellSizeX,
@@ -216,24 +235,6 @@ const createCanvas = (
     boardCtx.stroke();
   };
 
-  // #endregion
-
-  // #region General helper methods
-  // Method that gets the mouse position based on what cell it is over
-  const getMouseCell = (event) => {
-    const rect = boardCanvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-
-    const cellX = Math.floor(mouseX / cellSizeX);
-    const cellY = Math.floor(mouseY / cellSizeY);
-
-    return [cellX, cellY];
-  };
-
-  // #endregion
-
-  // #region Assign static behaviors
   // overlayCanvas
   // Forward clicks to board canvas
   overlayCanvas.handleMouseClick = (event) => {

@@ -96,7 +96,7 @@ const Gameboard = () => {
   };
 
   // Method for receiving an attack from opponent
-  thisGameboard.receiveAttack = (position, ships = thisGameboard.ships) => {
+  /*   thisGameboard.receiveAttack = (position, ships = thisGameboard.ships) => {
     // Validate position is 2 in array and ships is an array
     if (
       Array.isArray(position) &&
@@ -131,7 +131,45 @@ const Gameboard = () => {
     }
     addMiss(position);
     return false;
-  };
+  }; */
+  thisGameboard.receiveAttack = (position, ships = thisGameboard.ships) =>
+    new Promise((resolve) => {
+      // Validate position is 2 in array and ships is an array
+      if (
+        Array.isArray(position) &&
+        position.length === 2 &&
+        Number.isInteger(position[0]) &&
+        Number.isInteger(position[1]) &&
+        Array.isArray(ships)
+      ) {
+        // Each ship in ships
+        for (let i = 0; i < ships.length; i += 1) {
+          if (
+            // If the ship is not falsy, and occupiedCells prop exists and is an array
+            ships[i] &&
+            ships[i].occupiedCells &&
+            Array.isArray(ships[i].occupiedCells)
+          ) {
+            // For each of that ships occupied cells
+            for (let j = 0; j < ships[i].occupiedCells.length; j += 1) {
+              if (
+                // If that cell matches the attack position
+                ships[i].occupiedCells[j][0] === position[0] &&
+                ships[i].occupiedCells[j][1] === position[1]
+              ) {
+                // Call that ships hit method and break out of loop
+                ships[i].hit();
+                addHit(position);
+                resolve(true);
+                return;
+              }
+            }
+          }
+        }
+      }
+      addMiss(position);
+      resolve(false);
+    });
 
   // Method that determines if all ships are sunk or not
   thisGameboard.allSunk = (shipArray = thisGameboard.ships) => {

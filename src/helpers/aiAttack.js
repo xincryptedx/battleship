@@ -5,10 +5,30 @@ const aiAttack = (rivalBoard) => {
   const { hits, misses } = rivalBoard;
   let attackCoords = [];
 
+  // Method to determine if cell has a hit or miss in it
+  const alreadyAttacked = (cellCoordinates) => {
+    let attacked = false;
+    hits.forEach((hit) => {
+      if (cellCoordinates[0] === hit[0] && cellCoordinates[1] === hit[1]) {
+        attacked = true;
+      }
+    });
+
+    misses.forEach((miss) => {
+      if (cellCoordinates[0] === miss[0] && cellCoordinates[1] === miss[1]) {
+        attacked = true;
+      }
+    });
+
+    return attacked;
+  };
+
   // Method for returning random attack
-  const x = Math.floor(Math.random() * gridWidth);
-  const y = Math.floor(Math.random() * gridHeight);
-  attackCoords = [x, y];
+  const randomAttack = () => {
+    const x = Math.floor(Math.random() * gridWidth);
+    const y = Math.floor(Math.random() * gridHeight);
+    attackCoords = [x, y];
+  };
 
   return attackCoords;
 };

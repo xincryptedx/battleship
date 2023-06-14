@@ -29,6 +29,7 @@ body {
 .canvas-container {
   display: grid;
   grid-template: 1fr / 1fr;
+  width: fit-content;
 }
 
 .canvas-container > * {
@@ -99,6 +100,10 @@ body {
 .placement.hidden {
   transform: translateY(150%);
 }
+
+.placement .canvas-container {
+  background-color: var(--colorC);
+}
 /* #endregion */
 
 /* #region game section */
@@ -112,7 +117,6 @@ body {
 }
 
 .game .canvas-container {
-  width: fit-content;
   background-color: var(--colorA2);
 }
 

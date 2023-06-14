@@ -193,9 +193,27 @@ const createCanvas = (
   };
 
   // Draw hit or to board canvas
-  const drawHitMiss = (type = 0) => {
+  const drawHitMiss = (
+    cellCoordinates,
+    type = 0,
+    cellX = cellSizeX,
+    cellY = cellSizeY
+  ) => {
+    // Set proper fill color
     boardCtx.fillStyle = "white";
     if (type === 1) boardCtx.fillStyle = "red";
+    // Set a radius for circle to draw for "peg" that will always fit in cell
+    const radius = cellX > cellY ? cellY / 2 : cellX / 2;
+    // Draw the circle
+    boardCtx.beginPath();
+    boardCtx.arc(
+      cellCoordinates[0] * cellX,
+      cellCoordinates[1] * cellY,
+      radius,
+      0,
+      2 * Math.PI
+    );
+    boardCtx.stroke();
   };
 
   // #endregion

@@ -185,6 +185,7 @@ const createCanvas = (
       return attacked;
     };
     // Return if it is
+    if (alreadyAttacked()) return;
 
     // Highlight the cell
     overlayCtx.fillRect(
@@ -358,6 +359,8 @@ const createCanvas = (
       const attackHit = gameboard.receiveAttack(mouseCell);
       if (attackHit === true) boardCanvas.drawHitMiss(mouseCell, 1);
       else if (attackHit === false) boardCanvas.drawHitMiss(mouseCell, 0);
+      // Clear the overlay to show hit/miss under current highight
+      overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
     };
   }
   // #endregion

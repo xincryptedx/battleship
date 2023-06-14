@@ -91,7 +91,9 @@ describe("receiveAttack", () => {
         hit: mockHit,
       },
     ];
-    expect(testBoard.receiveAttack([2, 2], mockShips)).toBe(true);
+    testBoard.receiveAttack([2, 2], mockShips).then((result) => {
+      expect(result).toBe(true);
+    });
   });
 
   test("returns false when match not found", () => {
@@ -106,7 +108,9 @@ describe("receiveAttack", () => {
         hit: mockHit,
       },
     ];
-    expect(testBoard.receiveAttack([4, 2], mockShips)).toBe(false);
+    testBoard.receiveAttack([4, 4], mockShips).then((result) => {
+      expect(result).toBe(false);
+    });
   });
 
   test("hit recorded to testBoard.hits array", () => {

@@ -38,3 +38,5 @@ const aiAttack = (rivalBoard) => {
 
   return attackCoords;
 };
+
+export default aiAttack;

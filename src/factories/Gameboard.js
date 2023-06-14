@@ -105,6 +105,7 @@ const Gameboard = () => {
   // Method for receiving an attack from opponent
   thisGameboard.receiveAttack = (position, ships = thisGameboard.ships) =>
     new Promise((resolve) => {
+      console.log("RECEIVING ATTACK AT: ", position);
       // Validate position is 2 in array and ships is an array
       if (
         Array.isArray(position) &&
@@ -145,9 +146,8 @@ const Gameboard = () => {
   // Method for trying ai attacks
   thisGameboard.tryAiAttack = () => {
     // Return if not ai
-    if (!thisGameboard.isAi) return;
-    const attackCoords = aiAttack(thisGameboard.rivalBoard);
-    thisGameboard.rivalBoard.receiveAttack(attackCoords);
+    if (thisGameboard.isAi === false) return;
+    aiAttack(thisGameboard.rivalBoard);
   };
 
   // Method that determines if all ships are sunk or not

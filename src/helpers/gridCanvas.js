@@ -192,6 +192,12 @@ const createCanvas = (
     );
   };
 
+  // Draw hit or to board canvas
+  const drawHitMiss = (type = 0) => {
+    boardCtx.fillStyle = "white";
+    if (type === 1) boardCtx.fillStyle = "red";
+  };
+
   // #endregion
 
   // #region General helper methods

@@ -4,11 +4,7 @@ const createCanvas = (sizeX, sizeY, options, gameboard, webInterface) => {
   const { ships } = gameboard;
 
   // Sets info about current placement direction in reponse to event
-  let placementDirection = 1;
-
-  const setPlacementDirection = (direction) => {
-    placementDirection = direction;
-  };
+  const placementDirection = gameboard.direction;
 
   // #endregion
 

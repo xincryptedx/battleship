@@ -3,6 +3,7 @@ const aiAttack = (rivalBoard) => {
   const gridHeight = 10;
   const gridWidth = 10;
   const { hits, misses } = rivalBoard;
+  const [boardCanvas] = rivalBoard.canvas;
   let attackCoords = [];
 
   // Method to determine if cell has a hit or miss in it
@@ -36,7 +37,17 @@ const aiAttack = (rivalBoard) => {
     randomAttack();
   }
 
-  return attackCoords;
+  // Send attack to rival board
+  rivalBoard
+    .receiveAttack(attackCoords)
+    // Then draw hits or misses
+    .then((result) => {
+      if (result === true) {
+        boardCanvas.drawHitMiss(attackCoords, 1);
+      } else if (result === false) {
+        boardCanvas.drawHitMiss(attackCoords, 0);
+      }
+    });
 };
 
 export default aiAttack;

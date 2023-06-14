@@ -89,13 +89,17 @@ const Gameboard = () => {
   };
 
   const addMiss = (position) => {
-    thisGameboard.misses.push(position);
-    console.log("ADD HIT", position);
+    if (position) {
+      thisGameboard.misses.push(position);
+    }
+    console.log("ADD MISS", position);
   };
 
   const addHit = (position) => {
-    thisGameboard.hits.push(position);
-    console.log("ADD MISS: ", position);
+    if (position) {
+      thisGameboard.hits.push(position);
+    }
+    console.log("ADD HIT: ", position);
   };
 
   // Method for receiving an attack from opponent

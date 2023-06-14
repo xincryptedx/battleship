@@ -40,6 +40,7 @@ const aiAttack = (rivalBoard) => {
     randomAttack();
   }
 
+  console.log("Attacking User: ", attackCoords);
   // Send attack to rival board
   rivalBoard
     .receiveAttack(attackCoords)

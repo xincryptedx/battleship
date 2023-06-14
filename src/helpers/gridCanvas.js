@@ -399,8 +399,8 @@ const createCanvas = (
     overlayCanvas.handleMouseLeave()
   );
 
-  // Testing calls
-  drawLines(boardCtx); // Remove this later
+  // Draw initial board lines
+  drawLines(boardCtx);
 
   // Return completed canvases
   return canvasContainer;

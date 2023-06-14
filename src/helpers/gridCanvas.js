@@ -48,6 +48,39 @@ const createCanvas = (
 
   // #endregion
 
+  // #region General helper methods
+  // Method that gets the mouse position based on what cell it is over
+  const getMouseCell = (event) => {
+    const rect = boardCanvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    const cellX = Math.floor(mouseX / cellSizeX);
+    const cellY = Math.floor(mouseY / cellSizeY);
+
+    return [cellX, cellY];
+  };
+
+  // Method to determine if cell has a hit or miss in it
+  const alreadyAttacked = (cellCoordinates) => {
+    let attacked = false;
+    gameboard.hits.forEach((hit) => {
+      if (cellCoordinates[0] === hit[0] && cellCoordinates[1] === hit[1]) {
+        attacked = true;
+      }
+    });
+
+    gameboard.misses.forEach((miss) => {
+      if (cellCoordinates[0] === miss[0] && cellCoordinates[1] === miss[1]) {
+        attacked = true;
+      }
+    });
+
+    return attacked;
+  };
+
+  // #endregion
+
   // #region Methods for drawing to canvases
   // Method for drawing the grid lines
   const drawLines = (context) => {
@@ -168,24 +201,7 @@ const createCanvas = (
     overlayCtx.fillStyle = "red";
 
     // Check if cell coords in gameboard hits or misses
-    const alreadyAttacked = () => {
-      let attacked = false;
-      gameboard.hits.forEach((hit) => {
-        if (cellCoordinates[0] === hit[0] && cellCoordinates[1] === hit[1]) {
-          attacked = true;
-        }
-      });
-
-      gameboard.misses.forEach((miss) => {
-        if (cellCoordinates[0] === miss[0] && cellCoordinates[1] === miss[1]) {
-          attacked = true;
-        }
-      });
-
-      return attacked;
-    };
-    // Return if it is
-    if (alreadyAttacked()) return;
+    if (alreadyAttacked(cellCoordinates)) return;
 
     // Highlight the cell
     overlayCtx.fillRect(
@@ -198,19 +214,8 @@ const createCanvas = (
 
   // #endregion
 
-  // #region General helper methods
-  // Method that gets the mouse position based on what cell it is over
-  const getMouseCell = (event) => {
-    const rect = boardCanvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-
-    const cellX = Math.floor(mouseX / cellSizeX);
-    const cellY = Math.floor(mouseY / cellSizeY);
-
-    return [cellX, cellY];
-  };
-
+  // #region Assign static behaviors
+  // boardCanvas
   // Draw ships to board canvas using shipsCopy
   boardCanvas.drawShips = (
     shipsToDraw = ships,
@@ -229,10 +234,6 @@ const createCanvas = (
     });
   };
 
-  // #endregion
-
-  // #region Assign static behaviors
-  // boardCanvas
   // Draw hit or to board canvas
   boardCanvas.drawHitMiss = (
     cellCoordinates,

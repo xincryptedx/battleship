@@ -1,4 +1,5 @@
 import Ship from "./Ship";
+import aiAttack from "../helpers/aiAttack";
 
 /* Factory that returns a gameboard that can place ships with Ship(), recieve attacks based on coords 
    and then decides whether to hit() if ship is in that spot, records hits and misses, and reports if
@@ -174,8 +175,9 @@ const Gameboard = () => {
   // Method for trying ai attacks
   thisGameboard.tryAiAttack = () => {
     // Return if not ai
-    if (!thisGameboard.isAi) console.log("NOT AI");
-    else console.log("AI ATTACK!");
+    if (!thisGameboard.isAi) return;
+    const attackCoords = aiAttack(thisGameboard.rivalBoard);
+    thisGameboard.rivalBoard.receiveAttack(attackCoords);
   };
 
   // Method that determines if all ships are sunk or not

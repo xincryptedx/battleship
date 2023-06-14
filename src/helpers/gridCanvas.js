@@ -1,7 +1,19 @@
-const createCanvas = (sizeX, sizeY, options, gameboard, webInterface) => {
-  // #region Methods for getting/setting needed data via event
-  // Sets info about user ships in response to event
+const createCanvas = (
+  sizeX,
+  sizeY,
+  options,
+  gameboard,
+  webInterface,
+  userCanvas
+) => {
+  // #region References
+  // Ships array
   const { ships } = gameboard;
+
+  let userBoardCanvas = null;
+  if (userCanvas) {
+    [userBoardCanvas] = userCanvas.childNodes;
+  }
 
   // #endregion
 
@@ -252,6 +264,7 @@ const createCanvas = (sizeX, sizeY, options, gameboard, webInterface) => {
       // Try placement
       gameboard.addShip(mouseCell);
       boardCanvas.drawShips();
+
       webInterface.tryStartGame();
     };
   }

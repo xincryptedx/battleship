@@ -252,7 +252,6 @@ const createCanvas = (sizeX, sizeY, options, gameboard, webInterface) => {
       // Try placement
       gameboard.addShip(mouseCell);
       boardCanvas.drawShips();
-      console.log(webInterface);
       webInterface.tryStartGame();
     };
   }

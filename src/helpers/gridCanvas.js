@@ -333,7 +333,9 @@ const createCanvas = (
       // Get the current cell
       const mouseCell = getMouseCell(event);
       // Try attack at current cell
-      gameboard.receiveAttack(mouseCell);
+      const attackHit = gameboard.receiveAttack(mouseCell);
+      if (attackHit === true) boardCanvas.drawHitMiss(mouseCell, 1);
+      else if (attackHit === false) boardCanvas.drawHitMiss(mouseCell, 0);
     };
   }
   // #endregion

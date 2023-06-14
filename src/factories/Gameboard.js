@@ -25,6 +25,7 @@ const Gameboard = () => {
     get maxBoardY() {
       return maxBoardY;
     },
+    canvas: null,
   };
 
   // Method that validates ship occupied cell coords

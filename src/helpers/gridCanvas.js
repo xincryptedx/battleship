@@ -166,6 +166,27 @@ const createCanvas = (
 
     // Highlight the current cell in red
     overlayCtx.fillStyle = "red";
+
+    // Check if cell coords in gameboard hits or misses
+    const alreadyAttacked = () => {
+      let attacked = false;
+      gameboard.hits.forEach((hit) => {
+        if (cellCoordinates[0] === hit[0] && cellCoordinates[1] === hit[1]) {
+          attacked = true;
+        }
+      });
+
+      gameboard.misses.forEach((miss) => {
+        if (cellCoordinates[0] === miss[0] && cellCoordinates[1] === miss[1]) {
+          attacked = true;
+        }
+      });
+
+      return attacked;
+    };
+    // Return if it is
+
+    // Highlight the cell
     overlayCtx.fillRect(
       cellCoordinates[0] * cellX,
       cellCoordinates[1] * cellY,

@@ -171,6 +171,13 @@ const Gameboard = () => {
       resolve(false);
     });
 
+  // Method for trying ai attacks
+  thisGameboard.tryAiAttack = () => {
+    // Return if not ai
+    if (!thisGameboard.isAi) console.log("NOT AI");
+    else console.log("AI ATTACK!");
+  };
+
   // Method that determines if all ships are sunk or not
   thisGameboard.allSunk = (shipArray = thisGameboard.ships) => {
     if (!shipArray || !Array.isArray(shipArray)) return undefined;

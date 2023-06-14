@@ -20,6 +20,8 @@ const gameManager = () => {
   // Add the canvas objects now that gameboards are created
   canvasAdder(userPlayer.gameboard, aiPlayer.gameboard, webInt);
 
+  // Add ai ships
+  placeAiShips(1, aiPlayer.gameboard);
   /* Method to determine if game is over after every turn. Checks allSunk on rival gameboard 
      and returns true or false */
 

@@ -40,6 +40,7 @@ const placeAiShips = (passedDiff, aiGameboard) => {
   };
 
   placeShips(passedDiff);
+  console.log(aiShips);
 };
 
 export default placeAiShips;

@@ -264,7 +264,7 @@ const createCanvas = (
       // Try placement
       gameboard.addShip(mouseCell);
       boardCanvas.drawShips();
-
+      userBoardCanvas.drawShips();
       webInterface.tryStartGame();
     };
   }

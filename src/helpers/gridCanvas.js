@@ -365,7 +365,6 @@ const createCanvas = (
       // Try attack at current cell
       if (alreadyAttacked(mouseCell)) {
         // Bad thing. Error sound maybe.
-        console.log("Already attacked!");
       } else {
         gameboard
           .receiveAttack(mouseCell)

@@ -9,9 +9,6 @@ const aiAttack = (rivalBoard) => {
   const alreadyAttacked = (cellCoordinates) => {
     let attacked = false;
 
-    console.log("Hits:", hits);
-    console.log("Misses:", misses);
-
     hits.forEach((hit) => {
       if (cellCoordinates[0] === hit[0] && cellCoordinates[1] === hit[1]) {
         attacked = true;
@@ -40,7 +37,6 @@ const aiAttack = (rivalBoard) => {
     randomAttack();
   }
 
-  console.log("Attacking User: ", attackCoords);
   // Send attack to rival board
   rivalBoard
     .receiveAttack(attackCoords)

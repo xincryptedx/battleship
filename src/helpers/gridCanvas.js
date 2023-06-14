@@ -226,13 +226,14 @@ const createCanvas = (
     // Draw the circle
     boardCtx.beginPath();
     boardCtx.arc(
-      cellCoordinates[0] * cellX,
-      cellCoordinates[1] * cellY,
+      cellCoordinates[0] * cellX + cellX / 2,
+      cellCoordinates[1] * cellY + cellY / 2,
       radius,
       0,
       2 * Math.PI
     );
     boardCtx.stroke();
+    boardCtx.fill();
   };
 
   // overlayCanvas

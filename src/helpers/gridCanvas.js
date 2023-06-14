@@ -357,11 +357,16 @@ const createCanvas = (
       // Get the current cell
       const mouseCell = getMouseCell(event);
       // Try attack at current cell
-      const attackHit = gameboard.receiveAttack(mouseCell);
-      if (attackHit === true) boardCanvas.drawHitMiss(mouseCell, 1);
-      else if (attackHit === false) boardCanvas.drawHitMiss(mouseCell, 0);
-      // Clear the overlay to show hit/miss under current highight
-      overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+      if (alreadyAttacked(mouseCell)) {
+        // Bad thing. Error sound maybe.
+        console.log("Already attacked!");
+      } else {
+        const attackHit = gameboard.receiveAttack(mouseCell);
+        if (attackHit === true) boardCanvas.drawHitMiss(mouseCell, 1);
+        else if (attackHit === false) boardCanvas.drawHitMiss(mouseCell, 0);
+        // Clear the overlay to show hit/miss under current highight
+        overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+      }
     };
   }
   // #endregion

@@ -3,9 +3,6 @@ const createCanvas = (sizeX, sizeY, options, gameboard, webInterface) => {
   // Sets info about user ships in response to event
   const { ships } = gameboard;
 
-  // Sets info about current placement direction in reponse to event
-  const placementDirection = gameboard.direction;
-
   // #endregion
 
   // #region Set up basic element properties
@@ -89,7 +86,7 @@ const createCanvas = (sizeX, sizeY, options, gameboard, webInterface) => {
     cellX = cellSizeX,
     cellY = cellSizeY,
     shipsCount = ships.length,
-    direction = placementDirection
+    direction = gameboard.direction
   ) => {
     // Clear the canvas
     overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);

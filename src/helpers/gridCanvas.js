@@ -326,7 +326,7 @@ const createCanvas = (
         // Highlight the current cell in red
         highlightAttack(mouseCell);
       }
-      // Denote if it is a valid attack or not
+      // Denote if it is a valid attack or not - NYI
     };
     // Handle board mouse click
     boardCanvas.handleMouseClick = (event) => {

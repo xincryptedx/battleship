@@ -12,8 +12,8 @@ const gameManager = () => {
   const aiPlayer = Player();
   userPlayer.gameboard.rivalBoard = aiPlayer.gameboard;
   aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
-  userPlayer.gameboard.isAI = false;
-  aiPlayer.gameboard.isAI = true;
+  userPlayer.gameboard.isAi = false;
+  aiPlayer.gameboard.isAi = true;
 
   // Initialize the web interface with gameboards
   const webInt = webInterface(userPlayer.gameboard, aiPlayer.gameboard);

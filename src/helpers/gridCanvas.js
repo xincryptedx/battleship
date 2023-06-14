@@ -253,11 +253,11 @@ const createCanvas = (sizeX, sizeY, options, gameboard, webInterface) => {
     };
 
     // Browser click events
-    boardCanvas.handleMouseClick = (event, direction = placementDirection) => {
+    boardCanvas.handleMouseClick = (event) => {
       const mouseCell = getMouseCell(event);
 
       // Try placement
-      gameboard.addShip(mouseCell, direction);
+      gameboard.addShip(mouseCell);
       boardCanvas.drawShips();
       console.log(webInterface);
       webInterface.tryStartGame();

@@ -38,6 +38,9 @@ const canvasAdder = (userGameboard, aiGameboard, webInterface) => {
   placementPH.parentNode.replaceChild(placementCanvas, placementPH);
   userPH.parentNode.replaceChild(userCanvas, userPH);
   aiPH.parentNode.replaceChild(aiCanvas, aiPH);
+
+  // Return the canvases
+  return { placementCanvas, userCanvas, aiCanvas };
 };
 
 export default canvasAdder;

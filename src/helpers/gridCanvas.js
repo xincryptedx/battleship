@@ -304,8 +304,11 @@ const createCanvas = (
       // Denote if it is a valid attack or not
     };
     // Handle board mouse click
-    boardCanvas.handleMouseClick = () => {
-      // Try the attack at the given position
+    boardCanvas.handleMouseClick = (event) => {
+      // Get the current cell
+      const mouseCell = getMouseCell(event);
+      // Try attack at current cell
+      gameboard.receiveAttack(mouseCell);
     };
   }
   // #endregion

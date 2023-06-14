@@ -30,5 +30,11 @@ const aiAttack = (rivalBoard) => {
     attackCoords = [x, y];
   };
 
+  // Try a random attack that has not been yet tried
+  randomAttack();
+  while (alreadyAttacked(attackCoords)) {
+    randomAttack();
+  }
+
   return attackCoords;
 };

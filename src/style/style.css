@@ -1,8 +1,14 @@
 /* Color Rules */
 :root {
+  --colorA1: #722b94;
+  --colorA2: #a936e0;
+  --colorB1: #37e02b;
+  --colorB2: #941d0d;
+  --colorC: #e0361f;
+
   --bg-color: hsl(0, 0%, 22%);
   --text-color: hsl(0, 0%, 77%);
-  --link-color: hsl(98, 72%, 59%);
+  --link-color: hsl(36, 92%, 59%);
 }
 
 /* #region Universal element rules */

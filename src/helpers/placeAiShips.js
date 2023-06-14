@@ -7,7 +7,7 @@ const placeAiShips = (passedDiff, aiGameboard) => {
   // Copy of the ai ships array and method to get it
   const aiShips = aiGameboard.ships;
 
-  // Place a ship randomly until one successfully placed
+  // Place a ship randomly
   const placeRandomShip = () => {
     // Get random placement
     const x = Math.floor(Math.random() * gridWidth);

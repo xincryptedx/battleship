@@ -3,12 +3,15 @@ const aiAttack = (rivalBoard) => {
   const gridHeight = 10;
   const gridWidth = 10;
   const { hits, misses } = rivalBoard;
-  const [boardCanvas] = rivalBoard.canvas;
   let attackCoords = [];
 
   // Method to determine if cell has a hit or miss in it
   const alreadyAttacked = (cellCoordinates) => {
     let attacked = false;
+
+    console.log("Hits:", hits);
+    console.log("Misses:", misses);
+
     hits.forEach((hit) => {
       if (cellCoordinates[0] === hit[0] && cellCoordinates[1] === hit[1]) {
         attacked = true;
@@ -43,9 +46,9 @@ const aiAttack = (rivalBoard) => {
     // Then draw hits or misses
     .then((result) => {
       if (result === true) {
-        boardCanvas.drawHitMiss(attackCoords, 1);
+        rivalBoard.canvas.drawHit(attackCoords);
       } else if (result === false) {
-        boardCanvas.drawHitMiss(attackCoords, 0);
+        rivalBoard.canvas.drawMiss(attackCoords);
       }
     });
 };

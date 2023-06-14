@@ -307,7 +307,6 @@ const createCanvas = (
     boardCanvas.handleMouseClick = () => {
       // Try the attack at the given position
     };
-    // Event for drawing ships when user loses game
   }
   // #endregion
 

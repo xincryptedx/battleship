@@ -113,7 +113,7 @@ const Gameboard = () => {
           Array.isArray(ships[i].occupiedCells)
         ) {
           // For each of that ships occupied cells
-          for (let j = 0; j < ships[0].occupiedCells.length; j += 1) {
+          for (let j = 0; j < ships[i].occupiedCells.length; j += 1) {
             if (
               // If that cell matches the attack position
               ships[i].occupiedCells[j][0] === position[0] &&

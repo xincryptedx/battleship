@@ -15,7 +15,7 @@ const placeAiShips = (passedDiff, aiGameboard) => {
     const direction = Math.round(Math.random());
     // Try the placement
 
-    console.log("Trying AI placement: ", x, y, direction);
+    aiGameboard.addShip([x, y], direction);
   };
   // Place a ship along edges until one successfully placed
   // Place a ship based on quadrant

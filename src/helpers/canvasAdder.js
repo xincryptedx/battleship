@@ -9,14 +9,8 @@ const canvasAdder = (userGameboard, aiGameboard, webInterface) => {
   const userPH = document.querySelector(".user-canvas-ph");
   const aiPH = document.querySelector(".ai-canvas-ph");
 
-  // Create the ship placement canvas
-  const placementCanvas = gridCanvas(
-    300,
-    300,
-    { type: "placement" },
-    userGameboard,
-    webInterface
-  );
+  // Create the canvases
+
   const userCanvas = gridCanvas(
     300,
     300,
@@ -30,6 +24,14 @@ const canvasAdder = (userGameboard, aiGameboard, webInterface) => {
     { type: "ai" },
     aiGameboard,
     webInterface
+  );
+  const placementCanvas = gridCanvas(
+    300,
+    300,
+    { type: "placement" },
+    userGameboard,
+    webInterface,
+    userCanvas
   );
 
   // Replace the place holders

@@ -10,7 +10,7 @@ const Gameboard = () => {
 
   const thisGameboard = {
     ships: [],
-    direction: 0,
+    direction: 1,
     returnUserShips: null,
     allOccupiedCells: [],
     addShip: null,

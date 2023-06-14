@@ -2,12 +2,12 @@
 :root {
   --colorA1: #722b94;
   --colorA2: #a936e0;
-  --colorB1: #37e02b;
-  --colorB2: #941d0d;
-  --colorC: #e0361f;
+  --colorC: #37e02b;
+  --colorB1: #941d0d;
+  --colorB2: #e0361f;
 
   --bg-color: hsl(0, 0%, 22%);
-  --text-color: hsl(0, 0%, 77%);
+  --text-color: hsl(0, 0%, 91%);
   --link-color: hsl(36, 92%, 59%);
 }
 
@@ -57,7 +57,7 @@ body {
 
   transition: transform 0.8s ease-in-out;
 
-  background-color: hsl(214, 21%, 38%);
+  background-color: var(--colorA2);
   border-radius: 20px;
 }
 
@@ -78,7 +78,7 @@ body {
 
   transition: transform 0.3s ease-in-out;
 
-  background-color: hsla(300, 72%, 59%, 0.5);
+  background-color: var(--colorB1);
 }
 
 .menu.hidden {
@@ -93,7 +93,7 @@ body {
 
   transition: transform 0.3s ease-in-out;
 
-  background-color: hsla(276, 72%, 59%, 0.5);
+  background-color: var(--colorA1);
 }
 
 .placement.hidden {
@@ -108,7 +108,7 @@ body {
 
   transition: transform 0.3s ease-in-out;
 
-  background-color: hsla(106, 100%, 51%, 0.5);
+  background-color: var(--colorA1);
 }
 
 .game.hidden {

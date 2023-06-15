@@ -393,7 +393,11 @@ const createCanvas = (
               gameLog.append(
                 "All AI units destroyed. Humanity survives another day..."
               );
-              gameOver = true;
+            } else {
+              // Log the ai "thinking" about its attack
+              gameLog.append("AI detrmining attack...");
+              // Have the ai attack if not gameOver
+              gameboard.tryAiAttack();
             }
           } else if (result === false) {
             // Draw miss to board

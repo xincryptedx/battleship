@@ -150,6 +150,7 @@ body {
   transition: transform 0.3s ease-in-out;
 
   background-color: var(--colorA1);
+  border-radius: 20px;
 }
 
 .game .canvas-container {

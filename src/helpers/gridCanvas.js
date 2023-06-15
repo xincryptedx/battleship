@@ -373,42 +373,39 @@ const createCanvas = (
       if (alreadyAttacked(mouseCell)) {
         // Bad thing. Error sound maybe.
       } else {
-        // Did the game end?
-        let gameOver = false;
         // Set gameboard to not be able to attack
         aiBoard.rivalBoard.canAttack = false;
         // Log the sent attack
         gameLog.erase();
         gameLog.append(`User attacks cell: ${mouseCell}`);
         // Send the attack
-        gameboard
-          .receiveAttack(mouseCell)
-          .then((result) => {
-            // Attack hit
-            if (result === true) {
-              // Draw hit to board
-              boardCanvas.drawHitMiss(mouseCell, 1);
-              // Log hit
-              gameLog.append("Attack hit!");
-              // Log sunken ships
-              aiBoard.logSunk();
-              // Check if player won
-              if (aiBoard.allSunk()) {
-                gameLog.append(
-                  "All AI units destroyed. Humanity survives another day..."
-                );
-                gameOver = true;
-              }
-            } else if (result === false) {
-              // Draw miss to board
-              boardCanvas.drawHitMiss(mouseCell, 0);
-              // Log miss
-              gameLog.append("Attack missed!");
+        gameboard.receiveAttack(mouseCell).then((result) => {
+          // Attack hit
+          if (result === true) {
+            // Draw hit to board
+            boardCanvas.drawHitMiss(mouseCell, 1);
+            // Log hit
+            gameLog.append("Attack hit!");
+            // Log sunken ships
+            aiBoard.logSunk();
+            // Check if player won
+            if (aiBoard.allSunk()) {
+              gameLog.append(
+                "All AI units destroyed. Humanity survives another day..."
+              );
+              gameOver = true;
             }
+          } else if (result === false) {
+            // Draw miss to board
+            boardCanvas.drawHitMiss(mouseCell, 0);
+            // Log miss
+            gameLog.append("Attack missed!");
             // Log the ai "thinking" about its attack
             gameLog.append("AI detrmining attack...");
-          })
-          .then(gameboard.tryAiAttack(gameOver));
+            // Have the ai attack if not gameOver
+            gameboard.tryAiAttack();
+          }
+        });
         // Clear the overlay to show hit/miss under current highight
         overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
       }

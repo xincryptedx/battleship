@@ -1,5 +1,3 @@
-import gameLog from "../modules/gameLog";
-
 // Contains the names for the ships based on index
 const shipNames = {
   1: "Sentinel Probe",

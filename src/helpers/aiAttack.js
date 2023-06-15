@@ -2,6 +2,7 @@
 const aiAttack = (rivalBoard) => {
   const gridHeight = 10;
   const gridWidth = 10;
+  const board = rivalBoard;
   const { hits, misses } = rivalBoard;
   let attackCoords = [];
 
@@ -50,6 +51,8 @@ const aiAttack = (rivalBoard) => {
           rivalBoard.canvas.drawMiss(attackCoords);
         }
       });
+
+    board.canAttack = true;
   }, 2000);
 };
 

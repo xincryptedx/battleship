@@ -1,4 +1,4 @@
-const gameLog = () => {
+const gameLog = (() => {
   // Ref to log text
   const logText = document.querySelector(".log-text");
 
@@ -10,11 +10,11 @@ const gameLog = () => {
   // Add to log text
   const append = (stringToAppend) => {
     if (stringToAppend) {
-      logText.textContent += stringToAppend.toString();
+      logText.textContent += `\n${stringToAppend.toString()}`;
     }
   };
 
   return { erase, append };
-};
+})();
 
 export default gameLog;

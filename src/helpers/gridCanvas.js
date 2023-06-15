@@ -1,3 +1,6 @@
+// This module allows writing to the game log text
+import gameLog from "../modules/gameLog";
+
 const createCanvas = (
   sizeX,
   sizeY,
@@ -372,14 +375,24 @@ const createCanvas = (
       } else {
         // Set gameboard to not be able to attack
         aiBoard.rivalBoard.canAttack = false;
+        // Log the sent attack
+        gameLog.erase();
+        gameLog.append(`User attacks cell: ${mouseCell}`);
         // Send the attack
         gameboard
           .receiveAttack(mouseCell)
           .then((result) => {
+            // Attack hit
             if (result === true) {
+              // Draw hit to board
               boardCanvas.drawHitMiss(mouseCell, 1);
+              // Log hit
+              gameLog.append("Attack hit!");
             } else if (result === false) {
+              // Draw miss to board
               boardCanvas.drawHitMiss(mouseCell, 0);
+              // Log miss
+              gameLog.append("Attack missed!");
             }
           })
           .then(gameboard.tryAiAttack());

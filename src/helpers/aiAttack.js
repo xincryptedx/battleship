@@ -56,9 +56,13 @@ const aiAttack = (rivalBoard) => {
           rivalBoard.logSunk();
           // Check if AI won
           if (rivalBoard.allSunk()) {
+            // Log results
             gameLog.append(
               "All User units destroyed. AI dominance is assured."
             );
+            // Set game over on boards
+            board.gameOver = true;
+            board.rivalBoard.gameOver = true;
           }
         } else if (result === false) {
           // Draw the miss to board

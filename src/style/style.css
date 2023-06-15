@@ -30,6 +30,7 @@ body {
   display: grid;
   grid-template: 1fr / 1fr;
   width: fit-content;
+  height: fit-content;
 }
 
 .canvas-container > * {
@@ -92,9 +93,24 @@ body {
   grid-column: 3 / 19;
   grid-row: 6 / 20;
 
+  display: grid;
+  grid-template: repeat(3, min-content) / 1fr;
+
   transition: transform 0.3s ease-in-out;
 
   background-color: var(--colorA1);
+}
+
+.placement .instructions {
+}
+
+.placement .ships-to-place {
+}
+
+.placement .rotate {
+}
+
+.placement .placement-canvas-container {
 }
 
 .placement.hidden {

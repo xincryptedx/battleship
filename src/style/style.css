@@ -60,7 +60,7 @@ body {
 
   transition: transform 0.8s ease-in-out;
 
-  background-color: var(--colorB1);
+  background-color: var(--bg-color2);
   border-radius: 20px;
 }
 
@@ -69,6 +69,9 @@ body {
   justify-content: center;
   text-align: center;
   font-size: 5.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px var(--colorB1);
+  color: var(--colorB2);
 }
 
 .title.shrink {
@@ -80,13 +83,13 @@ body {
   grid-row: 8 / 18;
 
   display: grid;
-  grid-template: repeat(3, 5% min-content) / 1fr;
+  grid-template: 5% 15% 5% 1fr 5% 1fr / 1fr;
   place-items: center;
   grid-template-areas:
     "."
     "credits"
     "."
-    "start"
+    "start-game"
     "."
     "options";
 
@@ -105,7 +108,12 @@ body {
 }
 
 .menu .start {
-  grid-area: start;
+  grid-area: start-game;
+}
+
+.menu .options {
+  grid-area: options;
+  align-self: start;
 }
 
 .menu .start-btn,
@@ -128,9 +136,6 @@ body {
   text-shadow: 2px 2px 1px var(--colorC), -2px -2px 1px var(--colorB2);
 }
 
-.menu .options {
-  grid-area: options;
-}
 /* #endregion */
 
 /* #region placement section */

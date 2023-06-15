@@ -48,9 +48,17 @@ const aiAttack = (rivalBoard) => {
       // Then draw hits or misses
       .then((result) => {
         if (result === true) {
+          // Draw the hit to board
           rivalBoard.canvas.drawHit(attackCoords);
+          // Log the hit
+          // gameLog.erase();
+          gameLog.append(`AI attacks cell: ${attackCoords}\nAttack hit!`);
         } else if (result === false) {
+          // Draw the miss to board
           rivalBoard.canvas.drawMiss(attackCoords);
+          // Log the miss
+          // gameLog.erase();
+          gameLog.append(`AI attacks cell: ${attackCoords}\nAttack missed!`);
         }
       });
 

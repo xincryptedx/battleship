@@ -110,8 +110,7 @@ const Gameboard = () => {
         position.length === 2 &&
         Number.isInteger(position[0]) &&
         Number.isInteger(position[1]) &&
-        Array.isArray(ships) &&
-        thisGameboard.rivalBoard.canAttack
+        Array.isArray(ships)
       ) {
         // Each ship in ships
         for (let i = 0; i < ships.length; i += 1) {

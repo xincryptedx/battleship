@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const createCanvas = (
   sizeX,
   sizeY,
@@ -360,6 +361,10 @@ const createCanvas = (
     };
     // Handle board mouse click
     boardCanvas.handleMouseClick = (event) => {
+      // Return if gameboard can't attack
+      if (gameboard.canAttack === false) return;
+      // Set gameboard to not be able to attack
+      gameboard.canAttack = false;
       // Get the current cell
       const mouseCell = getMouseCell(event);
       // Try attack at current cell

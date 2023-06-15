@@ -266,6 +266,8 @@ body {
 
 .game .log {
   grid-area: log;
+  white-space: pre;
+  text-align: center;
 }
 
 .game.hidden {

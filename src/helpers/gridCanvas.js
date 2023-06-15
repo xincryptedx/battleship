@@ -394,6 +394,8 @@ const createCanvas = (
               // Log miss
               gameLog.append("Attack missed!");
             }
+            // Log the ai "thinking" about its attack
+            gameLog.append("AI detrmining attack...");
           })
           .then(gameboard.tryAiAttack());
         // Clear the overlay to show hit/miss under current highight

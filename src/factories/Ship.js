@@ -43,11 +43,6 @@ const Ship = (index, position, direction) => {
   // Adds a hit to the ship
   thisShip.hit = () => {
     thisShip.hits += 1;
-
-    // If sunk log message
-    if (thisShip.isSunk()) {
-      gameLog.append(`${thisShip.type} was destroyed!`);
-    }
   };
 
   // Determines if ship sunk is true

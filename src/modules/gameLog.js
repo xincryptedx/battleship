@@ -13,6 +13,8 @@ const gameLog = () => {
       logText.textContent += stringToAppend.toString();
     }
   };
+
+  return { erase, append };
 };
 
 export default gameLog;

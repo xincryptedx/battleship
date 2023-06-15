@@ -361,9 +361,9 @@ const createCanvas = (
     // Handle board mouse click
     boardCanvas.handleMouseClick = (event) => {
       // Ref to gameboard
-      const board = gameboard;
+      const aiBoard = gameboard;
       // Return if gameboard can't attack
-      if (board.canAttack === false) return;
+      if (aiBoard.rivalBoard.canAttack === false) return;
       // Get the current cell
       const mouseCell = getMouseCell(event);
       // Try attack at current cell
@@ -371,7 +371,7 @@ const createCanvas = (
         // Bad thing. Error sound maybe.
       } else {
         // Set gameboard to not be able to attack
-        board.canAttack = false;
+        aiBoard.rivalBoard.canAttack = false;
         // Send the attack
         gameboard
           .receiveAttack(mouseCell)

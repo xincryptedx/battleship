@@ -7,6 +7,7 @@
   --colorB2: #e0361f;
 
   --bg-color: hsl(0, 0%, 22%);
+  --bg-color2: hsl(0, 0%, 32%);
   --text-color: hsl(0, 0%, 91%);
   --link-color: hsl(36, 92%, 59%);
 }
@@ -59,7 +60,7 @@ body {
 
   transition: transform 0.8s ease-in-out;
 
-  background-color: var(--colorA2);
+  background-color: var(--colorB1);
   border-radius: 20px;
 }
 
@@ -91,7 +92,7 @@ body {
 
   transition: transform 0.3s ease-in-out;
 
-  background-color: var(--colorB1);
+  background-color: var(--colorA1);
   border-radius: 20px;
 }
 
@@ -105,6 +106,20 @@ body {
 
 .menu .start {
   grid-area: start;
+}
+
+.menu .start-btn,
+.menu .options-btn {
+  height: 60px;
+  width: 180px;
+
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--text-color);
+
+  background-color: var(--colorA2);
+  border: 2px solid var(--colorC);
+  border-radius: 10px;
 }
 
 .menu .options {

@@ -143,6 +143,11 @@ body {
   grid-column: 3 / 5;
 }
 
+.game .player-ships {
+  display: grid;
+  grid-auto-flow: column;
+}
+
 .game .log {
   grid-row: 4 / 5;
   grid-column: 1 / -1;

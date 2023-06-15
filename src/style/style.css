@@ -144,8 +144,17 @@ body {
   grid-row: 6 / 20;
 
   display: grid;
-  grid-template: repeat(3, min-content) 1fr / 1fr;
+  grid-template: 5% min-content 8% min-content 8% min-content 5% 1fr / 1fr;
   place-items: center;
+  grid-template-areas:
+    "."
+    "instructions"
+    "."
+    "ships"
+    "."
+    "rotate"
+    "."
+    "canvas";
 
   transition: transform 0.3s ease-in-out;
 
@@ -153,23 +162,50 @@ body {
 }
 
 .placement .instructions {
+  grid-area: instructions;
 }
 
 .placement .instructions-text {
   font-size: 2.75rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px var(--bg-color);
 }
 
 .placement .ships-to-place {
+  grid-area: ships;
   display: grid;
   grid-auto-flow: column;
 }
 
+.placement .rotate {
+  grid-area: rotate;
+}
+
 .placement .rotate-btn {
   height: 60px;
-  width: 120px;
+  width: 180px;
+
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--text-color);
+  transition: text-shadow 0.1s ease-in-out;
+
+  background-color: var(--colorA2);
+  border: 2px solid var(--colorC);
+  border-radius: 10px;
+}
+
+.placement .rotate-btn:hover {
+  text-shadow: 2px 2px 1px var(--colorC), -2px -2px 1px var(--colorB2);
+}
+
+.placement .rotate-btn:active {
+  text-shadow: 4px 4px 1px var(--colorC), -4px -4px 1px var(--colorB2);
 }
 
 .placement .placement-canvas-container {
+  grid-area: canvas;
+  align-self: start;
 }
 
 .placement.hidden {

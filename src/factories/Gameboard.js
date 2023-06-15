@@ -170,7 +170,9 @@ const Gameboard = () => {
       if (sunkenShips[key] === false && thisGameboard.ships[key - 1].isSunk()) {
         const ship = thisGameboard.ships[key - 1].type;
         const player = thisGameboard.isAi ? "AI's" : "User's";
-        gameLog.append(`${player} ${ship} was destroyed!`);
+        gameLog.append(
+          `<span style="color: red">${player} ${ship} was destroyed!</span>`
+        );
         sunkenShips[key] = true;
       }
     });

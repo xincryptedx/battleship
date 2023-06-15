@@ -10,7 +10,7 @@ const gameLog = (() => {
   // Add to log text
   const append = (stringToAppend) => {
     if (stringToAppend) {
-      logText.textContent += `\n${stringToAppend.toString()}`;
+      logText.innerHTML += `\n${stringToAppend.toString()}`;
     }
   };
 

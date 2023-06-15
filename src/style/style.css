@@ -94,7 +94,8 @@ body {
   grid-row: 6 / 20;
 
   display: grid;
-  grid-template: repeat(3, min-content) / 1fr;
+  grid-template: repeat(3, min-content) 1fr / 1fr;
+  place-items: center;
 
   transition: transform 0.3s ease-in-out;
 
@@ -104,10 +105,18 @@ body {
 .placement .instructions {
 }
 
-.placement .ships-to-place {
+.placement .instructions-text {
+  font-size: 2.75rem;
 }
 
-.placement .rotate {
+.placement .ships-to-place {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.placement .rotate-btn {
+  height: 60px;
+  width: 120px;
 }
 
 .placement .placement-canvas-container {

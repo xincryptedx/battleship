@@ -16,6 +16,7 @@ const Gameboard = () => {
     allOccupiedCells: [],
     addShip: null,
     receiveAttack: null,
+    canAttack: true,
     misses: [],
     hits: [],
     allSunk: null,
@@ -103,13 +104,14 @@ const Gameboard = () => {
   // Method for receiving an attack from opponent
   thisGameboard.receiveAttack = (position, ships = thisGameboard.ships) =>
     new Promise((resolve) => {
-      // Validate position is 2 in array and ships is an array
+      // Validate position is 2 in array and ships is an array, and rival board can attack
       if (
         Array.isArray(position) &&
         position.length === 2 &&
         Number.isInteger(position[0]) &&
         Number.isInteger(position[1]) &&
-        Array.isArray(ships)
+        Array.isArray(ships) &&
+        thisGameboard.rivalBoard.canAttack
       ) {
         // Each ship in ships
         for (let i = 0; i < ships.length; i += 1) {

@@ -388,6 +388,8 @@ const createCanvas = (
               boardCanvas.drawHitMiss(mouseCell, 1);
               // Log hit
               gameLog.append("Attack hit!");
+              // Log sunken ships
+              aiBoard.logSunk();
             } else if (result === false) {
               // Draw miss to board
               boardCanvas.drawHitMiss(mouseCell, 0);

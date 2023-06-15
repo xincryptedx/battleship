@@ -52,6 +52,8 @@ const aiAttack = (rivalBoard) => {
           rivalBoard.canvas.drawHit(attackCoords);
           // Log the hit
           gameLog.append(`AI attacks cell: ${attackCoords}\nAttack hit!`);
+          // Log sunk user ships
+          rivalBoard.logSunk();
         } else if (result === false) {
           // Draw the miss to board
           rivalBoard.canvas.drawMiss(attackCoords);

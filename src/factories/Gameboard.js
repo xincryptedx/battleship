@@ -1,5 +1,6 @@
 import Ship from "./Ship";
 import aiAttack from "../helpers/aiAttack";
+import gameLog from "../modules/gameLog";
 
 /* Factory that returns a gameboard that can place ships with Ship(), recieve attacks based on coords 
    and then decides whether to hit() if ship is in that spot, records hits and misses, and reports if
@@ -156,6 +157,20 @@ const Gameboard = () => {
       if (ship && ship.isSunk && !ship.isSunk()) allSunk = false;
     });
     return allSunk;
+  };
+
+  // Object for tracking board's sunken ships
+  const sunkenShips = { 1: false, 2: false, 3: false, 4: false, 5: false };
+
+  // Method for reporting sunken ships
+  thisGameboard.logSunk = () => {
+    Object.keys(sunkenShips).forEach((key) => {
+      if (sunkenShips[key] === false && thisGameboard.ships[key - 1].isSunk()) {
+        const ship = thisGameboard.ships[key - 1].type;
+        const player = thisGameboard.isAi ? "AI's" : "User's";
+        gameLog.append(`${player} ${ship} was destroyed!`);
+      }
+    });
   };
 
   return thisGameboard;

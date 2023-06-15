@@ -78,13 +78,37 @@ body {
   grid-column: 3 / 19;
   grid-row: 8 / 18;
 
+  display: grid;
+  grid-template: repeat(3, 5% min-content) / 1fr;
+  place-items: center;
+  grid-template-areas:
+    "."
+    "credits"
+    "."
+    "start"
+    "."
+    "options";
+
   transition: transform 0.3s ease-in-out;
 
   background-color: var(--colorB1);
+  border-radius: 20px;
 }
 
 .menu.hidden {
   transform: translateX(-150%);
+}
+
+.menu .credits {
+  grid-area: credits;
+}
+
+.menu .start {
+  grid-area: start;
+}
+
+.menu .options {
+  grid-area: options;
 }
 /* #endregion */
 

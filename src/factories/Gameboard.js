@@ -21,6 +21,7 @@ const Gameboard = () => {
     misses: [],
     hits: [],
     allSunk: null,
+    logSunk: null,
     rivalBoard: null,
     get maxBoardX() {
       return maxBoardX;
@@ -131,8 +132,6 @@ const Gameboard = () => {
                 // Call that ships hit method and break out of loop
                 ships[i].hit();
                 addHit(position);
-                // Log ship if sunk
-                thisGameboard.logSunk();
                 resolve(true);
                 return;
               }

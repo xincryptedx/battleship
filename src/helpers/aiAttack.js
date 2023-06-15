@@ -37,17 +37,20 @@ const aiAttack = (rivalBoard) => {
     randomAttack();
   }
 
-  // Send attack to rival board
-  rivalBoard
-    .receiveAttack(attackCoords)
-    // Then draw hits or misses
-    .then((result) => {
-      if (result === true) {
-        rivalBoard.canvas.drawHit(attackCoords);
-      } else if (result === false) {
-        rivalBoard.canvas.drawMiss(attackCoords);
-      }
-    });
+  // Timeout to simulate "thinking" and to make game feel better
+  setTimeout(() => {
+    // Send attack to rival board
+    rivalBoard
+      .receiveAttack(attackCoords)
+      // Then draw hits or misses
+      .then((result) => {
+        if (result === true) {
+          rivalBoard.canvas.drawHit(attackCoords);
+        } else if (result === false) {
+          rivalBoard.canvas.drawMiss(attackCoords);
+        }
+      });
+  }, 2000);
 };
 
 export default aiAttack;

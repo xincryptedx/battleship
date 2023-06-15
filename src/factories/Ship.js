@@ -1,3 +1,5 @@
+import gameLog from "../modules/gameLog";
+
 // Contains the names for the ships based on index
 const shipNames = {
   1: "Sentinel Probe",
@@ -41,6 +43,11 @@ const Ship = (index, position, direction) => {
   // Adds a hit to the ship
   thisShip.hit = () => {
     thisShip.hits += 1;
+
+    // If sunk log message
+    if (thisShip.isSunk()) {
+      gameLog.append(`${thisShip.type} was destroyed!`);
+    }
   };
 
   // Determines if ship sunk is true

@@ -390,9 +390,13 @@ const createCanvas = (
             aiBoard.logSunk();
             // Check if player won
             if (aiBoard.allSunk()) {
+              // Log results
               gameLog.append(
                 "All AI units destroyed. Humanity survives another day..."
               );
+              // Set gameover on boards
+              aiBoard.gameOver = true;
+              aiBoard.rivalBoard.gameOver = true;
             } else {
               // Log the ai "thinking" about its attack
               gameLog.append("AI detrmining attack...");

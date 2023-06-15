@@ -131,6 +131,8 @@ const Gameboard = () => {
                 // Call that ships hit method and break out of loop
                 ships[i].hit();
                 addHit(position);
+                // Log ship if sunk
+                thisGameboard.logSunk();
                 resolve(true);
                 return;
               }
@@ -169,6 +171,7 @@ const Gameboard = () => {
         const ship = thisGameboard.ships[key - 1].type;
         const player = thisGameboard.isAi ? "AI's" : "User's";
         gameLog.append(`${player} ${ship} was destroyed!`);
+        sunkenShips[key] = true;
       }
     });
   };

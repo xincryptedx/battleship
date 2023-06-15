@@ -372,7 +372,7 @@ const createCanvas = (
       // Try attack at current cell
       if (alreadyAttacked(mouseCell)) {
         // Bad thing. Error sound maybe.
-      } else {
+      } else if (gameboard.gameOver === false) {
         // Set gameboard to not be able to attack
         aiBoard.rivalBoard.canAttack = false;
         // Log the sent attack

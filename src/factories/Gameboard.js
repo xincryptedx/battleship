@@ -31,6 +31,7 @@ const Gameboard = () => {
     },
     canvas: null,
     isAi: false,
+    gameOver: false,
   };
 
   // Method that validates ship occupied cell coords

@@ -54,6 +54,12 @@ const aiAttack = (rivalBoard) => {
           gameLog.append(`AI attacks cell: ${attackCoords}\nAttack hit!`);
           // Log sunk user ships
           rivalBoard.logSunk();
+          // Check if AI won
+          if (rivalBoard.allSunk()) {
+            gameLog.append(
+              "All User units destroyed. AI dominance is assured."
+            );
+          }
         } else if (result === false) {
           // Draw the miss to board
           rivalBoard.canvas.drawMiss(attackCoords);

@@ -373,6 +373,8 @@ const createCanvas = (
       if (alreadyAttacked(mouseCell)) {
         // Bad thing. Error sound maybe.
       } else {
+        // Did the game end?
+        let gameOver = false;
         // Set gameboard to not be able to attack
         aiBoard.rivalBoard.canAttack = false;
         // Log the sent attack
@@ -390,6 +392,13 @@ const createCanvas = (
               gameLog.append("Attack hit!");
               // Log sunken ships
               aiBoard.logSunk();
+              // Check if player won
+              if (aiBoard.allSunk()) {
+                gameLog.append(
+                  "All AI units destroyed. Humanity survives another day..."
+                );
+                gameOver = true;
+              }
             } else if (result === false) {
               // Draw miss to board
               boardCanvas.drawHitMiss(mouseCell, 0);
@@ -399,7 +408,7 @@ const createCanvas = (
             // Log the ai "thinking" about its attack
             gameLog.append("AI detrmining attack...");
           })
-          .then(gameboard.tryAiAttack());
+          .then(gameboard.tryAiAttack(gameOver));
         // Clear the overlay to show hit/miss under current highight
         overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
       }

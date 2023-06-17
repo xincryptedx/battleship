@@ -392,7 +392,7 @@ const createCanvas = (
             if (aiBoard.allSunk()) {
               // Log results
               gameLog.append(
-                "All AI units destroyed. \nHumanity survives another day..."
+                "All AI units destroyed. \nHumanity survives another day... \nTest line"
               );
               // Set gameover on boards
               aiBoard.gameOver = true;

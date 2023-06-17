@@ -276,25 +276,25 @@ body {
 .game .log {
   grid-area: log;
   display: grid;
-  grid-template: 1 fr / repeat(4, 1fr);
-  grid-template-areas: "scene text text text";
+  grid-template: 1fr / min-content 10px 1fr;
+  grid-template-areas: "scene . text";
 
   width: 500px;
-
-  white-space: pre; /* Allows for \n */
-  text-align: center;
 }
 
 .game .log .scene {
   grid-area: scene;
 
-  height: 125px;
-  width: 125px;
+  height: 150px;
+  width: 150px;
   background-color: var(--colorB1);
 }
 
 .game .log .log-text {
-  font-size: 1.3rem;
+  grid-area: text;
+  font-size: 1.2rem;
+
+  white-space: pre; /* Allows for \n */
 }
 
 .game.hidden {

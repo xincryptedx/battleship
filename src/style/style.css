@@ -223,14 +223,17 @@ body {
   grid-row: 5 / 20;
   display: grid;
   place-items: center;
-  grid-template: repeat(4, 5% min-content) / repeat(4, 1fr);
+  grid-template: 1fr min-content 5% min-content 5% min-content 1fr / repeat(
+      4,
+      1fr
+    );
   grid-template-areas:
+    ". . . ."
+    ". log log ."
     ". . . ."
     "user-board user-board ai-board ai-board"
     ". . . ."
     "user-info user-info ai-info ai-info"
-    ". . . ."
-    ". log log ."
     ". . . .";
 
   transition: transform 0.3s ease-in-out;

@@ -22,21 +22,21 @@ const gameLog = (() => {
     const urls = {
       sp: {
         gen: [
-          "../scene-images/Sentinel Probe/sp_gen1",
-          "../scene-images/Sentinel Probe/sp_gen2",
-          "../scene-images/Sentinel Probe/sp_gen3",
-          "../scene-images/Sentinel Probe/sp_gen4",
+          "../scene-images/Sentinel Probe/sp_gen1.jpg",
+          "../scene-images/Sentinel Probe/sp_gen2.jpg",
+          "../scene-images/Sentinel Probe/sp_gen3.jpg",
+          "../scene-images/Sentinel Probe/sp_gen4.jpg",
         ],
         attack: [
-          "../scene-images/Sentinel Probe/sp_attack1",
-          "../scene-images/Sentinel Probe/sp_attack2",
-          "../scene-images/Sentinel Probe/sp_attack3",
-          "../scene-images/Sentinel Probe/sp_attack4",
+          "../scene-images/Sentinel Probe/sp_attack1.jpg",
+          "../scene-images/Sentinel Probe/sp_attack2.jpg",
+          "../scene-images/Sentinel Probe/sp_attack3.jpg",
+          "../scene-images/Sentinel Probe/sp_attack4.jpg",
         ],
         hit: [
-          "../scene-images/Sentinel Probe/sp_hit1",
-          "../scene-images/Sentinel Probe/sp_hit2",
-          "../scene-images/Sentinel Probe/sp_hit3",
+          "../scene-images/Sentinel Probe/sp_hit1.jpg",
+          "../scene-images/Sentinel Probe/sp_hit2.jpg",
+          "../scene-images/Sentinel Probe/sp_hit3.jpg",
         ],
       },
     };

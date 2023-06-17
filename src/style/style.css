@@ -229,10 +229,9 @@ body {
   grid-row: 5 / 20;
   display: grid;
   place-items: center;
-  grid-template: 1fr min-content 5% min-content 5% min-content 1fr / repeat(
-      4,
-      1fr
-    );
+  grid-template:
+    repeat(2, minmax(10px, 1fr) min-content) minmax(10px, 1fr)
+    min-content 1fr / repeat(4, 1fr);
   grid-template-areas:
     ". . . ."
     ". log log ."

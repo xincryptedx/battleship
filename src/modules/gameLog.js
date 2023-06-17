@@ -16,6 +16,10 @@ const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
     // Set the text to lowercase for comparison
     const logLower = logText.textContent.toLowerCase();
 
+    // Refs to ship types
+    const shipTypes = ["sentinel", "assault", "viper", "iron", "leviathan"];
+
+    // Image set by priority. Later conditions are higher priority and will overwrite prior
     // Set the image when you attack based on remaining ships
     if (
       logLower.includes(userName.toLowerCase()) &&
@@ -24,9 +28,23 @@ const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
       console.log("USER ATTACK IMG");
     }
 
-    // Set the image when an AI ship sinks
+    // Set the image when ship hit
+    if (logLower.includes("hit your")) {
+      shipTypes.forEach((type) => {
+        if (logLower.includes(type)) {
+          console.log(`HIT YOUR ${type} IMG`);
+        }
+      });
+    }
 
-    // Set the image when your ship is hit or sinks
+    // Set the image when ship sinks
+    if (logLower.includes("destroyed")) {
+      shipTypes.forEach((type) => {
+        if (logLower.includes(type)) {
+          console.log(`DESTROYED ${type} IMG`);
+        }
+      });
+    }
 
     // Set the image when there is a miss to gen of remaining ships
   };

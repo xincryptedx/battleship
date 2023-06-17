@@ -68,14 +68,20 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
-  font-size: 5.5rem;
+  font-size: 4.8rem;
   font-weight: bold;
   text-shadow: 2px 2px 2px var(--colorB1);
   color: var(--colorB2);
+
+  transition: font-size 0.8s ease-in-out;
 }
 
 .title.shrink {
   transform: scale(0.5) translateY(-50%);
+}
+
+.title.shrink .title-text {
+  font-size: 3.5rem;
 }
 /* #region menu section */
 .menu {

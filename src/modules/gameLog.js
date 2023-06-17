@@ -3,6 +3,7 @@ import imageLoader from "../helpers/imageLoader";
 const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
   // Ref to log text
   const logText = document.querySelector(".log-text");
+  const logImg = document.querySelector(".scene-img");
 
   // Log scene handling
   let sceneImages = null;
@@ -19,13 +20,13 @@ const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
     // Refs to ship types
     const shipTypes = ["sentinel", "assault", "viper", "iron", "leviathan"];
 
-    // Image set by priority. Later conditions are higher priority and will overwrite prior
     // Set the image when you attack based on remaining ships
     if (
       logLower.includes(userName.toLowerCase()) &&
       logLower.includes("attacks")
     ) {
       console.log("USER ATTACK IMG");
+      logImg.src = sceneImages.SP.attack[0];
     }
 
     // Set the image when ship hit
@@ -47,7 +48,7 @@ const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
     }
 
     // Set the image when there is an ai miss to gen of remaining ships
-    if (logLower.includes("AI attacks") && logLower.includes("missed")) {
+    if (logLower.includes("ai attacks") && logLower.includes("missed")) {
       console.log("MISSED USER IMG");
     }
   };

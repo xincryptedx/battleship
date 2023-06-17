@@ -46,7 +46,10 @@ const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
       });
     }
 
-    // Set the image when there is a miss to gen of remaining ships
+    // Set the image when there is an ai miss to gen of remaining ships
+    if (logLower.includes("AI attacks") && logLower.includes("missed")) {
+      console.log("MISSED USER IMG");
+    }
   };
 
   // Erase the log text

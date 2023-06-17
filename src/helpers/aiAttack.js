@@ -71,7 +71,7 @@ const aiAttack = (rivalBoard) => {
       });
 
     board.canAttack = true;
-  }, 10);
+  }, 1000);
 };
 
 export default aiAttack;

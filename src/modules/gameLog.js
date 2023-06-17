@@ -18,13 +18,14 @@ const gameLog = (() => {
 
   // Log scene handling
   let sceneImages = null;
+  // Method for loading scene images. Must be run once in game manager.
   const loadScenes = () => {
     sceneImages = imageLoader();
   };
 
   // Sets the scene image based on params passed
-  const scene = (unit, state) => {
-    // Set the img based on params
+  const setScene = () => {
+    // Set the img based on log text
   };
 
   return { erase, append, loadScenes };

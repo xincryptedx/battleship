@@ -1,6 +1,14 @@
 import imageLoader from "../helpers/imageLoader";
 
-const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
+const gameLog = ((userName = "User") => {
+  // Add a property to store the gameboard
+  let userGameboard = null;
+
+  // Setter method to set the gameboard
+  const setUserGameboard = (gameboard) => {
+    userGameboard = gameboard;
+  };
+
   // Ref to log text
   const logText = document.querySelector(".log-text");
   const logImg = document.querySelector(".scene-img");
@@ -10,6 +18,7 @@ const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
   // Method for loading scene images. Must be run once in game manager.
   const loadScenes = () => {
     sceneImages = imageLoader();
+    console.table(sceneImages);
   };
 
   // Sets the scene image based on params passed
@@ -87,7 +96,7 @@ const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
     }
   };
 
-  return { erase, append, setScene, loadScenes };
+  return { erase, append, setScene, loadScenes, setUserGameboard };
 })();
 
 export default gameLog;

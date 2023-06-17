@@ -20,6 +20,9 @@ const gameManager = () => {
   userPlayer.gameboard.isAi = false;
   aiPlayer.gameboard.isAi = true;
 
+  // Set gameLog user game board for accurate scenes
+  gameLog.setUserGameboard(userPlayer.gameboard);
+
   // Initialize the web interface with gameboards
   const webInt = webInterface(userPlayer.gameboard, aiPlayer.gameboard);
   // Add the canvas objects now that gameboards are created

@@ -378,6 +378,7 @@ const createCanvas = (
         // Log the sent attack
         gameLog.erase();
         gameLog.append(`User attacks cell: ${mouseCell}`);
+        gameLog.setScene();
         // Send the attack
         gameboard.receiveAttack(mouseCell).then((result) => {
           // Attack hit

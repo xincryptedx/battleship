@@ -41,8 +41,6 @@ const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
     if (stringToAppend) {
       logText.innerHTML += `\n${stringToAppend.toString()}`;
     }
-
-    setScene();
   };
 
   return { erase, append, setScene, loadScenes };

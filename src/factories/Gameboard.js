@@ -98,9 +98,14 @@ const Gameboard = () => {
     }
   };
 
-  const addHit = (position) => {
+  const addHit = (position, ship) => {
     if (position) {
       thisGameboard.hits.push(position);
+    }
+
+    // Log if player's ship was hit
+    if (!thisGameboard.isAi) {
+      gameLog.append(`Attack hit your ${ship.type} at cell ${position}!`);
     }
   };
 
@@ -132,7 +137,7 @@ const Gameboard = () => {
               ) {
                 // Call that ships hit method and break out of loop
                 ships[i].hit();
-                addHit(position);
+                addHit(position, ships[i]);
                 resolve(true);
                 return;
               }

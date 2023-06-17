@@ -50,8 +50,6 @@ const aiAttack = (rivalBoard) => {
         if (result === true) {
           // Draw the hit to board
           rivalBoard.canvas.drawHit(attackCoords);
-          // Log the hit
-          gameLog.append(`AI attacks cell: ${attackCoords}\nAttack hit!`);
           // Log sunk user ships
           rivalBoard.logSunk();
           // Check if AI won

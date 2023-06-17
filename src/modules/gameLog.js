@@ -37,7 +37,7 @@ const gameLog = ((userName = "User") => {
     }
 
     // Helper for getting random ship type from those remaining
-    const dirNames = { 1: "SP", 2: "AT", 3: "VM", 4: "IG", 5: "L" };
+    const dirNames = { 0: "SP", 1: "AT", 2: "VM", 3: "IG", 4: "L" };
     function randomShipDir(gameboard = userGameboard) {
       let randomNumber = Math.floor(Math.random() * 5);
       while (gameboard.ships[randomNumber].isSunk()) {
@@ -55,9 +55,10 @@ const gameLog = ((userName = "User") => {
       // Get random ship
       const shipDir = randomShipDir();
       // Get random img from appropriate place
+      console.log("Ship dir: ", shipDir);
       const entry = randomEntry(sceneImages[shipDir].attack);
       // Check user remaining ships
-      logImg.src = sceneImages.SP.attack[entry];
+      logImg.src = sceneImages[shipDir].attack[entry];
     }
 
     // Set the image when ship hit

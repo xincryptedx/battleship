@@ -280,6 +280,11 @@ body {
   grid-template-areas: "scene . text";
 
   width: 500px;
+
+  border: 3px solid var(--colorB1);
+  border-radius: 6px;
+
+  background-color: var(--bg-color);
 }
 
 .game .log .scene {
@@ -292,8 +297,7 @@ body {
 
 .game .log .log-text {
   grid-area: text;
-  font-size: 1.2rem;
-
+  font-size: 1.15rem;
   white-space: pre; /* Allows for \n */
 }
 

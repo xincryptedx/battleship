@@ -109,6 +109,7 @@ const Gameboard = () => {
       gameLog.append(
         `AI attacks cell: ${position} \nAttack hit your ${ship.type}!`
       );
+      gameLog.setScene();
     }
   };
 

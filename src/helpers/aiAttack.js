@@ -68,6 +68,7 @@ const aiAttack = (rivalBoard) => {
           // Log the miss
           gameLog.erase();
           gameLog.append(`AI attacks cell: ${attackCoords}\nAttack missed!`);
+          gameLog.setScene();
         }
       });
 

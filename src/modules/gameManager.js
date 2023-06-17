@@ -2,11 +2,16 @@ import Player from "../factories/Player";
 import canvasAdder from "../helpers/canvasAdder";
 import webInterface from "./webInterface";
 import placeAiShips from "../helpers/placeAiShips";
+import gameLog from "./gameLog";
 
 /* This module holds the game loop logic for starting games, creating
    required objects, iterating through turns, reporting game outcome when
    a player loses, and restart the game */
 const gameManager = () => {
+  // #region Loading/Init
+  // Load scene images for game log
+  gameLog.loadScenes();
+
   // Initialization of Player objects for user and AI
   const userPlayer = Player();
   const aiPlayer = Player();
@@ -26,6 +31,8 @@ const gameManager = () => {
   // Add canvases to gameboards
   userPlayer.gameboard.canvas = canvases.userCanvas;
   aiPlayer.gameboard.canvas = canvases.aiCanvas;
+
+  // #endregion
 
   // Add ai ships
   placeAiShips(1, aiPlayer.gameboard);

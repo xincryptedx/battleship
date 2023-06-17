@@ -20,13 +20,35 @@ const gameLog = ((aiGameboard, userGameboard, userName = "User") => {
     // Refs to ship types
     const shipTypes = ["sentinel", "assault", "viper", "iron", "leviathan"];
 
+    // Helper for getting random array entry
+    function randomEntry(array) {
+      const lastIndex = array.length - 1;
+      const randomNumber = Math.floor(Math.random() * (lastIndex + 1));
+      return randomNumber;
+    }
+
+    // Helper for getting random ship type from those remaining
+    const dirNames = { 1: "SP", 2: "AT", 3: "VM", 4: "IG", 5: "L" };
+    function randomShipDir(gameboard = userGameboard) {
+      let randomNumber = Math.floor(Math.random() * 5);
+      while (gameboard.ships[randomNumber].isSunk()) {
+        randomNumber = Math.floor(Math.random() * 5);
+      }
+      return dirNames[randomNumber];
+    }
+
     // Set the image when you attack based on remaining ships
     if (
       logLower.includes(userName.toLowerCase()) &&
       logLower.includes("attacks")
     ) {
       console.log("USER ATTACK IMG");
-      logImg.src = sceneImages.SP.attack[0];
+      // Get random ship
+      const shipDir = randomShipDir();
+      // Get random img from appropriate place
+      const entry = randomEntry(sceneImages[shipDir].attack);
+      // Check user remaining ships
+      logImg.src = sceneImages.SP.attack[entry];
     }
 
     // Set the image when ship hit

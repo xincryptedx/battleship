@@ -172,7 +172,7 @@ body {
 }
 
 .placement .instructions-text {
-  font-size: 2.75rem;
+  font-size: 2.3rem;
   font-weight: bold;
   text-shadow: 1px 1px 1px var(--bg-color);
 }

@@ -26,8 +26,15 @@ const gameLog = ((userName = "User") => {
     // Set the text to lowercase for comparison
     const logLower = logText.textContent.toLowerCase();
 
-    // Refs to ship types
+    // Refs to ship types and their dirs
     const shipTypes = ["sentinel", "assault", "viper", "iron", "leviathan"];
+    const typeToDir = {
+      sentinel: "SP",
+      assault: "AT",
+      viper: "VM",
+      iron: "IG",
+      leviathan: "L",
+    };
 
     // Helper for getting random array entry
     function randomEntry(array) {
@@ -62,6 +69,7 @@ const gameLog = ((userName = "User") => {
     }
 
     // Set the image when ship hit
+
     if (logLower.includes("hit your")) {
       shipTypes.forEach((type) => {
         if (logLower.includes(type)) {

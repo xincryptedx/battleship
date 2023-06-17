@@ -64,7 +64,7 @@ const gameLog = ((userName = "User") => {
       // Get random img from appropriate place
       console.log("Ship dir: ", shipDir);
       const entry = randomEntry(sceneImages[shipDir].attack);
-      // Check user remaining ships
+      // Set the image
       logImg.src = sceneImages[shipDir].attack[entry];
     }
 
@@ -74,6 +74,12 @@ const gameLog = ((userName = "User") => {
       shipTypes.forEach((type) => {
         if (logLower.includes(type)) {
           console.log(`HIT YOUR ${type} IMG`);
+          // Set the ship directory based on type
+          const shipDir = typeToDir[type];
+          // Get a random hit entry
+          const entry = randomEntry(sceneImages[shipDir].hit);
+          // Set the image
+          logImg.src = sceneImages[shipDir].hit[entry];
         }
       });
     }

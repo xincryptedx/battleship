@@ -58,7 +58,7 @@ const aiAttack = (rivalBoard) => {
           if (rivalBoard.allSunk()) {
             // Log results
             gameLog.append(
-              "All User units destroyed. AI dominance is assured."
+              "All User units destroyed. \nAI dominance is assured."
             );
             // Set game over on boards
             board.gameOver = true;

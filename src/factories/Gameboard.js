@@ -181,6 +181,7 @@ const Gameboard = () => {
         gameLog.append(
           `<span style="color: red">${player} ${ship} was destroyed!</span>`
         );
+        gameLog.setScene();
         sunkenShips[key] = true;
       }
     });

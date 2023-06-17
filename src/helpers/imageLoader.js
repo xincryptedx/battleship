@@ -16,7 +16,6 @@ const imageLoader = () => {
     const fileName = file.toLowerCase();
 
     const subDir = file.split("/")[1].toUpperCase();
-    console.log("subDir:", subDir);
 
     if (fileName.includes("hit")) {
       imageRefs[subDir].hit.push(filePath);

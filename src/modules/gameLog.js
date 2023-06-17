@@ -84,18 +84,15 @@ const gameLog = ((userName = "User") => {
       });
     }
 
-    // Set the image when ship sinks
-    if (logLower.includes("destroyed")) {
-      shipTypes.forEach((type) => {
-        if (logLower.includes(type)) {
-          console.log(`DESTROYED ${type} IMG`);
-        }
-      });
-    }
-
     // Set the image when there is an ai miss to gen of remaining ships
     if (logLower.includes("ai attacks") && logLower.includes("missed")) {
       console.log("MISSED USER IMG");
+      // Get random remaining ship dir
+      const shipDir = randomShipDir();
+      // Get random entry from there
+      const entry = randomEntry(sceneImages[shipDir].gen);
+      // Set the image
+      logImg.src = sceneImages[shipDir].gen[entry];
     }
   };
 

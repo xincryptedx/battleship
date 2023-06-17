@@ -144,7 +144,7 @@ body {
   grid-row: 6 / 20;
 
   display: grid;
-  grid-template: 5% min-content 8% min-content 8% min-content 5% 1fr / 1fr;
+  grid-template: 5% min-content 1fr min-content 1fr min-content 5% min-content 5% / 1fr;
   place-items: center;
   grid-template-areas:
     "."

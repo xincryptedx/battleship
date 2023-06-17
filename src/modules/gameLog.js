@@ -18,7 +18,6 @@ const gameLog = ((userName = "User") => {
   // Method for loading scene images. Must be run once in game manager.
   const loadScenes = () => {
     sceneImages = imageLoader();
-    console.table(sceneImages);
   };
 
   // Sets the scene image based on params passed
@@ -58,22 +57,18 @@ const gameLog = ((userName = "User") => {
       logLower.includes(userName.toLowerCase()) &&
       logLower.includes("attacks")
     ) {
-      console.log("USER ATTACK IMG");
       // Get random ship
       const shipDir = randomShipDir();
       // Get random img from appropriate place
-      console.log("Ship dir: ", shipDir);
       const entry = randomEntry(sceneImages[shipDir].attack);
       // Set the image
       logImg.src = sceneImages[shipDir].attack[entry];
     }
 
     // Set the image when ship hit
-
     if (logLower.includes("hit your")) {
       shipTypes.forEach((type) => {
         if (logLower.includes(type)) {
-          console.log(`HIT YOUR ${type} IMG`);
           // Set the ship directory based on type
           const shipDir = typeToDir[type];
           // Get a random hit entry
@@ -86,7 +81,6 @@ const gameLog = ((userName = "User") => {
 
     // Set the image when there is an ai miss to gen of remaining ships
     if (logLower.includes("ai attacks") && logLower.includes("missed")) {
-      console.log("MISSED USER IMG");
       // Get random remaining ship dir
       const shipDir = randomShipDir();
       // Get random entry from there

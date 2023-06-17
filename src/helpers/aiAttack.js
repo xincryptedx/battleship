@@ -66,6 +66,7 @@ const aiAttack = (rivalBoard) => {
           // Draw the miss to board
           rivalBoard.canvas.drawMiss(attackCoords);
           // Log the miss
+          gameLog.erase();
           gameLog.append(`AI attacks cell: ${attackCoords}\nAttack missed!`);
         }
       });

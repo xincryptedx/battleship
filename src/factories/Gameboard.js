@@ -105,7 +105,10 @@ const Gameboard = () => {
 
     // Log if player's ship was hit
     if (!thisGameboard.isAi) {
-      gameLog.append(`Attack hit your ${ship.type} at cell ${position}!`);
+      gameLog.erase();
+      gameLog.append(
+        `AI attacks cell: ${position} \nAttack hit your ${ship.type}!`
+      );
     }
   };
 

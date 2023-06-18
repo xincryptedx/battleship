@@ -67,6 +67,8 @@ const aiAttack = (rivalBoard) => {
             board.rivalBoard.gameOver = true;
           }
         } else if (result === false) {
+          // Play sound
+          soundPlayer.playMiss();
           // Draw the miss to board
           rivalBoard.canvas.drawMiss(attackCoords);
           // Log the miss

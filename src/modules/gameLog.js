@@ -20,6 +20,32 @@ const gameLog = ((userName = "User") => {
     sceneImages = imageLoader();
   };
 
+  // Gets a random array entry
+  function randomEntry(array) {
+    const lastIndex = array.length - 1;
+    const randomNumber = Math.floor(Math.random() * (lastIndex + 1));
+    return randomNumber;
+  }
+  // Gets a random user ship that isn't destroyed
+  const dirNames = { 0: "SP", 1: "AT", 2: "VM", 3: "IG", 4: "L" };
+  function randomShipDir(gameboard = userGameboard) {
+    let randomNumber = Math.floor(Math.random() * 5);
+    while (gameboard.ships[randomNumber].isSunk()) {
+      randomNumber = Math.floor(Math.random() * 5);
+    }
+    return dirNames[randomNumber];
+  }
+
+  // Initializes scene image to gen image
+  const initScene = () => {
+    // get random ship dir
+    const shipDir = randomShipDir();
+    // get random array entry
+    const entry = randomEntry(sceneImages[shipDir].gen);
+    // set the image
+    logImg.src = sceneImages[shipDir].gen[entry];
+  };
+
   // Sets the scene image based on params passed
   const setScene = () => {
     // Set the text to lowercase for comparison
@@ -35,22 +61,7 @@ const gameLog = ((userName = "User") => {
       leviathan: "L",
     };
 
-    // Helper for getting random array entry
-    function randomEntry(array) {
-      const lastIndex = array.length - 1;
-      const randomNumber = Math.floor(Math.random() * (lastIndex + 1));
-      return randomNumber;
-    }
-
     // Helper for getting random ship type from those remaining
-    const dirNames = { 0: "SP", 1: "AT", 2: "VM", 3: "IG", 4: "L" };
-    function randomShipDir(gameboard = userGameboard) {
-      let randomNumber = Math.floor(Math.random() * 5);
-      while (gameboard.ships[randomNumber].isSunk()) {
-        randomNumber = Math.floor(Math.random() * 5);
-      }
-      return dirNames[randomNumber];
-    }
 
     // Set the image when you attack based on remaining ships
     if (
@@ -102,7 +113,7 @@ const gameLog = ((userName = "User") => {
     }
   };
 
-  return { erase, append, setScene, loadScenes, setUserGameboard };
+  return { erase, append, setScene, loadScenes, setUserGameboard, initScene };
 })();
 
 export default gameLog;

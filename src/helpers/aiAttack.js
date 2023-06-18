@@ -1,5 +1,6 @@
 import gameLog from "../modules/gameLog";
 import sounds from "../modules/sounds";
+const soundPlayer = sounds();
 
 // This helper will look at current hits and misses and then return an attack
 const aiAttack = (rivalBoard) => {
@@ -50,6 +51,7 @@ const aiAttack = (rivalBoard) => {
       .then((result) => {
         if (result === true) {
           // Play hit sound
+          soundPlayer.playHit();
           // Draw the hit to board
           rivalBoard.canvas.drawHit(attackCoords);
           // Log sunk user ships

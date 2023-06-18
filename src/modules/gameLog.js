@@ -26,6 +26,7 @@ const gameLog = ((userName = "User") => {
     const randomNumber = Math.floor(Math.random() * (lastIndex + 1));
     return randomNumber;
   }
+
   // Gets a random user ship that isn't destroyed
   const dirNames = { 0: "SP", 1: "AT", 2: "VM", 3: "IG", 4: "L" };
   function randomShipDir(gameboard = userGameboard) {
@@ -39,7 +40,7 @@ const gameLog = ((userName = "User") => {
   // Initializes scene image to gen image
   const initScene = () => {
     // get random ship dir
-    const shipDir = randomShipDir();
+    const shipDir = dirNames[Math.floor(Math.random() * 5)];
     // get random array entry
     const entry = randomEntry(sceneImages[shipDir].gen);
     // set the image

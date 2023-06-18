@@ -22,6 +22,8 @@ const gameManager = () => {
 
   // Set gameLog user game board for accurate scenes
   gameLog.setUserGameboard(userPlayer.gameboard);
+  // Init game log scene img
+  gameLog.initScene();
 
   // Initialize the web interface with gameboards
   const webInt = webInterface(userPlayer.gameboard, aiPlayer.gameboard);

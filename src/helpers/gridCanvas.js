@@ -1,5 +1,7 @@
 // This module allows writing to the game log text
 import gameLog from "../modules/gameLog";
+import sounds from "../modules/sounds";
+const soundPlayer = sounds();
 
 const createCanvas = (
   sizeX,
@@ -379,41 +381,50 @@ const createCanvas = (
         gameLog.erase();
         gameLog.append(`User attacks cell: ${mouseCell}`);
         gameLog.setScene();
+        // Play the sound
+        soundPlayer.playAttack();
         // Send the attack
         gameboard.receiveAttack(mouseCell).then((result) => {
-          // Attack hit
-          if (result === true) {
-            // Draw hit to board
-            boardCanvas.drawHitMiss(mouseCell, 1);
-            // Log hit
-            gameLog.append("Attack hit!");
-            // Log sunken ships
-            aiBoard.logSunk();
-            // Check if player won
-            if (aiBoard.allSunk()) {
-              // Log results
-              gameLog.append(
-                "All AI units destroyed. \nHumanity survives another day..."
-              );
-              // Set gameover on boards
-              aiBoard.gameOver = true;
-              aiBoard.rivalBoard.gameOver = true;
-            } else {
+          // Set a timeout for dramatic effect
+          setTimeout(() => {
+            // Attack hit
+            if (result === true) {
+              // Play sound
+              soundPlayer.playHit();
+              // Draw hit to board
+              boardCanvas.drawHitMiss(mouseCell, 1);
+              // Log hit
+              gameLog.append("Attack hit!");
+              // Log sunken ships
+              aiBoard.logSunk();
+              // Check if player won
+              if (aiBoard.allSunk()) {
+                // Log results
+                gameLog.append(
+                  "All AI units destroyed. \nHumanity survives another day..."
+                );
+                // Set gameover on boards
+                aiBoard.gameOver = true;
+                aiBoard.rivalBoard.gameOver = true;
+              } else {
+                // Log the ai "thinking" about its attack
+                gameLog.append("AI detrmining attack...");
+                // Have the ai attack if not gameOver
+                gameboard.tryAiAttack();
+              }
+            } else if (result === false) {
+              // Play sound
+              soundPlayer.playMiss();
+              // Draw miss to board
+              boardCanvas.drawHitMiss(mouseCell, 0);
+              // Log miss
+              gameLog.append("Attack missed!");
               // Log the ai "thinking" about its attack
               gameLog.append("AI detrmining attack...");
               // Have the ai attack if not gameOver
               gameboard.tryAiAttack();
             }
-          } else if (result === false) {
-            // Draw miss to board
-            boardCanvas.drawHitMiss(mouseCell, 0);
-            // Log miss
-            gameLog.append("Attack missed!");
-            // Log the ai "thinking" about its attack
-            gameLog.append("AI detrmining attack...");
-            // Have the ai attack if not gameOver
-            gameboard.tryAiAttack();
-          }
+          }, 1000);
         });
         // Clear the overlay to show hit/miss under current highight
         overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);

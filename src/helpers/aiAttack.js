@@ -1,5 +1,6 @@
 import gameLog from "../modules/gameLog";
 import sounds from "../modules/sounds";
+
 const soundPlayer = sounds();
 
 // This helper will look at current hits and misses and then return an attack
@@ -79,7 +80,7 @@ const aiAttack = (rivalBoard) => {
       });
 
     board.canAttack = true;
-  }, 1000);
+  }, 2500);
 };
 
 export default aiAttack;

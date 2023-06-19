@@ -131,6 +131,11 @@ const gameManager = () => {
   };
 
   // #endregion
+
+  // #region Handle Ship Placement
+
+  // #endregion
+
   return {
     aiAttacking,
     playerAttacking,

@@ -215,9 +215,9 @@ const createCanvas = (
 
   // Add methods on the container for drawing hits or misses for ease of use elsewhere
   canvasContainer.drawHit = (coordinates) =>
-    boardCanvas.drawHitMiss(coordinates, 1);
+    canvasContainer.drawHitMiss(coordinates, 1);
   canvasContainer.drawMiss = (coordinates) =>
-    boardCanvas.drawHitMiss(coordinates, 0);
+    canvasContainer.drawHitMiss(coordinates, 0);
 
   // #endregion
 
@@ -242,7 +242,7 @@ const createCanvas = (
   };
 
   // Draw hit or to board canvas
-  boardCanvas.drawHitMiss = (
+  canvasContainer.drawHitMiss = (
     cellCoordinates,
     type = 0,
     cellX = cellSizeX,

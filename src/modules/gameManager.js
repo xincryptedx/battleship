@@ -11,8 +11,8 @@ const gameManager = () => {
   // Refs to relevant game objects
   let userBoard = null;
   let aiBoard = null;
-  let userCanvas = null;
-  let aiCanvas = null;
+  let userCanvasContainer = null;
+  let aiCanvasContainer = null;
 
   // #region Handle AI Attacks
   // AI Attack Hit
@@ -20,7 +20,7 @@ const gameManager = () => {
     // Play hit sound
     soundPlayer.playHit();
     // Draw the hit to board
-    userCanvas.drawHit(attackCoords); // user canvas
+    userCanvasContainer.drawHit(attackCoords); // user canvas
     // Log sunk user ships
     userBoard.logSunk(); // user board
     // Check if AI won
@@ -39,7 +39,7 @@ const gameManager = () => {
     // Play sound
     soundPlayer.playMiss();
     // Draw the miss to board
-    userCanvas.drawMiss(attackCoords);
+    userCanvasContainer.drawMiss(attackCoords);
     // Log the miss
     gameLog.erase();
     gameLog.append(`AI attacks cell: ${attackCoords}\nAttack missed!`);
@@ -93,7 +93,7 @@ const gameManager = () => {
             // Play sound
             soundPlayer.playHit();
             // Draw hit to board
-            aiCanvas.drawHitMiss(attackCoords, 1);
+            aiCanvasContainer.drawHitMiss(attackCoords, 1);
             // Log hit
             gameLog.append("Attack hit!");
             // Log sunken ships
@@ -117,7 +117,7 @@ const gameManager = () => {
             // Play sound
             soundPlayer.playMiss();
             // Draw miss to board
-            aiCanvas.drawHitMiss(attackCoords, 0);
+            aiCanvasContainer.drawHitMiss(attackCoords, 0);
             // Log miss
             gameLog.append("Attack missed!");
             // Log the ai "thinking" about its attack
@@ -147,16 +147,16 @@ const gameManager = () => {
       aiBoard = board;
     },
     get userCanvas() {
-      return userCanvas;
+      return userCanvasContainer;
     },
     set userCanvas(canvas) {
-      userCanvas = canvas;
+      userCanvasContainer = canvas;
     },
     get aiCanvas() {
-      return aiCanvas;
+      return aiCanvasContainer;
     },
     set aiCanvas(canvas) {
-      aiCanvas = canvas;
+      aiCanvasContainer = canvas;
     },
   };
 };

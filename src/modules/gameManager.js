@@ -14,6 +14,7 @@ const gameManager = () => {
   let userCanvas = null;
   let aiCanvas = null;
 
+  // #region Handle AI Attacks
   // AI Attack Hit
   const aiAttackHit = (attackCoords) => {
     // Play hit sound
@@ -64,6 +65,8 @@ const gameManager = () => {
       userBoard.canAttack = true;
     }, 2500);
   };
+
+  // #endregion
 
   return {
     aiAttacking,

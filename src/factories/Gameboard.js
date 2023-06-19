@@ -12,19 +12,19 @@ const Gameboard = (gm) => {
 
   const thisGameboard = {
     ships: [],
-    direction: 1,
     allOccupiedCells: [],
-    addShip: null,
-    receiveAttack: null,
     misses: [],
     hits: [],
-    allSunk: null,
-    logSunk: null,
-    rivalBoard: null,
-    canvas: null,
-    canAttack: true,
+    direction: 1,
     isAi: false,
     gameOver: false,
+    rivalBoard: null,
+    canvas: null,
+    addShip: null,
+    receiveAttack: null,
+    allSunk: null,
+    logSunk: null,
+    canAttack: true,
   };
 
   // Method that validates ship occupied cell coords

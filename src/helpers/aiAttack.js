@@ -11,11 +11,9 @@ const aiAttack = (gm) => {
     attackCoords = [x, y];
   };
 
-  // Try a random attack that has not been yet tried
+  // Set random attack  coords that have not been attacked
   randomAttack();
-  console.log(gm);
   while (gm.userBoard.alreadyAttacked(attackCoords)) {
-    console.log(attackCoords);
     randomAttack();
   }
 

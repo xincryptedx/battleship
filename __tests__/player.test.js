@@ -2,7 +2,8 @@ import Player from "../src/factories/Player";
 
 describe("Player basic functionality", () => {
   test("returns an object", () => {
-    const testPlayer = Player();
+    const gmMock = {}; // Mock gameManager
+    const testPlayer = Player(gmMock);
     expect(testPlayer).toBeInstanceOf(Object);
   });
 });
@@ -10,19 +11,22 @@ describe("Player basic functionality", () => {
 // Set function for player name
 describe("Player Name", () => {
   test('player.name = "string" should set name to string', () => {
-    const testPlayer = Player();
+    const gmMock = {}; // Mock gameManager
+    const testPlayer = Player(gmMock);
     testPlayer.name = "string";
     expect(testPlayer.name).toBe("string");
   });
 
   test("player.name = other types should use that objects .toString()", () => {
-    const testPlayer = Player();
+    const gmMock = {};
+    const testPlayer = Player(gmMock);
     testPlayer.name = 123;
     expect(testPlayer.name).toBe("123");
   });
 
   test("player.name = falsy values returns ''", () => {
-    const testPlayer = Player();
+    const gmMock = {}; // Mock gameManager
+    const testPlayer = Player(gmMock);
     testPlayer.name = "My Name"; // Removes default '' value for name
     testPlayer.name = null;
     expect(testPlayer.name).toBe("");
@@ -47,14 +51,16 @@ describe("sendAttack", () => {
       maxBoardY: 9,
       rivalBoard: mockRivalBoard,
     };
-    const testPlayer = Player();
+    const gmMock = {}; // Mock gameManager
+    const testPlayer = Player(gmMock);
     testPlayer.sendAttack([2, 4], mockPlayerBoard);
     expect(mockReceiveAttack.mock.calls).toHaveLength(1);
   });
 
   test("receiveAttack not invoked when invalid board param", () => {
     const mockReceiveAttack = jest.fn();
-    const testPlayer = Player();
+    const gmMock = {}; // Mock gameManager
+    const testPlayer = Player(gmMock);
     testPlayer.sendAttack([2, 4], null);
     expect(mockReceiveAttack.mock.calls).toHaveLength(0);
   });
@@ -67,7 +73,8 @@ describe("sendAttack", () => {
     const mockPlayerBoard = {
       rivalBoard: mockRivalBoard,
     };
-    const testPlayer = Player();
+    const gmMock = {}; // Mock gameManager
+    const testPlayer = Player(gmMock);
     testPlayer.sendAttack([2, 4], mockPlayerBoard);
     expect(mockReceiveAttack.mock.calls).toHaveLength(0);
   });
@@ -84,7 +91,8 @@ describe("sendAttack", () => {
       maxBoardY: 9,
       rivalBoard: mockRivalBoard,
     };
-    const testPlayer = Player();
+    const gmMock = {}; // Mock gameManager
+    const testPlayer = Player(gmMock);
     testPlayer.sendAttack([20, 4], mockPlayerBoard);
     expect(mockReceiveAttack.mock.calls).toHaveLength(0);
   });
@@ -101,7 +109,8 @@ describe("sendAttack", () => {
       maxBoardY: 9,
       rivalBoard: mockRivalBoard,
     };
-    const testPlayer = Player();
+    const gmMock = {}; // Mock gameManager
+    const testPlayer = Player(gmMock);
     testPlayer.sendAttack(null, mockPlayerBoard);
     expect(mockReceiveAttack.mock.calls).toHaveLength(0);
   });
@@ -118,7 +127,8 @@ describe("sendAttack", () => {
       maxBoardY: 9,
       rivalBoard: mockRivalBoard,
     };
-    const testPlayer = Player();
+    const gmMock = {}; // Mock gameManager
+    const testPlayer = Player(gmMock);
     testPlayer.sendAttack([2.5, "abc"], mockPlayerBoard);
     expect(mockReceiveAttack.mock.calls).toHaveLength(0);
   });

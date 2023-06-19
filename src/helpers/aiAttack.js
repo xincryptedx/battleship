@@ -1,13 +1,7 @@
-import gameLog from "../modules/gameLog";
-import sounds from "../modules/sounds";
-
-const soundPlayer = sounds();
-
 // This helper will look at current hits and misses and then return an attack
 const aiAttack = (rivalBoard, gm) => {
   const gridHeight = 10;
   const gridWidth = 10;
-  const board = rivalBoard;
   const { hits, misses } = rivalBoard;
   let attackCoords = [];
 
@@ -43,22 +37,8 @@ const aiAttack = (rivalBoard, gm) => {
     randomAttack();
   }
 
-  // Timeout to simulate "thinking" and to make game feel better
-  setTimeout(() => {
-    // Send attack to rival board
-    rivalBoard
-      .receiveAttack(attackCoords)
-      // Then draw hits or misses
-      .then((result) => {
-        if (result === true) {
-          gm.aiAttackHit(attackCoords);
-        } else if (result === false) {
-          gm.aiAttackMissed(attackCoords);
-        }
-      });
-
-    board.canAttack = true;
-  }, 2500);
+  // Send attack to game manager
+  gm.aiAttacking(attackCoords);
 };
 
 export default aiAttack;

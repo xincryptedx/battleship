@@ -45,9 +45,28 @@ const gameManager = () => {
     gameLog.setScene();
   };
 
+  // AI is attacking
+  const aiAttacking = (attackCoords) => {
+    // Timeout to simulate "thinking" and to make game feel better
+    setTimeout(() => {
+      // Send attack to rival board
+      userBoard
+        .receiveAttack(attackCoords)
+        // Then draw hits or misses
+        .then((result) => {
+          if (result === true) {
+            aiAttackHit(attackCoords);
+          } else if (result === false) {
+            aiAttackMissed(attackCoords);
+          }
+        });
+
+      userBoard.canAttack = true;
+    }, 2500);
+  };
+
   return {
-    aiAttackHit,
-    aiAttackMissed,
+    aiAttacking,
     get userBoard() {
       return userBoard;
     },

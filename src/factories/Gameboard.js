@@ -13,23 +13,16 @@ const Gameboard = () => {
   const thisGameboard = {
     ships: [],
     direction: 1,
-    returnUserShips: null,
     allOccupiedCells: [],
     addShip: null,
     receiveAttack: null,
-    canAttack: true,
     misses: [],
     hits: [],
     allSunk: null,
     logSunk: null,
     rivalBoard: null,
-    get maxBoardX() {
-      return maxBoardX;
-    },
-    get maxBoardY() {
-      return maxBoardY;
-    },
     canvas: null,
+    canAttack: true,
     isAi: false,
     gameOver: false,
   };

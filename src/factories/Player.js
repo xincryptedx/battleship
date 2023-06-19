@@ -1,7 +1,7 @@
 import Gameboard from "./Gameboard";
 
 /* Factory that creates and returns a player object that can take a shot at opponent's game board */
-const Player = () => {
+const Player = (gm) => {
   let privateName = "";
   const thisPlayer = {
     get name() {
@@ -12,7 +12,7 @@ const Player = () => {
         privateName = newName.toString();
       } else privateName = "";
     },
-    gameboard: Gameboard(),
+    gameboard: Gameboard(gm),
     sendAttack: null,
   };
 

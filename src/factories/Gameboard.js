@@ -5,7 +5,7 @@ import gameLog from "../modules/gameLog";
 /* Factory that returns a gameboard that can place ships with Ship(), recieve attacks based on coords 
    and then decides whether to hit() if ship is in that spot, records hits and misses, and reports if
    all its ships have been sunk. */
-const Gameboard = () => {
+const Gameboard = (gm) => {
   // Constraints for game board (10x10 grid, zero based)
   const maxBoardX = 9;
   const maxBoardY = 9;
@@ -150,7 +150,7 @@ const Gameboard = () => {
   thisGameboard.tryAiAttack = () => {
     // Return if not ai
     if (thisGameboard.isAi === false) return;
-    aiAttack(thisGameboard.rivalBoard);
+    aiAttack(thisGameboard.rivalBoard, gm);
   };
 
   // Method that determines if all ships are sunk or not

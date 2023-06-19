@@ -12,12 +12,15 @@ import placeAiShips from "./helpers/placeAiShips";
 import gameLog from "./modules/gameLog";
 
 // #region Loading/Init
+// Ref to game manager instance
+const gm = gameManager();
+
 // Load scene images for game log
 gameLog.loadScenes();
 
 // Initialization of Player objects for user and AI
-const userPlayer = Player(); // Create players
-const aiPlayer = Player();
+const userPlayer = Player(gm); // Create players
+const aiPlayer = Player(gm);
 userPlayer.gameboard.rivalBoard = aiPlayer.gameboard; // Set rival boards
 aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
 userPlayer.gameboard.isAi = false; // Set ai or not
@@ -36,12 +39,11 @@ const canvases = canvasAdder(userPlayer.gameboard, aiPlayer.gameboard, webInt);
 userPlayer.gameboard.canvas = canvases.userCanvas;
 aiPlayer.gameboard.canvas = canvases.aiCanvas;
 
-// Add boards and canvases to gameManager
-const GM = gameManager();
-GM.userBoard = userPlayer.gameboard;
-GM.aiBoard = aiPlayer.gameboard;
-GM.userCanvas = canvases.userCanvas;
-GM.aiCanvas = canvases.aiCanvas;
+// Add boards and canvases to gameManage
+gm.userBoard = userPlayer.gameboard;
+gm.aiBoard = aiPlayer.gameboard;
+gm.userCanvas = canvases.userCanvas;
+gm.aiCanvas = canvases.aiCanvas;
 
 // #endregion
 

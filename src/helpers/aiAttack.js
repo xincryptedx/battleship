@@ -1,11 +1,10 @@
 import gameLog from "../modules/gameLog";
 import sounds from "../modules/sounds";
-import gameManager from "../modules/gameManager";
 
 const soundPlayer = sounds();
 
 // This helper will look at current hits and misses and then return an attack
-const aiAttack = (rivalBoard) => {
+const aiAttack = (rivalBoard, gm) => {
   const gridHeight = 10;
   const gridWidth = 10;
   const board = rivalBoard;
@@ -52,9 +51,9 @@ const aiAttack = (rivalBoard) => {
       // Then draw hits or misses
       .then((result) => {
         if (result === true) {
-          gameManager.aiAttackHit(attackCoords);
+          gm.aiAttackHit(attackCoords);
         } else if (result === false) {
-          gameManager.aiAttackMissed(attackCoords);
+          gm.aiAttackMissed(attackCoords);
         }
       });
 

@@ -1,6 +1,7 @@
 // This module allows writing to the game log text
 import gameLog from "../modules/gameLog";
 import sounds from "../modules/sounds";
+
 const soundPlayer = sounds();
 
 const createCanvas = (

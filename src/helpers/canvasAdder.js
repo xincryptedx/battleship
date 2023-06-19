@@ -1,4 +1,4 @@
-import gridCanvas from "./gridCanvas";
+import gridCanvas from "../factories/GridCanvas";
 
 /* This module creates canvas elements and adds them to the appropriate 
    places in the DOM. */

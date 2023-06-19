@@ -68,8 +68,72 @@ const gameManager = () => {
 
   // #endregion
 
+  // #region Handle Player Attacks
+  const playerAttacking = (attackCoords) => {
+    // Return if gameboard can't attack
+    if (aiBoard.rivalBoard.canAttack === false) return;
+    // Try attack at current cell
+    if (aiBoard.alreadyAttacked(attackCoords)) {
+      // Bad thing. Error sound maybe.
+    } else if (userBoard.gameOver === false) {
+      // Set gameboard to not be able to attack
+      userBoard.canAttack = false;
+      // Log the sent attack
+      gameLog.erase();
+      gameLog.append(`User attacks cell: ${attackCoords}`);
+      gameLog.setScene();
+      // Play the sound
+      soundPlayer.playAttack();
+      // Send the attack
+      aiBoard.receiveAttack(attackCoords).then((result) => {
+        // Set a timeout for dramatic effect
+        setTimeout(() => {
+          // Attack hit
+          if (result === true) {
+            // Play sound
+            soundPlayer.playHit();
+            // Draw hit to board
+            aiCanvas.drawHitMiss(attackCoords, 1);
+            // Log hit
+            gameLog.append("Attack hit!");
+            // Log sunken ships
+            aiBoard.logSunk();
+            // Check if player won
+            if (aiBoard.allSunk()) {
+              // Log results
+              gameLog.append(
+                "All AI units destroyed. \nHumanity survives another day..."
+              );
+              // Set gameover on boards
+              aiBoard.gameOver = true;
+              aiBoard.rivalBoard.gameOver = true;
+            } else {
+              // Log the ai "thinking" about its attack
+              gameLog.append("AI detrmining attack...");
+              // Have the ai attack if not gameOver
+              aiBoard.tryAiAttack();
+            }
+          } else if (result === false) {
+            // Play sound
+            soundPlayer.playMiss();
+            // Draw miss to board
+            aiCanvas.drawHitMiss(attackCoords, 0);
+            // Log miss
+            gameLog.append("Attack missed!");
+            // Log the ai "thinking" about its attack
+            gameLog.append("AI detrmining attack...");
+            // Have the ai attack if not gameOver
+            aiBoard.tryAiAttack();
+          }
+        }, 1000);
+      });
+    }
+  };
+
+  // #endregion
   return {
     aiAttacking,
+    playerAttacking,
     get userBoard() {
       return userBoard;
     },

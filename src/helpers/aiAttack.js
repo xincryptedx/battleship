@@ -1,5 +1,6 @@
 import gameLog from "../modules/gameLog";
 import sounds from "../modules/sounds";
+import gameManager from "../modules/gameManager";
 
 const soundPlayer = sounds();
 
@@ -51,31 +52,9 @@ const aiAttack = (rivalBoard) => {
       // Then draw hits or misses
       .then((result) => {
         if (result === true) {
-          // Play hit sound
-          soundPlayer.playHit();
-          // Draw the hit to board
-          rivalBoard.canvas.drawHit(attackCoords);
-          // Log sunk user ships
-          rivalBoard.logSunk();
-          // Check if AI won
-          if (rivalBoard.allSunk()) {
-            // Log results
-            gameLog.append(
-              "All User units destroyed. \nAI dominance is assured."
-            );
-            // Set game over on boards
-            board.gameOver = true;
-            board.rivalBoard.gameOver = true;
-          }
+          gameManager.aiAttackHit(attackCoords);
         } else if (result === false) {
-          // Play sound
-          soundPlayer.playMiss();
-          // Draw the miss to board
-          rivalBoard.canvas.drawMiss(attackCoords);
-          // Log the miss
-          gameLog.erase();
-          gameLog.append(`AI attacks cell: ${attackCoords}\nAttack missed!`);
-          gameLog.setScene();
+          gameManager.aiAttackMissed(attackCoords);
         }
       });
 

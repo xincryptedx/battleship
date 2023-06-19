@@ -7,10 +7,12 @@ const soundPlayer = sounds();
 /* This module allows the various other game modules to communicate and offers
    high level methods to handle various game events. This object will be passed
    to other modules as prop so they can use these methods. */
-const gameManager = (userGameboard, aiGameboard, userCanvas, aiCanvas) => {
+const gameManager = () => {
   // Refs to relevant game objects
-  const userBoard = userGameboard;
-  const aiBoard = aiGameboard;
+  let userBoard = null;
+  let aiBoard = null;
+  let userCanvas = null;
+  let aiCanvas = null;
 
   // AI Attack Hit
   const aiAttackHit = (attackCoords) => {
@@ -43,7 +45,34 @@ const gameManager = (userGameboard, aiGameboard, userCanvas, aiCanvas) => {
     gameLog.setScene();
   };
 
-  return { aiAttackHit, aiAttackMissed };
+  return {
+    aiAttackHit,
+    aiAttackMissed,
+    get userBoard() {
+      return userBoard;
+    },
+    set userBoard(board) {
+      userBoard = board;
+    },
+    get aiBoard() {
+      return aiBoard;
+    },
+    set aiBoard(board) {
+      aiBoard = board;
+    },
+    get userCanvas() {
+      return userCanvas;
+    },
+    set userCanvas(canvas) {
+      userCanvas = canvas;
+    },
+    get aiCanvas() {
+      return aiCanvas;
+    },
+    set aiCanvas(canvas) {
+      aiCanvas = canvas;
+    },
+  };
 };
 
 export default gameManager;

@@ -13,7 +13,7 @@ const gameManager = (userGameboard, aiGameboard, userCanvas, aiCanvas) => {
   const aiBoard = aiGameboard;
 
   // AI Attack Hit
-  const aiHit = (attackCoords) => {
+  const aiAttackHit = (attackCoords) => {
     // Play hit sound
     soundPlayer.playHit();
     // Draw the hit to board
@@ -31,7 +31,19 @@ const gameManager = (userGameboard, aiGameboard, userCanvas, aiCanvas) => {
     }
   };
 
-  return { aiHit };
+  // AI Attack Missed
+  const aiAttackMissed = (attackCoords) => {
+    // Play sound
+    soundPlayer.playMiss();
+    // Draw the miss to board
+    userCanvas.drawMiss(attackCoords);
+    // Log the miss
+    gameLog.erase();
+    gameLog.append(`AI attacks cell: ${attackCoords}\nAttack missed!`);
+    gameLog.setScene();
+  };
+
+  return { aiAttackHit, aiAttackMissed };
 };
 
 export default gameManager;

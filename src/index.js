@@ -16,11 +16,11 @@ import gameLog from "./modules/gameLog";
 gameLog.loadScenes();
 
 // Initialization of Player objects for user and AI
-const userPlayer = Player();
+const userPlayer = Player(); // Create players
 const aiPlayer = Player();
-userPlayer.gameboard.rivalBoard = aiPlayer.gameboard;
+userPlayer.gameboard.rivalBoard = aiPlayer.gameboard; // Set rival boards
 aiPlayer.gameboard.rivalBoard = userPlayer.gameboard;
-userPlayer.gameboard.isAi = false;
+userPlayer.gameboard.isAi = false; // Set ai or not
 aiPlayer.gameboard.isAi = true;
 
 // Set gameLog user game board for accurate scenes
@@ -35,6 +35,13 @@ const canvases = canvasAdder(userPlayer.gameboard, aiPlayer.gameboard, webInt);
 // Add canvases to gameboards
 userPlayer.gameboard.canvas = canvases.userCanvas;
 aiPlayer.gameboard.canvas = canvases.aiCanvas;
+
+// Add boards and canvases to gameManager
+const GM = gameManager();
+GM.userBoard = userPlayer.gameboard;
+GM.aiBoard = aiPlayer.gameboard;
+GM.userCanvas = canvases.userCanvas;
+GM.aiCanvas = canvases.aiCanvas;
 
 // #endregion
 

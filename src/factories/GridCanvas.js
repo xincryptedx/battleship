@@ -1,11 +1,11 @@
 const createCanvas = (
+  gm,
   sizeX,
   sizeY,
   options,
   gameboard,
   webInterface,
-  userCanvas,
-  gm
+  userCanvas
 ) => {
   // #region References
   // Ships array

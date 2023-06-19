@@ -1,6 +1,7 @@
 import Gameboard from "./Gameboard";
 
-/* Factory that creates and returns a player object that can take a shot at opponent's game board */
+/* Factory that creates and returns a player object that can take a shot at opponent's game board.
+   Requires gameManager for gameboard methods */
 const Player = (gm) => {
   let privateName = "";
   const thisPlayer = {

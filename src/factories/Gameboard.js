@@ -151,7 +151,7 @@ const Gameboard = (gm) => {
   thisGameboard.tryAiAttack = () => {
     // Return if not ai
     if (thisGameboard.isAi === false) return;
-    aiAttack(thisGameboard.rivalBoard, gm);
+    aiAttack(gm);
   };
 
   // Method that determines if all ships are sunk or not

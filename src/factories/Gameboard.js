@@ -18,13 +18,14 @@ const Gameboard = (gm) => {
     direction: 1,
     isAi: false,
     gameOver: false,
+    canAttack: true,
     rivalBoard: null,
     canvas: null,
     addShip: null,
     receiveAttack: null,
     allSunk: null,
     logSunk: null,
-    canAttack: true,
+    alreadyAttacked: null,
   };
 
   // Method that validates ship occupied cell coords
@@ -179,6 +180,25 @@ const Gameboard = (gm) => {
         sunkenShips[key] = true;
       }
     });
+  };
+
+  // Method for determining if a position is already attacked
+  thisGameboard.alreadyAttacked = (attackCoords) => {
+    let attacked = false;
+
+    thisGameboard.hits.forEach((hit) => {
+      if (attackCoords[0] === hit[0] && attackCoords[1] === hit[1]) {
+        attacked = true;
+      }
+    });
+
+    thisGameboard.misses.forEach((miss) => {
+      if (attackCoords[0] === miss[0] && attackCoords[1] === miss[1]) {
+        attacked = true;
+      }
+    });
+
+    return attacked;
   };
 
   return thisGameboard;

@@ -34,7 +34,12 @@ gameLog.initScene();
 // Initialize the web interface with gameboards
 const webInt = webInterface(userPlayer.gameboard, aiPlayer.gameboard);
 // Add the canvas objects now that gameboards are created
-const canvases = canvasAdder(userPlayer.gameboard, aiPlayer.gameboard, webInt);
+const canvases = canvasAdder(
+  userPlayer.gameboard,
+  aiPlayer.gameboard,
+  webInt,
+  gm
+);
 // Add canvases to gameboards
 userPlayer.gameboard.canvas = canvases.userCanvas;
 aiPlayer.gameboard.canvas = canvases.aiCanvas;

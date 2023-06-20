@@ -1,6 +1,5 @@
 import Ship from "./Ship";
 import aiAttack from "../helpers/aiAttack";
-import gameLog from "../modules/gameLog";
 
 /* Factory that returns a gameboard that can place ships with Ship(), recieve attacks based on coords 
    and then decides whether to hit() if ship is in that spot, records hits and misses, and reports if
@@ -16,6 +15,7 @@ const Gameboard = (gm) => {
     misses: [],
     hits: [],
     direction: 1,
+    hitShipType: null,
     isAi: false,
     gameOver: false,
     canAttack: true,
@@ -97,14 +97,8 @@ const Gameboard = (gm) => {
       thisGameboard.hits.push(position);
     }
 
-    // Log if player's ship was hit
-    if (!thisGameboard.isAi) {
-      gameLog.erase();
-      gameLog.append(
-        `AI attacks cell: ${position} \nAttack hit your ${ship.type}!`
-      );
-      gameLog.setScene();
-    }
+    // Set the most recently hit ship
+    thisGameboard.hitShipType = ship.type;
   };
 
   // Method for receiving an attack from opponent

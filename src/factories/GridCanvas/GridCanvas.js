@@ -4,7 +4,7 @@ import drawingModule from "./draw";
 // Initialize it
 const draw = drawingModule();
 
-const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
+const createCanvas = (gm, canvasX, canvasY, options, gameboard) => {
   // #region References
   // Ships array
   const { ships } = gameboard;
@@ -25,15 +25,15 @@ const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
   // Static or rarely rendered things should go here
   const boardCanvas = document.createElement("canvas");
   canvasContainer.appendChild(boardCanvas);
-  boardCanvas.width = sizeX;
-  boardCanvas.height = sizeY;
+  boardCanvas.width = canvasX;
+  boardCanvas.height = canvasY;
   const boardCtx = boardCanvas.getContext("2d");
 
   // Create the overlay canvas for rendering ship placement and attack selection
   const overlayCanvas = document.createElement("canvas");
   canvasContainer.appendChild(overlayCanvas);
-  overlayCanvas.width = sizeX;
-  overlayCanvas.height = sizeY;
+  overlayCanvas.width = canvasX;
+  overlayCanvas.height = canvasY;
   const overlayCtx = overlayCanvas.getContext("2d");
 
   // Set the "cell size" for the grid represented by the canvas
@@ -149,8 +149,8 @@ const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
         // Render the changes
         draw.placementHighlight(
           overlayCtx,
-          sizeX,
-          sizeY,
+          canvasX,
+          canvasY,
           cellSizeX,
           cellSizeY,
           mouseCell,
@@ -208,8 +208,8 @@ const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
         // Highlight the current cell in red
         draw.attackHighlight(
           overlayCtx,
-          sizeX,
-          sizeY,
+          canvasX,
+          canvasY,
           cellSizeX,
           cellSizeY,
           mouseCell,
@@ -247,7 +247,7 @@ const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
   );
 
   // Draw initial board lines
-  draw.lines(boardCtx, sizeX, sizeY);
+  draw.lines(boardCtx, canvasX, canvasY);
 
   // Return completed canvases
   return canvasContainer;

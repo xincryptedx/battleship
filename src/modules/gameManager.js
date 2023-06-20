@@ -1,8 +1,4 @@
-import sounds from "./sounds";
 import gameLog from "./gameLog";
-import webInt from "./webInterface";
-
-// Initialize modules
 
 /* This module allows the various other game modules to communicate and offers
    high level methods to handle various game events. This object will be passed

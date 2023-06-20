@@ -55,27 +55,7 @@ const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
     return [cellX, cellY];
   };
 
-  // Method to determine if cell has a hit or miss in it
-  const alreadyAttacked = (cellCoordinates) => {
-    let attacked = false;
-    gameboard.hits.forEach((hit) => {
-      if (cellCoordinates[0] === hit[0] && cellCoordinates[1] === hit[1]) {
-        attacked = true;
-      }
-    });
-
-    gameboard.misses.forEach((miss) => {
-      if (cellCoordinates[0] === miss[0] && cellCoordinates[1] === miss[1]) {
-        attacked = true;
-      }
-    });
-
-    return attacked;
-  };
-
   // #endregion
-
-  // Methods for drawing to canvases
 
   // Add methods on the container for drawing hits or misses for ease of use elsewhere
   canvasContainer.drawHit = (coordinates) =>

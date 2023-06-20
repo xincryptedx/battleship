@@ -169,17 +169,16 @@ const Gameboard = (gm) => {
 
   // Method for reporting sunken ships
   thisGameboard.logSunk = () => {
+    let logMsg = null;
     Object.keys(sunkenShips).forEach((key) => {
       if (sunkenShips[key] === false && thisGameboard.ships[key - 1].isSunk()) {
         const ship = thisGameboard.ships[key - 1].type;
         const player = thisGameboard.isAi ? "AI's" : "User's";
-        gameLog.append(
-          `<span style="color: red">${player} ${ship} was destroyed!</span>`
-        );
-        gameLog.setScene();
+        logMsg = `<span style="color: red">${player} ${ship} was destroyed!</span>`;
         sunkenShips[key] = true;
       }
     });
+    return logMsg;
   };
 
   // Method for determining if a position is already attacked

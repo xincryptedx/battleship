@@ -98,7 +98,13 @@ const gameManager = () => {
             // Log hit
             gameLog.append("Attack hit!");
             // Log sunken ships
-            aiBoard.logSunk();
+            const sunkMsg = aiBoard.logSunk();
+            if (sunkMsg !== null) {
+              gameLog.append(sunkMsg);
+              // Update log scene
+              gameLog.setScene();
+            }
+
             // Check if player won
             if (aiBoard.allSunk()) {
               // Log results

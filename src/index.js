@@ -7,13 +7,20 @@ import "./style/style.css";
 import gameManager from "./modules/gameManager";
 import Player from "./factories/Player";
 import canvasAdder from "./helpers/canvasAdder";
-import webInterface from "./modules/webInterface";
+import webInt from "./modules/webInterface";
 import placeAiShips from "./helpers/placeAiShips";
 import gameLog from "./modules/gameLog";
+import sounds from "./modules/sounds";
 
 // #region Loading/Init
 // Ref to game manager instance
 const gm = gameManager();
+
+// Initialize the web interface with gm ref
+const webInterface = webInt(gm);
+
+// Initialize sound module
+const soundPlayer = sounds();
 
 // Load scene images for game log
 gameLog.loadScenes();
@@ -31,25 +38,27 @@ gameLog.setUserGameboard(userPlayer.gameboard);
 // Init game log scene img
 gameLog.initScene();
 
-// Initialize the web interface with gameboards
-const webInt = webInterface(userPlayer.gameboard, aiPlayer.gameboard);
 // Add the canvas objects now that gameboards are created
 const canvases = canvasAdder(
   userPlayer.gameboard,
   aiPlayer.gameboard,
-  webInt,
+  webInterface,
   gm
 );
 // Add canvases to gameboards
 userPlayer.gameboard.canvas = canvases.userCanvas;
 aiPlayer.gameboard.canvas = canvases.aiCanvas;
 
-// Add boards and canvases to gameManage
+// Add boards and canvases to gameManager
 gm.userBoard = userPlayer.gameboard;
 gm.aiBoard = aiPlayer.gameboard;
 gm.userCanvasContainer = canvases.userCanvas;
 gm.aiCanvasContainer = canvases.aiCanvas;
 gm.placementCanvasContainer = canvases.placementCanvas;
+
+// Add modules to gameManager
+gm.webInterface = webInterface;
+gm.soundPlayer = soundPlayer;
 
 // #endregion
 

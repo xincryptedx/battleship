@@ -1,5 +1,3 @@
-import gameLog from "./gameLog";
-
 /* This module allows the various other game modules to communicate and offers
    high level methods to handle various game events. This object will be passed
    to other modules as prop so they can use these methods. */
@@ -14,6 +12,7 @@ const gameManager = () => {
   // Refs to modules
   let soundPlayer = null;
   let webInterface = null;
+  let gameLog = null;
 
   // #region Handle AI Attacks
   // AI Attack Hit
@@ -220,6 +219,12 @@ const gameManager = () => {
     },
     set webInterface(aModule) {
       webInterface = aModule;
+    },
+    get gameLog() {
+      return gameLog;
+    },
+    set gameLog(aModule) {
+      gameLog = aModule;
     },
   };
 };

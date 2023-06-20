@@ -75,39 +75,13 @@ const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
 
   // #endregion
 
-  // #region Methods for drawing to canvases
-
-  // Draw highlighted attack cell
-  const highlightAttack = (
-    cellCoordinates,
-    cellX = cellSizeX,
-    cellY = cellSizeY
-  ) => {
-    // Clear the canvas
-    overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-
-    // Highlight the current cell in red
-    overlayCtx.fillStyle = "red";
-
-    // Check if cell coords in gameboard hits or misses
-    if (alreadyAttacked(cellCoordinates)) return;
-
-    // Highlight the cell
-    overlayCtx.fillRect(
-      cellCoordinates[0] * cellX,
-      cellCoordinates[1] * cellY,
-      cellX,
-      cellY
-    );
-  };
+  // Methods for drawing to canvases
 
   // Add methods on the container for drawing hits or misses for ease of use elsewhere
   canvasContainer.drawHit = (coordinates) =>
     canvasContainer.drawHitMiss(coordinates, 1);
   canvasContainer.drawMiss = (coordinates) =>
     canvasContainer.drawHitMiss(coordinates, 0);
-
-  // #endregion
 
   // #region Assign static behaviors
   // Draw ships to board canvas using shipsCopy
@@ -252,7 +226,16 @@ const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
         )
       ) {
         // Highlight the current cell in red
-        highlightAttack(mouseCell);
+        draw.attackHighlight(
+          overlayCtx,
+          sizeX,
+          sizeY,
+          cellSizeX,
+          cellSizeY,
+          mouseCell,
+          gm
+        );
+        // highlightAttack(mouseCell);
       }
       // Denote if it is a valid attack or not - NYI
     };

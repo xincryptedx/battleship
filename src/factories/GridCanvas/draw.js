@@ -24,6 +24,22 @@ const draw = () => {
     }
   };
 
+  // Draws the ships. Default data to use is user ships, but ai can be used too
+  const ships = (context, cellX, cellY, gm, userShips = true) => {
+    // Draw a cell to board
+    function drawCell(posX, posY) {
+      context.fillRect(posX * cellX, posY * cellY, cellX, cellY);
+    }
+    // Which board to get ships data from
+    const board = userShips === true ? gm.userBoard : gm.aiBoard;
+    // Draw the cells to the board
+    board.ships.forEach((ship) => {
+      ship.occupiedCells.forEach((cell) => {
+        drawCell(cell[0], cell[1]);
+      });
+    });
+  };
+
   const placementHighlight = (
     context,
     canvasX,
@@ -131,7 +147,7 @@ const draw = () => {
     );
   };
 
-  return { lines, placementHighlight, attackHighlight };
+  return { lines, ships, placementHighlight, attackHighlight };
 };
 
 export default draw;

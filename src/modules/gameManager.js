@@ -1,5 +1,6 @@
 import sounds from "./sounds";
 import gameLog from "./gameLog";
+import webInterface from "./webInterface";
 
 // Initialize modules
 const soundPlayer = sounds();
@@ -134,12 +135,19 @@ const gameManager = () => {
   // #endregion
 
   // #region Handle Ship Placement
-
+  const placementClicked = (cell) => {
+    // Try placement
+    userBoard.addShip(cell);
+    placementCanvasContainer.drawShips();
+    userCanvasContainer.drawShips();
+    webInterface.tryStartGame();
+  };
   // #endregion
 
   return {
     aiAttacking,
     playerAttacking,
+    placementClicked,
     get userBoard() {
       return userBoard;
     },

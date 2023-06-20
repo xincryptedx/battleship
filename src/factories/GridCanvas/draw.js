@@ -104,7 +104,34 @@ const draw = () => {
     }
   };
 
-  return { lines, placementHighlight };
+  const attackHighlight = (
+    context,
+    canvasX,
+    canvasY,
+    cellX,
+    cellY,
+    mouseCoords,
+    gm
+  ) => {
+    // Clear the canvas
+    context.clearRect(0, 0, canvasX, canvasY);
+
+    // Highlight the current cell in red
+    context.fillStyle = "red";
+
+    // Check if cell coords in gameboard hits or misses
+    if (gm.aiBoard.alreadyAttacked(mouseCoords)) return;
+
+    // Highlight the cell
+    context.fillRect(
+      mouseCoords[0] * cellX,
+      mouseCoords[1] * cellY,
+      cellX,
+      cellY
+    );
+  };
+
+  return { lines, placementHighlight, attackHighlight };
 };
 
 export default draw;

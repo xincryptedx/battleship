@@ -1,9 +1,10 @@
 import sounds from "./sounds";
 import gameLog from "./gameLog";
-import webInterface from "./webInterface";
+import webInt from "./webInterface";
 
 // Initialize modules
 const soundPlayer = sounds();
+const webInterface = webInt();
 
 /* This module allows the various other game modules to communicate and offers
    high level methods to handle various game events. This object will be passed
@@ -134,13 +135,19 @@ const gameManager = () => {
 
   // #endregion
 
-  // #region Handle Ship Placement
+  // #region Handle Ship Placement and Game Start
+  const tryStartGame = () => {
+    if (userBoard.ships.length === 5) {
+      webInterface.showGame();
+    }
+  };
+
   const placementClicked = (cell) => {
     // Try placement
     userBoard.addShip(cell);
     placementCanvasContainer.drawShips();
     userCanvasContainer.drawShips();
-    webInterface.tryStartGame();
+    tryStartGame();
   };
   // #endregion
 

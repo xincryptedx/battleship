@@ -45,12 +45,6 @@ const webInterface = (userGameboard, aiGameboard) => {
     hideAll();
     game.classList.remove("hidden");
   };
-  // If the user gameboard has full ships then the game is ready to start
-  const tryStartGame = () => {
-    if (userGameboard.ships.length === 5) {
-      showGame();
-    }
-  };
 
   // Shrink the title
   const shrinkTitle = () => {
@@ -81,7 +75,7 @@ const webInterface = (userGameboard, aiGameboard) => {
   rotateBtn.addEventListener("click", handleRotateClick);
   startBtn.addEventListener("click", handleStartClick);
 
-  return { tryStartGame };
+  return { showGame };
 };
 
 export default webInterface;

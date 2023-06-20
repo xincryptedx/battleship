@@ -47,8 +47,8 @@ aiPlayer.gameboard.canvas = canvases.aiCanvas;
 // Add boards and canvases to gameManage
 gm.userBoard = userPlayer.gameboard;
 gm.aiBoard = aiPlayer.gameboard;
-gm.userCanvas = canvases.userCanvas;
-gm.aiCanvas = canvases.aiCanvas;
+gm.userCanvasContainer = canvases.userCanvas;
+gm.aiCanvasContainer = canvases.aiCanvas;
 
 // #endregion
 

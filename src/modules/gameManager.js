@@ -13,6 +13,7 @@ const gameManager = () => {
   let aiBoard = null;
   let userCanvasContainer = null;
   let aiCanvasContainer = null;
+  let placementCanvasContainer = null;
 
   // #region Handle AI Attacks
   // AI Attack Hit
@@ -151,17 +152,23 @@ const gameManager = () => {
     set aiBoard(board) {
       aiBoard = board;
     },
-    get userCanvas() {
+    get userCanvasContainer() {
       return userCanvasContainer;
     },
-    set userCanvas(canvas) {
+    set userCanvasContainer(canvas) {
       userCanvasContainer = canvas;
     },
-    get aiCanvas() {
+    get aiCanvasContainer() {
       return aiCanvasContainer;
     },
-    set aiCanvas(canvas) {
+    set aiCanvasContainer(canvas) {
       aiCanvasContainer = canvas;
+    },
+    get placementCanvascontainer() {
+      return placementCanvasContainer;
+    },
+    set placementCanvasContainer(canvas) {
+      placementCanvasContainer = canvas;
     },
   };
 };

@@ -222,9 +222,8 @@ const createCanvas = (
   // #endregion
 
   // #region Assign static behaviors
-  // boardCanvas
   // Draw ships to board canvas using shipsCopy
-  boardCanvas.drawShips = (
+  canvasContainer.drawShips = (
     shipsToDraw = ships,
     cellX = cellSizeX,
     cellY = cellSizeY

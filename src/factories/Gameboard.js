@@ -92,13 +92,13 @@ const Gameboard = (gm) => {
     }
   };
 
-  const addHit = (position, ship) => {
+  const addHit = (position, ship, doLog = true) => {
     if (position) {
       thisGameboard.hits.push(position);
     }
 
     // Log if player's ship was hit
-    if (!thisGameboard.isAi) {
+    if (!thisGameboard.isAi && doLog === true) {
       gameLog.erase();
       gameLog.append(
         `AI attacks cell: ${position} \nAttack hit your ${ship.type}!`

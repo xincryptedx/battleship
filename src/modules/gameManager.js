@@ -22,6 +22,12 @@ const gameManager = () => {
     soundPlayer.playHit();
     // Draw the hit to board
     userCanvasContainer.drawHit(attackCoords);
+    // Log the hit
+    gameLog.erase();
+    gameLog.append(
+      `AI attacks cell: ${attackCoords} \nAttack hit your ${userBoard.hitShipType}!`
+    );
+    gameLog.setScene();
     // Log sunk user ships
     const sunkMsg = userBoard.logSunk();
     if (sunkMsg !== null) {

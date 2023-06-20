@@ -356,8 +356,7 @@ const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
   );
 
   // Draw initial board lines
-  draw.lines(boardCtx, boardCanvas.width, boardCanvas.height);
-  // drawLines(boardCtx);
+  draw.lines(boardCtx, sizeX, sizeY);
 
   // Return completed canvases
   return canvasContainer;

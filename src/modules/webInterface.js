@@ -74,7 +74,7 @@ const webInterface = (gm) => {
   rotateBtn.addEventListener("click", handleRotateClick);
   startBtn.addEventListener("click", handleStartClick);
 
-  return { showGame };
+  return { showGame, showMenu, showPlacement };
 };
 
 export default webInterface;

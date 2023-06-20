@@ -1,6 +1,6 @@
 import Gameboard from "../src/factories/Gameboard";
 
-// Import the gameLog and mock it
+// Mock the gameLog module
 jest.mock("../src/modules/gameLog", () => ({
   erase: jest.fn,
   append: jest.fn,

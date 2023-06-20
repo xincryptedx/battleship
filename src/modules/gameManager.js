@@ -136,10 +136,17 @@ const gameManager = () => {
   // #endregion
 
   // #region Handle Ship Placement and Game Start
+  // Check if game should start after placement
   const tryStartGame = () => {
     if (userBoard.ships.length === 5) {
       webInterface.showGame();
     }
+  };
+
+  // Handle rotate button clicks
+  const rotateClicked = () => {
+    userBoard.direction = userBoard.direction === 0 ? 1 : 0;
+    aiBoard.direction = aiBoard.direction === 0 ? 1 : 0;
   };
 
   const placementClicked = (cell) => {
@@ -155,6 +162,7 @@ const gameManager = () => {
     aiAttacking,
     playerAttacking,
     placementClicked,
+    rotateClicked,
     get userBoard() {
       return userBoard;
     },

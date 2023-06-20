@@ -315,13 +315,14 @@ const createCanvas = (
 
     // Browser click events
     boardCanvas.handleMouseClick = (event) => {
-      const mouseCell = getMouseCell(event);
+      const cell = getMouseCell(event);
 
       // Try placement
-      gameboard.addShip(mouseCell);
+      gm.placementClicked(cell);
+      /*       gameboard.addShip(mouseCell);
       boardCanvas.drawShips();
       userBoardCanvas.drawShips();
-      webInterface.tryStartGame();
+      webInterface.tryStartGame(); */
     };
   }
   // User canvas for displaying ai hits and misses against user and user ship placements

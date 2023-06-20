@@ -49,6 +49,7 @@ gm.userBoard = userPlayer.gameboard;
 gm.aiBoard = aiPlayer.gameboard;
 gm.userCanvasContainer = canvases.userCanvas;
 gm.aiCanvasContainer = canvases.aiCanvas;
+gm.placementCanvasContainer = canvases.placementCanvas;
 
 // #endregion
 

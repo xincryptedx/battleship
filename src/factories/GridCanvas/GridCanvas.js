@@ -1,3 +1,9 @@
+// Helper module for draw methods
+import drawingModule from "./draw";
+
+// Initialize it
+const draw = drawingModule();
+
 const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
   // #region References
   // Ships array
@@ -70,30 +76,6 @@ const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
   // #endregion
 
   // #region Methods for drawing to canvases
-  // Method for drawing the grid lines
-  const drawLines = (context) => {
-    // Draw grid lines
-    const gridSize = Math.min(sizeX, sizeY) / 10;
-    const lineColor = "black";
-    context.strokeStyle = lineColor;
-    context.lineWidth = 1;
-
-    // Draw vertical lines
-    for (let x = 0; x <= sizeX; x += gridSize) {
-      context.beginPath();
-      context.moveTo(x, 0);
-      context.lineTo(x, sizeY);
-      context.stroke();
-    }
-
-    // Draw horizontal lines
-    for (let y = 0; y <= sizeY; y += gridSize) {
-      context.beginPath();
-      context.moveTo(0, y);
-      context.lineTo(sizeX, y);
-      context.stroke();
-    }
-  };
 
   // Draws the highlighted placement cells to the overlay canvas
   const highlightPlacementCells = (
@@ -374,7 +356,8 @@ const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
   );
 
   // Draw initial board lines
-  drawLines(boardCtx);
+  draw.lines(boardCtx, boardCanvas.width, boardCanvas.height);
+  // drawLines(boardCtx);
 
   // Return completed canvases
   return canvasContainer;

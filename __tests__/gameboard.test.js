@@ -1,12 +1,5 @@
 import Gameboard from "../src/factories/Gameboard";
 
-// Mock the gameLog module
-jest.mock("../src/modules/gameLog", () => ({
-  erase: jest.fn,
-  append: jest.fn,
-  setScene: jest.fn,
-}));
-
 // Basic game boad factory functionality
 describe("General Functionality", () => {
   test("Gameboard returns an object", () => {

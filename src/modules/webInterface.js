@@ -3,7 +3,7 @@
    1. Get ship placement coordinates from the user based on their clicks on the web interface
    2. Get attack placement coordinates from the user based on the same
    3. Other minor interface actions such as handling button clicks (start game, restart, etc) */
-const webInterface = (userGameboard, aiGameboard) => {
+const webInterface = (gm) => {
   // References to main elements
   const title = document.querySelector(".title");
   const menu = document.querySelector(".menu");
@@ -16,8 +16,7 @@ const webInterface = (userGameboard, aiGameboard) => {
 
   // Method for iterating through directions
   const rotateDirection = () => {
-    userGameboard.direction = userGameboard.direction === 0 ? 1 : 0;
-    aiGameboard.direction = aiGameboard.direction === 0 ? 1 : 0;
+    gm.rotateClicked();
   };
 
   // #region Basic methods for showing/hiding elements

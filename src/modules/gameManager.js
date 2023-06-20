@@ -94,7 +94,7 @@ const gameManager = () => {
             // Play sound
             soundPlayer.playHit();
             // Draw hit to board
-            aiCanvasContainer.drawHitMiss(attackCoords, 1);
+            aiCanvasContainer.drawHit(attackCoords);
             // Log hit
             gameLog.append("Attack hit!");
             // Log sunken ships
@@ -118,7 +118,7 @@ const gameManager = () => {
             // Play sound
             soundPlayer.playMiss();
             // Draw miss to board
-            aiCanvasContainer.drawHitMiss(attackCoords, 0);
+            aiCanvasContainer.drawMiss(attackCoords);
             // Log miss
             gameLog.append("Attack missed!");
             // Log the ai "thinking" about its attack

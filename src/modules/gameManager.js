@@ -3,8 +3,6 @@ import gameLog from "./gameLog";
 import webInt from "./webInterface";
 
 // Initialize modules
-const soundPlayer = sounds();
-const webInterface = webInt();
 
 /* This module allows the various other game modules to communicate and offers
    high level methods to handle various game events. This object will be passed
@@ -16,6 +14,10 @@ const gameManager = () => {
   let userCanvasContainer = null;
   let aiCanvasContainer = null;
   let placementCanvasContainer = null;
+
+  // Refs to modules
+  let soundPlayer = null;
+  let webInterface = null;
 
   // #region Handle AI Attacks
   // AI Attack Hit
@@ -192,6 +194,18 @@ const gameManager = () => {
     },
     set placementCanvasContainer(canvas) {
       placementCanvasContainer = canvas;
+    },
+    get soundPlayer() {
+      return soundPlayer;
+    },
+    set soundPlayer(aModule) {
+      soundPlayer = aModule;
+    },
+    get webInterface() {
+      return webInterface;
+    },
+    set webInterface(aModule) {
+      webInterface = aModule;
     },
   };
 };

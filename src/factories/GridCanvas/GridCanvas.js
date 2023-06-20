@@ -58,7 +58,7 @@ const createCanvas = (gm, canvasX, canvasY, options) => {
   canvasContainer.drawMiss = (coordinates) =>
     draw.hitOrMiss(boardCtx, cellSizeX, cellSizeY, coordinates, 0);
 
-  // Draw ships to board canvas
+  // Add method to container for ships to board canvas
   canvasContainer.drawShips = (userShips = true) => {
     draw.ships(boardCtx, cellSizeX, cellSizeY, gm, userShips);
   };
@@ -125,10 +125,6 @@ const createCanvas = (gm, canvasX, canvasY, options) => {
 
       // Try placement
       gm.placementClicked(cell);
-      /*       gameboard.addShip(mouseCell);
-      boardCanvas.drawShips();
-      userBoardCanvas.drawShips();
-      webInterface.tryStartGame(); */
     };
   }
   // User canvas for displaying ai hits and misses against user and user ship placements
@@ -152,7 +148,6 @@ const createCanvas = (gm, canvasX, canvasY, options) => {
     overlayCanvas.handleMouseMove = (event) => {
       // Get what cell the mouse is over
       const mouseCell = getMouseCell(event);
-
       // If the 'old' currentCell is equal to the mouseCell being evaluated
       if (
         !(

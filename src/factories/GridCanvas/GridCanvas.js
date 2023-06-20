@@ -4,13 +4,7 @@ import drawingModule from "./draw";
 // Initialize it
 const draw = drawingModule();
 
-const createCanvas = (gm, canvasX, canvasY, options, gameboard) => {
-  // #region References
-  // Ships array
-  const { ships } = gameboard;
-
-  // #endregion
-
+const createCanvas = (gm, canvasX, canvasY, options) => {
   // #region Set up basic element properties
   // Set the grid height and width and add ref to current cell
   const gridHeight = 10;
@@ -57,29 +51,16 @@ const createCanvas = (gm, canvasX, canvasY, options, gameboard) => {
 
   // #endregion
 
-  // Add methods on the container for drawing hits or misses for ease of use elsewhere
+  // #region Assign static behaviors
+  // Add methods on the container for drawing hits or misses
   canvasContainer.drawHit = (coordinates) =>
     canvasContainer.drawHitMiss(coordinates, 1);
   canvasContainer.drawMiss = (coordinates) =>
     canvasContainer.drawHitMiss(coordinates, 0);
 
-  // #region Assign static behaviors
-  // Draw ships to board canvas using shipsCopy
-  canvasContainer.drawShips = (
-    shipsToDraw = ships,
-    cellX = cellSizeX,
-    cellY = cellSizeY
-  ) => {
-    // Draw a cell to board
-    function drawCell(posX, posY) {
-      boardCtx.fillRect(posX * cellX, posY * cellY, cellX, cellY);
-    }
-
-    shipsToDraw.forEach((ship) => {
-      ship.occupiedCells.forEach((cell) => {
-        drawCell(cell[0], cell[1]);
-      });
-    });
+  // Draw ships to board canvas
+  canvasContainer.drawShips = (userShips = true) => {
+    draw.ships(boardCtx, cellSizeX, cellSizeY, gm, userShips);
   };
 
   // Draw hit or to board canvas

@@ -40,6 +40,26 @@ const draw = () => {
     });
   };
 
+  // Draws a hit or a miss defaulting to a miss if no type passed
+  const hitOrMiss = (context, cellX, cellY, mouseCoords, type = 0) => {
+    // Set proper fill color
+    context.fillStyle = "white";
+    if (type === 1) context.fillStyle = "red";
+    // Set a radius for circle to draw for "peg" that will always fit in cell
+    const radius = cellX > cellY ? cellY / 2 : cellX / 2;
+    // Draw the circle
+    context.beginPath();
+    context.arc(
+      mouseCoords[0] * cellX + cellX / 2,
+      mouseCoords[1] * cellY + cellY / 2,
+      radius,
+      0,
+      2 * Math.PI
+    );
+    context.stroke();
+    context.fill();
+  };
+
   const placementHighlight = (
     context,
     canvasX,
@@ -147,7 +167,7 @@ const draw = () => {
     );
   };
 
-  return { lines, ships, placementHighlight, attackHighlight };
+  return { lines, ships, hitOrMiss, placementHighlight, attackHighlight };
 };
 
 export default draw;

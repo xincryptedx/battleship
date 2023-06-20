@@ -21,9 +21,15 @@ const gameManager = () => {
     // Play hit sound
     soundPlayer.playHit();
     // Draw the hit to board
-    userCanvasContainer.drawHit(attackCoords); // user canvas
+    userCanvasContainer.drawHit(attackCoords);
     // Log sunk user ships
-    userBoard.logSunk(); // user board
+    const sunkMsg = userBoard.logSunk();
+    if (sunkMsg !== null) {
+      gameLog.append(sunkMsg);
+      // Update log scene
+      gameLog.setScene();
+    }
+    userBoard.logSunk();
     // Check if AI won
     if (userBoard.allSunk()) {
       // '        '

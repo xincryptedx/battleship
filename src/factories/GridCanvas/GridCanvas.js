@@ -16,7 +16,6 @@ const createCanvas = (gm, canvasX, canvasY, options) => {
   canvasContainer.classList.add("canvas-container");
 
   // Create the board canvas element to serve as the gameboard base
-  // Static or rarely rendered things should go here
   const boardCanvas = document.createElement("canvas");
   canvasContainer.appendChild(boardCanvas);
   boardCanvas.width = canvasX;
@@ -51,7 +50,7 @@ const createCanvas = (gm, canvasX, canvasY, options) => {
 
   // #endregion
 
-  // #region Assign static behaviors
+  // #region Assign static methods
   // Add methods on the container for drawing hits or misses
   canvasContainer.drawHit = (coordinates) =>
     draw.hitOrMiss(boardCtx, cellSizeX, cellSizeY, coordinates, 1);

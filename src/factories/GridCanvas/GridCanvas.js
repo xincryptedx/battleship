@@ -54,38 +54,13 @@ const createCanvas = (gm, canvasX, canvasY, options) => {
   // #region Assign static behaviors
   // Add methods on the container for drawing hits or misses
   canvasContainer.drawHit = (coordinates) =>
-    canvasContainer.drawHitMiss(coordinates, 1);
+    draw.hitOrMiss(boardCtx, cellSizeX, cellSizeY, coordinates, 1);
   canvasContainer.drawMiss = (coordinates) =>
-    canvasContainer.drawHitMiss(coordinates, 0);
+    draw.hitOrMiss(boardCtx, cellSizeX, cellSizeY, coordinates, 0);
 
   // Draw ships to board canvas
   canvasContainer.drawShips = (userShips = true) => {
     draw.ships(boardCtx, cellSizeX, cellSizeY, gm, userShips);
-  };
-
-  // Draw hit or to board canvas
-  canvasContainer.drawHitMiss = (
-    cellCoordinates,
-    type = 0,
-    cellX = cellSizeX,
-    cellY = cellSizeY
-  ) => {
-    // Set proper fill color
-    boardCtx.fillStyle = "white";
-    if (type === 1) boardCtx.fillStyle = "red";
-    // Set a radius for circle to draw for "peg" that will always fit in cell
-    const radius = cellX > cellY ? cellY / 2 : cellX / 2;
-    // Draw the circle
-    boardCtx.beginPath();
-    boardCtx.arc(
-      cellCoordinates[0] * cellX + cellX / 2,
-      cellCoordinates[1] * cellY + cellY / 2,
-      radius,
-      0,
-      2 * Math.PI
-    );
-    boardCtx.stroke();
-    boardCtx.fill();
   };
 
   // overlayCanvas

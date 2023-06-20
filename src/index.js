@@ -59,7 +59,7 @@ gm.placementCanvasContainer = canvases.placementCanvas;
 // Add modules to gameManager
 gm.webInterface = webInterface;
 gm.soundPlayer = soundPlayer;
-
+gm.gameLog = gameLog;
 // #endregion
 
 // Add ai ships

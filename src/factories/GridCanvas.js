@@ -1,20 +1,7 @@
-const createCanvas = (
-  gm,
-  sizeX,
-  sizeY,
-  options,
-  gameboard,
-  webInterface,
-  userCanvas
-) => {
+const createCanvas = (gm, sizeX, sizeY, options, gameboard) => {
   // #region References
   // Ships array
   const { ships } = gameboard;
-
-  let userBoardCanvas = null;
-  if (userCanvas) {
-    [userBoardCanvas] = userCanvas.childNodes;
-  }
 
   // #endregion
 

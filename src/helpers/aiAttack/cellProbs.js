@@ -28,13 +28,39 @@ const cellProbs = () => {
       }
     }
     // Adjust the weights based on Barry's theory (if board is checker board, prefer one color)
-    // Optionally display the output in the console
-    console.table(board);
     // Return the initialized board
+    return board;
   };
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
   // Method for normalizing the probabilities
-  createBoard();
+  const normalizeBoard = (board) => {
+    let sum = 0;
+
+    // Calculate the sum of probabilities in the board
+    for (let row = 0; row < board.length; row += 1) {
+      for (let col = 0; col < board[row].length; col += 1) {
+        sum += board[row][col];
+      }
+    }
+
+    // Normalize the probabilities in the board
+    const normalizedBoard = [];
+    for (let row = 0; row < board.length; row += 1) {
+      normalizedBoard[row] = [];
+      for (let col = 0; col < board[row].length; col += 1) {
+        normalizedBoard[row][col] = board[row][col] / sum;
+      }
+    }
+
+    return normalizedBoard;
+  };
+
+  // Create the board
+  const board = createBoard();
+  // Normalize the probabilities
+  const normalizedBoard = normalizeBoard(board);
+  // Log it
+  console.table(normalizedBoard);
 };
 
 export default cellProbs;

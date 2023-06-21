@@ -3,11 +3,25 @@ const cellProbs = () => {
   const createBoard = () => {
     // Create the board. It is a 10x10 grid of cells.
     const board = [];
+
+    // How much to modify the unfocused color probabilities
+    const colorMod = 0.5;
+
+    // Randomly decide which "color" on the board to favor by randomly initializing color weight
+    const initialColorWeight = Math.random() < 0.5 ? 1 : colorMod;
+
+    // Initialize the board with 0's
     for (let i = 0; i < 10; i += 1) {
       board.push(Array(10).fill(0));
     }
+
     // Assign initial probabilities based on Alemi's theory (0.08 in corners, 0.2 in 4 center cells)
     for (let row = 0; row < 10; row += 1) {
+      // On even rows start with alternate color weight
+      let colorWeight = initialColorWeight;
+      if (row % 2 === 0) {
+        colorWeight = initialColorWeight === 1 ? colorMod : 1;
+      }
       for (let col = 0; col < 10; col += 1) {
         // Calculate the distance from the center
         const centerX = 4.5;
@@ -24,10 +38,17 @@ const cellProbs = () => {
           (maxProbability - minProbability) *
             (1 - distanceFromCenter / Math.sqrt(4.5 ** 2 + 4.5 ** 2));
 
-        board[row][col] = probability;
+        // Adjust the weights based on Barry's theory (if board is checker board, prefer one color)
+        const barryProbability = probability * colorWeight;
+
+        // Assign probabilty to the board
+        board[row][col] = barryProbability;
+
+        // Flip the color weight
+        colorWeight = colorWeight === 1 ? colorMod : 1;
       }
     }
-    // Adjust the weights based on Barry's theory (if board is checker board, prefer one color)
+
     // Return the initialized board
     return board;
   };

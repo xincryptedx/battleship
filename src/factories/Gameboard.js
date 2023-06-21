@@ -1,5 +1,5 @@
 import Ship from "./Ship";
-import aiAttack from "../helpers/aiAttack";
+import aiAttack from "../helpers/aiAttack/aiAttack";
 
 /* Factory that returns a gameboard that can place ships with Ship(), recieve attacks based on coords 
    and then decides whether to hit() if ship is in that spot, records hits and misses, and reports if

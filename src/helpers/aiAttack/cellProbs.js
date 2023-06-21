@@ -80,15 +80,21 @@ const cellProbs = () => {
   const board = createBoard();
   // Normalize the probabilities
   const normalizedBoard = normalizeBoard(board);
-  // Log it
-  console.table(normalizedBoard);
-  // Log the toal of all probs
-  console.log(
-    normalizedBoard.reduce(
-      (sum, row) => sum + row.reduce((rowSum, value) => rowSum + value, 0),
-      0
-    )
-  );
+
+  // Method for displaying the board
+  const logBoard = (boardToLog) => {
+    // Log the board
+    console.table(boardToLog);
+    // Log the toal of all probs
+    console.log(
+      boardToLog.reduce(
+        (sum, row) => sum + row.reduce((rowSum, value) => rowSum + value, 0),
+        0
+      )
+    );
+  };
+
+  logBoard(normalizedBoard);
 };
 
 export default cellProbs;

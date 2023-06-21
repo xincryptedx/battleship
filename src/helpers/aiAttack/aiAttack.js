@@ -10,6 +10,9 @@ const aiAttack = (gm) => {
   const gridWidth = 10;
   let attackCoords = [];
 
+  // Update cell hit probabilities
+  probs.updateProbs(gm);
+
   // Method for returning random attack
   const randomAttack = () => {
     const x = Math.floor(Math.random() * gridWidth);

@@ -9,15 +9,12 @@ const cellProbs = () => {
     // Assign initial probabilities based on Alemi's theory (0.08 in corners, 0.2 in 4 center cells)
     // Adjust the weights based on Barry's theory (if board is checker board, prefer one color)
     // Optionally display the output in the console
-    for (let row = 0; row < 10; row += 1) {
-      for (let col = 0; col < 10; col += 1) {
-        console.log(`Cell (${row}, ${col}) - Probability: ${board[row][col]}`);
-      }
-    }
+    console.table(board);
     // Return the initialized board
   };
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
   // Method for normalizing the probabilities
+  createBoard();
 };
 
 export default cellProbs;

@@ -159,17 +159,26 @@ const Gameboard = (gm) => {
   };
 
   // Object for tracking board's sunken ships
-  const sunkenShips = { 1: false, 2: false, 3: false, 4: false, 5: false };
+  thisGameboard.sunkenShips = {
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+  };
 
   // Method for reporting sunken ships
   thisGameboard.logSunk = () => {
     let logMsg = null;
-    Object.keys(sunkenShips).forEach((key) => {
-      if (sunkenShips[key] === false && thisGameboard.ships[key - 1].isSunk()) {
+    Object.keys(thisGameboard.sunkenShips).forEach((key) => {
+      if (
+        thisGameboard.sunkenShips[key] === false &&
+        thisGameboard.ships[key - 1].isSunk()
+      ) {
         const ship = thisGameboard.ships[key - 1].type;
         const player = thisGameboard.isAi ? "AI's" : "User's";
         logMsg = `<span style="color: red">${player} ${ship} was destroyed!</span>`;
-        sunkenShips[key] = true;
+        thisGameboard.sunkenShips[key] = true;
       }
     });
     return logMsg;

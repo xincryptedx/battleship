@@ -52,7 +52,7 @@ const cellProbs = () => {
     // Return the initialized board
     return board;
   };
-  // Method that updates probabilities based on hits, misses, and remaining ships' lengths
+
   // Method for normalizing the probabilities
   const normalizeBoard = (board) => {
     let sum = 0;
@@ -96,7 +96,29 @@ const cellProbs = () => {
     );
   };
 
+  // These values are used as the evidence to update the probabilities on the board
+  let sunkenShips;
+  let hits;
+  let misses;
+  // Method for updating these values from the game manager
+  const updateEvidence = (gm) => {
+    sunkenShips = gm.userBoard.sunkenShips;
+    hits = gm.userBoard.hits;
+    misses = gm.userBoard.misses;
+  };
+
+  // Method that updates probabilities based on hits, misses, and remaining ships' lengths
+  const updateProbs = (gm) => {
+    // First get the updated evidence
+    updateEvidence(gm);
+
+    // Log the evidence for now
+    console.log(sunkenShips, hits, misses);
+  };
+
   logBoard(normalizedBoard);
+
+  return { updateProbs };
 };
 
 export default cellProbs;

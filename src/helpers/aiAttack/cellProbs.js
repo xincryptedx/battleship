@@ -84,8 +84,10 @@ const cellProbs = () => {
   // Method for displaying the board
   const logBoard = (boardToLog) => {
     // Log the board
+    // eslint-disable-next-line no-console
     console.table(boardToLog);
     // Log the toal of all probs
+    // eslint-disable-next-line no-console
     console.log(
       boardToLog.reduce(
         (sum, row) => sum + row.reduce((rowSum, value) => rowSum + value, 0),

@@ -66,6 +66,9 @@ const webInterface = (gm) => {
   };
 
   const handleAiMatchClick = () => {
+    // Set style class based on if userBoard is ai
+    if (gm.userBoard.isAi === true) aiMatchBtn.classList.add("active");
+    else aiMatchBtn.classList.remove("active");
     gm.aiMatchClicked();
   };
 

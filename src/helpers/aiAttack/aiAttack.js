@@ -14,41 +14,42 @@ const aiAttack = (gm, delay) => {
   probs.updateProbs(gm);
 
   // Method for returning random attack
-  const randomAttack = () => {
+  const findRandomAttack = () => {
     const x = Math.floor(Math.random() * gridWidth);
     const y = Math.floor(Math.random() * gridHeight);
     attackCoords = [x, y];
   };
 
   // Method that finds largest value in 2d array
-  const findGreatestValue = (arr) => {
+  const findGreatestProbAttack = () => {
+    const { board } = probs;
     let max = Number.NEGATIVE_INFINITY;
 
-    for (let i = 0; i < arr.length; i += 1) {
-      for (let j = 0; j < arr[i].length; j += 1) {
-        if (arr[i][j] > max) {
-          max = arr[i][j];
+    for (let i = 0; i < board.length; i += 1) {
+      for (let j = 0; j < board[i].length; j += 1) {
+        if (board[i][j] > max) {
+          max = board[i][j];
+          attackCoords = [i, j];
         }
       }
     }
-
-    return max;
   };
 
   // Random attack if ai difficulty is 1
   if (gm.aiDifficulty === 1) {
     // Set random attack  coords that have not been attacked
-    randomAttack();
+    findRandomAttack();
     while (gm.userBoard.alreadyAttacked(attackCoords)) {
-      randomAttack();
+      findRandomAttack();
     }
   }
 
   // Do an attack based on probabilities if ai difficulty is 2
   else if (gm.aiDifficulty === 2) {
-    const { board } = probs;
-    const maxProb = findGreatestValue(board);
-    console.log(maxProb);
+    findGreatestProbAttack();
+    while (gm.userBoard.alreadyAttacked(attackCoords)) {
+      findGreatestProbAttack();
+    }
   }
 
   // Send attack to game manager

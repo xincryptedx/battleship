@@ -218,6 +218,12 @@ const gameManager = () => {
     placementClicked,
     randomShipsClicked,
     rotateClicked,
+    get aiDifficulty() {
+      return aiDifficulty;
+    },
+    set aiDifficulty(diff) {
+      if (diff === 1 || diff === 2 || diff === 3) aiDifficulty = diff;
+    },
     get userBoard() {
       return userBoard;
     },

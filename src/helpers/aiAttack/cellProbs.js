@@ -113,7 +113,7 @@ const cellProbs = () => {
     updateEvidence(gm);
 
     // Log the evidence for now
-    console.log(sunkenShips, hits, misses);
+    // console.log(sunkenShips, hits, misses);
   };
 
   // logBoard(normalizedBoard);

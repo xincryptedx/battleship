@@ -59,7 +59,12 @@ const gameManager = () => {
   };
 
   // AI is attacking
+  let aiAttackCount = 0;
   const aiAttacking = (attackCoords, delay = 2500) => {
+    // Break out of recursion if game is over
+    if (userBoard.gameOver === true) {
+      return;
+    }
     // Timeout to simulate "thinking" and to make game feel better
     setTimeout(() => {
       // Send attack to rival board
@@ -77,9 +82,9 @@ const gameManager = () => {
       userBoard.canAttack = true;
 
       // If user board is AI controlled have it try an attack
-      if (userBoard.isAi) {
+      if (userBoard.isAi === true) {
+        aiAttackCount += 1;
         userBoard.tryAiAttack(0);
-        console.log("ATTACK!");
       }
     }, delay);
   };

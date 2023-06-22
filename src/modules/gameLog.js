@@ -3,6 +3,8 @@ import imageLoader from "../helpers/imageLoader";
 const gameLog = ((userName = "User") => {
   // Flag for turning off scene updates
   let doUpdateScene = true;
+  // Flag for locking the log
+  let doLock = false;
 
   // Add a property to store the gameboard
   let userGameboard = null;
@@ -132,6 +134,14 @@ const gameLog = ((userName = "User") => {
     set doUpdateScene(bool) {
       if (bool === true || bool === false) {
         doUpdateScene = bool;
+      }
+    },
+    get doLock() {
+      return doLock;
+    },
+    set doLock(bool) {
+      if (bool === true || bool === false) {
+        doLock = bool;
       }
     },
   };

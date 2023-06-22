@@ -8,7 +8,7 @@ const missAudio = new Audio(missSound);
 
 const sounds = () => {
   // Flag for muting
-  const isMuted = false;
+  let isMuted = false;
 
   const playHit = () => {
     if (isMuted) return;
@@ -31,7 +31,17 @@ const sounds = () => {
     attackAudio.play();
   };
 
-  return { playHit, playMiss, playAttack };
+  return {
+    playHit,
+    playMiss,
+    playAttack,
+    get isMuted() {
+      return isMuted;
+    },
+    set isMuted(bool) {
+      if (bool === true || bool === false) isMuted = bool;
+    },
+  };
 };
 
 export default sounds;

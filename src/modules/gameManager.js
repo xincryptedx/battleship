@@ -174,6 +174,8 @@ const gameManager = () => {
     userBoard.isAi = userBoard.isAi !== true;
     // Set game log to not update scene
     gameLog.doUpdateScene = false;
+    // Set the sounds to muted
+    soundPlayer.isMuted = soundPlayer.isMuted !== true;
   };
 
   // #region Handle Ship Placement and Game Start

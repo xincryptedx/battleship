@@ -5,11 +5,9 @@ import aiAttack from "../helpers/aiAttack/aiAttack";
    and then decides whether to hit() if ship is in that spot, records hits and misses, and reports if
    all its ships have been sunk. */
 const Gameboard = (gm) => {
-  // Constraints for game board (10x10 grid, zero based)
-  const maxBoardX = 9;
-  const maxBoardY = 9;
-
   const thisGameboard = {
+    maxBoardX: 9,
+    maxBoardY: 9,
     ships: [],
     allOccupiedCells: [],
     misses: [],
@@ -39,9 +37,9 @@ const Gameboard = (gm) => {
       // On the map?
       if (
         ship.occupiedCells[i][0] >= 0 &&
-        ship.occupiedCells[i][0] <= maxBoardX &&
+        ship.occupiedCells[i][0] <= thisGameboard.maxBoardX &&
         ship.occupiedCells[i][1] >= 0 &&
-        ship.occupiedCells[i][1] <= maxBoardY
+        ship.occupiedCells[i][1] <= thisGameboard.maxBoardY
       ) {
         // Do nothing
       } else {

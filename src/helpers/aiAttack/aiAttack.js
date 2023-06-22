@@ -18,19 +18,13 @@ const aiAttack = (gm, delay) => {
     const x = Math.floor(Math.random() * gridWidth);
     const y = Math.floor(Math.random() * gridHeight);
     attackCoords = [x, y];
-    console.log("Selected attack coordinates:", attackCoords);
   };
 
   // Set random attack  coords that have not been attacked
   randomAttack();
   while (gm.userBoard.alreadyAttacked(attackCoords)) {
-    console.log(
-      "Attack coordinates already attacked. Selecting new coordinates..."
-    );
-
     randomAttack();
   }
-  console.log("Final attack coordinates:", attackCoords);
 
   // Send attack to game manager
   gm.aiAttacking(attackCoords, delay);

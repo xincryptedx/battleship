@@ -63,6 +63,9 @@ const gameManager = () => {
   const aiAttacking = (attackCoords, delay = 2500) => {
     // Break out of recursion if game is over
     if (userBoard.gameOver === true) {
+      gameLog.erase();
+      gameLog.append(`Total AI attacks: ${aiAttackCount}`);
+      gameLog.doLock = true;
       return;
     }
     // Timeout to simulate "thinking" and to make game feel better

@@ -5,7 +5,7 @@ import randomShips from "../helpers/randomShips";
    to other modules as prop so they can use these methods. */
 const gameManager = () => {
   // Game settings
-  let aiDifficulty = 0;
+  let aiDifficulty = 1;
 
   // Refs to relevant game objects
   let userBoard = null;

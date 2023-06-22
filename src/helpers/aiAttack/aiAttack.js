@@ -20,10 +20,12 @@ const aiAttack = (gm, delay) => {
     attackCoords = [x, y];
   };
 
-  // Set random attack  coords that have not been attacked
-  randomAttack();
-  while (gm.userBoard.alreadyAttacked(attackCoords)) {
+  if (gm.aiDifficulty === 1) {
+    // Set random attack  coords that have not been attacked
     randomAttack();
+    while (gm.userBoard.alreadyAttacked(attackCoords)) {
+      randomAttack();
+    }
   }
 
   // Send attack to game manager

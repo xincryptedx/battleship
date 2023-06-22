@@ -118,7 +118,7 @@ const cellProbs = () => {
 
   // logBoard(normalizedBoard);
 
-  return { updateProbs };
+  return { updateProbs, board: normalizedBoard };
 };
 
 export default cellProbs;

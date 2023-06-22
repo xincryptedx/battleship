@@ -20,11 +20,6 @@ const placeAiShips = (passedDiff, aiGameboard) => {
   // Place a ship along edges until one successfully placed
   // Place a ship based on quadrant
 
-  // Waits for a aiShipsSet event
-  function waitForAiShipsSet() {
-    // Refactor
-  }
-
   // Combine placement tactics to create varying difficulties
   const placeShips = async (difficulty) => {
     // Totally random palcement
@@ -32,8 +27,6 @@ const placeAiShips = (passedDiff, aiGameboard) => {
       // Try random placement
       placeRandomShip();
 
-      // Wait for returnAiShips
-      await waitForAiShipsSet();
       // Recursively call fn until ships placed
       placeShips(difficulty);
     }

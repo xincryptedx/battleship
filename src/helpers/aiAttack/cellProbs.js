@@ -116,7 +116,7 @@ const cellProbs = () => {
     console.log(sunkenShips, hits, misses);
   };
 
-  logBoard(normalizedBoard);
+  // logBoard(normalizedBoard);
 
   return { updateProbs };
 };

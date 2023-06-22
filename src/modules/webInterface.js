@@ -12,6 +12,7 @@ const webInterface = (gm) => {
 
   // Reference to btn elements
   const startBtn = document.querySelector(".start-btn");
+  const aiMatchBtn = document.querySelector(".ai-match-btn");
   const rotateBtn = document.querySelector(".rotate-btn");
 
   // Method for iterating through directions

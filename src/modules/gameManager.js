@@ -59,7 +59,7 @@ const gameManager = () => {
   };
 
   // AI is attacking
-  const aiAttacking = (attackCoords) => {
+  const aiAttacking = (attackCoords, delay = 2500) => {
     // Timeout to simulate "thinking" and to make game feel better
     setTimeout(() => {
       // Send attack to rival board
@@ -80,7 +80,7 @@ const gameManager = () => {
       if (userBoard.isAi) {
         userBoard.tryAiAttack(0);
       }
-    }, 2500);
+    }, delay);
   };
 
   // #endregion
@@ -129,7 +129,7 @@ const gameManager = () => {
               );
               // Set gameover on boards
               aiBoard.gameOver = true;
-              aiBoard.rivalBoard.gameOver = true;
+              userBoard.gameOver = true;
             } else {
               // Log the ai "thinking" about its attack
               gameLog.append("AI detrmining attack...");

@@ -143,7 +143,7 @@ const Gameboard = (gm) => {
 
   // Method for trying ai attacks
   thisGameboard.tryAiAttack = (delay) => {
-    // Return if not ai
+    // Return if not ai or game is over
     if (thisGameboard.isAi === false) return;
     aiAttack(gm, delay);
   };

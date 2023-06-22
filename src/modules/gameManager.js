@@ -73,8 +73,13 @@ const gameManager = () => {
             aiAttackMissed(attackCoords);
           }
         });
-
+      // Allow userBoard to attack again
       userBoard.canAttack = true;
+
+      // If user board is AI controlled have it try an attack
+      if (userBoard.isAi) {
+        userBoard.tryAiAttack(0);
+      }
     }, 2500);
   };
 
@@ -150,6 +155,14 @@ const gameManager = () => {
 
   // #endregion
 
+  // Handle setting up an AI vs AI match
+  const aiMatchClicked = () => {
+    console.log("Starting AI battle!");
+    // Set user ships randomly
+    // Set user to ai
+    userBoard.isAi = true;
+  };
+
   // #region Handle Ship Placement and Game Start
   // Check if game should start after placement
   const tryStartGame = () => {
@@ -176,6 +189,7 @@ const gameManager = () => {
   return {
     aiAttacking,
     playerAttacking,
+    aiMatchClicked,
     placementClicked,
     rotateClicked,
     get userBoard() {

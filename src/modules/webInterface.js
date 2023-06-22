@@ -65,6 +65,10 @@ const webInterface = (gm) => {
     rotateDirection();
   };
 
+  const handleAiMatchClick = () => {
+    gm.aiMatchClicked();
+  };
+
   // #endregion
 
   // #region Add classes to ship divs to represent placed/destroyed
@@ -74,6 +78,7 @@ const webInterface = (gm) => {
   // Handle browser events
   rotateBtn.addEventListener("click", handleRotateClick);
   startBtn.addEventListener("click", handleStartClick);
+  aiMatchBtn.addEventListener("click", handleAiMatchClick);
 
   return { showGame, showMenu, showPlacement };
 };

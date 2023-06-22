@@ -80,15 +80,16 @@ const gameManager = () => {
           } else if (result === false) {
             aiAttackMissed(attackCoords);
           }
-        });
-      // Allow userBoard to attack again
-      userBoard.canAttack = true;
 
-      // If user board is AI controlled have it try an attack
-      if (userBoard.isAi === true) {
-        aiAttackCount += 1;
-        userBoard.tryAiAttack(0);
-      }
+          // Allow userBoard to attack again
+          userBoard.canAttack = true;
+
+          // If user board is AI controlled have it try an attack
+          if (userBoard.isAi === true) {
+            aiAttackCount += 1;
+            userBoard.tryAiAttack(0);
+          }
+        });
     }, delay);
   };
 

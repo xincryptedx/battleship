@@ -181,6 +181,11 @@ const gameManager = () => {
     }
   };
 
+  // Handle random ships button click
+  const randomShipsClicked = () => {
+    console.log("RANDOM!");
+  };
+
   // Handle rotate button clicks
   const rotateClicked = () => {
     userBoard.direction = userBoard.direction === 0 ? 1 : 0;
@@ -201,6 +206,7 @@ const gameManager = () => {
     playerAttacking,
     aiMatchClicked,
     placementClicked,
+    randomShipsClicked,
     rotateClicked,
     get userBoard() {
       return userBoard;

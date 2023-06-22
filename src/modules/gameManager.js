@@ -4,6 +4,9 @@ import randomShips from "../helpers/randomShips";
    high level methods to handle various game events. This object will be passed
    to other modules as prop so they can use these methods. */
 const gameManager = () => {
+  // Game settings
+  let aiDifficulty = 0;
+
   // Refs to relevant game objects
   let userBoard = null;
   let aiBoard = null;

@@ -111,11 +111,13 @@ const gameLog = ((userName = "User") => {
 
   // Erase the log text
   const erase = () => {
+    if (doLock) return;
     logText.textContent = "";
   };
 
   // Add to log text
   const append = (stringToAppend) => {
+    if (doLock) return;
     if (stringToAppend) {
       logText.innerHTML += `\n${stringToAppend.toString()}`;
     }

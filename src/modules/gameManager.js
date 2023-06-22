@@ -79,6 +79,7 @@ const gameManager = () => {
       // If user board is AI controlled have it try an attack
       if (userBoard.isAi) {
         userBoard.tryAiAttack(0);
+        console.log("ATTACK!");
       }
     }, delay);
   };
@@ -161,6 +162,8 @@ const gameManager = () => {
     // Set user ships randomly
     // Set user to ai
     userBoard.isAi = true;
+    // Set game log to not update scene
+    gameLog.doUpdateScene = false;
   };
 
   // #region Handle Ship Placement and Game Start

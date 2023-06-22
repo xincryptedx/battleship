@@ -1,6 +1,9 @@
 import imageLoader from "../helpers/imageLoader";
 
 const gameLog = ((userName = "User") => {
+  // Flag for turning off scene updates
+  let doUpdateScene = true;
+
   // Add a property to store the gameboard
   let userGameboard = null;
 
@@ -49,6 +52,8 @@ const gameLog = ((userName = "User") => {
 
   // Sets the scene image based on params passed
   const setScene = () => {
+    // Return if log flag set to not update
+    if (!doUpdateScene) return;
     // Set the text to lowercase for comparison
     const logLower = logText.textContent.toLowerCase();
 
@@ -114,7 +119,22 @@ const gameLog = ((userName = "User") => {
     }
   };
 
-  return { erase, append, setScene, loadScenes, setUserGameboard, initScene };
+  return {
+    erase,
+    append,
+    setScene,
+    loadScenes,
+    setUserGameboard,
+    initScene,
+    get doUpdateScene() {
+      return doUpdateScene;
+    },
+    set doUpdateScene(bool) {
+      if (bool === true || bool === false) {
+        doUpdateScene = bool;
+      }
+    },
+  };
 })();
 
 export default gameLog;

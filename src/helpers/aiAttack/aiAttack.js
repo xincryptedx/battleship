@@ -5,7 +5,7 @@ import cellProbs from "./cellProbs";
 const probs = cellProbs();
 
 // This helper will look at current hits and misses and then return an attack
-const aiAttack = (gm) => {
+const aiAttack = (gm, delay) => {
   const gridHeight = 10;
   const gridWidth = 10;
   let attackCoords = [];
@@ -27,7 +27,7 @@ const aiAttack = (gm) => {
   }
 
   // Send attack to game manager
-  gm.aiAttacking(attackCoords);
+  gm.aiAttacking(attackCoords, delay);
 };
 
 export default aiAttack;

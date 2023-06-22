@@ -166,10 +166,8 @@ const gameManager = () => {
 
   // Handle setting up an AI vs AI match
   const aiMatchClicked = () => {
-    console.log("Starting AI battle!");
-    // Set user ships randomly
     // Set user to ai
-    userBoard.isAi = true;
+    userBoard.isAi = userBoard.isAi !== true;
     // Set game log to not update scene
     gameLog.doUpdateScene = false;
   };

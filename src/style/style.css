@@ -89,7 +89,7 @@ body {
   grid-row: 8 / 18;
 
   display: grid;
-  grid-template: 5% 10% 5% 1fr 5% 1fr 5% 1fr / 1fr;
+  grid-template: 5% min-content 5% 1fr 5% 1fr 5% 1fr / 1fr;
   place-items: center;
   grid-template-areas:
     "."
@@ -117,6 +117,7 @@ body {
 
 .menu .start {
   grid-area: start-game;
+  align-self: end;
 }
 
 .menu .ai-match {

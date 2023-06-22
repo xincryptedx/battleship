@@ -81,22 +81,6 @@ const cellProbs = () => {
   // Normalize the probabilities
   const probs = normalizeProbs(nonNormalizedProbs);
 
-  // Method for displaying the probs
-  // eslint-disable-next-line no-unused-vars
-  const logProbs = (probsToLog) => {
-    // Log the probs
-    // eslint-disable-next-line no-console
-    console.table(probsToLog);
-    // Log the toal of all probs
-    // eslint-disable-next-line no-console
-    console.log(
-      probsToLog.reduce(
-        (sum, row) => sum + row.reduce((rowSum, value) => rowSum + value, 0),
-        0
-      )
-    );
-  };
-
   // These values are used as the evidence to update the probabilities on the probs
   let sunkenShips;
   let hits;
@@ -112,16 +96,31 @@ const cellProbs = () => {
   const updateProbs = (gm) => {
     // First get the updated evidence
     updateEvidence(gm);
-    console.log(hits, misses);
     // Set the probability of every hit and missed cell to 0 to prevent that cell from being targeted
     Object.values(hits).forEach((hit) => {
-      const { x, y } = hit;
+      const [x, y] = hit;
       probs[x][y] = 0;
     });
     Object.values(misses).forEach((miss) => {
-      const { x, y } = miss;
+      const [x, y] = miss;
       probs[x][y] = 0;
     });
+  };
+
+  // Method for displaying the probs
+  // eslint-disable-next-line no-unused-vars
+  const logProbs = (probsToLog) => {
+    // Log the probs
+    // eslint-disable-next-line no-console
+    console.table(probsToLog);
+    // Log the toal of all probs
+    // eslint-disable-next-line no-console
+    console.log(
+      probsToLog.reduce(
+        (sum, row) => sum + row.reduce((rowSum, value) => rowSum + value, 0),
+        0
+      )
+    );
   };
 
   // logBoard(normalizedBoard);

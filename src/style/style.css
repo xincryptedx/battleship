@@ -89,13 +89,15 @@ body {
   grid-row: 8 / 18;
 
   display: grid;
-  grid-template: 5% 15% 5% 1fr 5% 1fr / 1fr;
+  grid-template: 5% 10% 5% 1fr 5% 1fr 5% 1fr / 1fr;
   place-items: center;
   grid-template-areas:
     "."
     "credits"
     "."
     "start-game"
+    "."
+    "ai-match"
     "."
     "options";
 
@@ -117,13 +119,18 @@ body {
   grid-area: start-game;
 }
 
+.menu .ai-match {
+  grid-area: ai-match;
+}
+
 .menu .options {
   grid-area: options;
   align-self: start;
 }
 
 .menu .start-btn,
-.menu .options-btn {
+.menu .options-btn,
+.menu .ai-match-btn {
   height: 60px;
   width: 180px;
 
@@ -138,7 +145,8 @@ body {
 }
 
 .menu .start-btn:hover,
-.menu .options-btn:hover {
+.menu .options-btn:hover,
+.menu .ai-match-btn:hover {
   text-shadow: 2px 2px 1px var(--colorC), -2px -2px 1px var(--colorB2);
 }
 

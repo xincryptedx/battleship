@@ -20,12 +20,35 @@ const aiAttack = (gm, delay) => {
     attackCoords = [x, y];
   };
 
+  // Method that finds largest value in 2d array
+  const findGreatestValue = (arr) => {
+    let max = Number.NEGATIVE_INFINITY;
+
+    for (let i = 0; i < arr.length; i += 1) {
+      for (let j = 0; j < arr[i].length; j += 1) {
+        if (arr[i][j] > max) {
+          max = arr[i][j];
+        }
+      }
+    }
+
+    return max;
+  };
+
+  // Random attack if ai difficulty is 1
   if (gm.aiDifficulty === 1) {
     // Set random attack  coords that have not been attacked
     randomAttack();
     while (gm.userBoard.alreadyAttacked(attackCoords)) {
       randomAttack();
     }
+  }
+
+  // Do an attack based on probabilities if ai difficulty is 2
+  else if (gm.aiDifficulty === 2) {
+    const { board } = probs;
+    const maxProb = findGreatestValue(board);
+    console.log(maxProb);
   }
 
   // Send attack to game manager

@@ -13,6 +13,8 @@ const webInterface = (gm) => {
   // Reference to btn elements
   const startBtn = document.querySelector(".start-btn");
   const aiMatchBtn = document.querySelector(".ai-match-btn");
+
+  const randomShipsBtn = document.querySelector(".random-ships-btn");
   const rotateBtn = document.querySelector(".rotate-btn");
 
   // Method for iterating through directions
@@ -60,16 +62,21 @@ const webInterface = (gm) => {
     showPlacement();
   };
 
-  // Handle clicks on the rotate button in the placement section
-  const handleRotateClick = () => {
-    rotateDirection();
-  };
-
   const handleAiMatchClick = () => {
     // Set style class based on if userBoard is ai (if false, set active b/c will be true after click)
     if (gm.userBoard.isAi === false) aiMatchBtn.classList.add("active");
     else aiMatchBtn.classList.remove("active");
     gm.aiMatchClicked();
+  };
+
+  // Handle clicks on the rotate button in the placement section
+  const handleRotateClick = () => {
+    rotateDirection();
+  };
+
+  // Handle random ships button click
+  const handleRandomShipsClick = () => {
+    gm.randomShipsClicked();
   };
 
   // #endregion
@@ -82,6 +89,7 @@ const webInterface = (gm) => {
   rotateBtn.addEventListener("click", handleRotateClick);
   startBtn.addEventListener("click", handleStartClick);
   aiMatchBtn.addEventListener("click", handleAiMatchClick);
+  randomShipsBtn.addEventListener("click", handleRandomShipsClick);
 
   return { showGame, showMenu, showPlacement };
 };

@@ -77,11 +77,12 @@ const cellProbs = () => {
   };
 
   // Create the board
-  const board = createBoard();
+  const nonNormalizedBoard = createBoard();
   // Normalize the probabilities
-  const normalizedBoard = normalizeBoard(board);
+  const board = normalizeBoard(nonNormalizedBoard);
 
   // Method for displaying the board
+  // eslint-disable-next-line no-unused-vars
   const logBoard = (boardToLog) => {
     // Log the board
     // eslint-disable-next-line no-console
@@ -112,13 +113,20 @@ const cellProbs = () => {
     // First get the updated evidence
     updateEvidence(gm);
 
-    // Log the evidence for now
-    // console.log(sunkenShips, hits, misses);
+    // Set the probability of every hit and missed cell to 0 to prevent that cell from being targeted
+    hits.foreach((hit) => {
+      const { x, y } = hit;
+      board[x][y] = 0;
+    });
+    misses.foreach((miss) => {
+      const { x, y } = miss;
+      board[x][y] = 0;
+    });
   };
 
   // logBoard(normalizedBoard);
 
-  return { updateProbs, board: normalizedBoard };
+  return { updateProbs, board };
 };
 
 export default cellProbs;

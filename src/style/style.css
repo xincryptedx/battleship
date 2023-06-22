@@ -163,17 +163,17 @@ body {
   grid-row: 6 / 20;
 
   display: grid;
-  grid-template: 5% min-content 1fr min-content 1fr min-content 5% min-content 5% / 1fr;
+  grid-template: 5% min-content 1fr min-content 1fr min-content 5% min-content 5% / 1fr 5% 1fr;
   place-items: center;
   grid-template-areas:
-    "."
-    "instructions"
-    "."
-    "ships"
-    "."
-    "rotate"
-    "."
-    "canvas";
+    ". . ."
+    "instructions instructions instructions"
+    ". . ."
+    "ships ships ships"
+    ". . . "
+    "random . rotate"
+    ". . ."
+    "canvas canvas canvas";
 
   transition: transform 0.3s ease-in-out;
 
@@ -196,11 +196,18 @@ body {
   grid-auto-flow: column;
 }
 
-.placement .rotate {
-  grid-area: rotate;
+.placement .random-ships {
+  grid-area: random;
+  justify-self: end;
 }
 
-.placement .rotate-btn {
+.placement .rotate {
+  grid-area: rotate;
+  justify-self: start;
+}
+
+.placement .rotate-btn,
+.placement .random-ships-btn {
   height: 60px;
   width: 180px;
 
@@ -214,11 +221,13 @@ body {
   border-radius: 10px;
 }
 
-.placement .rotate-btn:hover {
+.placement .rotate-btn:hover,
+.placement .random-ships-btn:hover {
   text-shadow: 2px 2px 1px var(--colorC), -2px -2px 1px var(--colorB2);
 }
 
-.placement .rotate-btn:active {
+.placement .rotate-btn:active,
+.placement .random-ships-btn:active {
   text-shadow: 4px 4px 1px var(--colorC), -4px -4px 1px var(--colorB2);
 }
 

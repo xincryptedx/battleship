@@ -22,13 +22,13 @@ const aiAttack = (gm, delay) => {
 
   // Method that finds largest value in 2d array
   const findGreatestProbAttack = () => {
-    const { board } = probs;
+    const allProbs = probs.probs;
     let max = Number.NEGATIVE_INFINITY;
 
-    for (let i = 0; i < board.length; i += 1) {
-      for (let j = 0; j < board[i].length; j += 1) {
-        if (board[i][j] > max) {
-          max = board[i][j];
+    for (let i = 0; i < allProbs.length; i += 1) {
+      for (let j = 0; j < allProbs[i].length; j += 1) {
+        if (allProbs[i][j] > max) {
+          max = allProbs[i][j];
           attackCoords = [i, j];
         }
       }

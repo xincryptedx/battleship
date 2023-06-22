@@ -1,18 +1,18 @@
 const cellProbs = () => {
-  // Method that creates board and defines initial probabilities
-  const createBoard = () => {
-    // Create the board. It is a 10x10 grid of cells.
-    const board = [];
+  // Method that creates probs and defines initial probabilities
+  const createProbs = () => {
+    // Create the probs. It is a 10x10 grid of cells.
+    const initialProbs = [];
 
     // How much to modify the unfocused color probabilities
     const colorMod = 0.5;
 
-    // Randomly decide which "color" on the board to favor by randomly initializing color weight
+    // Randomly decide which "color" on the probs to favor by randomly initializing color weight
     const initialColorWeight = Math.random() < 0.5 ? 1 : colorMod;
 
-    // Initialize the board with 0's
+    // Initialize the probs with 0's
     for (let i = 0; i < 10; i += 1) {
-      board.push(Array(10).fill(0));
+      initialProbs.push(Array(10).fill(0));
     }
 
     // Assign initial probabilities based on Alemi's theory (0.08 in corners, 0.2 in 4 center cells)
@@ -38,66 +38,66 @@ const cellProbs = () => {
           (maxProbability - minProbability) *
             (1 - distanceFromCenter / Math.sqrt(4.5 ** 2 + 4.5 ** 2));
 
-        // Adjust the weights based on Barry's theory (if board is checker board, prefer one color)
+        // Adjust the weights based on Barry's theory (if probs is checker probs, prefer one color)
         const barryProbability = probability * colorWeight;
 
-        // Assign probabilty to the board
-        board[row][col] = barryProbability;
+        // Assign probabilty to the probs
+        initialProbs[row][col] = barryProbability;
 
         // Flip the color weight
         colorWeight = colorWeight === 1 ? colorMod : 1;
       }
     }
 
-    // Return the initialized board
-    return board;
+    // Return the initialized probs
+    return initialProbs;
   };
 
   // Method for normalizing the probabilities
-  const normalizeBoard = (board) => {
+  const normalizeProbs = (probs) => {
     let sum = 0;
 
-    // Calculate the sum of probabilities in the board
-    for (let row = 0; row < board.length; row += 1) {
-      for (let col = 0; col < board[row].length; col += 1) {
-        sum += board[row][col];
+    // Calculate the sum of probabilities in the probs
+    for (let row = 0; row < probs.length; row += 1) {
+      for (let col = 0; col < probs[row].length; col += 1) {
+        sum += probs[row][col];
       }
     }
 
-    // Normalize the probabilities in the board
-    const normalizedBoard = [];
-    for (let row = 0; row < board.length; row += 1) {
-      normalizedBoard[row] = [];
-      for (let col = 0; col < board[row].length; col += 1) {
-        normalizedBoard[row][col] = board[row][col] / sum;
+    // Normalize the probabilities
+    const normalizedProbs = [];
+    for (let row = 0; row < probs.length; row += 1) {
+      normalizedProbs[row] = [];
+      for (let col = 0; col < probs[row].length; col += 1) {
+        normalizedProbs[row][col] = probs[row][col] / sum;
       }
     }
 
-    return normalizedBoard;
+    return normalizedProbs;
   };
 
-  // Create the board
-  const nonNormalizedBoard = createBoard();
+  // Create the probs
+  const nonNormalizedProbs = createProbs();
   // Normalize the probabilities
-  const board = normalizeBoard(nonNormalizedBoard);
+  const probs = normalizeProbs(nonNormalizedProbs);
 
-  // Method for displaying the board
+  // Method for displaying the probs
   // eslint-disable-next-line no-unused-vars
-  const logBoard = (boardToLog) => {
-    // Log the board
+  const logProbs = (probsToLog) => {
+    // Log the probs
     // eslint-disable-next-line no-console
-    console.table(boardToLog);
+    console.table(probsToLog);
     // Log the toal of all probs
     // eslint-disable-next-line no-console
     console.log(
-      boardToLog.reduce(
+      probsToLog.reduce(
         (sum, row) => sum + row.reduce((rowSum, value) => rowSum + value, 0),
         0
       )
     );
   };
 
-  // These values are used as the evidence to update the probabilities on the board
+  // These values are used as the evidence to update the probabilities on the probs
   let sunkenShips;
   let hits;
   let misses;
@@ -112,21 +112,21 @@ const cellProbs = () => {
   const updateProbs = (gm) => {
     // First get the updated evidence
     updateEvidence(gm);
-
+    console.log(hits, misses);
     // Set the probability of every hit and missed cell to 0 to prevent that cell from being targeted
-    hits.foreach((hit) => {
+    Object.values(hits).forEach((hit) => {
       const { x, y } = hit;
-      board[x][y] = 0;
+      probs[x][y] = 0;
     });
-    misses.foreach((miss) => {
+    Object.values(misses).forEach((miss) => {
       const { x, y } = miss;
-      board[x][y] = 0;
+      probs[x][y] = 0;
     });
   };
 
   // logBoard(normalizedBoard);
 
-  return { updateProbs, board };
+  return { updateProbs, probs };
 };
 
 export default cellProbs;

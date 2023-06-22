@@ -105,6 +105,13 @@ const cellProbs = () => {
       const [x, y] = miss;
       probs[x][y] = 0;
     });
+    // Update probability of cells adjacent to hit
+    /* If hit surrounded by non-attacked cells then increase adjacent probabilities based
+       on sunkenShips, where more cells away from the hit are affected if larger ships remain.
+       This should be done by having a prob mod that is reduced based on how many cells away.
+       If hit has another hit next to it then only increase the probability of the cells on that
+       axis, and decrease the probability of adjacent cells not on that axis to account for previous
+       increase that now should be discounted. */
   };
 
   // Method for displaying the probs

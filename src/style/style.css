@@ -151,6 +151,10 @@ body {
   text-shadow: 2px 2px 1px var(--colorC), -2px -2px 1px var(--colorB2);
 }
 
+.menu .ai-match-btn.active {
+  background-color: var(--colorB1);
+}
+
 /* #endregion */
 
 /* #region placement section */

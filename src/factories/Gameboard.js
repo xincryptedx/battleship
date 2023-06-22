@@ -142,10 +142,10 @@ const Gameboard = (gm) => {
     });
 
   // Method for trying ai attacks
-  thisGameboard.tryAiAttack = () => {
+  thisGameboard.tryAiAttack = (delay) => {
     // Return if not ai
     if (thisGameboard.isAi === false) return;
-    aiAttack(gm);
+    aiAttack(gm, delay);
   };
 
   // Method that determines if all ships are sunk or not

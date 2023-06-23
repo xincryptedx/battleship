@@ -1,11 +1,12 @@
 const cellProbs = () => {
+  // Probability modifiers
+  const colorMod = 0.5; // Strong negative bias used to initialize all probs
+  const adjacentMod = 2; // Medium positive bias for hit adjacent adjustments
+
   // Method that creates probs and defines initial probabilities
   const createProbs = () => {
     // Create the probs. It is a 10x10 grid of cells.
     const initialProbs = [];
-
-    // How much to modify the unfocused color probabilities
-    const colorMod = 0.5;
 
     // Randomly decide which "color" on the probs to favor by randomly initializing color weight
     const initialColorWeight = Math.random() < 0.5 ? 1 : colorMod;
@@ -82,9 +83,18 @@ const cellProbs = () => {
   const probs = normalizeProbs(nonNormalizedProbs);
 
   // Helper methods for updateProbs
-  const hitAdjacentIncrease = (hit, probs) => {
-    // For each hit
-    // Increase probs n,s,e and w of it
+  const hitAdjacentIncrease = (hitX, hitY, largestLength) => {
+    // Iterate through the cells and update them
+    for (let i = 0; i < largestLength; i += 1) {
+      // North - check that the adjacent spot is on the board
+      if (hitY - i >= 0) {
+        console.log(
+          `Updating ${hitX}, ${hitY - i} from ${probs[hitX][hitY - i]}...`
+        );
+        probs[hitX][hitY - i] *= adjacentMod;
+        console.log(`...to ${probs[hitX][hitY - i]}`);
+      }
+    }
   };
 
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
@@ -107,9 +117,8 @@ const cellProbs = () => {
       // If the hit is new, and therefore the prob for that hit is not yet 0
       if (probs[x][y] !== 0) {
         // Apply the increase to adjacent cells
-        hitAdjacentIncrease(hit, probs);
-        // Set the probability of every hit to 0 to prevent that cell from being targeted
-        // This also causes hitAdjacentIncrease to only fire once per new hit
+        hitAdjacentIncrease(x, y, largestShipLength);
+        // Set the probability of the hit to 0
         probs[x][y] = 0;
       }
     });

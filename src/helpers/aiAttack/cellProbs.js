@@ -85,14 +85,23 @@ const cellProbs = () => {
   // Helper methods for updateProbs
   const hitAdjacentIncrease = (hitX, hitY, largestLength) => {
     // Iterate through the cells and update them
+    // North
     for (let i = 0; i < largestLength; i += 1) {
-      // North - check that the adjacent spot is on the board
+      // North if on board
       if (hitY - i >= 0) {
-        console.log(
-          `Updating ${hitX}, ${hitY - i} from ${probs[hitX][hitY - i]}...`
-        );
         probs[hitX][hitY - i] *= adjacentMod;
-        console.log(`...to ${probs[hitX][hitY - i]}`);
+      }
+      // South if on board
+      if (hitY + i <= 9) {
+        probs[hitX][hitY + i] *= adjacentMod;
+      }
+      // West if on board
+      if (hitX - i >= 0) {
+        probs[hitX - i][hitY] *= adjacentMod;
+      }
+      // South if on board
+      if (hitX + i <= 9) {
+        probs[hitX + i][hitY] *= adjacentMod;
       }
     }
   };

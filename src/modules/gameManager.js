@@ -93,7 +93,7 @@ const gameManager = () => {
           // If user board is AI controlled have it try an attack
           if (userBoard.isAi === true) {
             aiAttackCount += 1;
-            userBoard.tryAiAttack(500);
+            userBoard.tryAiAttack(250);
           }
         });
     }, delay);

@@ -81,6 +81,12 @@ const cellProbs = () => {
   // Normalize the probabilities
   const probs = normalizeProbs(nonNormalizedProbs);
 
+  // Helper methods for updateProbs
+  const hitAdjacentIncrease = (hits, probs) => {
+    // For each hit
+    // Increase probs n,s,e and w of it
+  };
+
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
   const updateProbs = (gm) => {
     // These values are used as the evidence to update the probabilities on the probs
@@ -94,8 +100,6 @@ const cellProbs = () => {
         break;
       }
     }
-
-    console.log(largestShipLength);
 
     // Set the probability of every hit and missed cell to 0 to prevent that cell from being targeted
     Object.values(hits).forEach((hit) => {

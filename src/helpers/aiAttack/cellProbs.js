@@ -106,16 +106,32 @@ const cellProbs = () => {
     }
   };
 
+  const checkDeadCells = (missX, missY, smallestLength) => {
+    // Check in each direction. Count empty cells in a row.
+    // If that count is < smallestLength zero out those cells
+  };
+
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
   const updateProbs = (gm) => {
     // These values are used as the evidence to update the probabilities on the probs
     const { hits, misses } = gm.userBoard;
+    // Largest ship length
     let largestShipLength = null;
     for (let i = Object.keys(gm.userBoard.sunkenShips).length; i >= 1; i -= 1) {
       if (!gm.userBoard.sunkenShips[i]) {
         largestShipLength = i;
         largestShipLength = i === 1 ? 2 : largestShipLength;
         largestShipLength = i === 2 ? 3 : largestShipLength;
+        break;
+      }
+    }
+    // Smallest ship length
+    let smallestShipLength = null;
+    for (let i = 0; i < Object.keys(gm.userBoard.sunkenShips).length; i += 1) {
+      if (!gm.userBoard.sunkenShips[i]) {
+        smallestShipLength = i;
+        smallestShipLength = i === 1 ? 2 : smallestShipLength;
+        smallestShipLength = i === 2 ? 3 : smallestShipLength;
         break;
       }
     }
@@ -135,6 +151,8 @@ const cellProbs = () => {
     // Update values based on misses
     Object.values(misses).forEach((miss) => {
       const [x, y] = miss;
+      // Check for dead cells where hits cannot possibly be
+      checkDeadCells(x, y, smallestShipLength);
       // Set the probability of every miss to 0 to prevent that cell from being targeted
       probs[x][y] = 0;
     });

@@ -106,34 +106,52 @@ const cellProbs = () => {
     }
   };
 
-  const checkDeadCells = (missX, missY, smallestLength) => {
-    // Flags to determine if checks should continue
-    let checkN = true;
-    // Add empty cells in each direction to appropriate list
-    let cellsN = [];
-    // Iterate through directions based on smallest length
-    for (let i = 0; i < smallestLength; i += 1) {
-      // If still checking N, the check is on the board, and the cell has a prob (is empty)
-      if (checkN && missY - i >= 0 && probs[missX][missY - i] > 0) {
-        cellsN.push([missX, missY - i]);
-        console.log(`Adding cell to N count: ${missX}, ${missY - i}`);
-      }
-      // Else if a hit cell is found (value = 0)
-      else if (checkN && missY - i >= 0 && probs[missX][missY - i] === 0) {
-        // Remove all cells from consideration for zeroing out and stop checking N
-        cellsN = [];
-        checkN = false;
-      }
-      // Else if a boundary or missed cell is found
-      else if ((checkN && missY - i < 0) || probs[missX][missY - i] === -1) {
-        // Stop checking
-        checkN = false;
-        // If cellsN.length is < smallestLength zero out those cells
-        if (cellsN.length < smallestLength) {
-          cellsN.forEach((cell) => {
-            probs[cell[0]][cell[1]] = -1;
-            console.log(`Set prob to zero: dead cell: ${cell}`);
-          });
+  const checkDeadCells = (maxSize) => {
+    const numRows = probs.length;
+    const numCols = probs[0].length;
+
+    // Helper function to check if a cell is within the boundaries of the probs
+    function isValidCell(row, col) {
+      return row >= 0 && row < numRows && col >= 0 && col < numCols;
+    }
+
+    // Helper function to check if a cell is a boundary or has a value of -1
+    function isBoundaryOrNegativeOne(row, col) {
+      return (
+        !isValidCell(row, col) ||
+        probs[row][col] === -1 ||
+        row === 0 ||
+        row === numRows - 1 ||
+        col === 0 ||
+        col === numCols - 1
+      );
+    }
+
+    // Iterate over each cell in the probs
+    for (let row = 0; row < numRows; row += 1) {
+      for (let col = 0; col < numCols; col += 1) {
+        // Check if the current cell is a non-zero value
+        if (probs[row][col] > 0) {
+          let groupSize = 0;
+
+          // Check the surrounding cells within the specified max size
+          for (let i = -maxSize; i <= maxSize; i += 1) {
+            for (let j = -maxSize; j <= maxSize; j += 1) {
+              if (!isBoundaryOrNegativeOne(row + i, col + j)) {
+                groupSize += 1;
+              }
+            }
+          }
+
+          // If the group size is equal to the maximum size squared,
+          // update the cells in the group to -1
+          if (groupSize === (2 * maxSize + 1) ** 2) {
+            for (let i = -maxSize; i <= maxSize; i += 1) {
+              for (let j = -maxSize; j <= maxSize; j += 1) {
+                probs[row + i][col + j] = -1;
+              }
+            }
+          }
         }
       }
     }

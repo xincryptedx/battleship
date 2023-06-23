@@ -107,8 +107,27 @@ const cellProbs = () => {
   };
 
   const checkDeadCells = (missX, missY, smallestLength) => {
-    // Check in each direction. Count empty cells in a row.
+    console.log("Beginning dead cell check...");
+    // Flags to determine if checks should continue
+    let checkN = true;
+    // Add empty cells in each direction to appropriate list
+    const cellsN = [];
+    // Iterate through directions based on smallest length
+    for (let i = 0; i < smallestLength; i += 1) {
+      console.log(`Checking for cell: ${missX}, ${missY - i}`);
+      // If still checking N, the check is on the board, and the cell has a prob (is empty)
+      if (checkN && missY - i >= 0 && probs[missX][missY - i] > 0) {
+        cellsN.push([missX, missY - i]);
+        console.log(`Adding cell to N count: ${missX}, ${missY - i}`);
+      } else checkN = false; // If non-empty found then stop checking N
+    }
     // If that count is < smallestLength zero out those cells
+    if (cellsN.length < smallestLength) {
+      cellsN.forEach((cell) => {
+        probs[cell[0]][cell[1]] = 0;
+        console.log(`Set prob to zero: dead cell: ${cell}`);
+      });
+    }
   };
 
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
@@ -129,12 +148,13 @@ const cellProbs = () => {
     let smallestShipLength = null;
     for (let i = 0; i < Object.keys(gm.userBoard.sunkenShips).length; i += 1) {
       if (!gm.userBoard.sunkenShips[i]) {
-        smallestShipLength = i;
-        smallestShipLength = i === 1 ? 2 : smallestShipLength;
-        smallestShipLength = i === 2 ? 3 : smallestShipLength;
+        smallestShipLength = i === 0 ? 2 : smallestShipLength;
+        smallestShipLength = i === 1 ? 3 : smallestShipLength;
+        smallestShipLength = i > 1 ? i : smallestShipLength;
         break;
       }
     }
+    console.log(`Smallest length: ${smallestShipLength}`);
 
     // Update values based on hits
     Object.values(hits).forEach((hit) => {

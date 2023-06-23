@@ -1,6 +1,6 @@
 const cellProbs = () => {
   // Probability modifiers
-  const colorMod = 0.5; // Strong negative bias used to initialize all probs
+  const colorMod = 0.33; // Strong negative bias used to initialize all probs
   const adjacentMod = 2; // Medium positive bias for hit adjacent adjustments
 
   // Method that creates probs and defines initial probabilities
@@ -99,7 +99,7 @@ const cellProbs = () => {
       if (hitX - i >= 0) {
         probs[hitX - i][hitY] *= adjacentMod;
       }
-      // South if on board
+      // East if on board
       if (hitX + i <= 9) {
         probs[hitX + i][hitY] *= adjacentMod;
       }

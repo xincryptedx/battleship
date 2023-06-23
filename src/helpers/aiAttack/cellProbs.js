@@ -82,7 +82,7 @@ const cellProbs = () => {
   const probs = normalizeProbs(nonNormalizedProbs);
 
   // Helper methods for updateProbs
-  const hitAdjacentIncrease = (hits, probs) => {
+  const hitAdjacentIncrease = (hit, probs) => {
     // For each hit
     // Increase probs n,s,e and w of it
   };
@@ -101,18 +101,25 @@ const cellProbs = () => {
       }
     }
 
-    // Set the probability of every hit and missed cell to 0 to prevent that cell from being targeted
+    // Update values based on hits
     Object.values(hits).forEach((hit) => {
       const [x, y] = hit;
-      probs[x][y] = 0;
-    });
-    Object.values(misses).forEach((miss) => {
-      const [x, y] = miss;
-      probs[x][y] = 0;
+      // If the hit is new, and therefore the prob for that hit is not yet 0
+      if (probs[x][y] !== 0) {
+        // Apply the increase to adjacent cells
+        hitAdjacentIncrease(hit, probs);
+        // Set the probability of every hit to 0 to prevent that cell from being targeted
+        // This also causes hitAdjacentIncrease to only fire once per new hit
+        probs[x][y] = 0;
+      }
     });
 
-    /* Apply a probability increase to all cells adjacent to hits in all four directions up to 
-    the maximum ship length remaining - 1 to account for the hit cell. */
+    // Update values based on misses
+    Object.values(misses).forEach((miss) => {
+      const [x, y] = miss;
+      // Set the probability of every miss to 0 to prevent that cell from being targeted
+      probs[x][y] = 0;
+    });
 
     /* Apply a secondary increase to groups of cells between hits that have a group length, when 
     added to 2, not greater than the greatest remaining ship length */

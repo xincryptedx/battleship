@@ -81,21 +81,10 @@ const cellProbs = () => {
   // Normalize the probabilities
   const probs = normalizeProbs(nonNormalizedProbs);
 
-  // These values are used as the evidence to update the probabilities on the probs
-  let sunkenShips;
-  let hits;
-  let misses;
-  // Method for updating these values from the game manager
-  const updateEvidence = (gm) => {
-    sunkenShips = gm.userBoard.sunkenShips;
-    hits = gm.userBoard.hits;
-    misses = gm.userBoard.misses;
-  };
-
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
   const updateProbs = (gm) => {
-    // First get the updated evidence
-    updateEvidence(gm);
+    // These values are used as the evidence to update the probabilities on the probs
+    const { sunkenShips, hits, misses } = gm.userBoard;
 
     // Set the probability of every hit and missed cell to 0 to prevent that cell from being targeted
     Object.values(hits).forEach((hit) => {

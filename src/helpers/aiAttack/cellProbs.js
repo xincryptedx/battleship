@@ -84,7 +84,18 @@ const cellProbs = () => {
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
   const updateProbs = (gm) => {
     // These values are used as the evidence to update the probabilities on the probs
-    const { sunkenShips, hits, misses } = gm.userBoard;
+    const { hits, misses } = gm.userBoard;
+    let largestShipLength = null;
+    for (let i = Object.keys(gm.userBoard.sunkenShips).length; i >= 1; i -= 1) {
+      if (!gm.userBoard.sunkenShips[i]) {
+        largestShipLength = i;
+        largestShipLength = i === 1 ? 2 : largestShipLength;
+        largestShipLength = i === 2 ? 3 : largestShipLength;
+        break;
+      }
+    }
+
+    console.log(largestShipLength);
 
     // Set the probability of every hit and missed cell to 0 to prevent that cell from being targeted
     Object.values(hits).forEach((hit) => {

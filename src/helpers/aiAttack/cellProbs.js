@@ -149,6 +149,7 @@ const cellProbs = () => {
             for (let i = -maxSize; i <= maxSize; i += 1) {
               for (let j = -maxSize; j <= maxSize; j += 1) {
                 probs[row + i][col + j] = -1;
+                console.log(`Dead cell found! ${[[row + i][col + j]]}`);
               }
             }
           }
@@ -198,9 +199,6 @@ const cellProbs = () => {
     // Update values based on misses
     Object.values(misses).forEach((miss) => {
       const [x, y] = miss;
-      // Check for dead cells where hits cannot possibly be
-      console.log(miss);
-      // checkDeadCells(x, y, smallestShipLength);
       // Set the probability of every miss to 0 to prevent that cell from being targeted
       probs[x][y] = -1;
     });
@@ -210,6 +208,7 @@ const cellProbs = () => {
 
     /* Reduce the chance of groups of cells that are surrounded by misses or the edge of the board 
     if the group length is not less than or equal to the greatest remaining ship length. */
+    checkDeadCells(smallestShipLength);
 
     /* Ignore cells with a probability of 0 when considering groups of cells to increase efficiency. */
 

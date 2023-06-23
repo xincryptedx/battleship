@@ -96,6 +96,7 @@ const cellProbs = () => {
   const updateProbs = (gm) => {
     // First get the updated evidence
     updateEvidence(gm);
+
     // Set the probability of every hit and missed cell to 0 to prevent that cell from being targeted
     Object.values(hits).forEach((hit) => {
       const [x, y] = hit;
@@ -105,13 +106,19 @@ const cellProbs = () => {
       const [x, y] = miss;
       probs[x][y] = 0;
     });
-    // Update probability of cells adjacent to hit
-    /* If hit surrounded by non-attacked cells then increase adjacent probabilities based
-       on sunkenShips, where more cells away from the hit are affected if larger ships remain.
-       This should be done by having a prob mod that is reduced based on how many cells away.
-       If hit has another hit next to it then only increase the probability of the cells on that
-       axis, and decrease the probability of adjacent cells not on that axis to account for previous
-       increase that now should be discounted. */
+
+    /* Apply a probability increase to all cells adjacent to hits in all four directions up to 
+    the maximum ship length remaining - 1 to account for the hit cell. */
+
+    /* Apply a secondary increase to groups of cells between hits that have a group length, when 
+    added to 2, not greater than the greatest remaining ship length */
+
+    /* Reduce the chance of groups of cells that are surrounded by misses or the edge of the board 
+    if the group length is not less than or equal to the greatest remaining ship length. */
+
+    /* Ignore cells with a probability of 0 when considering groups of cells to increase efficiency. */
+
+    /* Set the probability of cells with hits and misses to 0 to prevent duplicate attacks. */
   };
 
   // Method for displaying the probs

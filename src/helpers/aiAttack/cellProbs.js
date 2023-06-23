@@ -107,26 +107,35 @@ const cellProbs = () => {
   };
 
   const checkDeadCells = (missX, missY, smallestLength) => {
-    console.log("Beginning dead cell check...");
     // Flags to determine if checks should continue
     let checkN = true;
     // Add empty cells in each direction to appropriate list
-    const cellsN = [];
+    let cellsN = [];
     // Iterate through directions based on smallest length
     for (let i = 0; i < smallestLength; i += 1) {
-      console.log(`Checking for cell: ${missX}, ${missY - i}`);
       // If still checking N, the check is on the board, and the cell has a prob (is empty)
       if (checkN && missY - i >= 0 && probs[missX][missY - i] > 0) {
         cellsN.push([missX, missY - i]);
         console.log(`Adding cell to N count: ${missX}, ${missY - i}`);
-      } else checkN = false; // If non-empty found then stop checking N
-    }
-    // If that count is < smallestLength zero out those cells
-    if (cellsN.length < smallestLength) {
-      cellsN.forEach((cell) => {
-        probs[cell[0]][cell[1]] = 0;
-        console.log(`Set prob to zero: dead cell: ${cell}`);
-      });
+      }
+      // Else if a hit cell is found (value = 0)
+      else if (checkN && missY - i >= 0 && probs[missX][missY - i] === 0) {
+        // Remove all cells from consideration for zeroing out and stop checking N
+        cellsN = [];
+        checkN = false;
+      }
+      // Else if a boundary or missed cell is found
+      else if ((checkN && missY - i < 0) || probs[missX][missY - i] === -1) {
+        // Stop checking
+        checkN = false;
+        // If cellsN.length is < smallestLength zero out those cells
+        if (cellsN.length < smallestLength) {
+          cellsN.forEach((cell) => {
+            probs[cell[0]][cell[1]] = -1;
+            console.log(`Set prob to zero: dead cell: ${cell}`);
+          });
+        }
+      }
     }
   };
 
@@ -172,7 +181,8 @@ const cellProbs = () => {
     Object.values(misses).forEach((miss) => {
       const [x, y] = miss;
       // Check for dead cells where hits cannot possibly be
-      checkDeadCells(x, y, smallestShipLength);
+      console.log(miss);
+      // checkDeadCells(x, y, smallestShipLength);
       // Set the probability of every miss to 0 to prevent that cell from being targeted
       probs[x][y] = -1;
     });

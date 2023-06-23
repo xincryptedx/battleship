@@ -174,7 +174,7 @@ const cellProbs = () => {
       // Check for dead cells where hits cannot possibly be
       checkDeadCells(x, y, smallestShipLength);
       // Set the probability of every miss to 0 to prevent that cell from being targeted
-      probs[x][y] = 0;
+      probs[x][y] = -1;
     });
 
     /* Apply a secondary increase to groups of cells between hits that have a group length, when 

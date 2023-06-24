@@ -86,15 +86,18 @@ const cellProbs = () => {
   const destroyModeCoords = (gm) => {
     // Look at first cell to check which will be the oldest added cell
     const cellToCheck = gm.aiBoard.cellsToCheck[0];
-    // Are there any adjacent hits?
-    // Yes then Check next cell:
+    // Clockwise, search adjacent cells for hit. Found hit?
+    // Yes then check next cell:
     // next cell in that direction empty? Return next cell
     // next cell miss? Check opposite direction cell.
     // next cell hit? If next cell not farther than max ship length return it
     // Else check opposite direction cell
     // No adjacent hits? Return empty adjacent cell, of which there must be at least one
     // Check opposite direction cell:
-    // If opposite direction hit?
+    // opposite direction cell empty? Return that cell
+    // opposite cell miss? likely two ships are close together so move to next adjacent cell
+    // opposite cell hit? check the next opposite cell
+    // check next opposite direction cell...
   };
 
   // Helper methods for updateProbs

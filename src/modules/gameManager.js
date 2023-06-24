@@ -19,9 +19,6 @@ const gameManager = () => {
   let webInterface = null;
   let gameLog = null;
 
-  // What cells are being considered when ai is in destroy attack mode?
-  let cellsToCheck = [];
-
   // #region Handle AI Attacks
   // AI Attack Hit
   const aiAttackHit = (attackCoords) => {
@@ -222,19 +219,19 @@ const gameManager = () => {
       // Occupied cell x and y
       const [ox, oy] = cell;
       // Remove it from cells to check if it exists
-      for (let i = 0; i < cellsToCheck.length; i += 1) {
+      for (let i = 0; i < aiBoard.cellsToCheck.length; i += 1) {
         // Cell to check x and y
-        const [cx, cy] = cellsToCheck[i];
+        const [cx, cy] = aiBoard.cellsToCheck[i];
         // Remove if match found
         if (ox === cx && oy === cy) {
-          cellsToCheck.splice(i, 1);
+          aiBoard.cellsToCheck.splice(i, 1);
         }
       }
     });
 
     // Clear relevant cells from check queue in cellProbs
     console.log(ship);
-    console.log(`Cells to check on GM:`, cellsToCheck);
+    console.log(`Cells to check:`, aiBoard.cellsToCheck);
   };
 
   return {

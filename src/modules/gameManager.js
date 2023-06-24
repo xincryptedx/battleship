@@ -211,6 +211,12 @@ const gameManager = () => {
   };
   // #endregion
 
+  // When a user ship is sunk
+  const userShipSunk = (ship) => {
+    // Set AI gameboard back to isSeeking
+    // Clear relevant cells from check queue in cellProbs
+  };
+
   return {
     aiAttacking,
     playerAttacking,
@@ -218,6 +224,7 @@ const gameManager = () => {
     placementClicked,
     randomShipsClicked,
     rotateClicked,
+    userShipSunk,
     get aiDifficulty() {
       return aiDifficulty;
     },

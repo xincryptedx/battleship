@@ -106,53 +106,34 @@ const cellProbs = () => {
     }
   };
 
-  const checkDeadCells = (maxSize) => {
-    const numRows = probs.length;
-    const numCols = probs[0].length;
-
-    // Helper function to check if a cell is within the boundaries of the probs
+  const checkDeadCells = () => {
+    // Set rows and cols
+    const numRows = probs[0].length;
+    const numCols = probs.length;
+    // Helper that checks if valid cell on grid
     function isValidCell(row, col) {
       return row >= 0 && row < numRows && col >= 0 && col < numCols;
     }
-
-    // Helper function to check if a cell is a boundary or has a value of -1
-    function isBoundaryOrNegativeOne(row, col) {
-      return (
-        !isValidCell(row, col) ||
-        probs[row][col] === -1 ||
-        row === 0 ||
-        row === numRows - 1 ||
-        col === 0 ||
-        col === numCols - 1
-      );
+    // Helper that checks if cell is a boundary or miss (-1 value)
+    function isBoundaryOrMiss(row, col) {
+      return !isValidCell(row, col) || probs[row][col] === -1;
     }
-
-    // Iterate over each cell in the probs
+    // For every cell, check the cells around it. If they are all boundary or miss then set to -1
     for (let row = 0; row < numRows; row += 1) {
       for (let col = 0; col < numCols; col += 1) {
-        // Check if the current cell is a non-zero value
-        if (probs[row][col] > 0) {
-          let groupSize = 0;
-
-          // Check the surrounding cells within the specified max size
-          for (let i = -maxSize; i <= maxSize; i += 1) {
-            for (let j = -maxSize; j <= maxSize; j += 1) {
-              if (!isBoundaryOrNegativeOne(row + i, col + j)) {
-                groupSize += 1;
-              }
-            }
-          }
-
-          // If the group size is equal to the maximum size squared,
-          // update the cells in the group to -1
-          if (groupSize === (2 * maxSize + 1) ** 2) {
-            for (let i = -maxSize; i <= maxSize; i += 1) {
-              for (let j = -maxSize; j <= maxSize; j += 1) {
-                probs[row + i][col + j] = -1;
-                console.log(`Dead cell found! ${[[row + i][col + j]]}`);
-              }
-            }
-          }
+        // If the cell is an empty cell (> 0) and adjacent cells are boundary or miss
+        if (
+          probs[row][col] > 0 &&
+          isBoundaryOrMiss(row, col - 1) &&
+          isBoundaryOrMiss(row, col + 1) &&
+          isBoundaryOrMiss(row - 1, col) &&
+          isBoundaryOrMiss(row + 1, col)
+        ) {
+          // Set that cell to a miss since it cannot be a hit
+          probs[row][col] = -1;
+          console.log(
+            `${row}, ${col} surrounded and cannot be a hit. Set to miss.`
+          );
         }
       }
     }

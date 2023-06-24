@@ -1,7 +1,7 @@
 const cellProbs = () => {
   // Probability modifiers
   const colorMod = 0.33; // Strong negative bias used to initialize all probs
-  const adjacentMod = 2; // Medium positive bias for hit adjacent adjustments
+  const adjacentMod = 3; // Medium positive bias for hit adjacent adjustments
 
   // Method that creates probs and defines initial probabilities
   const createProbs = () => {
@@ -84,24 +84,30 @@ const cellProbs = () => {
 
   // Helper methods for updateProbs
   const hitAdjacentIncrease = (hitX, hitY, largestLength) => {
+    // Vars for calculating decrement factor
+    const startingDec = 1;
+    const decPercentage = 0.1;
+    const minDec = 0.7;
     // Iterate through the cells and update them
     // North
     for (let i = 0; i < largestLength; i += 1) {
+      let decrementFactor = startingDec - i * decPercentage;
+      if (decrementFactor < minDec) decrementFactor = minDec;
       // North if on board
       if (hitY - i >= 0) {
-        probs[hitX][hitY - i] *= adjacentMod;
+        probs[hitX][hitY - i] *= adjacentMod * decrementFactor;
       }
       // South if on board
       if (hitY + i <= 9) {
-        probs[hitX][hitY + i] *= adjacentMod;
+        probs[hitX][hitY + i] *= adjacentMod * decrementFactor;
       }
       // West if on board
       if (hitX - i >= 0) {
-        probs[hitX - i][hitY] *= adjacentMod;
+        probs[hitX - i][hitY] *= adjacentMod * decrementFactor;
       }
       // East if on board
       if (hitX + i <= 9) {
-        probs[hitX + i][hitY] *= adjacentMod;
+        probs[hitX + i][hitY] *= adjacentMod * decrementFactor;
       }
     }
   };

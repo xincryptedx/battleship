@@ -83,7 +83,7 @@ const cellProbs = () => {
   const probs = normalizeProbs(nonNormalizedProbs);
 
   // Persistant array of cells to check adjacent on
-  const cellsToCheck = [];
+  const cellsToCheck = ["test"];
   // Method for destrying found ships
   const destroyFoundShip = (newHit) => {
     // Put the new hit into the cells to check if passed
@@ -191,6 +191,7 @@ const cellProbs = () => {
     // These values are used as the evidence to update the probabilities on the probs
     const { hits, misses } = gm.userBoard;
     const { aiBoard } = gm;
+
     // Largest ship length
     let largestShipLength = null;
     for (let i = Object.keys(gm.userBoard.sunkenShips).length; i >= 1; i -= 1) {
@@ -240,10 +241,12 @@ const cellProbs = () => {
     if the group length is not less than or equal to the greatest remaining ship length. */
     checkDeadCells(smallestShipLength);
 
-    /* Ignore cells with a probability of 0 when considering groups of cells to increase efficiency. */
+    // Update gm with cells to check list
+    // eslint-disable-next-line no-param-reassign
+    gm.cellsToCheck = cellsToCheck;
 
-    /* Set the probability of cells with hits and misses to 0 to prevent duplicate attacks. */
-    logProbs(probs);
+    // Optionally log the results
+    // logProbs(probs);
   };
 
   return {

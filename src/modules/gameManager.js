@@ -19,6 +19,9 @@ const gameManager = () => {
   let webInterface = null;
   let gameLog = null;
 
+  // What cells are being considered when ai is in destroy attack mode?
+  let cellsToCheck = [];
+
   // #region Handle AI Attacks
   // AI Attack Hit
   const aiAttackHit = (attackCoords) => {
@@ -218,6 +221,7 @@ const gameManager = () => {
 
     // Clear relevant cells from check queue in cellProbs
     console.log(ship);
+    console.log(cellsToCheck);
   };
 
   return {
@@ -233,6 +237,12 @@ const gameManager = () => {
     },
     set aiDifficulty(diff) {
       if (diff === 1 || diff === 2 || diff === 3) aiDifficulty = diff;
+    },
+    get cellsToCheck() {
+      return cellsToCheck;
+    },
+    set cellsToCheck(arr) {
+      if (Array.isArray(arr)) cellsToCheck = arr;
     },
     get userBoard() {
       return userBoard;

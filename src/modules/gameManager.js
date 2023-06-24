@@ -214,7 +214,8 @@ const gameManager = () => {
 
   // When a user ship is sunk
   const userShipSunk = (ship) => {
-    // Set AI gameboard back to isSeeking
+    // Determine if ai is still destroying or should go back to seeking
+
     // Clear relevant cells from check queue in cellProbs
     console.log(ship);
   };

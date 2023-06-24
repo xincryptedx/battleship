@@ -159,9 +159,9 @@ const cellProbs = () => {
         ) {
           // Set that cell to a miss since it cannot be a hit
           probs[row][col] = -1;
-          console.log(
+          /* console.log(
             `${row}, ${col} surrounded and cannot be a hit. Set to miss.`
-          );
+          ); */
         }
       }
     }
@@ -220,18 +220,21 @@ const cellProbs = () => {
     /* Reduce the chance of groups of cells that are surrounded by misses or the edge of the board 
     if the group length is not less than or equal to the greatest remaining ship length. */
     checkDeadCells(smallestShipLength);
-    console.table(probs);
+
     /* Ignore cells with a probability of 0 when considering groups of cells to increase efficiency. */
 
     /* Set the probability of cells with hits and misses to 0 to prevent duplicate attacks. */
   };
 
   // Method for displaying the probs
+  // Helper to transpose array for console.table's annoying col first approach
+  const transposeArray = (array) =>
+    array[0].map((_, colIndex) => array.map((row) => row[colIndex]));
   // eslint-disable-next-line no-unused-vars
   const logProbs = (probsToLog) => {
     // Log the probs
-    // eslint-disable-next-line no-console
-    console.table(probsToLog);
+    const transposedProbs = transposeArray(probsToLog);
+    console.table(transposedProbs);
     // Log the toal of all probs
     // eslint-disable-next-line no-console
     console.log(

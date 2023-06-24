@@ -9,7 +9,7 @@ const aiAttack = (gm, delay) => {
   const gridHeight = 10;
   const gridWidth = 10;
   let attackCoords = [];
-  let { isSeeking } = gm.aiGameboard;
+  let { isSeeking } = gm.aiBoard;
 
   // Update cell hit probabilities
   probs.updateProbs(gm);

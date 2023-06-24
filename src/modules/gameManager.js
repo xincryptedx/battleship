@@ -37,7 +37,6 @@ const gameManager = () => {
     console.log("AI Destroying!");
     // Add hit to cells to check
     aiBoard.cellsToCheck.push(attackCoords);
-    console.log(aiBoard.cellsToCheck);
     // Log sunk user ships
     const sunkMsg = userBoard.logSunk();
     if (sunkMsg !== null) {

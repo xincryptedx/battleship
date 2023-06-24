@@ -171,6 +171,7 @@ const cellProbs = () => {
   const updateProbs = (gm) => {
     // These values are used as the evidence to update the probabilities on the probs
     const { hits, misses } = gm.userBoard;
+    const { aiBoard } = gm;
     // Largest ship length
     let largestShipLength = null;
     for (let i = Object.keys(gm.userBoard.sunkenShips).length; i >= 1; i -= 1) {
@@ -197,6 +198,8 @@ const cellProbs = () => {
       const [x, y] = hit;
       // If the hit is new, and therefore the prob for that hit is not yet 0
       if (probs[x][y] !== 0) {
+        // Set the ai isSeeking to false to switch to the destroy strat
+        aiBoard.isSeeking = false;
         // Apply the increase to adjacent cells
         hitAdjacentIncrease(x, y, largestShipLength);
         // Set the probability of the hit to 0

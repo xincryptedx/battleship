@@ -244,7 +244,14 @@ const cellProbs = () => {
 
   // logBoard(normalizedBoard);
 
-  return { updateProbs, destroyFoundShip, probs };
+  return {
+    updateProbs,
+    destroyFoundShip,
+    probs,
+    get cellsToCheck() {
+      return cellsToCheck;
+    },
+  };
 };
 
 export default cellProbs;

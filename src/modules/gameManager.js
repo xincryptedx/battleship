@@ -87,13 +87,14 @@ const gameManager = () => {
             return;
           }
 
-          // Allow userBoard to attack again
-          userBoard.canAttack = true;
-
           // If user board is AI controlled have it try an attack
-          if (userBoard.isAi === true) {
+          if (aiBoard.isAutoAttacking === true) {
             aiAttackCount += 1;
-            userBoard.tryAiAttack(250);
+            aiBoard.tryAiAttack(250);
+          }
+          // Otherwise allow the user to attack again
+          else {
+            userBoard.canAttack = true;
           }
         });
     }, delay);
@@ -173,8 +174,8 @@ const gameManager = () => {
 
   // Handle setting up an AI vs AI match
   const aiMatchClicked = () => {
-    // Set user to ai
-    userBoard.isAi = userBoard.isAi !== true;
+    // Set ai to auto attack
+    aiBoard.isAutoAttacking = true;
     // Set game log to not update scene
     gameLog.doUpdateScene = false;
     // Set the sounds to muted

@@ -55,8 +55,20 @@ const aiAttack = (gm, delay) => {
 
   // Do an attack based on destroy behavior after a hit is found
   else if (gm.aiDifficulty === 2 && !isSeeking) {
-    probs.destroyFoundShip();
-    isSeeking = false;
+    // Get coords using destroy method
+    const coords = probs.destroyFoundShip();
+    // If no coords are returned instead use seeking strat
+    if (!coords) {
+      isSeeking = true;
+      findGreatestProbAttack();
+      while (gm.userBoard.alreadyAttacked(attackCoords)) {
+        findGreatestProbAttack();
+      }
+    }
+    // Else if coords returned, use those for attack
+    else if (coords) {
+      attackCoords = coords;
+    }
   }
   // Send attack to game manager
   gm.aiAttacking(attackCoords, delay);

@@ -32,6 +32,12 @@ const gameManager = () => {
       `AI attacks cell: ${attackCoords} \nAttack hit your ${userBoard.hitShipType}!`
     );
     gameLog.setScene();
+    // Set ai to destroy mode
+    aiBoard.isAiSeeking = false;
+    console.log("AI Destroying!");
+    // Add hit to cells to check
+    aiBoard.cellsToCheck.push(attackCoords);
+    console.log(aiBoard.cellsToCheck);
     // Log sunk user ships
     const sunkMsg = userBoard.logSunk();
     if (sunkMsg !== null) {
@@ -215,6 +221,8 @@ const gameManager = () => {
   // When a user ship is sunk
   const userShipSunk = (ship) => {
     // Remove the sunken ship cells from cells to check
+    console.log("Cells before removal logic:");
+    console.log(JSON.stringify(aiBoard.cellsToCheck));
     ship.occupiedCells.forEach((cell) => {
       // Occupied cell x and y
       const [ox, oy] = cell;
@@ -229,9 +237,16 @@ const gameManager = () => {
       }
     });
 
+    // If cells to check is empty then stop destory mode
+    if (aiBoard.cellsToCheck.length === 0) aiBoard.isAiSeeking = true;
+    console.log("AI Seeking...");
+
     // Clear relevant cells from check queue in cellProbs
-    console.log(ship);
-    console.log(`Cells to check:`, aiBoard.cellsToCheck);
+    console.log(
+      `Ship cells that should be gone: `,
+      JSON.stringify(ship.occupiedCells)
+    );
+    console.log(`Cells to check:`, JSON.stringify(aiBoard.cellsToCheck));
   };
 
   return {
@@ -247,12 +262,6 @@ const gameManager = () => {
     },
     set aiDifficulty(diff) {
       if (diff === 1 || diff === 2 || diff === 3) aiDifficulty = diff;
-    },
-    get cellsToCheck() {
-      return cellsToCheck;
-    },
-    set cellsToCheck(arr) {
-      if (Array.isArray(arr)) cellsToCheck = arr;
     },
     get userBoard() {
       return userBoard;

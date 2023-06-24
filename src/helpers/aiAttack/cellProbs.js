@@ -173,6 +173,7 @@ const cellProbs = () => {
   const logProbs = (probsToLog) => {
     // Log the probs
     const transposedProbs = transposeArray(probsToLog);
+    // eslint-disable-next-line no-console
     console.table(transposedProbs);
     // Log the toal of all probs
     // eslint-disable-next-line no-console

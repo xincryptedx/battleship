@@ -15,6 +15,7 @@ const Gameboard = (gm) => {
     direction: 1,
     hitShipType: null,
     isAi: false,
+    isAutoAttacking: false,
     isAiSeeking: true,
     gameOver: false,
     canAttack: true,

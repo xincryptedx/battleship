@@ -1,7 +1,7 @@
 const cellProbs = () => {
   // Probability modifiers
   const colorMod = 0.33; // Strong negative bias used to initialize all probs
-  const adjacentMod = 3; // Medium positive bias for hit adjacent adjustments
+  const adjacentMod = 4; // Medium positive bias for hit adjacent adjustments
 
   // Method that creates probs and defines initial probabilities
   const createProbs = () => {
@@ -87,7 +87,7 @@ const cellProbs = () => {
     // Vars for calculating decrement factor
     const startingDec = 1;
     const decPercentage = 0.1;
-    const minDec = 0.7;
+    const minDec = 0.5;
     // Iterate through the cells and update them
     // North
     for (let i = 0; i < largestLength; i += 1) {

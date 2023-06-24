@@ -217,11 +217,24 @@ const gameManager = () => {
 
   // When a user ship is sunk
   const userShipSunk = (ship) => {
-    // Determine if ai is still destroying or should go back to seeking
+    // Remove the sunken ship cells from cells to check
+    ship.occupiedCells.forEach((cell) => {
+      // Occupied cell x and y
+      const [ox, oy] = cell;
+      // Remove it from cells to check if it exists
+      for (let i = 0; i < cellsToCheck.length; i += 1) {
+        // Cell to check x and y
+        const [cx, cy] = cellsToCheck[i];
+        // Remove if match found
+        if (ox === cx && oy === cy) {
+          cellsToCheck.splice(i, 1);
+        }
+      }
+    });
 
     // Clear relevant cells from check queue in cellProbs
     console.log(ship);
-    console.log(cellsToCheck);
+    console.log(`Cells to check on GM:`, cellsToCheck);
   };
 
   return {

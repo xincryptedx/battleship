@@ -10,6 +10,7 @@ const Gameboard = (gm) => {
     maxBoardY: 9,
     ships: [],
     allOccupiedCells: [],
+    cellsToCheck: [],
     misses: [],
     hits: [],
     direction: 1,

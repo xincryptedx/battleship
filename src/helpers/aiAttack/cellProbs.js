@@ -83,7 +83,7 @@ const cellProbs = () => {
   const probs = normalizeProbs(nonNormalizedProbs);
 
   // Persistant array of cells to check adjacent on
-  const cellsToCheck = ["test"];
+  const cellsToCheck = [];
   // Method for destrying found ships
   const destroyFoundShip = (newHit) => {
     // Put the new hit into the cells to check if passed
@@ -220,6 +220,8 @@ const cellProbs = () => {
       if (probs[x][y] !== 0) {
         // Set the ai isSeeking to false to switch to the destroy strat
         aiBoard.isSeeking = false;
+        // For now just add hit to cellsTocheck
+        cellsToCheck.push([x, y]);
         // Apply the increase to adjacent cells
         hitAdjacentIncrease(x, y, largestShipLength);
         // Set the probability of the hit to 0
@@ -244,6 +246,7 @@ const cellProbs = () => {
     // Update gm with cells to check list
     // eslint-disable-next-line no-param-reassign
     gm.cellsToCheck = cellsToCheck;
+    console.log(`Cells to check on cellProbs:`, cellsToCheck);
 
     // Optionally log the results
     // logProbs(probs);

@@ -88,6 +88,8 @@ const cellProbs = () => {
     const startingDec = 1;
     const decPercentage = 0.1;
     const minDec = 0.5;
+
+    // Adjust for -1 values!!!!!!!!!!!!
     // Iterate through the cells and update them
     // North
     for (let i = 0; i < largestLength; i += 1) {
@@ -122,7 +124,7 @@ const cellProbs = () => {
     }
     // Helper that checks if cell is a boundary or miss (-1 value)
     function isBoundaryOrMiss(row, col) {
-      return !isValidCell(row, col) || probs[row][col] === -1;
+      return !isValidCell(row, col) || probs[row][col] < -1;
     }
     // For every cell, check the cells around it. If they are all boundary or miss then set to -1
     for (let row = 0; row < numRows; row += 1) {

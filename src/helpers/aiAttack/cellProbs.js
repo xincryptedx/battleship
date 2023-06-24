@@ -144,7 +144,7 @@ const cellProbs = () => {
     }
     // Helper that checks if cell is a boundary or miss (-1 value)
     function isBoundaryOrMiss(row, col) {
-      return !isValidCell(row, col) || probs[row][col] < -1;
+      return !isValidCell(row, col) || probs[row][col] === -1;
     }
     // For every cell, check the cells around it. If they are all boundary or miss then set to -1
     for (let row = 0; row < numRows; row += 1) {
@@ -220,7 +220,7 @@ const cellProbs = () => {
     /* Reduce the chance of groups of cells that are surrounded by misses or the edge of the board 
     if the group length is not less than or equal to the greatest remaining ship length. */
     checkDeadCells(smallestShipLength);
-
+    console.table(probs);
     /* Ignore cells with a probability of 0 when considering groups of cells to increase efficiency. */
 
     /* Set the probability of cells with hits and misses to 0 to prevent duplicate attacks. */

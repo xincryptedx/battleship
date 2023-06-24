@@ -237,8 +237,10 @@ const gameManager = () => {
     });
 
     // If cells to check is empty then stop destory mode
-    if (aiBoard.cellsToCheck.length === 0) aiBoard.isAiSeeking = true;
-    console.log("AI Seeking...");
+    if (aiBoard.cellsToCheck.length === 0) {
+      aiBoard.isAiSeeking = true;
+      console.log("AI Seeking...");
+    }
 
     // Clear relevant cells from check queue in cellProbs
     console.log(

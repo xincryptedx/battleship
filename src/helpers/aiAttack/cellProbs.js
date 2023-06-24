@@ -167,6 +167,25 @@ const cellProbs = () => {
     }
   };
 
+  // Method for displaying the probs
+  // Helper to transpose array for console.table's annoying col first approach
+  const transposeArray = (array) =>
+    array[0].map((_, colIndex) => array.map((row) => row[colIndex]));
+  // eslint-disable-next-line no-unused-vars
+  const logProbs = (probsToLog) => {
+    // Log the probs
+    const transposedProbs = transposeArray(probsToLog);
+    console.table(transposedProbs);
+    // Log the toal of all probs
+    // eslint-disable-next-line no-console
+    console.log(
+      probsToLog.reduce(
+        (sum, row) => sum + row.reduce((rowSum, value) => rowSum + value, 0),
+        0
+      )
+    );
+  };
+
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
   const updateProbs = (gm) => {
     // These values are used as the evidence to update the probabilities on the probs
@@ -224,28 +243,8 @@ const cellProbs = () => {
     /* Ignore cells with a probability of 0 when considering groups of cells to increase efficiency. */
 
     /* Set the probability of cells with hits and misses to 0 to prevent duplicate attacks. */
+    logProbs(probs);
   };
-
-  // Method for displaying the probs
-  // Helper to transpose array for console.table's annoying col first approach
-  const transposeArray = (array) =>
-    array[0].map((_, colIndex) => array.map((row) => row[colIndex]));
-  // eslint-disable-next-line no-unused-vars
-  const logProbs = (probsToLog) => {
-    // Log the probs
-    const transposedProbs = transposeArray(probsToLog);
-    console.table(transposedProbs);
-    // Log the toal of all probs
-    // eslint-disable-next-line no-console
-    console.log(
-      probsToLog.reduce(
-        (sum, row) => sum + row.reduce((rowSum, value) => rowSum + value, 0),
-        0
-      )
-    );
-  };
-
-  // logBoard(normalizedBoard);
 
   return {
     updateProbs,

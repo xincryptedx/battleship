@@ -179,8 +179,8 @@ const Gameboard = (gm) => {
         const player = thisGameboard.isAi ? "AI's" : "User's";
         logMsg = `<span style="color: red">${player} ${ship} was destroyed!</span>`;
         thisGameboard.sunkenShips[key] = true;
-        // Call the method for responding to ship sunk on game manager
-        gm.userShipSunk(ship);
+        // Call the method for responding to user ship sunk on game manager
+        if (!thisGameboard.isAi) gm.userShipSunk(ship);
       }
     });
     return logMsg;

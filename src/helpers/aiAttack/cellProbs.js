@@ -83,7 +83,7 @@ const cellProbs = () => {
   const probs = normalizeProbs(nonNormalizedProbs);
 
   // Method for destrying found ships
-  const destroyFoundShip = (newHit) => {
+  const destroyModeCoords = (newHit) => {
     // Put the new hit into the cells to check if passed
     // Look at first cell to check
     // Are there any adjacent hits?
@@ -188,7 +188,6 @@ const cellProbs = () => {
   const updateProbs = (gm) => {
     // These values are used as the evidence to update the probabilities on the probs
     const { hits, misses } = gm.userBoard;
-    const { aiBoard } = gm;
 
     // Largest ship length
     let largestShipLength = null;
@@ -216,10 +215,6 @@ const cellProbs = () => {
       const [x, y] = hit;
       // If the hit is new, and therefore the prob for that hit is not yet 0
       if (probs[x][y] !== 0) {
-        // Set the ai isSeeking to false to switch to the destroy strat
-        aiBoard.isSeeking = false;
-        // For now just add hit to cellsTocheck
-        gm.aiBoard.cellsToCheck.push([x, y]);
         // Apply the increase to adjacent cells
         hitAdjacentIncrease(x, y, largestShipLength);
         // Set the probability of the hit to 0
@@ -247,7 +242,7 @@ const cellProbs = () => {
 
   return {
     updateProbs,
-    destroyFoundShip,
+    destroyModeCoords,
     probs,
   };
 };

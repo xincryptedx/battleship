@@ -82,6 +82,26 @@ const cellProbs = () => {
   // Normalize the probabilities
   const probs = normalizeProbs(nonNormalizedProbs);
 
+  // Persistant array of cells to check adjacent on
+  const cellsToCheck = [];
+  // Method for destrying found ships
+  const destroyFoundShip = (newHit) => {
+    // Put the new hit into the cells to check if passed
+    // Look at first cell to check
+    // Are there any adjacent hits?
+    // Yes then Check next cell:
+    // next cell in that direction empty? Return next cell
+    // next cell miss? Check opposite direction cell.
+    // next cell hit? If next cell not farther than max ship length return it
+    // Else check opposite direction cell
+    // No adjacent hits? Return empty adjacent cell, of which there must be at least one
+    // Check opposite direction cell:
+    // If opposite direction hit?
+    // Somewhere when a ship is destroyed
+    // Find which cells make up that ship and remove them from cellsToCheck
+    // Set aiAttack isSeeking to true
+  };
+
   // Helper methods for updateProbs
   const hitAdjacentIncrease = (hitX, hitY, largestLength) => {
     // Vars for calculating decrement factor
@@ -171,7 +191,6 @@ const cellProbs = () => {
         break;
       }
     }
-    console.log(`Smallest length: ${smallestShipLength}`);
 
     // Update values based on hits
     Object.values(hits).forEach((hit) => {
@@ -222,7 +241,7 @@ const cellProbs = () => {
 
   // logBoard(normalizedBoard);
 
-  return { updateProbs, probs };
+  return { updateProbs, destroyFoundShip, probs };
 };
 
 export default cellProbs;

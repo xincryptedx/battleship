@@ -215,6 +215,7 @@ const gameManager = () => {
   const userShipSunk = (ship) => {
     // Set AI gameboard back to isSeeking
     // Clear relevant cells from check queue in cellProbs
+    console.log(ship);
   };
 
   return {

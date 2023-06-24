@@ -83,9 +83,9 @@ const cellProbs = () => {
   const probs = normalizeProbs(nonNormalizedProbs);
 
   // Method for destrying found ships
-  const destroyModeCoords = (newHit) => {
-    // Put the new hit into the cells to check if passed
-    // Look at first cell to check
+  const destroyModeCoords = (gm) => {
+    // Look at first cell to check which will be the oldest added cell
+    const cellToCheck = gm.aiBoard.cellsToCheck[0];
     // Are there any adjacent hits?
     // Yes then Check next cell:
     // next cell in that direction empty? Return next cell
@@ -95,9 +95,6 @@ const cellProbs = () => {
     // No adjacent hits? Return empty adjacent cell, of which there must be at least one
     // Check opposite direction cell:
     // If opposite direction hit?
-    // Somewhere when a ship is destroyed
-    // Find which cells make up that ship and remove them from cellsToCheck
-    // Set aiAttack isSeeking to true
   };
 
   // Helper methods for updateProbs

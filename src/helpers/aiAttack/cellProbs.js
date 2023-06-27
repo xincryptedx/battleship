@@ -106,19 +106,32 @@ const cellProbs = () => {
   const loadAdjacentCells = (centerCell, hits, empties) => {
     // Center Cell x and y
     const [centerX, centerY] = centerCell;
-    // Top is valid?
-    if (isValidCell(centerY - 1, centerX)) {
-      // If hit add to hits
-      if (probs[centerY - 1][centerX] === 0) {
-        hits.push([centerY - 1, centerX]);
-        console.log(`Pushing ${centerX}, ${centerY - 1} to adjacentHits!`);
-      }
-      // If empty add to empites
-      else if (probs[centerY - 1][centerX] > 0) {
-        empties.push([centerY - 1, centerX]);
-        console.log(`Pushing ${centerX}, ${centerY - 1} to adjacentempties!`);
+    // Adjacent values row first, then col
+    const top = [centerY - 1, centerX];
+    const bottom = [centerY + 1, centerX];
+    const left = [centerY, centerX - 1];
+    const right = [centerY, centerX + 1];
+
+    // Fn that checks the cells and adds them to arrays
+    function checkCell(cellY, cellX) {
+      if (isValidCell(cellY, cellX)) {
+        // If hit add to hits
+        if (probs[cellX][cellY] === 0) {
+          hits.push([cellX, cellY]);
+          console.log(`Pushing ${cellX}, ${cellY} to adjacentHits!`);
+        }
+        // If empty add to empites
+        else if (probs[cellX][cellY] > 0) {
+          empties.push([cellX, cellY]);
+          console.log(`Pushing ${cellX}, ${cellY} to adjacentempties!`);
+        }
       }
     }
+
+    checkCell(...top);
+    checkCell(...bottom);
+    checkCell(...left);
+    checkCell(...right);
   };
 
   // Method for destrying found ships

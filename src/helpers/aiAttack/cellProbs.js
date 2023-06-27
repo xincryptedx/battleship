@@ -93,10 +93,39 @@ const cellProbs = () => {
     const numCols = probs.length;
     return row >= 0 && row < numRows && col >= 0 && col < numCols;
   }
+
   // Helper that checks if cell is a boundary or miss (-1 value)
   function isBoundaryOrMiss(row, col) {
     return !isValidCell(row, col) || probs[row][col] === -1;
   }
+
+  // Helpers for getting remaining ship lengths
+  const getLargestRemainingLength = (gm) => {
+    // Largest ship length
+    let largestShipLength = null;
+    for (let i = Object.keys(gm.userBoard.sunkenShips).length; i >= 1; i -= 1) {
+      if (!gm.userBoard.sunkenShips[i]) {
+        largestShipLength = i;
+        largestShipLength = i === 1 ? 2 : largestShipLength;
+        largestShipLength = i === 2 ? 3 : largestShipLength;
+        break;
+      }
+    }
+    return largestShipLength;
+  };
+
+  const getSmallestRemainingLength = (gm) => {
+    let smallestShipLength = null;
+    for (let i = 0; i < Object.keys(gm.userBoard.sunkenShips).length; i += 1) {
+      if (!gm.userBoard.sunkenShips[i]) {
+        smallestShipLength = i === 0 ? 2 : smallestShipLength;
+        smallestShipLength = i === 1 ? 3 : smallestShipLength;
+        smallestShipLength = i > 1 ? i : smallestShipLength;
+        break;
+      }
+    }
+    return smallestShipLength;
+  };
 
   // #endregion
 
@@ -138,8 +167,10 @@ const cellProbs = () => {
   const checkAdjacentCells = (hits, empties) => {
     // cellCount = 1 and will increment for every cell "away" from the cellToCheck we are considering
     let cellCount = 1;
+
     // Variable for coordiates to return
     let attackCoords = null;
+
     // If no hits then set attackCoords to an empty cell if one exists
     if (hits.length === 0 && empties.length > 0) {
       // Check each empty cell and return the most likely hit based on probs
@@ -157,6 +188,8 @@ const cellProbs = () => {
 
     // If there are hits
     // cellCount++. Then, if cellCount <= biggest remaining ship length {
+    cellCount += 1;
+    // if (cellCount <= )
     //    if the next cell beyond the first in adjacentHits is empty return it
     //    if the cell is a hit, cellCount++. Then if cell count <= biggest length{
     //      if next cell beyond hit is empty return it
@@ -180,7 +213,7 @@ const cellProbs = () => {
     const adjacentEmpties = [];
     loadAdjacentCells(cellToCheck, adjacentHits, adjacentEmpties);
 
-    const attackCoords = checkAdjacentCells(adjacentHits, adjacentEmpties);
+    const attackCoords = checkAdjacentCells(adjacentHits, adjacentEmpties, gm);
 
     // if ajdacentEmpties and adjacentHits are both empty, then no cells remain to be checked.
     // this means that the cell to check has been exhausted and should be removed from the cellsToCheck array
@@ -282,25 +315,9 @@ const cellProbs = () => {
     const { hits, misses } = gm.userBoard;
 
     // Largest ship length
-    let largestShipLength = null;
-    for (let i = Object.keys(gm.userBoard.sunkenShips).length; i >= 1; i -= 1) {
-      if (!gm.userBoard.sunkenShips[i]) {
-        largestShipLength = i;
-        largestShipLength = i === 1 ? 2 : largestShipLength;
-        largestShipLength = i === 2 ? 3 : largestShipLength;
-        break;
-      }
-    }
+    const largestShipLength = getLargestRemainingLength(gm);
     // Smallest ship length
-    let smallestShipLength = null;
-    for (let i = 0; i < Object.keys(gm.userBoard.sunkenShips).length; i += 1) {
-      if (!gm.userBoard.sunkenShips[i]) {
-        smallestShipLength = i === 0 ? 2 : smallestShipLength;
-        smallestShipLength = i === 1 ? 3 : smallestShipLength;
-        smallestShipLength = i > 1 ? i : smallestShipLength;
-        break;
-      }
-    }
+    const smallestShipLength = getSmallestRemainingLength(gm);
 
     // Update values based on hits
     Object.values(hits).forEach((hit) => {

@@ -134,16 +134,42 @@ const cellProbs = () => {
     checkCell(...right);
   };
 
+  // Helper method for checking the adjacent hits for nearby empties
+  const checkAdjacentCells = (hits, empties) => {
+    // Variable for coordiates to return
+    let attackCoords = null;
+    // If no hits then set attackCoords to an empty cell if one exists
+    if (hits.length === 0 && empties.length > 0) {
+      // Check each empty cell and return the most likely hit based on probs
+      let maxValue = Number.NEGATIVE_INFINITY;
+      for (let i = 0; i < empties.length; i += 1) {
+        const [x, y] = empties[i];
+        const value = probs[x][y];
+        // Update maxValue if found value bigger, along with attack coords
+        if (value > maxValue) {
+          maxValue = value;
+          attackCoords = empties[i];
+        }
+      }
+    }
+
+    return attackCoords;
+  };
+
   // Method for destrying found ships
   const destroyModeCoords = (gm) => {
     // Look at first cell to check which will be the oldest added cell
     const cellToCheck = gm.aiBoard.cellsToCheck[0];
     // cellCount = 1 and will increment for every cell "away" from the cellToCheck we are considering
     let cellCount = 1;
+
     // Put all adjacent cells in adjacentEmpties/adjacentHits
     const adjacentHits = [];
     const adjacentEmpties = [];
     loadAdjacentCells(cellToCheck, adjacentHits, adjacentEmpties);
+
+    const attackCoords = checkAdjacentCells(adjacentHits, adjacentEmpties);
+
     // Initial check for cellToCheck
     // Are any of them hits?
     // No - return one of the empty cells at random
@@ -163,6 +189,8 @@ const cellProbs = () => {
     // then continuing the process with the next cell in the front of the array
     // if somehow there are no cells remainig (logically this shouldn't be possible before a ship is sunk and destroy mode is ended)
     // then just return null, and therefore allow the backup selection process to choose an attack
+    console.log(`Destroy target found! ${attackCoords}`);
+    return attackCoords;
   };
 
   // #endregion

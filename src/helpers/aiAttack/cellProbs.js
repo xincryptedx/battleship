@@ -85,6 +85,18 @@ const cellProbs = () => {
 
   // #endregion
 
+  // #region General use helpers
+  // Helper that checks if valid cell on grid
+  function isValidCell(row, col, numRows, numCols) {
+    return row >= 0 && row < numRows && col >= 0 && col < numCols;
+  }
+  // Helper that checks if cell is a boundary or miss (-1 value)
+  function isBoundaryOrMiss(row, col, numRows, numCols) {
+    return !isValidCell(row, col, numRows, numCols) || probs[row][col] === -1;
+  }
+
+  // #endregion
+
   // #region Destory mode move determination
 
   // Helper for loading adjacent cells into appropriate arrays
@@ -161,24 +173,17 @@ const cellProbs = () => {
     // Set rows and cols
     const numRows = probs[0].length;
     const numCols = probs.length;
-    // Helper that checks if valid cell on grid
-    function isValidCell(row, col) {
-      return row >= 0 && row < numRows && col >= 0 && col < numCols;
-    }
-    // Helper that checks if cell is a boundary or miss (-1 value)
-    function isBoundaryOrMiss(row, col) {
-      return !isValidCell(row, col) || probs[row][col] === -1;
-    }
+
     // For every cell, check the cells around it. If they are all boundary or miss then set to -1
     for (let row = 0; row < numRows; row += 1) {
       for (let col = 0; col < numCols; col += 1) {
         // If the cell is an empty cell (> 0) and adjacent cells are boundary or miss
         if (
           probs[row][col] > 0 &&
-          isBoundaryOrMiss(row, col - 1) &&
-          isBoundaryOrMiss(row, col + 1) &&
-          isBoundaryOrMiss(row - 1, col) &&
-          isBoundaryOrMiss(row + 1, col)
+          isBoundaryOrMiss(row, col - 1, numRows, numCols) &&
+          isBoundaryOrMiss(row, col + 1, numRows, numCols) &&
+          isBoundaryOrMiss(row - 1, col, numRows, numCols) &&
+          isBoundaryOrMiss(row + 1, col, numRows, numCols)
         ) {
           // Set that cell to a miss since it cannot be a hit
           probs[row][col] = -1;

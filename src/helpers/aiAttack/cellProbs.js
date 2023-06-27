@@ -191,15 +191,15 @@ const cellProbs = () => {
 
     // If cell count is not larger than the biggest remaining ship
     if (thisCount <= largestShipLength) {
-      //    if the cell is a miss stop checking in this direction by removing the adjacentHit
+      // If cell is a miss stop checking in this direction by removing the adjacentHit
       if (probs[hitX][hitY] === -1) {
         adjacentHits.shift();
-        // If adjacent hits isn't empty try to handle the next adjacent hit
+        // Then if adjacent hits isn't empty try to handle the next adjacent hit
         if (adjacentHits.length > 0) {
           foundEmpty = handleAdjacentHit(gm, adjacentHits);
         }
       }
-      // If the next cell beyond the first in adjacentHits is empty return it
+      // If the next cell is empty and valid return it
       else if (isValidCell(nextY, nextX) && probs[nextX][nextY] > 0) {
         foundEmpty = [nextCell];
       }

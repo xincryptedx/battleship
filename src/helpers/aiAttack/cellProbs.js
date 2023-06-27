@@ -136,22 +136,22 @@ const cellProbs = () => {
     // Center Cell x and y
     const [centerX, centerY] = centerCell;
     // Adjacent values row first, then col
-    const top = [centerY - 1, centerX];
-    const bottom = [centerY + 1, centerX];
-    const left = [centerY, centerX - 1];
-    const right = [centerY, centerX + 1];
+    const top = [centerY - 1, centerX, "top"];
+    const bottom = [centerY + 1, centerX, "bottom"];
+    const left = [centerY, centerX - 1, "left"];
+    const right = [centerY, centerX + 1, "right"];
 
     // Fn that checks the cells and adds them to arrays
-    function checkCell(cellY, cellX) {
+    function checkCell(cellY, cellX, direction) {
       if (isValidCell(cellY, cellX)) {
         // If hit add to hits
         if (probs[cellX][cellY] === 0) {
-          adjacentHits.push([cellX, cellY]);
+          adjacentHits.push([cellX, cellY, direction]);
           console.log(`Pushing ${cellX}, ${cellY} to adjacentHits!`);
         }
         // If empty add to empites
         else if (probs[cellX][cellY] > 0) {
-          adjacentEmpties.push([cellX, cellY]);
+          adjacentEmpties.push([cellX, cellY, direction]);
           console.log(`Pushing ${cellX}, ${cellY} to adjacentempties!`);
         }
       }
@@ -172,25 +172,45 @@ const cellProbs = () => {
     const largestShipLength = getLargestRemainingLength(gm);
 
     // If thisCount is bigger than the biggest remaining ship then return
-    if (thisCount > largestShipLength) return;
+    if (thisCount > largestShipLength) return null;
 
     // Get the adjacent hit to consider
     const hit = adjacentHits[0];
-    const [hitX, hitY] = hit;
+    const [hitX, hitY, direction] = hit;
+
+    // The next cell in the same direction
+    let nextCell = null;
+    if (direction === "top") nextCell = [hitX, hitY - 1];
+    else if (direction === "bottom") nextCell = [hitX, hitY + 1];
+    else if (direction === "left") nextCell = [hitX - 1, hitY];
+    else if (direction === "right") nextCell = [hitX + 1, hitY];
+    const [nextX, nextY] = nextCell;
+
+    // Ref to found empty
+    let foundEmpty = null;
 
     // If cell count is not larger than the biggest remaining ship
     if (thisCount <= largestShipLength) {
       //    if the cell is a miss stop checking in this direction by removing the adjacentHit
       if (probs[hitX][hitY] === -1) {
         adjacentHits.shift();
+        // If adjacent hits isn't empty try to handle the next adjacent hit
+        if (adjacentHits.length > 0) {
+          foundEmpty = handleAdjacentHit(gm, adjacentHits);
+        }
       }
-      //    then go back to the initial check for cellToCheck.
-      //    if the next cell beyond the first in adjacentHits is empty return it
+      // If the next cell beyond the first in adjacentHits is empty return it
+      else if (isValidCell(nextY, nextX) && probs[nextX][nextY] > 0) {
+        foundEmpty = [nextCell];
+      }
+
       //    if the cell is a hit, cellCount++. Then if cell count <= biggest length{
       //      if next cell beyond hit is empty return it
       //      if a hit....
       //      if empty...
     }
+
+    return foundEmpty;
   };
 
   // Helper method for checking the adjacent hits for nearby empties

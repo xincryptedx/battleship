@@ -103,8 +103,22 @@ const cellProbs = () => {
   // #region Destory mode move determination
 
   // Helper for loading adjacent cells into appropriate arrays
-  const loadAdjacentCells = (centerCell, hits, empties, gm) => {
-    //
+  const loadAdjacentCells = (centerCell, hits, empties) => {
+    // Center Cell x and y
+    const [centerX, centerY] = centerCell;
+    // Top is valid?
+    if (isValidCell(centerY - 1, centerX)) {
+      // If hit add to hits
+      if (probs[centerY - 1][centerX] === 0) {
+        hits.push([centerY - 1, centerX]);
+        console.log(`Pushing ${centerX}, ${centerY - 1} to adjacentHits!`);
+      }
+      // If empty add to empites
+      else if (probs[centerY - 1][centerX] > 0) {
+        empties.push([centerY - 1, centerX]);
+        console.log(`Pushing ${centerX}, ${centerY - 1} to adjacentempties!`);
+      }
+    }
   };
 
   // Method for destrying found ships
@@ -116,7 +130,7 @@ const cellProbs = () => {
     // Put all adjacent cells in adjacentEmpties/adjacentHits
     const adjacentHits = [];
     const adjacentEmpties = [];
-    loadAdjacentCells(cellToCheck, adjacentHits, adjacentEmpties, gm);
+    loadAdjacentCells(cellToCheck, adjacentHits, adjacentEmpties);
     // Initial check for cellToCheck
     // Are any of them hits?
     // No - return one of the empty cells at random

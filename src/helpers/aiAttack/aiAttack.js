@@ -9,7 +9,6 @@ const aiAttack = (gm, delay) => {
   const gridHeight = 10;
   const gridWidth = 10;
   let attackCoords = [];
-  let { isSeeking } = gm.aiBoard;
 
   // Update cell hit probabilities
   probs.updateProbs(gm);
@@ -46,7 +45,7 @@ const aiAttack = (gm, delay) => {
   }
 
   // Do an attack based on probabilities if ai difficulty is 2 and is seeking
-  else if (gm.aiDifficulty === 2 && isSeeking) {
+  else if (gm.aiDifficulty === 2 && gm.aiBoard.isAiSeeking) {
     findGreatestProbAttack();
     while (gm.userBoard.alreadyAttacked(attackCoords)) {
       findGreatestProbAttack();
@@ -54,12 +53,13 @@ const aiAttack = (gm, delay) => {
   }
 
   // Do an attack based on destroy behavior after a hit is found
-  else if (gm.aiDifficulty === 2 && !isSeeking) {
+  else if (gm.aiDifficulty === 2 && !gm.aiBoard.isAiSeeking) {
     // Get coords using destroy method
     const coords = probs.destroyModeCoords(gm);
     // If no coords are returned instead use seeking strat
     if (!coords) {
-      isSeeking = true;
+      // eslint-disable-next-line no-param-reassign
+      gm.aiBoard.isAiSeeking = true;
       findGreatestProbAttack();
       while (gm.userBoard.alreadyAttacked(attackCoords)) {
         findGreatestProbAttack();

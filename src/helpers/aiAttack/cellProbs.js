@@ -136,6 +136,8 @@ const cellProbs = () => {
 
   // Helper method for checking the adjacent hits for nearby empties
   const checkAdjacentCells = (hits, empties) => {
+    // cellCount = 1 and will increment for every cell "away" from the cellToCheck we are considering
+    let cellCount = 1;
     // Variable for coordiates to return
     let attackCoords = null;
     // If no hits then set attackCoords to an empty cell if one exists
@@ -153,27 +155,8 @@ const cellProbs = () => {
       }
     }
 
-    return attackCoords;
-  };
-
-  // Method for destrying found ships
-  const destroyModeCoords = (gm) => {
-    // Look at first cell to check which will be the oldest added cell
-    const cellToCheck = gm.aiBoard.cellsToCheck[0];
-    // cellCount = 1 and will increment for every cell "away" from the cellToCheck we are considering
-    let cellCount = 1;
-
-    // Put all adjacent cells in adjacentEmpties/adjacentHits
-    const adjacentHits = [];
-    const adjacentEmpties = [];
-    loadAdjacentCells(cellToCheck, adjacentHits, adjacentEmpties);
-
-    const attackCoords = checkAdjacentCells(adjacentHits, adjacentEmpties);
-
-    // Initial check for cellToCheck
-    // Are any of them hits?
-    // No - return one of the empty cells at random
-    // Yes - cellCount++. Then, if cellCount <= biggest remaining ship length {
+    // If there are hits
+    // cellCount++. Then, if cellCount <= biggest remaining ship length {
     //    if the next cell beyond the first in adjacentHits is empty return it
     //    if the cell is a hit, cellCount++. Then if cell count <= biggest length{
     //      if next cell beyond hit is empty return it
@@ -183,6 +166,22 @@ const cellProbs = () => {
     //    if the cell is a miss stop checking in this direction by removing the adjacentHit
     //    then go back to the initial check for cellToCheck.
     // }
+
+    return attackCoords;
+  };
+
+  // Method for destrying found ships
+  const destroyModeCoords = (gm) => {
+    // Look at first cell to check which will be the oldest added cell
+    const cellToCheck = gm.aiBoard.cellsToCheck[0];
+
+    // Put all adjacent cells in adjacentEmpties/adjacentHits
+    const adjacentHits = [];
+    const adjacentEmpties = [];
+    loadAdjacentCells(cellToCheck, adjacentHits, adjacentEmpties);
+
+    const attackCoords = checkAdjacentCells(adjacentHits, adjacentEmpties);
+
     // if ajdacentEmpties and adjacentHits are both empty, then no cells remain to be checked.
     // this means that the cell to check has been exhausted and should be removed from the cellsToCheck array
     // if this happens then restart this whole process by removing the first entry of cellsToCheck and

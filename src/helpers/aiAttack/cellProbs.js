@@ -132,7 +132,7 @@ const cellProbs = () => {
   // #region Destory mode move determination
 
   // Helper for loading adjacent cells into appropriate arrays
-  const loadAdjacentCells = (centerCell, hits, empties) => {
+  const loadAdjacentCells = (centerCell, adjacentHits, adjacentEmpties) => {
     // Center Cell x and y
     const [centerX, centerY] = centerCell;
     // Adjacent values row first, then col
@@ -146,12 +146,12 @@ const cellProbs = () => {
       if (isValidCell(cellY, cellX)) {
         // If hit add to hits
         if (probs[cellX][cellY] === 0) {
-          hits.push([cellX, cellY]);
+          adjacentHits.push([cellX, cellY]);
           console.log(`Pushing ${cellX}, ${cellY} to adjacentHits!`);
         }
         // If empty add to empites
         else if (probs[cellX][cellY] > 0) {
-          empties.push([cellX, cellY]);
+          adjacentEmpties.push([cellX, cellY]);
           console.log(`Pushing ${cellX}, ${cellY} to adjacentempties!`);
         }
       }
@@ -164,7 +164,7 @@ const cellProbs = () => {
   };
 
   // Helper method for handling adjacent hits recursively
-  const handleAdjacentHits = (gm, hits, cellCount = 1) => {
+  const handleAdjacentHit = (gm, adjacentHits, cellCount = 1) => {
     // Increment cell count
     const thisCount = cellCount + 1;
 
@@ -175,14 +175,14 @@ const cellProbs = () => {
     if (thisCount > largestShipLength) return;
 
     // Get the adjacent hit to consider
-    const hit = hits[0];
+    const hit = adjacentHits[0];
     const [hitX, hitY] = hit;
 
     // If cell count is not larger than the biggest remaining ship
     if (thisCount <= largestShipLength) {
       //    if the cell is a miss stop checking in this direction by removing the adjacentHit
       if (probs[hitX][hitY] === -1) {
-        hits.shift();
+        adjacentHits.shift();
       }
       //    then go back to the initial check for cellToCheck.
       //    if the next cell beyond the first in adjacentHits is empty return it
@@ -194,23 +194,28 @@ const cellProbs = () => {
   };
 
   // Helper method for checking the adjacent hits for nearby empties
-  const checkAdjacentCells = (hits, empties, gm) => {
+  const checkAdjacentCells = (adjacentHits, adjacentEmpties, gm) => {
     // Variable for coordiates to return
     let attackCoords = null;
 
     // If no hits then set attackCoords to an empty cell if one exists
-    if (hits.length === 0 && empties.length > 0) {
+    if (adjacentHits.length === 0 && adjacentEmpties.length > 0) {
       // Check each empty cell and return the most likely hit based on probs
       let maxValue = Number.NEGATIVE_INFINITY;
-      for (let i = 0; i < empties.length; i += 1) {
-        const [x, y] = empties[i];
+      for (let i = 0; i < adjacentEmpties.length; i += 1) {
+        const [x, y] = adjacentEmpties[i];
         const value = probs[x][y];
         // Update maxValue if found value bigger, along with attack coords
         if (value > maxValue) {
           maxValue = value;
-          attackCoords = empties[i];
+          attackCoords = adjacentEmpties[i];
         }
       }
+    }
+
+    // If there are hits then handle checking cells after them to find empty for attack
+    if (adjacentHits.length > 0) {
+      attackCoords = handleAdjacentHit(gm, adjacentHits);
     }
 
     return attackCoords;

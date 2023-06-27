@@ -3,6 +3,7 @@ const cellProbs = () => {
   const colorMod = 0.33; // Strong negative bias used to initialize all probs
   const adjacentMod = 4; // Medium positive bias for hit adjacent adjustments
 
+  // #region Create the initial probs
   // Method that creates probs and defines initial probabilities
   const createProbs = () => {
     // Create the probs. It is a 10x10 grid of cells.
@@ -82,13 +83,25 @@ const cellProbs = () => {
   // Normalize the probabilities
   const probs = normalizeProbs(nonNormalizedProbs);
 
+  // #endregion
+
+  // #region Destory mode move determination
+
+  // Helper for loading adjacent cells into appropriate arrays
+  const loadAdjacentCells = (centerCell, hits, empties, gm) => {
+    //
+  };
+
   // Method for destrying found ships
   const destroyModeCoords = (gm) => {
     // Look at first cell to check which will be the oldest added cell
     const cellToCheck = gm.aiBoard.cellsToCheck[0];
     // cellCount = 1 and will increment for every cell "away" from the cellToCheck we are considering
     let cellCount = 1;
-    // Clockwise, search adjacent cells and put in adjacentEmpties/adjacentHit fn scope arrays
+    // Put all adjacent cells in adjacentEmpties/adjacentHits
+    const adjacentHits = [];
+    const adjacentEmpties = [];
+    loadAdjacentCells(cellToCheck, adjacentHits, adjacentEmpties, gm);
     // Initial check for cellToCheck
     // Are any of them hits?
     // No - return one of the empty cells at random
@@ -110,7 +123,9 @@ const cellProbs = () => {
     // then just return null, and therefore allow the backup selection process to choose an attack
   };
 
-  // Helper methods for updateProbs
+  // #endregion
+
+  // #region Helper methods for updateProbs
   const hitAdjacentIncrease = (hitX, hitY, largestLength) => {
     // Vars for calculating decrement factor
     const startingDec = 1;
@@ -175,7 +190,9 @@ const cellProbs = () => {
     }
   };
 
-  // Method for displaying the probs
+  // #endregion
+
+  // #region Method and helper for logging probs
   // Helper to transpose array for console.table's annoying col first approach
   const transposeArray = (array) =>
     array[0].map((_, colIndex) => array.map((row) => row[colIndex]));
@@ -194,6 +211,8 @@ const cellProbs = () => {
       )
     );
   };
+
+  // #endregion
 
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
   const updateProbs = (gm) => {

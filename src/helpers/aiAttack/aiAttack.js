@@ -46,6 +46,7 @@ const aiAttack = (gm, delay) => {
 
   // Do an attack based on probabilities if ai difficulty is 2 and is seeking
   else if (gm.aiDifficulty === 2 && gm.aiBoard.isAiSeeking) {
+    console.log("AI attacking with seek mode!");
     findGreatestProbAttack();
     while (gm.userBoard.alreadyAttacked(attackCoords)) {
       findGreatestProbAttack();
@@ -54,12 +55,11 @@ const aiAttack = (gm, delay) => {
 
   // Do an attack based on destroy behavior after a hit is found
   else if (gm.aiDifficulty === 2 && !gm.aiBoard.isAiSeeking) {
+    console.log("AI attacking with destroy mode!");
     // Get coords using destroy method
     const coords = probs.destroyModeCoords(gm);
     // If no coords are returned instead use seeking strat
     if (!coords) {
-      // eslint-disable-next-line no-param-reassign
-      gm.aiBoard.isAiSeeking = true;
       findGreatestProbAttack();
       while (gm.userBoard.alreadyAttacked(attackCoords)) {
         findGreatestProbAttack();

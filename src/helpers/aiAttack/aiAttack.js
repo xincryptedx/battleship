@@ -71,6 +71,7 @@ const aiAttack = (gm, delay) => {
     }
   }
   // Send attack to game manager
+  console.log(`Final attack coords: ${attackCoords}`);
   gm.aiAttacking(attackCoords, delay);
 
   // Return the probs for gm access

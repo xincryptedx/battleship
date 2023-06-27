@@ -196,12 +196,14 @@ const cellProbs = () => {
         adjacentHits.shift();
         // Then if adjacent hits isn't empty try to handle the next adjacent hit
         if (adjacentHits.length > 0) {
+          console.log("Miss found. Checking next adjacent hit...");
           foundEmpty = handleAdjacentHit(gm, adjacentHits);
         }
       }
       // If the next cell is empty and valid return it
       else if (isValidCell(nextY, nextX) && probs[nextX][nextY] > 0) {
-        foundEmpty = [nextCell];
+        console.log("Found next empty after adjacent hit!");
+        foundEmpty = [nextX, nextY];
       }
 
       //    if the cell is a hit, cellCount++. Then if cell count <= biggest length{
@@ -228,7 +230,7 @@ const cellProbs = () => {
         // Update maxValue if found value bigger, along with attack coords
         if (value > maxValue) {
           maxValue = value;
-          attackCoords = adjacentEmpties[i];
+          attackCoords = [x, y];
         }
       }
     }

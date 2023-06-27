@@ -163,11 +163,38 @@ const cellProbs = () => {
     checkCell(...right);
   };
 
-  // Helper method for checking the adjacent hits for nearby empties
-  const checkAdjacentCells = (hits, empties) => {
-    // cellCount = 1 and will increment for every cell "away" from the cellToCheck we are considering
-    let cellCount = 1;
+  // Helper method for handling adjacent hits recursively
+  const handleAdjacentHits = (gm, hits, cellCount = 1) => {
+    // Increment cell count
+    const thisCount = cellCount + 1;
 
+    // Biggest ship length
+    const largestShipLength = getLargestRemainingLength(gm);
+
+    // If thisCount is bigger than the biggest remaining ship then return
+    if (thisCount > largestShipLength) return;
+
+    // Get the adjacent hit to consider
+    const hit = hits[0];
+    const [hitX, hitY] = hit;
+
+    // If cell count is not larger than the biggest remaining ship
+    if (thisCount <= largestShipLength) {
+      //    if the cell is a miss stop checking in this direction by removing the adjacentHit
+      if (probs[hitX][hitY] === -1) {
+        hits.shift();
+      }
+      //    then go back to the initial check for cellToCheck.
+      //    if the next cell beyond the first in adjacentHits is empty return it
+      //    if the cell is a hit, cellCount++. Then if cell count <= biggest length{
+      //      if next cell beyond hit is empty return it
+      //      if a hit....
+      //      if empty...
+    }
+  };
+
+  // Helper method for checking the adjacent hits for nearby empties
+  const checkAdjacentCells = (hits, empties, gm) => {
     // Variable for coordiates to return
     let attackCoords = null;
 
@@ -185,20 +212,6 @@ const cellProbs = () => {
         }
       }
     }
-
-    // If there are hits
-    // cellCount++. Then, if cellCount <= biggest remaining ship length {
-    cellCount += 1;
-    // if (cellCount <= )
-    //    if the next cell beyond the first in adjacentHits is empty return it
-    //    if the cell is a hit, cellCount++. Then if cell count <= biggest length{
-    //      if next cell beyond hit is empty return it
-    //      if a hit....
-    //      if empty...
-    //    }
-    //    if the cell is a miss stop checking in this direction by removing the adjacentHit
-    //    then go back to the initial check for cellToCheck.
-    // }
 
     return attackCoords;
   };

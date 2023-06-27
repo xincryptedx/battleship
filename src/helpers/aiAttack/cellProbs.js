@@ -86,18 +86,28 @@ const cellProbs = () => {
   const destroyModeCoords = (gm) => {
     // Look at first cell to check which will be the oldest added cell
     const cellToCheck = gm.aiBoard.cellsToCheck[0];
-    // Clockwise, search adjacent cells for hit. Found hit?
-    // Yes then check next cell:
-    // next cell in that direction empty? Return next cell
-    // next cell miss? Check opposite direction cell.
-    // next cell hit? If next cell not farther than max ship length return it
-    // Else check opposite direction cell
-    // No adjacent hits? Return empty adjacent cell, of which there must be at least one
-    // Check opposite direction cell:
-    // opposite direction cell empty? Return that cell
-    // opposite cell miss? likely two ships are close together so move to next adjacent cell
-    // opposite cell hit? check the next opposite cell
-    // check next opposite direction cell...
+    // cellCount = 1 and will increment for every cell "away" from the cellToCheck we are considering
+    let cellCount = 1;
+    // Clockwise, search adjacent cells and put in adjacentEmpties/adjacentHit fn scope arrays
+    // Initial check for cellToCheck
+    // Are any of them hits?
+    // No - return one of the empty cells at random
+    // Yes - cellCount++. Then, if cellCount <= biggest remaining ship length {
+    //    if the next cell beyond the first in adjacentHits is empty return it
+    //    if the cell is a hit, cellCount++. Then if cell count <= biggest length{
+    //      if next cell beyond hit is empty return it
+    //      if a hit....
+    //      if empty...
+    //    }
+    //    if the cell is a miss stop checking in this direction by removing the adjacentHit
+    //    then go back to the initial check for cellToCheck.
+    // }
+    // if ajdacentEmpties and adjacentHits are both empty, then no cells remain to be checked.
+    // this means that the cell to check has been exhausted and should be removed from the cellsToCheck array
+    // if this happens then restart this whole process by removing the first entry of cellsToCheck and
+    // then continuing the process with the next cell in the front of the array
+    // if somehow there are no cells remainig (logically this shouldn't be possible before a ship is sunk and destroy mode is ended)
+    // then just return null, and therefore allow the backup selection process to choose an attack
   };
 
   // Helper methods for updateProbs

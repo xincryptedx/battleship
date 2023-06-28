@@ -164,7 +164,7 @@ const cellProbs = () => {
   };
 
   // Helper method for handling adjacent hits recursively
-  const handleAdjacentHit = (gm, adjacentHits, cellCount = 1) => {
+  const handleAdjacentHit = (gm, adjacentHits, cellCount = 0) => {
     // Increment cell count
     const thisCount = cellCount + 1;
 

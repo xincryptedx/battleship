@@ -421,7 +421,7 @@ const cellProbs = () => {
       // If the hit is new, and therefore the prob for that hit is not yet 0
       if (probs[x][y] !== 0) {
         // Apply the increase to adjacent cells
-        hitAdjacentIncrease(x, y, largestShipLength);
+        // hitAdjacentIncrease(x, y, largestShipLength);
         // Set the probability of the hit to 0
         probs[x][y] = 0;
       }
@@ -433,9 +433,6 @@ const cellProbs = () => {
       // Set the probability of every miss to 0 to prevent that cell from being targeted
       probs[x][y] = -1;
     });
-
-    /* Apply a secondary increase to groups of cells between hits that have a group length, when 
-    added to 2, not greater than the greatest remaining ship length */
 
     /* Reduce the chance of groups of cells that are surrounded by misses or the edge of the board 
     if the group length is not less than or equal to the greatest remaining ship length. */

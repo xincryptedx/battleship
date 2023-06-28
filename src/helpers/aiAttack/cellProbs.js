@@ -226,7 +226,7 @@ const cellProbs = () => {
     const checkNextCell = (nX, nY) => {
       if (thisCount <= largestShipLength) {
         // If next cell is a miss stop checking in this direction by removing the adjacentHit
-        if (probs[nX][nY] === -1) {
+        if (probs[nX][nY] === -1 || !isValidCell(nY, nX)) {
           console.log("Miss found. Shifting adjacent hits array...");
           adjacentHits.shift();
           // Then if adjacent hits isn't empty try to handle the next adjacent hit
@@ -259,7 +259,7 @@ const cellProbs = () => {
           const [newX, newY] = newNext;
           // Recursively check the next cell
           console.log(
-            `Hit detected after previous hit. Recursively checking ${nextCell}`
+            `Hit detected after previous hit. Recursively checking ${newNext}`
           );
           checkNextCell(newX, newY);
         }

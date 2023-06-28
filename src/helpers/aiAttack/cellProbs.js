@@ -172,7 +172,12 @@ const cellProbs = () => {
     const largestShipLength = getLargestRemainingLength(gm);
 
     // If thisCount is bigger than the biggest remaining ship then return
-    if (thisCount > largestShipLength) return null;
+    if (thisCount > largestShipLength) {
+      console.log(
+        "Cell count has exceeded largest remaining ship length. Returning destroy target: null."
+      );
+      return null;
+    }
 
     // Get the adjacent hit to consider
     const hit = adjacentHits[0];
@@ -188,15 +193,18 @@ const cellProbs = () => {
 
     // Ref to found empty
     let foundEmpty = null;
-
+    console.log(`Analyzing ${hit}'s surrounding cells...`);
     // If cell count is not larger than the biggest remaining ship
     if (thisCount <= largestShipLength) {
-      // If cell is a miss stop checking in this direction by removing the adjacentHit
+      // If next cell is a miss stop checking in this direction by removing the adjacentHit
       if (probs[hitX][hitY] === -1) {
+        console.log("Miss found. Shifting adjacent hits array...");
         adjacentHits.shift();
         // Then if adjacent hits isn't empty try to handle the next adjacent hit
         if (adjacentHits.length > 0) {
-          console.log("Miss found. Checking next adjacent hit...");
+          console.log(
+            `Adjacent hits remain. Recursively checking next adjacent hit...`
+          );
           foundEmpty = handleAdjacentHit(gm, adjacentHits);
         }
       }
@@ -222,6 +230,7 @@ const cellProbs = () => {
 
     // If no hits then set attackCoords to an empty cell if one exists
     if (adjacentHits.length === 0 && adjacentEmpties.length > 0) {
+      console.log("No adjacent hits. Returning best empty cell.");
       // Check each empty cell and return the most likely hit based on probs
       let maxValue = Number.NEGATIVE_INFINITY;
       for (let i = 0; i < adjacentEmpties.length; i += 1) {
@@ -237,6 +246,7 @@ const cellProbs = () => {
 
     // If there are hits then handle checking cells after them to find empty for attack
     if (adjacentHits.length > 0) {
+      console.log(`Adjacent hits detected. Moving to helper method...`);
       attackCoords = handleAdjacentHit(gm, adjacentHits);
     }
 

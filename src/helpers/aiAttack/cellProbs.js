@@ -345,34 +345,40 @@ const cellProbs = () => {
         // Increase the probability
         probs[hitX][hitY - i] *= adjacentMod * decrementFactor;
         // Record the cell to increased adjacent cells for later use
-        increasedAdjacentCells.push(hitX, hitY - i);
+        increasedAdjacentCells.push([hitX, hitY - i]);
       }
       // South if on board
       if (hitY + i <= 9) {
         probs[hitX][hitY + i] *= adjacentMod * decrementFactor;
-        increasedAdjacentCells.push(hitX, hitY + i);
+        increasedAdjacentCells.push([hitX, hitY + i]);
       }
       // West if on board
       if (hitX - i >= 0) {
         probs[hitX - i][hitY] *= adjacentMod * decrementFactor;
-        increasedAdjacentCells.push(hitX - i, hitY);
+        increasedAdjacentCells.push([hitX - i, hitY]);
       }
       // East if on board
       if (hitX + i <= 9) {
         probs[hitX + i][hitY] *= adjacentMod * decrementFactor;
-        increasedAdjacentCells.push(hitX + i, hitY);
+        increasedAdjacentCells.push([hitX + i, hitY]);
       }
     }
   };
 
   const resetHitAdjacentIncreases = () => {
-    // If the values in the list are still empty re-initialize their probs
-    increasedAdjacentCells.forEach((cell) => {
-      const [x, y] = cell;
+    // If list empty then just return
+    if (increasedAdjacentCells.length === 0) return;
+    // If the values in the list are still empty
+    for (let i = 0; i < increasedAdjacentCells.length; i += 1) {
+      const [x, y] = increasedAdjacentCells[i];
       if (probs[x][y] > 0) {
+        // Re-initialize their prob value
         probs[x][y] = initialProbs[x][y];
+        // And remove them from the list
+        increasedAdjacentCells.splice(i, 1);
+        console.log(`Re-initialized probs[${x}][${y}]`);
       }
-    });
+    }
   };
 
   const checkDeadCells = () => {

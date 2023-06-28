@@ -270,6 +270,7 @@ const cellProbs = () => {
     // Initial call to above recursive helper
     if (thisCount <= largestShipLength) {
       console.log("Starting recursive check...");
+      console.log(`CellCount: ${cellCount}`);
       checkNextCell();
     }
 

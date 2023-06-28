@@ -376,6 +376,8 @@ const cellProbs = () => {
         probs[x][y] = initialProbs[x][y];
         // And remove them from the list
         increasedAdjacentCells.splice(i, 1);
+        // Reset the iterator
+        i = -1;
         console.log(`Re-initialized probs[${x}][${y}]`);
       }
     }

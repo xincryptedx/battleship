@@ -167,7 +167,7 @@ const cellProbs = () => {
   };
 
   // Helper that returns highest prob adjacent empty
-  const returnBestEmptyAdjacent = (adjacentEmpties) => {
+  const returnBestAdjacentEmpty = (adjacentEmpties) => {
     let attackCoords = null;
     // Check each empty cell and return the most likely hit based on probs
     let maxValue = Number.NEGATIVE_INFINITY;
@@ -184,7 +184,12 @@ const cellProbs = () => {
   };
 
   // Helper method for handling adjacent hits recursively
-  const handleAdjacentHit = (gm, adjacentHits, cellCount = 0) => {
+  const handleAdjacentHit = (
+    gm,
+    adjacentHits,
+    adjacentEmpties,
+    cellCount = 0
+  ) => {
     // Increment cell count
     let thisCount = cellCount + 1;
 
@@ -227,11 +232,17 @@ const cellProbs = () => {
             console.log(
               `Adjacent hits remain. Recursively checking next adjacent hit...`
             );
-            foundEmpty = handleAdjacentHit(gm, adjacentHits);
+            foundEmpty = handleAdjacentHit(gm, adjacentHits, adjacentEmpties);
           }
-          // Else if it is empty try to return the best empty adjacent cell
+          // Else if it is empty try to set found emtpy to the best empty adjacent cell
+          else {
+            console.log(
+              "Adjacent hits now empty. Attempting to return best adjacent empty..."
+            );
+            foundEmpty = returnBestAdjacentEmpty(adjacentEmpties);
+          }
         }
-        // If the next cell is empty and valid return it
+        // If the next cell is empty and valid set found empty to it
         else if (isValidCell(nextY, nextX) && probs[nextX][nextY] > 0) {
           console.log("Found next empty after adjacent hit!");
           foundEmpty = [nextX, nextY];
@@ -273,13 +284,13 @@ const cellProbs = () => {
     // If no hits then set attackCoords to an empty cell if one exists
     if (adjacentHits.length === 0 && adjacentEmpties.length > 0) {
       console.log("No adjacent hits. Returning best empty cell.");
-      attackCoords = returnBestEmptyAdjacent(adjacentEmpties);
+      attackCoords = returnBestAdjacentEmpty(adjacentEmpties);
     }
 
     // If there are hits then handle checking cells after them to find empty for attack
     if (adjacentHits.length > 0) {
       console.log(`Adjacent hits detected. Moving to helper method...`);
-      attackCoords = handleAdjacentHit(gm, adjacentHits);
+      attackCoords = handleAdjacentHit(gm, adjacentHits, adjacentEmpties);
     }
 
     return attackCoords;

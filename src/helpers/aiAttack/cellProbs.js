@@ -82,6 +82,8 @@ const cellProbs = () => {
   const nonNormalizedProbs = createProbs();
   // Normalize the probabilities
   const probs = normalizeProbs(nonNormalizedProbs);
+  // Copy the initial probs for later use
+  const initialProbs = probs.map((row) => [...row]);
 
   // #endregion
 

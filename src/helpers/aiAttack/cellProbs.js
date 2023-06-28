@@ -273,17 +273,7 @@ const cellProbs = () => {
     // If no hits then set attackCoords to an empty cell if one exists
     if (adjacentHits.length === 0 && adjacentEmpties.length > 0) {
       console.log("No adjacent hits. Returning best empty cell.");
-      // Check each empty cell and return the most likely hit based on probs
-      let maxValue = Number.NEGATIVE_INFINITY;
-      for (let i = 0; i < adjacentEmpties.length; i += 1) {
-        const [x, y] = adjacentEmpties[i];
-        const value = probs[x][y];
-        // Update maxValue if found value bigger, along with attack coords
-        if (value > maxValue) {
-          maxValue = value;
-          attackCoords = [x, y];
-        }
-      }
+      attackCoords = returnBestEmptyAdjacent(adjacentEmpties);
     }
 
     // If there are hits then handle checking cells after them to find empty for attack

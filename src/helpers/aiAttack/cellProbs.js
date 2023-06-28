@@ -166,6 +166,23 @@ const cellProbs = () => {
     checkCell(...right);
   };
 
+  // Helper that returns highest prob adjacent empty
+  const returnBestEmptyAdjacent = (adjacentEmpties) => {
+    let attackCoords = null;
+    // Check each empty cell and return the most likely hit based on probs
+    let maxValue = Number.NEGATIVE_INFINITY;
+    for (let i = 0; i < adjacentEmpties.length; i += 1) {
+      const [x, y] = adjacentEmpties[i];
+      const value = probs[x][y];
+      // Update maxValue if found value bigger, along with attack coords
+      if (value > maxValue) {
+        maxValue = value;
+        attackCoords = [x, y];
+      }
+    }
+    return attackCoords;
+  };
+
   // Helper method for handling adjacent hits recursively
   const handleAdjacentHit = (gm, adjacentHits, cellCount = 0) => {
     // Increment cell count
@@ -212,6 +229,7 @@ const cellProbs = () => {
             );
             foundEmpty = handleAdjacentHit(gm, adjacentHits);
           }
+          // Else if it is empty try to return the best empty adjacent cell
         }
         // If the next cell is empty and valid return it
         else if (isValidCell(nextY, nextX) && probs[nextX][nextY] > 0) {

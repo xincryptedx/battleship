@@ -195,6 +195,7 @@ const cellProbs = () => {
 
     // Biggest ship length
     const largestShipLength = getLargestRemainingLength(gm);
+    console.log(`Biggest ship length: ${largestShipLength}`);
 
     // If thisCount is bigger than the biggest remaining ship then return
     if (thisCount > largestShipLength) {
@@ -214,17 +215,16 @@ const cellProbs = () => {
     else if (direction === "bottom") nextCell = [hitX, hitY + 1];
     else if (direction === "left") nextCell = [hitX - 1, hitY];
     else if (direction === "right") nextCell = [hitX + 1, hitY];
-    let [nextX, nextY] = nextCell;
+    const [nextX, nextY] = nextCell;
 
     // Ref to found empty
     let foundEmpty = null;
 
-    console.log(`Analyzing ${hit}'s surrounding cells...`);
     // If cell count is not larger than the biggest remaining ship
-    const checkNextCell = () => {
+    const checkNextCell = (nX, nY) => {
       if (thisCount <= largestShipLength) {
         // If next cell is a miss stop checking in this direction by removing the adjacentHit
-        if (probs[nextX][nextY] === -1) {
+        if (probs[nX][nY] === -1) {
           console.log("Miss found. Shifting adjacent hits array...");
           adjacentHits.shift();
           // Then if adjacent hits isn't empty try to handle the next adjacent hit
@@ -242,36 +242,38 @@ const cellProbs = () => {
             foundEmpty = returnBestAdjacentEmpty(adjacentEmpties);
           }
         }
-        // If the next cell is empty and valid set found empty to it
-        else if (isValidCell(nextY, nextX) && probs[nextX][nextY] > 0) {
-          console.log("Found next empty after adjacent hit!");
-          foundEmpty = [nextX, nextY];
+        // If the cell is a hit
+        else if (probs[nX][nY] === 0) {
+          // Increment the cell count
+          thisCount += 1;
+          // New next cell ref
+          let newNext = null;
+          // Increment the nextCell in the same direction as adjacent hit being checked
+          if (direction === "top") newNext = [nX, nY - 1];
+          else if (direction === "bottom") newNext = [nX, nY + 1];
+          else if (direction === "left") newNext = [nX - 1, nY];
+          else if (direction === "right") newNext = [nX + 1, nY];
+          // Set nextX and nextY to the coords of this incremented next cell
+          const [newX, newY] = newNext;
+          // Recursively check the next cell
+          console.log(
+            `Hit detected after previous hit. Recursively checking ${nextCell}`
+          );
+          checkNextCell(newX, newY);
         }
-      }
-      // If the cell is a hit
-      else if (probs[nextX][nextY] === 0) {
-        // Increment the cell count
-        thisCount += 1;
-        // Increment the nextCell in the same direction as adjacent hit being checked
-        if (direction === "top") nextCell = [nextX, nextY - 1];
-        else if (direction === "bottom") nextCell = [nextX, nextY + 1];
-        else if (direction === "left") nextCell = [nextX - 1, nextY];
-        else if (direction === "right") nextCell = [nextX + 1, nextY];
-        // Set nextX and nextY to the coords of this incremented next cell
-        [nextX, nextY] = nextCell;
-        // Recursively check the next cell
-        console.log(
-          `Hit detected after adjacent hit. Recursively checking ${nextCell}`
-        );
-        checkNextCell();
+        // The cell is empty and valid
+        else if (isValidCell(nY, nX) && probs[nX][nY] > 0) {
+          console.log("Found next empty after adjacent hit!");
+          foundEmpty = [nX, nY];
+        }
       }
     };
 
+    console.log(`Analyzing ${hit}'s surrounding cells...`);
     // Initial call to above recursive helper
     if (thisCount <= largestShipLength) {
-      console.log("Starting recursive check...");
-      console.log(`CellCount: ${cellCount}`);
-      checkNextCell();
+      console.log(`Starting check next cell on ${[nextX, nextY]}`);
+      checkNextCell(nextX, nextY);
     }
 
     return foundEmpty;

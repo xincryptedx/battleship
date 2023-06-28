@@ -209,20 +209,22 @@ const Gameboard = (gm) => {
 
   // Method for returning bool for if cell occupied by sunk ship
   thisGameboard.isCellSunk = (cellToCheck) => {
+    let isCellSunk = false; // Flag variable
+
     Object.keys(thisGameboard.sunkenShips).forEach((key) => {
-      if (thisGameboard.sunkenShips[key] === true) {
-        thisGameboard.ships[key - 1].occupiedCells.forEach((cell) => {
-          if (cellToCheck[0] === cell[0] && cellToCheck[1] === cell[1]) {
-            // Matching cell found return true
-            return true;
-          }
-          // Match not found
-          return false;
-        });
+      if (thisGameboard.sunkenShips[key] === true && !isCellSunk) {
+        const hasMatchingCell = thisGameboard.ships[key - 1].occupiedCells.some(
+          (cell) => cellToCheck[0] === cell[0] && cellToCheck[1] === cell[1]
+        );
+
+        if (hasMatchingCell) {
+          isCellSunk = true;
+          console.log(`Cell ${cellToCheck} belongs to a sunken ship.`);
+        }
       }
     });
-    // Default return false
-    return false;
+
+    return isCellSunk;
   };
 
   return thisGameboard;

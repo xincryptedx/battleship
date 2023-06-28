@@ -335,7 +335,6 @@ const cellProbs = () => {
     const decPercentage = 0.1;
     const minDec = 0.5;
 
-    // Adjust for -1 values!!!!!!!!!!!!
     // Iterate through the cells and update them
     // North
     for (let i = 0; i < largestLength; i += 1) {
@@ -364,6 +363,16 @@ const cellProbs = () => {
         increasedAdjacentCells.push(hitX + i, hitY);
       }
     }
+  };
+
+  const resetHitAdjacentIncreases = () => {
+    // If the values in the list are still empty re-initialize their probs
+    increasedAdjacentCells.forEach((cell) => {
+      const [x, y] = cell;
+      if (probs[x][y] > 0) {
+        probs[x][y] = initialProbs[x][y];
+      }
+    });
   };
 
   const checkDeadCells = () => {
@@ -455,6 +464,7 @@ const cellProbs = () => {
 
   return {
     updateProbs,
+    resetHitAdjacentIncreases,
     destroyModeCoords,
     probs,
   };

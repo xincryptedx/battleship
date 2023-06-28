@@ -236,7 +236,7 @@ const cellProbs = () => {
             );
             foundEmpty = handleAdjacentHit(gm, adjacentHits, adjacentEmpties);
           }
-          // Else if it is empty try to set foundEmpty to the best empty adjacent cell
+          // Else if it is empty try to set foundEmpty to it
           else {
             console.log(
               "Adjacent hits now empty. Attempting to return best adjacent empty..."
@@ -313,12 +313,24 @@ const cellProbs = () => {
 
     const attackCoords = checkAdjacentCells(adjacentHits, adjacentEmpties, gm);
 
-    // if ajdacentEmpties and adjacentHits are both empty, then no cells remain to be checked.
-    // this means that the cell to check has been exhausted and should be removed from the cellsToCheck array
-    // if this happens then restart this whole process by removing the first entry of cellsToCheck and
-    // then continuing the process with the next cell in the front of the array
-    // if somehow there are no cells remainig (logically this shouldn't be possible before a ship is sunk and destroy mode is ended)
-    // then just return null, and therefore allow the backup selection process to choose an attack
+    // If ajdacentEmpties and adjacentHits are both empty and attack coords null
+    if (
+      attackCoords === null &&
+      adjacentHits.length === 0 &&
+      adjacentEmpties.length === 0
+    ) {
+      // Remove the first entry of cells to check
+      gm.aiBoard.cellsToCheck.shift();
+      // If cells remain to be checked
+      if (gm.aiBoard.cellsToCheck.length > 0) {
+        // Try using the next cell to check for destroyModeCoords
+        console.log(
+          "Cell to check is exhausted. Moving to next cell to check."
+        );
+        destroyModeCoords(gm);
+      }
+    }
+
     console.log(`Destroy target found! ${attackCoords}`);
     return attackCoords;
   };

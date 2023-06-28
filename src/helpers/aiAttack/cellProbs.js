@@ -420,8 +420,8 @@ const cellProbs = () => {
       const [x, y] = hit;
       // If the hit is new, and therefore the prob for that hit is not yet 0
       if (probs[x][y] !== 0) {
-        // Apply the increase to adjacent cells
-        // hitAdjacentIncrease(x, y, largestShipLength);
+        // Apply the increase to adjacent cells. This will be reduced to inital probs on seek mode.
+        hitAdjacentIncrease(x, y, largestShipLength);
         // Set the probability of the hit to 0
         probs[x][y] = 0;
       }

@@ -202,7 +202,7 @@ const cellProbs = () => {
     const checkNextCell = () => {
       if (thisCount <= largestShipLength) {
         // If next cell is a miss stop checking in this direction by removing the adjacentHit
-        if (probs[hitX][hitY] === -1) {
+        if (probs[nextX][nextY] === -1) {
           console.log("Miss found. Shifting adjacent hits array...");
           adjacentHits.shift();
           // Then if adjacent hits isn't empty try to handle the next adjacent hit

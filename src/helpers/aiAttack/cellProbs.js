@@ -199,7 +199,7 @@ const cellProbs = () => {
     const largestShipLength = getLargestRemainingLength(gm);
     console.log(`Biggest ship length: ${largestShipLength}`);
 
-    // If thisCount is bigger than the biggest remaining ship then return
+    // If thisCount is bigger than the biggest possible line of ships
     if (thisCount > largestShipLength) {
       console.log(
         "Cell count has exceeded largest remaining ship length. Returning destroy target: null."
@@ -236,7 +236,7 @@ const cellProbs = () => {
             );
             foundEmpty = handleAdjacentHit(gm, adjacentHits, adjacentEmpties);
           }
-          // Else if it is empty try to set found emtpy to the best empty adjacent cell
+          // Else if it is empty try to set foundEmpty to the best empty adjacent cell
           else {
             console.log(
               "Adjacent hits now empty. Attempting to return best adjacent empty..."

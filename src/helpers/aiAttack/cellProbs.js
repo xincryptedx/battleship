@@ -132,7 +132,7 @@ const cellProbs = () => {
   // #region Destory mode move determination
 
   // Helper for loading adjacent cells into appropriate arrays
-  const loadAdjacentCells = (centerCell, adjacentHits, adjacentEmpties) => {
+  const loadAdjacentCells = (centerCell, adjacentHits, adjacentEmpties, gm) => {
     // Center Cell x and y
     const [centerX, centerY] = centerCell;
     // Adjacent values row first, then col
@@ -144,8 +144,11 @@ const cellProbs = () => {
     // Fn that checks the cells and adds them to arrays
     function checkCell(cellY, cellX, direction) {
       if (isValidCell(cellY, cellX)) {
-        // If hit add to hits
-        if (probs[cellX][cellY] === 0) {
+        // If hit and not occupied by sunken ship add to hits
+        if (
+          probs[cellX][cellY] === 0 &&
+          !gm.userBoard.isCellSunk([cellX, cellY])
+        ) {
           adjacentHits.push([cellX, cellY, direction]);
           console.log(`Pushing ${cellX}, ${cellY} to adjacentHits!`);
         }
@@ -282,7 +285,7 @@ const cellProbs = () => {
     // Put all adjacent cells in adjacentEmpties/adjacentHits
     const adjacentHits = [];
     const adjacentEmpties = [];
-    loadAdjacentCells(cellToCheck, adjacentHits, adjacentEmpties);
+    loadAdjacentCells(cellToCheck, adjacentHits, adjacentEmpties, gm);
 
     const attackCoords = checkAdjacentCells(adjacentHits, adjacentEmpties, gm);
 

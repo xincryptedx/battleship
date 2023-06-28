@@ -152,12 +152,10 @@ const cellProbs = () => {
           !gm.userBoard.isCellSunk([cellX, cellY])
         ) {
           adjacentHits.push([cellX, cellY, direction]);
-          console.log(`Pushing ${cellX}, ${cellY} to adjacentHits!`);
         }
         // If empty add to empites
         else if (probs[cellX][cellY] > 0) {
           adjacentEmpties.push([cellX, cellY, direction]);
-          console.log(`Pushing ${cellX}, ${cellY} to adjacentempties!`);
         }
       }
     }
@@ -197,13 +195,9 @@ const cellProbs = () => {
 
     // Biggest ship length
     const largestShipLength = getLargestRemainingLength(gm);
-    console.log(`Biggest ship length: ${largestShipLength}`);
 
     // If thisCount is bigger than the biggest possible line of ships
     if (thisCount > largestShipLength) {
-      console.log(
-        "Cell count has exceeded largest remaining ship length. Returning destroy target: null."
-      );
       return null;
     }
 
@@ -227,20 +221,13 @@ const cellProbs = () => {
       if (thisCount <= largestShipLength) {
         // If next cell is a miss stop checking in this direction by removing the adjacentHit
         if (probs[nX][nY] === -1 || !isValidCell(nY, nX)) {
-          console.log("Miss found. Shifting adjacent hits array...");
           adjacentHits.shift();
           // Then if adjacent hits isn't empty try to handle the next adjacent hit
           if (adjacentHits.length > 0) {
-            console.log(
-              `Adjacent hits remain. Recursively checking next adjacent hit...`
-            );
             foundEmpty = handleAdjacentHit(gm, adjacentHits, adjacentEmpties);
           }
           // Else if it is empty try to set foundEmpty to it
           else {
-            console.log(
-              "Adjacent hits now empty. Attempting to return best adjacent empty..."
-            );
             foundEmpty = returnBestAdjacentEmpty(adjacentEmpties);
           }
         }
@@ -258,23 +245,17 @@ const cellProbs = () => {
           // Set nextX and nextY to the coords of this incremented next cell
           const [newX, newY] = newNext;
           // Recursively check the next cell
-          console.log(
-            `Hit detected after previous hit. Recursively checking ${newNext}`
-          );
           checkNextCell(newX, newY);
         }
         // The cell is empty and valid
         else if (isValidCell(nY, nX) && probs[nX][nY] > 0) {
-          console.log("Found next empty after adjacent hit!");
           foundEmpty = [nX, nY];
         }
       }
     };
 
-    console.log(`Analyzing ${hit}'s surrounding cells...`);
     // Initial call to above recursive helper
     if (thisCount <= largestShipLength) {
-      console.log(`Starting check next cell on ${[nextX, nextY]}`);
       checkNextCell(nextX, nextY);
     }
 
@@ -288,13 +269,11 @@ const cellProbs = () => {
 
     // If no hits then set attackCoords to an empty cell if one exists
     if (adjacentHits.length === 0 && adjacentEmpties.length > 0) {
-      console.log("No adjacent hits. Returning best empty cell.");
       attackCoords = returnBestAdjacentEmpty(adjacentEmpties);
     }
 
     // If there are hits then handle checking cells after them to find empty for attack
     if (adjacentHits.length > 0) {
-      console.log(`Adjacent hits detected. Moving to helper method...`);
       attackCoords = handleAdjacentHit(gm, adjacentHits, adjacentEmpties);
     }
 
@@ -324,14 +303,11 @@ const cellProbs = () => {
       // If cells remain to be checked
       if (gm.aiBoard.cellsToCheck.length > 0) {
         // Try using the next cell to check for destroyModeCoords
-        console.log(
-          "Cell to check is exhausted. Moving to next cell to check."
-        );
         destroyModeCoords(gm);
       }
     }
 
-    console.log(`Destroy target found! ${attackCoords}`);
+    // console.log(`Destroy target found! ${attackCoords}`);
     return attackCoords;
   };
 
@@ -390,7 +366,6 @@ const cellProbs = () => {
         increasedAdjacentCells.splice(i, 1);
         // Reset the iterator
         i = -1;
-        console.log(`Re-initialized probs[${x}][${y}]`);
       }
     }
   };

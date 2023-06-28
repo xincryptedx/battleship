@@ -219,7 +219,6 @@ const Gameboard = (gm) => {
 
         if (hasMatchingCell) {
           isCellSunk = true;
-          console.log(`Cell ${cellToCheck} belongs to a sunken ship.`);
         }
       }
     });

@@ -6,8 +6,8 @@ import randomShips from "../helpers/randomShips";
 const gameManager = () => {
   // Game settings
   let aiDifficulty = 2;
-  const userAttackDelay = 50;
-  const aiAttackDelay = 50;
+  const userAttackDelay = 1000;
+  const aiAttackDelay = 2200;
   const aiAutoDelay = 250;
 
   // Refs to relevant game objects

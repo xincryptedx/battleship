@@ -29,7 +29,6 @@ const gameManager = () => {
     soundPlayer.playHit();
     // Draw the hit to board
     userCanvasContainer.drawHit(attackCoords);
-    console.log("DRAW HIT DONE");
     // Log the hit
     gameLog.erase();
     gameLog.append(
@@ -56,7 +55,6 @@ const gameManager = () => {
       aiBoard.gameOver = true; // AI board
       userBoard.gameOver = true; // User board
     }
-    console.log("DONE WITH HIT");
   };
 
   // AI Attack Missed
@@ -89,13 +87,15 @@ const gameManager = () => {
 
           // Break out of recursion if game is over
           if (userBoard.gameOver === true) {
-            gameLog.erase();
-            gameLog.append(`Total AI attacks: ${aiAttackCount}`);
+            // Log total hits if ai auto attacking
+            if (aiBoard.isAutoAttacking) {
+              gameLog.append(`Total AI attacks: ${aiAttackCount}`);
+            }
             gameLog.doLock = true;
             return;
           }
 
-          // If user board is AI controlled have it try an attack
+          // If ai board is autoattacking have it try an attack
           if (aiBoard.isAutoAttacking === true) {
             aiAttackCount += 1;
             aiBoard.tryAiAttack(aiAutoDelay);

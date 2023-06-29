@@ -42,7 +42,7 @@ const gameLog = ((userName = "User") => {
     }
 
     // Handle the case when all ships are sunk
-    if (remainingShips.length > 0) {
+    if (remainingShips.length === 0) {
       const randomNumber = Math.floor(Math.random() * 5);
       return dirNames[randomNumber + 1]; // dirNames start at index 1
     }

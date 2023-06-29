@@ -6,6 +6,9 @@ import randomShips from "../helpers/randomShips";
 const gameManager = () => {
   // Game settings
   let aiDifficulty = 2;
+  const userAttackDelay = 1000;
+  const aiAttackDelay = 1000;
+  const aiAutoDelay = 250;
 
   // Refs to relevant game objects
   let userBoard = null;
@@ -69,7 +72,7 @@ const gameManager = () => {
 
   // AI is attacking
   let aiAttackCount = 0;
-  const aiAttacking = (attackCoords, delay = 2500) => {
+  const aiAttacking = (attackCoords, delay = aiAttackDelay) => {
     // Timeout to simulate "thinking" and to make game feel better
     setTimeout(() => {
       // Send attack to rival board
@@ -94,7 +97,7 @@ const gameManager = () => {
           // If user board is AI controlled have it try an attack
           if (aiBoard.isAutoAttacking === true) {
             aiAttackCount += 1;
-            aiBoard.tryAiAttack(250);
+            aiBoard.tryAiAttack(aiAutoDelay);
           }
           // Otherwise allow the user to attack again
           else {
@@ -169,7 +172,7 @@ const gameManager = () => {
             // Have the ai attack if not gameOver
             aiBoard.tryAiAttack();
           }
-        }, 1000);
+        }, userAttackDelay);
       });
     }
   };

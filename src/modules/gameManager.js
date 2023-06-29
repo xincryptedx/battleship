@@ -178,12 +178,12 @@ const gameManager = () => {
 
   // Handle setting up an AI vs AI match
   const aiMatchClicked = () => {
-    // Set ai to auto attack
-    aiBoard.isAutoAttacking = true;
-    // Set game log to not update scene
-    gameLog.doUpdateScene = false;
+    // Toggle ai auto attack
+    aiBoard.isAutoAttacking = !aiBoard.isAutoAttacking;
+    // Toggle log to not update scene
+    gameLog.doUpdateScene = !gameLog.doUpdateScene;
     // Set the sounds to muted
-    soundPlayer.isMuted = soundPlayer.isMuted !== true;
+    soundPlayer.isMuted = !soundPlayer.isMuted;
   };
 
   // #region Handle Ship Placement and Game Start

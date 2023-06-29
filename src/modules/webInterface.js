@@ -64,7 +64,8 @@ const webInterface = (gm) => {
 
   const handleAiMatchClick = () => {
     // Set style class based on if userBoard is ai (if false, set active b/c will be true after click)
-    if (gm.userBoard.isAi === false) aiMatchBtn.classList.add("active");
+    if (gm.aiBoard.isAutoAttacking === false)
+      aiMatchBtn.classList.add("active");
     else aiMatchBtn.classList.remove("active");
     gm.aiMatchClicked();
   };

@@ -6,8 +6,8 @@ import randomShips from "../helpers/randomShips";
 const gameManager = () => {
   // Game settings
   let aiDifficulty = 2;
-  const userAttackDelay = 1000;
-  const aiAttackDelay = 1000;
+  const userAttackDelay = 50;
+  const aiAttackDelay = 50;
   const aiAutoDelay = 250;
 
   // Refs to relevant game objects
@@ -29,6 +29,7 @@ const gameManager = () => {
     soundPlayer.playHit();
     // Draw the hit to board
     userCanvasContainer.drawHit(attackCoords);
+    console.log("DRAW HIT DONE");
     // Log the hit
     gameLog.erase();
     gameLog.append(
@@ -46,7 +47,6 @@ const gameManager = () => {
       // Update log scene
       gameLog.setScene();
     }
-    userBoard.logSunk();
     // Check if AI won
     if (userBoard.allSunk()) {
       // '        '
@@ -56,6 +56,7 @@ const gameManager = () => {
       aiBoard.gameOver = true; // AI board
       userBoard.gameOver = true; // User board
     }
+    console.log("DONE WITH HIT");
   };
 
   // AI Attack Missed

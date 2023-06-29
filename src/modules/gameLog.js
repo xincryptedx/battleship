@@ -35,10 +35,17 @@ const gameLog = ((userName = "User") => {
   // Gets a random user ship that isn't destroyed
   const dirNames = { 0: "SP", 1: "AT", 2: "VM", 3: "IG", 4: "L" };
   function randomShipDir(gameboard = userGameboard) {
-    let randomNumber = Math.floor(Math.random() * 5);
-    while (gameboard.ships[randomNumber].isSunk()) {
-      randomNumber = Math.floor(Math.random() * 5);
+    const remainingShips = Object.values(gameboard.ships).filter(
+      (ship) => !ship.isSunk()
+    );
+
+    if (remainingShips.length === 0) {
+      // Handle the case when all ships are sunk
+      const randomNumber = Math.floor(Math.random() * 5);
+      return dirNames[randomNumber];
     }
+
+    const randomNumber = Math.floor(Math.random() * remainingShips.length);
     return dirNames[randomNumber];
   }
 

@@ -41,7 +41,6 @@ const aiAttack = (gm, delay) => {
     findRandomAttack();
     while (gm.userBoard.alreadyAttacked(attackCoords)) {
       findRandomAttack();
-      console.log("Infinite loop 1");
     }
   }
 
@@ -53,7 +52,6 @@ const aiAttack = (gm, delay) => {
     findGreatestProbAttack();
     while (gm.userBoard.alreadyAttacked(attackCoords)) {
       findGreatestProbAttack();
-      console.log("Infinite loop 2");
     }
   }
 
@@ -69,7 +67,6 @@ const aiAttack = (gm, delay) => {
       findGreatestProbAttack();
       while (gm.userBoard.alreadyAttacked(attackCoords)) {
         findGreatestProbAttack();
-        console.log("Infinite loop 3");
       }
     }
     // Else if coords returned, use those for attack

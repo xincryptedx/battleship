@@ -33,20 +33,23 @@ const gameLog = ((userName = "User") => {
   }
 
   // Gets a random user ship that isn't destroyed
-  const dirNames = { 0: "SP", 1: "AT", 2: "VM", 3: "IG", 4: "L" };
+  const dirNames = { 1: "SP", 2: "AT", 3: "VM", 4: "IG", 5: "L" };
   function randomShipDir(gameboard = userGameboard) {
-    const remainingShips = Object.values(gameboard.ships).filter(
-      (ship) => !ship.isSunk()
-    );
-
-    if (remainingShips.length === 0) {
-      // Handle the case when all ships are sunk
-      const randomNumber = Math.floor(Math.random() * 5);
-      return dirNames[randomNumber];
+    const remainingShips = [];
+    for (let i = 0; i < gameboard.ships.length; i += 1) {
+      if (!gameboard.ships[i].isSunk())
+        remainingShips.push(gameboard.ships[i].index);
     }
 
+    // Handle the case when all ships are sunk
+    if (remainingShips.length > 0) {
+      const randomNumber = Math.floor(Math.random() * 5);
+      return dirNames[randomNumber + 1]; // dirNames start at index 1
+    }
+
+    // Otherwise return random remaining ship
     const randomNumber = Math.floor(Math.random() * remainingShips.length);
-    return dirNames[randomNumber];
+    return dirNames[remainingShips[randomNumber]];
   }
 
   // Initializes scene image to gen image

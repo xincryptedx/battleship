@@ -1,3 +1,7 @@
+/* This module is used to create the player objects that store other objects and info related
+  to the user player and AI player. This includes their gameboards, names, and a method for
+  sending attacks to a gameboard. */
+
 import Gameboard from "./Gameboard";
 
 /* Factory that creates and returns a player object that can take a shot at opponent's game board.

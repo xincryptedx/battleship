@@ -1,9 +1,12 @@
+/* This module is used by the Player factory to create gameboards for the user and ai
+  players. The gameboard is responsible for holding information related to the state of
+  a players ships, hits and misses, references representing the board state, and various
+  methods for altering the board or getting information about it. */
+
 import Ship from "./Ship";
 import aiAttack from "../helpers/aiAttack/aiAttack";
 
-/* Factory that returns a gameboard that can place ships with Ship(), recieve attacks based on coords 
-   and then decides whether to hit() if ship is in that spot, records hits and misses, and reports if
-   all its ships have been sunk. */
+// Gameboard factory
 const Gameboard = (gm) => {
   const thisGameboard = {
     maxBoardX: 9,

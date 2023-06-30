@@ -1,3 +1,7 @@
+/* This module is a factory used by the Gameboard factory module to populate gameboards with
+  ships. A ship object will be returned that includes various information about the state
+  of the ship such as what cells it occupies, its size, type, etc. */
+
 // Contains the names for the ships based on index
 const shipNames = {
   1: "Sentinel Probe",
@@ -7,7 +11,7 @@ const shipNames = {
   5: "Leviathan",
 };
 
-// Factory that can create and return one of a variety of pre-determined ships.
+// Factory for creating ships
 const Ship = (index, position, direction) => {
   // Validate index
   if (!Number.isInteger(index) || index > 5 || index < 1) return undefined;

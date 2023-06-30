@@ -1,3 +1,11 @@
+/* This module creates and returns a dual, layered canvas element. The bottom layer is the board
+  canvas that represpents basic board elements that don't change often, such as ships, hits, misses
+  and grid lines. The top layer is the overlay canvas that represents frequently changing elements
+  like highlighting cells to indicate where attacks or ships will go. 
+  
+  It also sets up handlers for browser mouse events that allow the human user to interact with the
+  program, such as placing ships and picking cells to attack. */
+
 // Helper module for draw methods
 import drawingModule from "./draw";
 

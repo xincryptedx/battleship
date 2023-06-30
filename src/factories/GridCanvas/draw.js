@@ -1,3 +1,7 @@
+/* This module contains the methods used by GridCanvas to actuall draw elements
+  to the board and overlay canvas elements. This includes grid lines, ship placements,
+  hits, misses and various cell highlight effects. */
+
 const draw = () => {
   // Draws the grid lines
   const lines = (context, canvasX, canvasY) => {

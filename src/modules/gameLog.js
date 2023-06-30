@@ -64,8 +64,9 @@ const gameLog = ((userName = "User") => {
   // Initializes scene image to gen image
   const initScene = () => {
     // get random ship dir
-    const shipDir = dirNames[Math.floor(Math.random() * 5)];
+    const shipDir = dirNames[Math.floor(Math.random() * 5) + 1];
     // get random array entry
+    console.log(shipDir);
     const entry = randomEntry(sceneImages[shipDir].gen);
     // set the image
     logImg.src = sceneImages[shipDir].gen[entry];

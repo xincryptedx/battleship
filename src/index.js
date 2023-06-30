@@ -13,6 +13,9 @@ import gameLog from "./modules/gameLog";
 import sounds from "./modules/sounds";
 
 // #region Loading/Init
+// Ref to loading screen
+const loadingScreen = document.querySelector(".loading-screen");
+
 // Ref to game manager instance
 const gm = gameManager();
 
@@ -64,3 +67,8 @@ gm.gameLog = gameLog;
 
 // Add ai ships
 placeAiShips(1, aiPlayer.gameboard);
+
+// Hide the loading screen after min timeout
+setTimeout(() => {
+  loadingScreen.classList.add("hidden");
+}, 1000);

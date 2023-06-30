@@ -137,7 +137,7 @@ const aiBrain = () => {
     else if (direction === "right") nextCell = [hitX + 1, hitY];
     const [nextX, nextY] = nextCell;
 
-    // Ref to found empty
+    // Ref to found empty cell
     let foundEmpty = null;
 
     // If cell count is not larger than the biggest remaining ship
@@ -150,7 +150,7 @@ const aiBrain = () => {
           if (adjacentHits.length > 0) {
             foundEmpty = handleAdjacentHit(gm, adjacentHits, adjacentEmpties);
           }
-          // Else if it is empty try to set foundEmpty to it
+          // Else if it is empty try to return the best adjacent empty cell
           else {
             foundEmpty = returnBestAdjacentEmpty(adjacentEmpties);
           }

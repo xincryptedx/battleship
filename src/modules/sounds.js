@@ -1,3 +1,6 @@
+/* This module is used to play the games sound effects. As there are
+not many sounds in total, each sound gets its own method for playing. */
+
 import hitSound from "../Sound Effects/explosion.mp3";
 import missSound from "../Sound Effects/miss.mp3";
 import attackSound from "../Sound Effects/laser.mp3";

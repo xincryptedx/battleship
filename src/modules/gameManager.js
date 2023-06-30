@@ -1,8 +1,12 @@
+/* This module acts as the central communications hub for all the different modules.
+  It has methods for responding to various game events, as well as refs to game settings,
+  game objects, and the other main modules.
+  
+  If something needs to happen that involves various un-related parts of the codebase 
+  working together then it will be handled by this module. */
+
 import randomShips from "../helpers/randomShips";
 
-/* This module allows the various other game modules to communicate and offers
-   high level methods to handle various game events. This object will be passed
-   to other modules as prop so they can use these methods. */
 const gameManager = () => {
   // Game settings
   let aiDifficulty = 2;

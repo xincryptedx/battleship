@@ -1,3 +1,12 @@
+/* This module handles updating the game log ui elements to display relevant
+  information such as attacks made, ships sunk, and pictures of various units
+  in various states.
+  
+  It returns three primarily used methods, being erase, append, and setScene.
+  The first two are self obvious. setScene will check through the current log text,
+  looking for keywords, and then choose an image to display in the log based on
+  found keywords. */
+
 import imageLoader from "../helpers/imageLoader";
 
 const gameLog = ((userName = "User") => {

@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
-/* This module has three primary functions:
-   1. Get ship placement coordinates from the user based on their clicks on the web interface
-   2. Get attack placement coordinates from the user based on the same
-   3. Other minor interface actions such as handling button clicks (start game, restart, etc) */
+/* This module is responsible for setting up event handlers for the
+  main UI buttons, and has methods used by those handlers that change
+  the state of the UI by changing various element classes.
+  
+  This allows for methods that transition from one part of the game to the next. */
 const webInterface = (gm) => {
   // References to main elements
   const title = document.querySelector(".title");

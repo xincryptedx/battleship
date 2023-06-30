@@ -2,7 +2,7 @@ import aiBrain from "./aiBrain";
 
 // Module that allows ai to make attacks based on probability a cell will result
 // in a hit. Uses Bayesian inference along with two Battleship game theories.
-const probs = aiBrain();
+const brain = aiBrain();
 
 // This helper will look at current hits and misses and then return an attack
 const aiAttack = (gm, delay) => {
@@ -11,7 +11,7 @@ const aiAttack = (gm, delay) => {
   let attackCoords = [];
 
   // Update cell hit probabilities
-  probs.updateProbs(gm);
+  brain.updateProbs(gm);
 
   // Method for returning random attack
   const findRandomAttack = () => {
@@ -22,7 +22,7 @@ const aiAttack = (gm, delay) => {
 
   // Method that finds largest value in 2d array
   const findGreatestProbAttack = () => {
-    const allProbs = probs.probs;
+    const allProbs = brain.probs;
     let max = Number.NEGATIVE_INFINITY;
 
     for (let i = 0; i < allProbs.length; i += 1) {
@@ -47,7 +47,7 @@ const aiAttack = (gm, delay) => {
   // Do an attack based on probabilities if ai difficulty is 2 and is seeking
   else if (gm.aiDifficulty === 2 && gm.aiBoard.isAiSeeking) {
     // First ensure that empty cells are set to their initialized probs when seeking
-    probs.resetHitAdjacentIncreases();
+    brain.resetHitAdjacentIncreases();
     // Then find the best attack
     findGreatestProbAttack();
     while (gm.userBoard.alreadyAttacked(attackCoords)) {
@@ -58,11 +58,11 @@ const aiAttack = (gm, delay) => {
   // Do an attack based on destroy behavior after a hit is found
   else if (gm.aiDifficulty === 2 && !gm.aiBoard.isAiSeeking) {
     // Get coords using destroy method
-    const coords = probs.destroyModeCoords(gm);
+    const coords = brain.destroyModeCoords(gm);
     // If no coords are returned instead use seeking strat
     if (!coords) {
       // First ensure that empty cells are set to their initialized probs when seeking
-      probs.resetHitAdjacentIncreases();
+      brain.resetHitAdjacentIncreases();
       // Then find the best attack
       findGreatestProbAttack();
       while (gm.userBoard.alreadyAttacked(attackCoords)) {
@@ -76,13 +76,6 @@ const aiAttack = (gm, delay) => {
   }
   // Send attack to game manager
   gm.aiAttacking(attackCoords, delay);
-
-  // Return the probs for gm access
-  return {
-    get probs() {
-      return probs;
-    },
-  };
 };
 
 export default aiAttack;

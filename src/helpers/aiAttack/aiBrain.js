@@ -1,4 +1,4 @@
-const cellProbs = () => {
+const aiBrain = () => {
   // Probability modifiers
   const colorMod = 0.33; // Strong negative bias used to initialize all probs
   const adjacentMod = 4; // Medium positive bias for hit adjacent adjustments
@@ -465,4 +465,4 @@ const cellProbs = () => {
   };
 };
 
-export default cellProbs;
+export default aiBrain;

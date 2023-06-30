@@ -1,8 +1,8 @@
-import cellProbs from "./cellProbs";
+import aiBrain from "./aiBrain";
 
 // Module that allows ai to make attacks based on probability a cell will result
 // in a hit. Uses Bayesian inference along with two Battleship game theories.
-const probs = cellProbs();
+const probs = aiBrain();
 
 // This helper will look at current hits and misses and then return an attack
 const aiAttack = (gm, delay) => {

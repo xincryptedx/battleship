@@ -8,6 +8,30 @@
     <title>TDD Battleship</title>
   </head>
   <body>
+    <div
+      id="loading-screen"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #303030;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+      "
+    >
+      <p
+        class="loading-text"
+        style="
+          color: hsl(0, 0%, 91%);
+          font-family: Arial, Helvetica, sans-serif;
+        "
+      >
+        Loading Game...
+      </p>
+    </div>
     <div class="main-content grid-container">
       <div class="title grid-container">
         <p class="title-text">Titan Machina</p>

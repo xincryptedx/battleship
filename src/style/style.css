@@ -178,6 +178,7 @@ body {
   transition: transform 0.3s ease-in-out;
 
   background-color: var(--colorA1);
+  border-radius: 20px;
 }
 
 .placement .instructions {
@@ -330,6 +331,48 @@ body {
 .game.hidden {
   transform: translateX(150%);
 }
+/* #endregion */
+
+/* #region Reset */
+.reset {
+  grid-column: 17 / 20;
+  grid-row: 2 / 4;
+
+  display: grid;
+
+  place-items: center;
+
+  transition: transform 0.3s ease-in-out;
+
+  z-index: 1;
+}
+
+.reset .reset-btn {
+  height: 100%;
+  width: 100%;
+
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--text-color);
+  transition: text-shadow 0.1s ease-in-out;
+
+  background-color: var(--colorA2);
+  border: 2px solid var(--colorC);
+  border-radius: 10px;
+}
+
+.reset .reset-btn:hover {
+  text-shadow: 2px 2px 1px var(--colorC), -2px -2px 1px var(--colorB2);
+}
+
+.reset .reset-btn:active {
+  text-shadow: 4px 4px 1px var(--colorC), -4px -4px 1px var(--colorB2);
+}
+
+.reset.hidden {
+  transform: translateX(150%);
+}
+
 /* #endregion */
 
 /* #endregion */

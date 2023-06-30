@@ -1,3 +1,10 @@
+/* This module serves as the intelligence of the AI player. It uses a 2d array of hit 
+probabilities, made available to aiAttack, to determine attack coords when the AI is in 
+seek mode. When a new hit is found and the AI switches to destroy mode a different set of
+methods are used to destroy found ships quickly and logically. There is also a set of methods
+for updating the probabilities in response to hits and ships being sunk in order to better
+determine attacks while in destroy mode. */
+
 import createProbs from "./createProbs";
 
 const aiBrain = () => {
@@ -56,6 +63,16 @@ const aiBrain = () => {
   // #endregion
 
   // #region Destory mode move determination
+
+  /* The general idea here is to cause the AI to do what human players do upon finding
+    a new ship. Typically when you find a ship you start attacking adjacent cells to 
+    find the "next part" of the ship, changing to other adjacent cells when finding a miss,
+    or going in the other direction when a mis is found after a hit, etc.
+    
+    This is accomplished using lists of cells to check and recursive logic to keep checking
+    the "next cell" after an adjacent hit is found, as well as to recursively keep checking
+    if a ship is sunk, but other hits exist that aren't part of the sunken ship, which
+    indicates more ships that have been discovered but not yet sunk. */
 
   // Helper for loading adjacent cells into appropriate arrays
   const loadAdjacentCells = (centerCell, adjacentHits, adjacentEmpties, gm) => {
@@ -237,7 +254,17 @@ const aiBrain = () => {
 
   // #endregion
 
-  // #region Helper methods for updateProbs
+  // #region Methods for updating probs on hit and miss
+
+  /* When a hit is first discovered, horizontal and vertical cells get a stacking,
+    temporariy probability increase. This is to help direct the destroy process to
+    choose the best cells while destroying, for example only attacking empty cells
+    in the same direction as the likely ship placement.
+    
+    After all currently discovered ships are destroyed, the probabilities of remaining
+    empty cells are brought back to their initial values so as to not disrupt the optimal
+    seeking process when looking for the next ship. */
+
   // Records wich cells were altered with hidAdjacentIncrease
   const increasedAdjacentCells = [];
   // Increase adjacent cells to new hits
@@ -320,30 +347,6 @@ const aiBrain = () => {
     }
   };
 
-  // #endregion
-
-  // #region Method and helper for logging probs
-  // Helper to transpose array for console.table's annoying col first approach
-  const transposeArray = (array) =>
-    array[0].map((_, colIndex) => array.map((row) => row[colIndex]));
-  // eslint-disable-next-line no-unused-vars
-  const logProbs = (probsToLog) => {
-    // Log the probs
-    const transposedProbs = transposeArray(probsToLog);
-    // eslint-disable-next-line no-console
-    console.table(transposedProbs);
-    // Log the toal of all probs
-    // eslint-disable-next-line no-console
-    console.log(
-      probsToLog.reduce(
-        (sum, row) => sum + row.reduce((rowSum, value) => rowSum + value, 0),
-        0
-      )
-    );
-  };
-
-  // #endregion
-
   // Method that updates probabilities based on hits, misses, and remaining ships' lengths
   const updateProbs = (gm) => {
     // These values are used as the evidence to update the probabilities on the probs
@@ -374,12 +377,36 @@ const aiBrain = () => {
     });
 
     /* Reduce the chance of groups of cells that are surrounded by misses or the edge of the board 
-    if the group length is not less than or equal to the greatest remaining ship length. */
+      if the group length is not less than or equal to the greatest remaining ship length. */
     checkDeadCells(smallestShipLength);
 
     // Optionally log the results
     // logProbs(probs);
   };
+
+  // #endregion
+
+  // #region Method and helper for logging probs
+  // Helper to transpose array for console.table's annoying col first approach
+  const transposeArray = (array) =>
+    array[0].map((_, colIndex) => array.map((row) => row[colIndex]));
+  // eslint-disable-next-line no-unused-vars
+  const logProbs = (probsToLog) => {
+    // Log the probs
+    const transposedProbs = transposeArray(probsToLog);
+    // eslint-disable-next-line no-console
+    console.table(transposedProbs);
+    // Log the toal of all probs
+    // eslint-disable-next-line no-console
+    console.log(
+      probsToLog.reduce(
+        (sum, row) => sum + row.reduce((rowSum, value) => rowSum + value, 0),
+        0
+      )
+    );
+  };
+
+  // #endregion
 
   return {
     updateProbs,

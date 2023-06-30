@@ -1,7 +1,11 @@
+/* This module is used to determine what cells the AI should attack. It chooses attack 
+  startegies based on the ai difficulty setting on the gameManager. After attack coords
+  are found they are sent off to the gameManager to handle the aiAttacking logic for the
+  rest of the program. */
+
 import aiBrain from "./aiBrain";
 
-// Module that allows ai to make attacks based on probability a cell will result
-// in a hit. Uses Bayesian inference along with two Battleship game theories.
+// Module that allows ai to make attacks based on probability and heuristics
 const brain = aiBrain();
 
 // This helper will look at current hits and misses and then return an attack

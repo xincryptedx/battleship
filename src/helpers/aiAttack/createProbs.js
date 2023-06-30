@@ -1,3 +1,16 @@
+/* This module is used to create the initial probability array for aiBrain.
+  It does this by first initializing the probabilites with a bias towards central
+  cells, and then further adjusts these initial weights to create a "chess board" 
+  pattern of cells that have much higher and much lower priorities, at random. So for
+  example, in one game "white" cells might be heavily weighted compared to "black" cells.
+  
+  The reasoning for doing both of these things is explained here: 
+  https://blogs.glowscotland.org.uk/glowblogs/njoldfieldeportfolio1/2015/12/01/mathematics-behind-battleship/ 
+  
+  In a nutshell, checkerboard because all boats are at least 2 spaces long, so you can ignore every
+  other space while seeking a new ship. Central bias due to the nature of how ships take up
+  space on the board. Corners will always be the least likely to have a ship, central the highest. */
+
 // Helper method for normalizing the probabilities
 const normalizeProbs = (probs) => {
   let sum = 0;

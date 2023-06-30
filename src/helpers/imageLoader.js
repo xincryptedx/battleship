@@ -1,3 +1,6 @@
+/* This helper module is used to load images into arrays for use in the
+game log. */
+
 const imageLoader = () => {
   const imageRefs = {
     SP: { hit: [], attack: [], gen: [] },

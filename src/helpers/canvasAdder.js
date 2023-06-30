@@ -1,3 +1,6 @@
+/* This helper module is responsible for creating the gridCanvas compound elements and 
+replacing the placeholders for them in the html with the new elements */
+
 import gridCanvas from "../factories/GridCanvas/GridCanvas";
 
 /* This module creates canvas elements and adds them to the appropriate 

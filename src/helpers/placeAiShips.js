@@ -1,3 +1,7 @@
+/* This helper module will place the ai ships on the ai gameboard. They are currently
+  always placed randomly, but the framework exists for creating different placement
+  methods based on the gameManager's aiDifficulty setting. */
+
 import randomShips from "./randomShips";
 
 // This helper will attempt to add ships to the ai gameboard in a variety of ways for varying difficulty

@@ -10,6 +10,7 @@ const webInterface = (gm) => {
   const menu = document.querySelector(".menu");
   const placement = document.querySelector(".placement");
   const game = document.querySelector(".game");
+  const reset = document.querySelector(".reset");
 
   // Reference to btn elements
   const startBtn = document.querySelector(".start-btn");
@@ -17,6 +18,8 @@ const webInterface = (gm) => {
 
   const randomShipsBtn = document.querySelector(".random-ships-btn");
   const rotateBtn = document.querySelector(".rotate-btn");
+
+  const resetBtn = document.querySelector(".reset-btn");
 
   // Method for iterating through directions
   const rotateDirection = () => {
@@ -29,6 +32,7 @@ const webInterface = (gm) => {
     menu.classList.add("hidden");
     placement.classList.add("hidden");
     game.classList.add("hidden");
+    reset.classList.add("hidden");
   };
 
   // Show the menu UI
@@ -47,6 +51,7 @@ const webInterface = (gm) => {
   const showGame = () => {
     hideAll();
     game.classList.remove("hidden");
+    reset.classList.remove("hidden");
   };
 
   // Shrink the title
@@ -81,6 +86,11 @@ const webInterface = (gm) => {
     gm.randomShipsClicked();
   };
 
+  // Handle reset button click
+  const handleResetClick = () => {
+    window.location.reload();
+  };
+
   // #endregion
 
   // #region Add classes to ship divs to represent placed/destroyed
@@ -92,6 +102,7 @@ const webInterface = (gm) => {
   startBtn.addEventListener("click", handleStartClick);
   aiMatchBtn.addEventListener("click", handleAiMatchClick);
   randomShipsBtn.addEventListener("click", handleRandomShipsClick);
+  resetBtn.addEventListener("click", handleResetClick);
 
   return { showGame, showMenu, showPlacement };
 };

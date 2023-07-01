@@ -27,6 +27,9 @@ const webInterface = (gm) => {
     ".ships-to-place .ship-name-text"
   );
 
+  const userIcons = document.querySelectorAll(".user-info .icon");
+  const aiIcons = document.querySelectorAll(".ai-info .icon");
+
   // Method for iterating through directions
   const rotateDirection = () => {
     gm.rotateClicked();

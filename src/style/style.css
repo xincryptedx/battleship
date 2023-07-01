@@ -342,13 +342,20 @@ body {
 
 .game .info {
   display: grid;
-  grid-template: min-content 5px 1fr / 5px repeat(5, 64px) 5px;
+  grid-template: min-content 10px 1fr / 5% repeat(5, 1fr) 5%;
   grid-template-areas:
     ". n n n n n ."
     ". . . . . . ."
     ". sp at vm ig l .";
 
   place-items: center;
+}
+
+.info .name {
+  grid-area: n;
+
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .info .ship {
@@ -358,10 +365,6 @@ body {
 
 .info .icon {
   width: 80%;
-}
-
-.info .name {
-  grid-area: n;
 }
 
 .info .ship-one {

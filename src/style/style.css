@@ -340,6 +340,50 @@ body {
   grid-area: ai-board;
 }
 
+.game .info {
+  display: grid;
+  grid-template: min-content 5px 1fr / 5px repeat(5, 64px) 5px;
+  grid-template-areas:
+    ". n n n n n ."
+    ". . . . . . ."
+    ". sp at vm ig l .";
+
+  place-items: center;
+}
+
+.info .ship {
+  display: grid;
+  place-items: center;
+}
+
+.info .icon {
+  width: 80%;
+}
+
+.info .name {
+  grid-area: n;
+}
+
+.info .ship-one {
+  grid-area: sp;
+}
+
+.info .ship-two {
+  grid-area: at;
+}
+
+.info .ship-three {
+  grid-area: vm;
+}
+
+.info .ship-four {
+  grid-area: ig;
+}
+
+.info .ship-five {
+  grid-area: l;
+}
+
 .game .user-info {
   grid-area: user-info;
 }

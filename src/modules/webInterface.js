@@ -29,6 +29,23 @@ const webInterface = (gm) => {
     gm.rotateClicked();
   };
 
+  // #region Add/remove classes to ship divs to represent placed/destroyed
+  // Indicate what ship is being placed by the user
+  const updatePlacementIcons = (shipToPlaceNum) => {
+    for (let i = 0; i < placementIcons.length; i += 1) {
+      // If the index = ship to place num then highlight that icon by removing class
+      if (shipToPlaceNum === i) {
+        placementIcons[i].classList.remove("inactive");
+      }
+      // Else it is not the active ship icon so make it inactive
+      else {
+        placementIcons[i].classList.add("inactive");
+      }
+    }
+  };
+
+  // #endregion
+
   // #region Basic methods for showing/hiding elements
   // Move any active sections off the screen
   const hideAll = () => {
@@ -48,6 +65,8 @@ const webInterface = (gm) => {
   const showPlacement = () => {
     hideAll();
     placement.classList.remove("hidden");
+    // Update icons to first ship as that is always first placed
+    updatePlacementIcons(0);
   };
 
   // Show the game UI
@@ -92,23 +111,6 @@ const webInterface = (gm) => {
   // Handle reset button click
   const handleResetClick = () => {
     window.location.reload();
-  };
-
-  // #endregion
-
-  // #region Add/remove classes to ship divs to represent placed/destroyed
-  // Indicate what ship is being placed by the user
-  const updatePlacementIcons = (shipToPlaceNum) => {
-    for (let i = 0; i < placementIcons.length; i += 1) {
-      // If the index = ship to place num then highlight that icon by removing class
-      if (shipToPlaceNum === i) {
-        placementIcons[i].classList.remove("inactive");
-      }
-      // Else it is not the active ship icon so make it inactive
-      else {
-        placementIcons[i].classList.add("inactive");
-      }
-    }
   };
 
   // #endregion

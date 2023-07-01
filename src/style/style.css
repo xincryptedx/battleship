@@ -43,6 +43,10 @@ body {
   filter: grayscale(80%) brightness(50%);
 }
 
+.section {
+  max-width: 750px;
+  min-width: min-content;
+}
 /* #endregion */
 
 /* #region loading-screen */
@@ -120,6 +124,9 @@ body {
 
   background-color: var(--colorA1);
   border-radius: 20px;
+  width: 100%;
+
+  justify-self: center;
 }
 
 .menu.hidden {
@@ -194,6 +201,9 @@ body {
 
   background-color: var(--colorA1);
   border-radius: 20px;
+  width: 100%;
+
+  justify-self: center;
 }
 
 .placement .instructions {
@@ -326,6 +336,8 @@ body {
 
   background-color: var(--colorA1);
   border-radius: 20px;
+
+  justify-self: center;
 }
 
 .game .canvas-container {

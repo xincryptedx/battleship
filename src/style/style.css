@@ -39,6 +39,10 @@ body {
   grid-column: -1 / 1;
 }
 
+.icon.inactive {
+  filter: grayscale(80%) brightness(50%);
+}
+
 /* #endregion */
 
 /* #region loading-screen */

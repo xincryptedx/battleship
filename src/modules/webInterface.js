@@ -21,8 +21,11 @@ const webInterface = (gm) => {
 
   const resetBtn = document.querySelector(".reset-btn");
 
-  // References to the various icons
+  // References to ship info icons and text
   const placementIcons = document.querySelectorAll(".ships-to-place .icon");
+  const placementShipName = document.querySelector(
+    ".ships-to-place .ship-name-text"
+  );
 
   // Method for iterating through directions
   const rotateDirection = () => {
@@ -31,6 +34,31 @@ const webInterface = (gm) => {
 
   // #region Add/remove classes to ship divs to represent placed/destroyed
   // Indicate what ship is being placed by the user
+  const updatePlacementName = (shipToPlaceNum) => {
+    let shipName = null;
+    switch (shipToPlaceNum) {
+      case 0:
+        shipName = "Sentinel Probe";
+        break;
+      case 1:
+        shipName = "Assault Titan";
+        break;
+      case 2:
+        shipName = "Viper Mech";
+        break;
+      case 3:
+        shipName = "Iron Goliath";
+        break;
+      case 4:
+        shipName = "Leviathan";
+        break;
+      default:
+        shipName = "Ship Name";
+    }
+
+    placementShipName.textContent = shipName;
+  };
+
   const updatePlacementIcons = (shipToPlaceNum) => {
     for (let i = 0; i < placementIcons.length; i += 1) {
       // If the index = ship to place num then highlight that icon by removing class
@@ -122,7 +150,13 @@ const webInterface = (gm) => {
   randomShipsBtn.addEventListener("click", handleRandomShipsClick);
   resetBtn.addEventListener("click", handleResetClick);
 
-  return { showGame, showMenu, showPlacement, updatePlacementIcons };
+  return {
+    showGame,
+    showMenu,
+    showPlacement,
+    updatePlacementIcons,
+    updatePlacementName,
+  };
 };
 
 export default webInterface;

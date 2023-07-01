@@ -189,7 +189,7 @@ const Gameboard = (gm) => {
           gm.userShipSunk(thisGameboard.ships[key - 1]);
         }
         // Else call the method for responding to ai ship sunk
-        else if (thisGameboard.isAI) {
+        else if (thisGameboard.isAi) {
           gm.aiShipSunk(thisGameboard.ships[key - 1]);
         }
       }

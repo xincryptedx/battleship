@@ -252,6 +252,9 @@ const gameManager = () => {
     if (aiBoard.cellsToCheck.length === 0) {
       aiBoard.isAiSeeking = true;
     }
+
+    // Set the sunk icon to inactive
+    webInterface.updateInfoIcons(ship.index - 1, true); // -1 bc Ships are indexed at 1 not 0
   };
 
   return {

@@ -75,6 +75,14 @@ const webInterface = (gm) => {
     }
   };
 
+  const updateInfoIcons = (shipThatSunkNum, forUser = true) => {
+    if (forUser) {
+      userIcons[shipThatSunkNum].classList.add("inactive");
+    } else if (!forUser) {
+      aiIcons[shipThatSunkNum].classList.add("inactive");
+    }
+  };
+
   // #endregion
 
   // #region Basic methods for showing/hiding elements
@@ -160,6 +168,7 @@ const webInterface = (gm) => {
     showPlacement,
     updatePlacementIcons,
     updatePlacementName,
+    updateInfoIcons,
   };
 };
 

@@ -93,8 +93,9 @@ const webInterface = (gm) => {
   const showPlacement = () => {
     hideAll();
     placement.classList.remove("hidden");
-    // Update icons to first ship as that is always first placed
+    // Update icons and text to first ship as that is always first placed
     updatePlacementIcons(0);
+    updatePlacementName(0);
   };
 
   // Show the game UI

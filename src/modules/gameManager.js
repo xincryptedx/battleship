@@ -221,9 +221,10 @@ const gameManager = () => {
     // Update the canvases
     placementCanvasContainer.drawShips();
     userCanvasContainer.drawShips();
-    // Update placement icons
+    // Update placement icons and text
     if (userBoard.ships.length < 5) {
       webInterface.updatePlacementIcons(userBoard.ships.length);
+      webInterface.updatePlacementName(userBoard.ships.length);
     }
     // Try to start the game
     tryStartGame();

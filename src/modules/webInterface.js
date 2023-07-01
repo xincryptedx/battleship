@@ -12,7 +12,7 @@ const webInterface = (gm) => {
   const game = document.querySelector(".game");
   const reset = document.querySelector(".reset");
 
-  // Reference to btn elements
+  // References to btn elements
   const startBtn = document.querySelector(".start-btn");
   const aiMatchBtn = document.querySelector(".ai-match-btn");
 
@@ -20,6 +20,9 @@ const webInterface = (gm) => {
   const rotateBtn = document.querySelector(".rotate-btn");
 
   const resetBtn = document.querySelector(".reset-btn");
+
+  // References to the various icons
+  const placementIcons = document.querySelectorAll(".ships-to-place .icon");
 
   // Method for iterating through directions
   const rotateDirection = () => {
@@ -93,7 +96,20 @@ const webInterface = (gm) => {
 
   // #endregion
 
-  // #region Add classes to ship divs to represent placed/destroyed
+  // #region Add/remove classes to ship divs to represent placed/destroyed
+  // Indicate what ship is being placed by the user
+  const updatePlacementIcons = (shipToPlaceNum) => {
+    for (let i = 0; i < placementIcons.length; i += 1) {
+      // If the index = ship to place num then highlight that icon by removing class
+      if (shipToPlaceNum === i) {
+        placementIcons[i].classList.remove("inactive");
+      }
+      // Else it is not the active ship icon so make it inactive
+      else {
+        placementIcons[i].classList.add("inactive");
+      }
+    }
+  };
 
   // #endregion
 
@@ -104,7 +120,7 @@ const webInterface = (gm) => {
   randomShipsBtn.addEventListener("click", handleRandomShipsClick);
   resetBtn.addEventListener("click", handleResetClick);
 
-  return { showGame, showMenu, showPlacement };
+  return { showGame, showMenu, showPlacement, updatePlacementIcons };
 };
 
 export default webInterface;

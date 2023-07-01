@@ -45,8 +45,7 @@ body {
   filter: grayscale(80%) brightness(50%);
 }
 
-.section,
-.title {
+.section {
   max-width: 900px;
   min-width: 600px;
 }
@@ -130,7 +129,9 @@ body {
 
   background-color: var(--colorA1);
   border-radius: 20px;
+
   width: 100%;
+  min-height: 275px;
 
   justify-self: center;
 }
@@ -207,7 +208,9 @@ body {
 
   background-color: var(--colorA1);
   border-radius: 20px;
+
   width: 100%;
+  min-height: 650px;
 
   justify-self: center;
 }
@@ -342,6 +345,8 @@ body {
 
   background-color: var(--colorA1);
   border-radius: 20px;
+
+  min-height: 600px;
 
   justify-self: center;
 }

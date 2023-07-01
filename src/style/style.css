@@ -1,4 +1,4 @@
-/* Color Rules */
+/* Global Vars */
 :root {
   --colorA1: #722b94;
   --colorA2: #a936e0;
@@ -10,6 +10,8 @@
   --bg-color2: hsl(0, 0%, 32%);
   --text-color: hsl(0, 0%, 91%);
   --link-color: hsl(36, 92%, 59%);
+
+  --canvas-size: 300;
 }
 
 /* #region Universal element rules */
@@ -44,8 +46,8 @@ body {
 }
 
 .section {
-  max-width: 750px;
-  min-width: min-content;
+  max-width: 900px;
+  min-width: 600px;
 }
 /* #endregion */
 

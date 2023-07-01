@@ -257,6 +257,11 @@ const gameManager = () => {
     webInterface.updateInfoIcons(ship.index - 1, true); // -1 bc Ships are indexed at 1 not 0
   };
 
+  const aiShipSunk = (ship) => {
+    // Set the sunk icon to inactive
+    webInterface.updateInfoIcons(ship.index - 1, false); // -1 bc Ships are indexed at 1 not 0
+  };
+
   return {
     aiAttacking,
     playerAttacking,
@@ -265,6 +270,7 @@ const gameManager = () => {
     randomShipsClicked,
     rotateClicked,
     userShipSunk,
+    aiShipSunk,
     get aiDifficulty() {
       return aiDifficulty;
     },

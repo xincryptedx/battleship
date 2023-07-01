@@ -55,7 +55,7 @@ body {
 }
 
 .loading-screen.hidden {
-  transform: translateY(150%);
+  transform: translateY(200%);
 }
 
 /* #endregion */
@@ -130,7 +130,7 @@ body {
 }
 
 .menu.hidden {
-  transform: translateX(-150%);
+  transform: translateX(-200%);
 }
 
 .menu .credits {
@@ -306,7 +306,7 @@ body {
 }
 
 .placement.hidden {
-  transform: translateY(150%);
+  transform: translateY(200%);
 }
 
 .placement .canvas-container {
@@ -446,7 +446,7 @@ body {
 }
 
 .game.hidden {
-  transform: translateX(150%);
+  transform: translateX(200%);
 }
 /* #endregion */
 
@@ -485,7 +485,7 @@ body {
 }
 
 .reset.hidden {
-  transform: translateX(150%);
+  transform: translateX(200%);
 }
 
 /* #endregion */

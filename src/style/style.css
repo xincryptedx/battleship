@@ -171,7 +171,7 @@ body {
 /* #region placement section */
 .placement {
   grid-column: 3 / 19;
-  grid-row: 6 / 20;
+  grid-row: 5 / 20;
 
   display: grid;
   grid-template: 5% min-content 1fr min-content 1fr min-content 5% min-content 5% / 1fr 5% 1fr;
@@ -205,7 +205,50 @@ body {
 .placement .ships-to-place {
   grid-area: ships;
   display: grid;
-  grid-auto-flow: column;
+  grid-template: 10px 1fr 10px min-content / 10% repeat(5, 1fr) 10%;
+  grid-template-areas:
+    ". . . . . . ."
+    ". sp at vm ig l ."
+    ". . . . . . ."
+    ". n n n n n .";
+}
+
+.ships-to-place .ship {
+  display: grid;
+  place-items: center;
+}
+
+.ships-to-place .icon {
+  width: 90%;
+}
+
+.ships-to-place .ship-name {
+  grid-area: n;
+  display: grid;
+  place-items: center;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.ships-to-place .ship-one {
+  grid-area: sp;
+}
+
+.ships-to-place .ship-two {
+  grid-area: at;
+}
+
+.ships-to-place .ship-three {
+  grid-area: vm;
+}
+
+.ships-to-place .ship-four {
+  grid-area: ig;
+}
+
+.ships-to-place .ship-five {
+  grid-area: l;
 }
 
 .placement .random-ships {

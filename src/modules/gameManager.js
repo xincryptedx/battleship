@@ -218,8 +218,14 @@ const gameManager = () => {
   const placementClicked = (cell) => {
     // Try placement
     userBoard.addShip(cell);
+    // Update the canvases
     placementCanvasContainer.drawShips();
     userCanvasContainer.drawShips();
+    // Update placement icons
+    if (userBoard.ships.length < 5) {
+      webInterface.updatePlacementIcons(userBoard.ships.length);
+    }
+    // Try to start the game
     tryStartGame();
   };
   // #endregion

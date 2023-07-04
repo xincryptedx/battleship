@@ -10,7 +10,6 @@ const webInterface = (gm) => {
   const menu = document.querySelector(".menu");
   const placement = document.querySelector(".placement");
   const game = document.querySelector(".game");
-  const reset = document.querySelector(".reset");
 
   // References to btn elements
   const startBtn = document.querySelector(".start-btn");

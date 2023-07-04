@@ -35,8 +35,12 @@
 
   --static-text-shadow: 1px 1px 2px black;
 
+  --log-box-shadow: 4px 4px 5px var(--shadow-color);
+
   /* Borders */
   --section-border: 1px solid var(--shadow-color);
+
+  --log-border: 5px solid var(--bg-color);
 
   /* Backgrounds */
   --horizontal-grad-center: linear-gradient(
@@ -515,9 +519,9 @@ body {
 
   width: 500px;
 
-  border: 3px solid var(--colorB1);
+  border: var(--log-border);
   border-radius: 6px;
-
+  box-shadow: var(--log-box-shadow);
   background-color: var(--bg-color);
 }
 

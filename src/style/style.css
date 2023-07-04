@@ -41,6 +41,7 @@
   --section-border: 1px solid var(--shadow-color);
 
   --log-border: 5px solid var(--bg-color);
+  --log-scene-border: 2px solid var(--bg-color2);
 
   /* Backgrounds */
   --horizontal-grad-center: linear-gradient(
@@ -530,12 +531,15 @@ body {
 
   height: 150px;
   width: 150px;
-  background-color: var(--colorB1);
+  background-color: var(--bg-color);
+  border: 2px solid var(--bg-color2);
+  border-radius: 10px;
 }
 
 .game .log .scene-img {
   height: 100%;
   width: 100%;
+  border-radius: 10px;
 }
 
 .game .log .log-text {

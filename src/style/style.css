@@ -1,5 +1,6 @@
 /* Global Vars */
 :root {
+  /* Colors */
   --colorA1: #722b94;
   --colorA2: #a936e0;
   --colorC: #37e02b;
@@ -11,7 +12,11 @@
   --text-color: hsl(0, 0%, 91%);
   --link-color: hsl(36, 92%, 59%);
 
+  /* Sizes */
   --canvas-size: 300;
+
+  /* Shadows */
+  --section-shadow: 2px 2px 1px black;
 }
 
 /* #region Universal element rules */
@@ -56,6 +61,10 @@ body {
 
 .icon.inactive {
   filter: grayscale(80%) brightness(50%);
+}
+
+.section {
+  box-shadow: var(--section-shadow);
 }
 
 .section,

@@ -203,7 +203,7 @@ body {
 /* #region placement section */
 .placement {
   grid-column: 3 / 19;
-  grid-row: 3 / 20;
+  grid-row: 2 / 20;
 
   display: grid;
   grid-template: 5% min-content 1fr min-content 1fr min-content 5% min-content 5% / 1fr 5% 1fr;

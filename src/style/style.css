@@ -24,7 +24,7 @@
   --section-shadow: 1px 1px var(--shadow-color), 3px 3px 1px var(--colorCt),
     -3px -3px 1px var(--colorB2t);
 
-  --btn-text-inactive: 1px 1px 1px black;
+  --btn-text-shadow-inactive: 1px 1px 1px black;
   --btn-text-shadow-chromab: 1px 1px 1px black, 2px 2px 1px var(--colorC),
     -2px -2px 1px var(--colorB2);
   --btn-text-shadow-chromab-active: 1px 1px 1px black, 4px 4px 1px var(--colorC),
@@ -221,7 +221,7 @@ body {
   font-size: 1.3rem;
   font-weight: bold;
   color: var(--text-color);
-  text-shadow: var(--btn-text-inactive);
+  text-shadow: var(--btn-text-shadow-inactive);
   transition: text-shadow 0.1s ease-in-out;
 
   background-color: var(--colorA2);
@@ -351,6 +351,7 @@ body {
   font-size: 1.3rem;
   font-weight: bold;
   color: var(--text-color);
+  text-shadow: var(--btn-text-shadow-inactive);
   transition: text-shadow 0.1s ease-in-out;
 
   background-color: var(--colorA2);

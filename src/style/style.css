@@ -30,8 +30,18 @@
   --btn-text-shadow-chromab-active: 1px 1px 1px black, 4px 4px 1px var(--colorC),
     -4px -4px 1px var(--colorB2);
 
+  --static-text-shadow: 1px 1px 2px black;
+
   /* Borders */
   --section-border: 1px solid var(--shadow-color);
+
+  /* Backgrounds */
+  --horizontal-grad-center: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    var(--bg-color),
+    rgba(255, 255, 255, 0)
+  );
 }
 
 /* #region Universal element rules */
@@ -281,7 +291,7 @@ body {
 .placement .instructions-text {
   font-size: 2.3rem;
   font-weight: bold;
-  text-shadow: 1px 1px 1px var(--bg-color);
+  text-shadow: var(--static-text-shadow);
 }
 
 .placement .ships-to-place {
@@ -311,6 +321,10 @@ body {
 
   font-size: 1.5rem;
   font-weight: bold;
+  text-shadow: var(--static-text-shadow);
+
+  border-radius: 10px;
+  background: var(--horizontal-grad-center);
 }
 
 .ships-to-place .ship-one {

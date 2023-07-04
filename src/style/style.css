@@ -21,6 +21,10 @@
   --section-shadow: 1px 1px black, 3px 3px 1px var(--colorCt),
     -3px -3px 1px var(--colorB2t);
 
+  --btn-text-chromab: 2px 2px 1px var(--colorC), -2px -2px 1px var(--colorB2);
+  --btn-text-chromab-active: 4px 4px 1px var(--colorC),
+    -4px -4px 1px var(--colorB2);
+
   /* Borders */
   --section-border: 1px solid black;
 }
@@ -200,7 +204,7 @@ body {
 
 .menu .start-btn:hover,
 .menu .ai-match-btn:hover {
-  text-shadow: 2px 2px 1px var(--colorC), -2px -2px 1px var(--colorB2);
+  text-shadow: var(--btn-text-chromab);
 }
 
 .menu .ai-match-btn.active {
@@ -324,12 +328,12 @@ body {
 
 .placement .rotate-btn:hover,
 .placement .random-ships-btn:hover {
-  text-shadow: 2px 2px 1px var(--colorC), -2px -2px 1px var(--colorB2);
+  text-shadow: var(--btn-text-chromab);
 }
 
 .placement .rotate-btn:active,
 .placement .random-ships-btn:active {
-  text-shadow: 4px 4px 1px var(--colorC), -4px -4px 1px var(--colorB2);
+  text-shadow: var(--btn-text-chromab-active);
 }
 
 .placement .placement-canvas-container {
@@ -517,11 +521,11 @@ body {
 }
 
 .reset .reset-btn:hover {
-  text-shadow: 2px 2px 1px var(--colorC), -2px -2px 1px var(--colorB2);
+  text-shadow: var(--btn-text-chromab);
 }
 
 .reset .reset-btn:active {
-  text-shadow: 4px 4px 1px var(--colorC), -4px -4px 1px var(--colorB2);
+  text-shadow: var(--btn-text-chromab-active);
 }
 
 .reset.hidden {

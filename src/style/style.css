@@ -251,17 +251,17 @@ body {
   grid-row: 2 / 20;
 
   display: grid;
-  grid-template: 5% min-content 1fr min-content 1fr min-content 5% min-content 5% / 1fr 5% 1fr;
+  grid-template: 5% min-content 5% min-content 1fr min-content 1fr min-content 1fr / 1fr 5% 1fr;
   place-items: center;
   grid-template-areas:
     ". . ."
     "instructions instructions instructions"
     ". . ."
-    "ships ships ships"
-    ". . . "
     "random . rotate"
+    ". . . "
+    "canvas canvas canvas"
     ". . ."
-    "canvas canvas canvas";
+    "ships ships ships";
 
   transition: transform 0.3s ease-in-out;
 

@@ -143,15 +143,15 @@ body {
   grid-row: 8 / 18;
 
   display: grid;
-  grid-template: 5% min-content 5% 1fr 5% 1fr / 1fr;
+  grid-template: 5% min-content 5% 1fr 1fr 1fr / 5% 1fr 1fr 5%;
   place-items: center;
   grid-template-areas:
-    "."
-    "credits"
-    "."
-    "start-game"
-    "."
-    "ai-match";
+    ". . . ."
+    ". credits credits ."
+    ". . . ."
+    ". . . ."
+    ". start-game ai-match ."
+    ". . . .";
 
   transition: transform 0.3s ease-in-out;
 
@@ -159,7 +159,10 @@ body {
   border-radius: 20px;
 
   width: 100%;
+  max-width: 400px;
+
   min-height: 275px;
+  max-height: 300px;
 
   justify-self: center;
 }
@@ -174,7 +177,6 @@ body {
 
 .menu .start {
   grid-area: start-game;
-  align-self: end;
 }
 
 .menu .ai-match {

@@ -91,7 +91,6 @@ const webInterface = (gm) => {
     menu.classList.add("hidden");
     placement.classList.add("hidden");
     game.classList.add("hidden");
-    reset.classList.add("hidden");
   };
 
   // Show the menu UI
@@ -113,7 +112,6 @@ const webInterface = (gm) => {
   const showGame = () => {
     hideAll();
     game.classList.remove("hidden");
-    reset.classList.remove("hidden");
   };
 
   // Shrink the title

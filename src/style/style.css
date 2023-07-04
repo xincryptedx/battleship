@@ -454,9 +454,13 @@ body {
 
 .info .name {
   grid-area: n;
+  display: grid;
+  place-items: center;
 
+  width: 100%;
   font-size: 1.3rem;
   font-weight: bold;
+  background: var(--horizontal-grad-center);
 }
 
 .info .ship {

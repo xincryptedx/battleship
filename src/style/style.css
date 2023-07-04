@@ -197,6 +197,7 @@ body {
   font-size: 1.3rem;
   font-weight: bold;
   color: var(--text-color);
+  text-shadow: var(--btn-text-inactive);
   transition: text-shadow 0.1s ease-in-out;
 
   background-color: var(--colorA2);
@@ -207,6 +208,11 @@ body {
 .menu .start-btn:hover,
 .menu .ai-match-btn:hover {
   text-shadow: var(--btn-text-shadow-chromab);
+}
+
+.menu .start-btn:active,
+.menu .ai-match-btn:active {
+  text-shadow: var(--btn-text-shadow-chromab-active);
 }
 
 .menu .ai-match-btn.mode-on {

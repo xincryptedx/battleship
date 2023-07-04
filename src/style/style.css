@@ -20,6 +20,9 @@
   --canvas-size: 300;
 
   /* Shadows */
+  --canvas-shadow: 2px 2px 4px var(--shadow-color),
+    -1px -1px 20px var(--shadow-color);
+
   --title-shadow: 2px 2px 2px var(--shadow-color);
   --section-shadow: 1px 1px var(--shadow-color), 3px 3px 1px var(--colorCt),
     -3px -3px 1px var(--colorB2t);
@@ -77,6 +80,7 @@ body {
   grid-template: 1fr / 1fr;
   width: fit-content;
   height: fit-content;
+  box-shadow: var(--canvas-shadow);
 }
 
 .canvas-container > * {

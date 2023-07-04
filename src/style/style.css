@@ -17,6 +17,9 @@
 
   /* Shadows */
   --section-shadow: 2px 2px 1px black;
+
+  /* Borders */
+  --section-border: 1px solid black;
 }
 
 /* #region Universal element rules */
@@ -65,6 +68,7 @@ body {
 
 .section {
   box-shadow: var(--section-shadow);
+  border: var(--section-border);
 }
 
 .section,

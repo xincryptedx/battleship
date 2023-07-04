@@ -58,7 +58,8 @@ body {
   filter: grayscale(80%) brightness(50%);
 }
 
-.section {
+.section,
+.title {
   max-width: 900px;
   min-width: 600px;
 }

@@ -14,11 +14,14 @@
   --text-color: hsl(0, 0%, 91%);
   --link-color: hsl(36, 92%, 59%);
 
+  --shadow-color: hsl(0, 0%, 15%);
+
   /* Sizes */
   --canvas-size: 300;
 
   /* Shadows */
-  --section-shadow: 1px 1px black, 3px 3px 1px var(--colorCt),
+  --title-shadow: 2px 2px 2px var(--shadow-color);
+  --section-shadow: 1px 1px var(--shadow-color), 3px 3px 1px var(--colorCt),
     -3px -3px 1px var(--colorB2t);
 
   --btn-text-inactive: 1px 1px 1px black;
@@ -28,7 +31,7 @@
     -4px -4px 1px var(--colorB2);
 
   /* Borders */
-  --section-border: 1px solid black;
+  --section-border: 1px solid var(--shadow-color);
 }
 
 /* #region Universal element rules */
@@ -120,6 +123,7 @@ body {
   background-color: var(--bg-color2);
   border-radius: 20px;
   width: 100%;
+  box-shadow: var(--title-shadow);
 
   justify-self: center;
 }

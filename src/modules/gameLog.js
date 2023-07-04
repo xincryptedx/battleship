@@ -61,16 +61,6 @@ const gameLog = ((userName = "User") => {
     return dirNames[remainingShips[randomNumber]];
   }
 
-  // Initializes scene image to gen image
-  const initScene = () => {
-    // get random ship dir
-    const shipDir = dirNames[Math.floor(Math.random() * 5) + 1];
-    // get random array entry
-    const entry = randomEntry(sceneImages[shipDir].gen);
-    // set the image
-    logImg.src = sceneImages[shipDir].gen[entry];
-  };
-
   // Sets the scene image based on params passed
   const setScene = () => {
     // Return if log flag set to not update
@@ -140,6 +130,24 @@ const gameLog = ((userName = "User") => {
     if (stringToAppend) {
       logText.innerHTML += `\n${stringToAppend.toString()}`;
     }
+  };
+
+  const initText = () => {
+    erase();
+    append("Waiting for user to attack...");
+  };
+
+  // Initializes scene image to gen image
+  const initScene = () => {
+    // get random ship dir
+    const shipDir = dirNames[Math.floor(Math.random() * 5) + 1];
+    // get random array entry
+    const entry = randomEntry(sceneImages[shipDir].gen);
+    // set the image
+    logImg.src = sceneImages[shipDir].gen[entry];
+
+    // Init the text when the log scene is initialized
+    initText();
   };
 
   return {

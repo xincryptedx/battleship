@@ -287,12 +287,12 @@ body {
 .placement .ships-to-place {
   grid-area: ships;
   display: grid;
-  grid-template: 5% 1fr 10% min-content / 10% repeat(5, 1fr) 10%;
+  grid-template: 5% 1fr 10% 1fr / 10% repeat(5, 1fr) 10%;
   grid-template-areas:
     ". . . . . . ."
-    ". sp at vm ig l ."
+    ". n n n n n ."
     ". . . . . . ."
-    ". n n n n n .";
+    ". sp at vm ig l .";
 }
 
 .ships-to-place .ship {

@@ -179,6 +179,26 @@ body {
 
 .menu .credits {
   grid-area: credits;
+  display: grid;
+  grid-template: min-content 10px min-content / 1fr;
+  grid-template-areas:
+    "author"
+    "."
+    "bing";
+  place-items: center;
+}
+
+.credits p {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.credits .author-text {
+  grid-area: author;
+}
+
+.credits .bing-text {
+  grid-area: bing;
 }
 
 .menu .start {

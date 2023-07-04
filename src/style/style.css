@@ -556,9 +556,6 @@ body {
   max-height: 60px;
   width: 90%;
   max-width: 180px;
-  place-self: center;
-
-  transition: transform 0.3s ease-in-out;
 }
 
 .reset .reset-btn {
@@ -581,10 +578,6 @@ body {
 
 .reset .reset-btn:active {
   text-shadow: var(--btn-text-shadow-chromab-active);
-}
-
-.reset.hidden {
-  transform: translateY(-200%);
 }
 
 /* #endregion */

@@ -209,7 +209,7 @@ body {
   text-shadow: var(--btn-text-shadow-chromab);
 }
 
-.menu .ai-match-btn.active {
+.menu .ai-match-btn.mode-on {
   background-color: var(--colorB1);
 }
 

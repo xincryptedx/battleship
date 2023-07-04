@@ -1,11 +1,12 @@
 /* Global Vars */
 :root {
   /* Colors */
-  --colorA1: #722b94;
-  --colorA2: #a936e0;
-  --colorC: #37e02b;
-  --colorB1: #941d0d;
-  --colorB2: #e0361f;
+  --colorA1: hsl(281, 55%, 37%);
+  --colorA2: hsl(281, 73%, 55%);
+  --colorC: hsl(116, 74%, 52%);
+  --colorC50: hsla(116, 74%, 52%, 50%);
+  --colorB1: hsl(7, 84%, 32%);
+  --colorB2: hsl(7, 76%, 50%);
 
   --bg-color: hsl(0, 0%, 22%);
   --bg-color2: hsl(0, 0%, 32%);
@@ -16,7 +17,7 @@
   --canvas-size: 300;
 
   /* Shadows */
-  --section-shadow: 2px 2px 1px black;
+  --section-shadow: 2px 2px 1px black, -2px -2px 1px var(--colorC50);
 
   /* Borders */
   --section-border: 1px solid black;
